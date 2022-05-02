@@ -12,7 +12,7 @@ public class Administrador {
     @Column(name = "id_Administrador")
     private Integer id_Administrador;
     @Column
-    private String nombres;
+    private String nombre;
     @Column
     private String apellido_P;
     @Column
