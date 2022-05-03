@@ -7,7 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+import com.unam.proyecto1.utils.Rol;
 @Service
 public class UsuarioServicioImpl implements UsuarioServicio {
 
@@ -26,6 +26,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         nuevoUsuario.setApellido_M(apellido_m);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         nuevoUsuario.setPassword(passwordEncoder.encode(password));
+        nuevoUsuario.setRol(Rol.ROLE_ADMIN);
         return usuarioRepo.save(nuevoUsuario);
     }
 }
