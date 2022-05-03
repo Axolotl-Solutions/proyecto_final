@@ -5,6 +5,7 @@ CREATE TABLE Usuario (
     apellido_P       VARCHAR(30),
     apellido_M       VARCHAR(30),
     email            VARCHAR(50),
-    password         VARCHAR(50),
-    rol              VARCHAR(20) DEFAULT 'ROL_USER'
+    password         VARCHAR(60)
 );
+ALTER TABLE Usuario
+ADD COLUMN rol VARCHAR(10) DEFAULT 'ROLE_USER';

@@ -20,11 +20,25 @@ public class UsuarioControlador {
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
+    @Autowired
+    private UsuarioServicio usuarioServicio;
+
     @GetMapping("/")
     public String findUsuarios(Model model) {
         List<Usuario> usuarios = usuarioRepositorio.findAll();
         model.addAttribute("usuarios", usuarios);
         return "usuarios";
+    }
+
+    @PostMapping("/crea")
+    public String crea(HttpServletRequest request, Model model) {
+        Usuario usuario = usuarioServicio.creaUsuario(request.getParameter("email"),
+                request.getParameter("password"),
+                request.getParameter("nombre"),
+                request.getParameter("apellido_p"),
+                request.getParameter("apellido_m"));
+        model.addAttribute("exito", usuario != null);
+        return "registro";
     }
 
 }
