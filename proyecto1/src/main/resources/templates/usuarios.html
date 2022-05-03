@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuarios</title>
+</head>
+<body>
+    <h2>Lista de Usuarios</h2>
+
+    <table>
+        <tr>
+            <th>Id Administrador</th>
+            <th>Nombres</th>
+            <th>Apellido Paterno</th>
+            <th>Apellido Materno</th>
+            <th>Email</th>
+            <th>Contraseña</th>
+            <th>Rol</th>
+        </tr>
+
+        <tr th:each="usuario : ${usuarios}">
+            <td th:text="${usuario.getId_Usuario()}">Id Administrador</td>
+            <td th:text="${usuario.getNombre()}">Nombre</td>
+            <td th:text="${usuario.getApellido_P()}">Apellido Paterno</td>
+            <td th:text="${usuario.getApellido_M()}">Apellido Materno</td>
+            <td th:text="${usuario.getEmail()}">Email</td>
+            <td th:text="${usuario.getPassword()}">Contraseña</td>
+            <td th:text="${usuario.getRol()}">Rol</td>
+        </tr>
+</table>
+
+</body>
+</html>
