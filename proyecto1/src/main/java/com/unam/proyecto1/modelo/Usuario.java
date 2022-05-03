@@ -1,16 +1,18 @@
 package com.unam.proyecto1.modelo;
 
 import javax.persistence.*;
+
+import com.unam.proyecto1.utils.Rol;
 import lombok.Data;
 
 @Data
-@Table(name = "Administrador")
+@Table(name = "Usuario")
 @Entity
-public class Administrador {
+public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_Administrador")
-    private Integer id_Administrador;
+    @Column(name = "id_Usuario")
+    private Integer id_Usuario;
     @Column
     private String nombre;
     @Column
@@ -21,13 +23,16 @@ public class Administrador {
     private String email;
     @Column
     private String password;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
 
-    public Integer getId_Administrador() {
-        return id_Administrador;
+    public Integer getId_Usuario() {
+        return id_Usuario;
     }
 
-    public void setId_Administrador(Integer id_Administrador) {
-        this.id_Administrador = id_Administrador;
+    public void setId_Usuario(Integer id_Administrador) {
+        this.id_Usuario = id_Administrador;
     }
 
     public String getNombre() {
@@ -68,5 +73,13 @@ public class Administrador {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 }

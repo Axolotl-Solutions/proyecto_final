@@ -1,10 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Página principal</title>
+    <title>Sistema de Olimpiadas</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <style>
+        #tarjeta {
+            border: 1px solid lightgray;
+            border-radius: 11px;
+            padding: 22px;
+            box-shadow: 2px 2px lightgray;
+            height: 259px
+        }
+    </style>
 </head>
 <body>
-    <a href="admins">Mostrar admins</a>
+<div class="container">
+    <div class="row">
+        <div class="col">
+        </div>
+        <div class="col-8">
+            <h1>Iniciar sesión</h1>
+            <div class="alert alert-warning" role="alert" th:if="${error}">
+                <p>Usuario o contraseña incorrectos</p>
+            </div>
+            <div id="tarjeta">
+                <form method="post" th:action="@{/}">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Correo electrónico</label>
+                        <input type="text" id="email" name="email" class="form-control"
+                               placeholder="Introduce el correo electrónico" required/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" minlength="4" id="password" name="password" class="form-control"
+                               placeholder="Introduce la contraseña" required/>
+                    </div>
+                    <div class="mb-3">
+                        <button style="float:left" class="btn btn-warning" type="submit">Continuar</button>
+                        <span style="float:right"> ¿No tienes una cuenta? <a th:href="@{/registro}">Registrate</a>.</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col">
+        </div>
+
+    </div>
+</div>
 </body>
 </html>
