@@ -20,14 +20,17 @@ public class SeguridadConfiguracion extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests()
+
+             http.csrf().disable().authorizeRequests()
                 .antMatchers("/", "/usuarios/crea", "/registro").permitAll()
-                .antMatchers("/usuarios/").hasRole("ADMIN")
+                .antMatchers("/usuarios/").hasRole("USUARIO")
+                //.antMatchers("/manejoAdmin/").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/")
                 .loginProcessingUrl("/").usernameParameter("email").passwordParameter("password")
                 .defaultSuccessUrl("/usuarios/").permitAll()
+                //.defaultSuccessUrl("/manejoAdmin/").permitAll()
                 .and()
                 .logout()// logout configuration
                 .logoutUrl("/salir")
@@ -35,6 +38,9 @@ public class SeguridadConfiguracion extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)
                 .logoutSuccessUrl("/").permitAll();
     }
+
+
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

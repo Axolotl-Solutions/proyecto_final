@@ -4,7 +4,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import com.unam.proyecto1.modelo.Usuario;
+import com.unam.proyecto1.repositorio.UsuarioRepositorio;
+import com.unam.proyecto1.servicio.UsuarioServicio;
+import org.springframework.beans.factory.annotation.Autowired;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,13 +24,22 @@ public class PrincipalControlador {
 
         if (principal != null) {
             System.out.println("Hola :)");
+            System.out.println(model.toString());
             return "redirect:/usuarios/";
         }
+
         return "index";
     }
 
+    @RequestMapping("/manejoAdmin")
+    public String manejoAdmin() { 
+        return "manejoAdmin"; 
+    }
+
     @RequestMapping("/registro")
-    public String registro() { return "registro"; }
+    public String registro() { 
+        return "registro";
+         }
 
     @RequestMapping("/salir")
     public String salir(HttpServletRequest request){
