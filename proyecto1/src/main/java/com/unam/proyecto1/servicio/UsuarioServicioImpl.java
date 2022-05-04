@@ -26,7 +26,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         nuevoUsuario.setApellido_M(apellido_m);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         nuevoUsuario.setPassword(passwordEncoder.encode(password));
-        nuevoUsuario.setRol(Rol.ROLE_ADMIN);
+        nuevoUsuario.setRol(Rol.ROLE_USUARIO);
         return usuarioRepo.save(nuevoUsuario);
     }
 }
