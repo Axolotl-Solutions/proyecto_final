@@ -9,7 +9,7 @@
 
     <table>
         <tr>
-            <th>Id Administrador</th>
+            <th>Id Usuario</th>
             <th>Nombres</th>
             <th>Apellido Paterno</th>
             <th>Apellido Materno</th>
@@ -18,7 +18,7 @@
             <th>Rol</th>
         </tr>
 
-        <tr th:each="manejoAdmin : ${usuarios}">
+        <tr th:each="usuario : ${admins}">
             <td th:text="${usuario.getId_Usuario()}">Id Administrador</td>
             <td th:text="${usuario.getNombre()}">Nombre</td>
             <td th:text="${usuario.getApellido_P()}">Apellido Paterno</td>

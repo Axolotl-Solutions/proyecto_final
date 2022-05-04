@@ -14,9 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-//@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/manejoAdmin")
-public class AdminControlador extends UsuarioControlador{
+public class AdminControlador {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
@@ -24,12 +23,11 @@ public class AdminControlador extends UsuarioControlador{
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    @Override
+    @GetMapping("/")
     public String findUsuarios(Model model) {
-        List<Usuario> usuarios = usuarioRepositorio.findAll();
-        model.addAttribute("manejoAdmin", usuarios);
-        System.out.println("manejoAdmin");
-        return "manejoAdmin";
+        List<Usuario> admins = usuarioRepositorio.findAll();
+        model.addAttribute("admins", admins);
+        return "admins";
     }
 
    /** @PostMapping("/crea")
