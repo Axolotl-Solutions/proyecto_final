@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Usuarios</title>
+
     <link rel="stylesheet" href="" th:href="@{/style/estilo.css}">
+
 </head>
 <body>
 <header>
@@ -16,46 +18,79 @@
         </ul>
     </nav>
 </header>
-
 <div>
     <aside class="men-lat">
         <ul>
             <li><h1>User</h1></li>
-            <li><a href="/registrarCompetidor">Registrar</a></li>
+            <li><a href="" th:href="@{/registrarCompetidor/}">Registrar</a></li>
             <li><a href="#">Buscar</a></li>
-            <li><a href="#">Opcion</a></li>
+            <li><a href="#">Ajustes</a></li>
             <li><a href="#">Opcion</a></li>
             <li><a href="#">Opcion</a></li>
         </ul>
 
     </aside>
-    <div class="texto" th:each="usuario : ${usuarios}">
-        <p th:text="${usuario.getNombre()}">
-        </p>
-    </div>
-</div>
-
-
-
-<div class="contenedor" >
-    <div class="contenedor_tarjeta" th:each="usuario : ${usuarios}">
-        <a href="https://github.com/Axolotl-Solutions">
-            <figure id="tarjeta">
-                <img th:src="@{/img/corriendo.png}" class="frontal" alt="">
-                <div class="tex-img" th:text="${usuario.getNombre()}"></div>
-                <figcaption class="trasera">
-                    <h2 class="titulo" th:text="${'Nombre: '+usuario.getNombre()}"></h2>
-                    <hr>
-                    <p th:text="${'Email: '+usuario.getEmail()}"></p>
-                    <p th:text="${'Rol: '+usuario.getRol()}"> </p>
-                    <p th:text="${'Contraseña: '+usuario.getPassword()}">/p>
-                </figcaption>
-            </figure>
-        </a>
-    </div>
-
 
 </div>
+
+<div class="container">
+    <div class="title">Registrar competidor</div>
+    <form action="#">
+        <div class="user-details">
+            <div class="input-box">
+                <span class="details">Nombre</span>
+                <input type="text" placeholder="Introduce el nombre">
+            </div>
+            <div class="input-box">
+                <span class="details">Apellido Paterno</span>
+                <input type="text" placeholder="Introduce el apellido paterno">
+            </div>
+            <div class="input-box">
+                <span class="details">Apellido Materno</span>
+                <input type="text" placeholder="Introduce el apellido materno">
+            </div>
+            <div class="input-box">
+                <span class="details">Peso</span>
+                <input type="text" placeholder="Introduce el peso">
+            </div>
+            <div class="input-box">
+                <span class="details">Altura</span>
+                <input type="number" placeholder="Introduce la altura">
+            </div>
+            <div class="input-box">
+                <span class="details">Fecha de nacimiento</span>
+                <input type="date" placeholder="Introduce la fecha de nacimiento">
+            </div>
+            <div class="input-box">
+                <span class="details">Contraseña</span>
+                <input type="password" placeholder="Introduzca la contraseña">
+            </div>
+        </div>
+        <div class="sexo-detalles">
+
+
+            <span class="sexo-titulo">Sexo</span>
+            <div class="category">
+                <label for="dot-1">
+                    <input type="radio" name="gender" id="dot-1">
+                    <span class="">
+                        <span class="">Masculino</span>
+                    </span>
+                </label>
+                <label for="dot-2">
+                    <input type="radio" name="gender" id="dot-2">
+                    <span class="dot two">
+                        <span class="sexo">Femenino</span>
+                    </span>
+                </label>
+            </div>
+        </div>
+        <div class="button">
+            <input type="submit" value="Registrar">
+        </div>
+    </form>
+</div>
+
 <div id="fondo"></div>
 <footer>
     <a href="https://github.com/Axolotl-Solutions"><img width="50" height="50"th:src="@{/img/axolotl.png}" alt="img"></a>

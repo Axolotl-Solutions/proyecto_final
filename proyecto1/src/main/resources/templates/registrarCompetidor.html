@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="" th:href="@{/style/estilo.css}">
+</head>
+<body>
+<header>
+    <nav class="nv">
+        <ul>
+            <li><a href="#"><span class="primero"><i class="icon icon-home"></i></span>Inicio</a></li>
+            <li><a href="#"><span class="segundo"><i class="icon icon-image"></i></span>Competidores</a></li>
+            <li><a href="#"><span class="tercero"><i class="icon icon-lab"></i></span>Jueces</a></li>
+            <li><a href="/salir"><span class="cuarto"><i class="icon icon-mobile2"></i></span>Salir</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div>
+    <aside class="men-lat">
+        <ul>
+            <li><h1>User</h1></li>
+            <li><a href="" th:href="@{/registrarCompetidor/}">Registrar</a></li>
+            <li><a href="#">Buscar</a></li>
+            <li><a href="#">Ajustes</a></li>
+            <li><a href="#">Opcion</a></li>
+            <li><a href="#">Opcion</a></li>
+        </ul>
+
+    </aside>
+    <div class="texto" th:each="usuario : ${usuarios}">
+        <p th:text="${usuario.getNombre()}">
+        </p>
+    </div>
+</div>
+
+
+
+<div class="contenedor" >
+    <div class="contenedor_tarjeta" th:each="usuario : ${usuarios}">
+        <a href="https://github.com/Axolotl-Solutions">
+            <figure id="tarjeta">
+                <img th:src="@{/img/corriendo.png}" class="frontal" alt="">
+                <div class="tex-img" th:text="${usuario.getNombre()}"></div>
+                <figcaption class="trasera">
+                    <h2 class="titulo" th:text="${'Nombre: '+usuario.getNombre()}"></h2>
+                    <hr>
+                    <p th:text="${'Email: '+usuario.getEmail()}"></p>
+                    <p th:text="${'Rol: '+usuario.getRol()}"> </p>
+                    <p th:text="${'Contraseña: '+usuario.getPassword()}">/p>
+                </figcaption>
+            </figure>
+        </a>
+    </div>
+
+
+</div>
+<div id="fondo"></div>
+<footer>
+    <a href="https://github.com/Axolotl-Solutions"><img width="50" height="50"th:src="@{/img/axolotl.png}" alt="img"></a>
+    <a href="https://github.com/Axolotl-Solutions"><p>© 2022 Axolotl Solutions</p></a>
+</footer>
+</body>
+</html>

@@ -14,9 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-@RequestMapping("/usuarios")
-public class UsuarioControlador {
-
+@RequestMapping("/registrarCompetidor")
+public class RegistrarCompetidorControler {
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
@@ -25,12 +24,10 @@ public class UsuarioControlador {
 
     @GetMapping("/")
     public String findUsuarios(Model model) {
-        List<Usuario> usuarios = usuarioRepositorio.findAll();
-        model.addAttribute("usuarios", usuarios);
-        return "usuarios";
+        List<Usuario> admins = usuarioRepositorio.findAll();
+        model.addAttribute("admins", admins);
+        return "admins";
     }
-
-
     @PostMapping("/crea")
     public String crea(HttpServletRequest request, Model model) {
         Usuario usuario = usuarioServicio.creaUsuario(request.getParameter("email"),
@@ -41,5 +38,4 @@ public class UsuarioControlador {
         model.addAttribute("exito", usuario != null);
         return "registro";
     }
-
 }
