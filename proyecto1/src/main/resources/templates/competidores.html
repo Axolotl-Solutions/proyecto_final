@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuarios</title>
+    <link rel="stylesheet" href="" th:href="@{/style/estilo.css}">
+</head>
+<body>
+<header>
+    <nav class="nv">
+        <ul>
+            <li><a href="/"><span class="primero"><i class="icon icon-home"></i></span>Inicio</a></li>
+            <li><a href="/registrarCompetidor/competidores"><span class="segundo"><i class="icon icon-image"></i></span>Competidores</a></li>
+            <li><a href=""><span class="tercero"><i class="icon icon-lab"></i></span>Jueces</a></li>
+            <li><a href="/salir"><span class="cuarto"><i class="icon icon-mobile2"></i></span>Salir</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+<div class="contenedort" >
+    <div class="contenedor_tarjeta" th:each="usuario : ${competidores}">
+        <a href="https://github.com/Axolotl-Solutions">
+            <figure id="tarjeta">
+
+                <img th:if="${usuario.getSexo().equals('Masculino')}" th:src="@{/img/corriendo.png}" class="frontal">
+                <img th:if="${usuario.getSexo().equals('Femenino')}" th:src="@{/img/atleta.jpg}" class="frontal">
+                <div class="tex-img" th:text="${usuario.getNombre()}"></div>
+                <figcaption class="trasera">
+                    <h2 class="titulo" th:text="${usuario.getNombre()}"></h2>
+                    <hr>
+                    <p th:text="${usuario.getNombre()+' '+usuario.getApellido_P()+' '+usuario.getApellido_M()}"><br></p>
+                    <p th:text="${usuario.getEmail()}"><br></p>
+                    <p th:text="${usuario.getPeso()+' kg'}"> </p>
+                    <p th:text="${usuario.getAltura()+' cm'}"> </p>
+                    <p th:text="${usuario.getFecha_nacimiento().toString().substring(0,10)}"> </p>
+                    <p th:text="${usuario.getSexo()}">/p>
+                </figcaption>
+            </figure>
+        </a>
+    </div>
+
+</div>
+
+<div id="fondo"></div>
+<footer>
+    <a href="https://github.com/Axolotl-Solutions"><img width="50" height="50"th:src="@{/img/axolotl.png}" alt="img"></a>
+    <a href="https://github.com/Axolotl-Solutions"><p>© 2022 Axolotl Solutions</p></a>
+</footer>
+</body>
+</html>

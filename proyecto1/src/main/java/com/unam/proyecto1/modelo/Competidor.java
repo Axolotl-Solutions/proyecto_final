@@ -35,4 +35,7 @@ public class Competidor {
     @Column
     @Enumerated(EnumType.STRING)
     private Rol rol;
+
 }
+
+

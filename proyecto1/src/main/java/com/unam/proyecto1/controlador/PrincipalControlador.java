@@ -46,6 +46,10 @@ public class PrincipalControlador {
         return "manejoAdmin"; 
     }*/
 
+    @RequestMapping("/buscarComp")
+    public  String buscarComp(){
+        return "redirect:/registrarCompetidor/buscar/";
+    }
     @RequestMapping("/registro")
     public String registro() { 
         return "registro";

@@ -14,7 +14,28 @@ public class CompetidorServicioImpl implements  CompetidorServicio{
     @Autowired
     private CompetidorRepositorio competidorRepo;
 
+
     @Override
+    public void eliminarCompetidor(Integer id) {
+        competidorRepo.deleteById(id);
+    }
+
+    @Override
+    public Competidor actualizarCompetidor(Competidor competidor) {
+        return competidorRepo.save(competidor);
+    }
+
+    @Override
+    public Competidor getCompetidorCorreo(String correo) {
+        return competidorRepo.findByEmail(correo);
+    }
+
+    @Override
+    public Competidor getCompetidorId(Integer id) {
+        return competidorRepo.findById(id).get();
+    }
+
+
     public Competidor creaCompetidor(String email, String password, String nombre, String apellido_p, String apellido_m, int peso, int altura, Date fecha_nacimiento, String sexo) {
         if (competidorRepo.existsCompetidorByEmail(email)) {
             return null;

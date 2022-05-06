@@ -27,6 +27,10 @@ public class UsuarioControlador {
     public String findUsuarios(Model model) {
         List<Usuario> usuarios = usuarioRepositorio.findAll();
         model.addAttribute("usuarios", usuarios);
+        return "inicio";
+    }
+    @GetMapping("/registra")
+    public String registra(){
         return "usuarios";
     }
 
