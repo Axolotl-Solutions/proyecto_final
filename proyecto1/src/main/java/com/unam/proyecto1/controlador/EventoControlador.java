@@ -33,7 +33,7 @@ public class EventoControlador {
 
     @PostMapping("/crea")
     public String crea(HttpServletRequest request, Model model) {
-        Evento evento = eventoServicio.creaEvento(request.getParameter("nombre_evento"),
+        Evento evento = eventoServicio.creaEvento(request.getParameter("nombre_Evento"),
                 request.getParameter("nombre_Disciplina"),
                 request.getParameter("categoria"),
                 request.getParameter("rama"));

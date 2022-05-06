@@ -14,8 +14,8 @@ public class Evento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_Evento")
     private Integer id_Evento;
-    @Column
-    private String nombre_Evento;
+    @Column(name = "nombre_Evento")
+    private String nombreEvento;
     @Column
     private String nombre_Disciplina;
     @Column
@@ -33,12 +33,12 @@ public class Evento {
         this.id_Evento = id_Evento;
     }
 
-    public String getNombre_Evento() {
-        return nombre_Evento;
+    public String getNombreEvento() {
+        return nombreEvento;
     }
 
-    public void setNombre_Evento(String nombre_Evento) {
-        this.nombre_Evento = nombre_Evento;
+    public void setNombreEvento(String nombreEvento) {
+        this.nombreEvento = nombreEvento;
     }
 
     public String getNombre_Disciplina() {
