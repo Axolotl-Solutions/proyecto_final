@@ -26,7 +26,6 @@ public class CompetidorServicioImpl implements CompetidorServicio {
     }
 
     @Override
-<<<<<<< HEAD
     public Competidor getCompetidorCorreo(String correo) {
         return competidorRepo.findByEmail(correo);
     }
@@ -38,10 +37,6 @@ public class CompetidorServicioImpl implements CompetidorServicio {
 
 
     public Competidor creaCompetidor(String email, String password, String nombre, String apellido_p, String apellido_m, int peso, int altura, Date fecha_nacimiento, String sexo) {
-=======
-    public Competidor creaCompetidor(String email, String password, String nombre, String apellido_p, String apellido_m,
-            int peso, int altura, Date fecha_nacimiento, String sexo) {
->>>>>>> 57b46358c89d5aed880b154d8a4422b856b4d0ac
         if (competidorRepo.existsCompetidorByEmail(email)) {
             return null;
         }

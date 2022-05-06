@@ -47,8 +47,6 @@ public class Competidor {
     @Enumerated(EnumType.STRING)
     private Rol rol;
 
-<<<<<<< HEAD
-=======
     /* Setters: */
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -138,7 +136,6 @@ public class Competidor {
     public String getSexo() {
         return sexo;
     }
->>>>>>> 57b46358c89d5aed880b154d8a4422b856b4d0ac
 }
 
 
