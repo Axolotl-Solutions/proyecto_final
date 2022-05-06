@@ -34,7 +34,7 @@ public class EventoControlador {
 
     @PostMapping("/crea")
     public String crea(HttpServletRequest request, Model model) {
-        Date fecha = Date.valueOf(request.getParameter("fecha"))
+        Date fecha = Date.valueOf(request.getParameter("fecha"));
         Evento evento = eventoServicio.creaEvento(request.getParameter("nombre_Evento"),
                 request.getParameter("nombre_Disciplina"),
                 request.getParameter("categoria"),
