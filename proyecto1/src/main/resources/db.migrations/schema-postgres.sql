@@ -1,3 +1,6 @@
+
+DROP TABLE Usuario;
+
 CREATE TABLE IF NOT EXISTS Usuario (
     id_Usuario       SERIAL PRIMARY KEY NOT NULL,
     nombre           VARCHAR(50) NOT NULL,
