@@ -15,7 +15,7 @@ public class EventoServicioImpl implements EventoServicio{
     private EventoRepositorio eventoRepositorio;
 
     @Override
-    public Evento creaEvento(String nombreEvento, String nombre_Disciplina, String rama, String categoria) {
+    public Evento creaEvento(String nombreEvento, String nombre_Disciplina, String rama, String categoria, Date fecha) {
         if(eventoRepositorio.existsEventoByNombreEventoAndCategoriaAndRama(nombreEvento, categoria, rama)){
             return null;
         }
@@ -24,7 +24,7 @@ public class EventoServicioImpl implements EventoServicio{
         nuevoEvento.setNombre_Disciplina(nombre_Disciplina);
         nuevoEvento.setCategoria(categoria);
         nuevoEvento.setRama(rama);
-        nuevoEvento.setFecha(Date.valueOf(LocalDate.now()));
+        nuevoEvento.setFecha(fecha);
         return eventoRepositorio.save(nuevoEvento);
     }
 }
