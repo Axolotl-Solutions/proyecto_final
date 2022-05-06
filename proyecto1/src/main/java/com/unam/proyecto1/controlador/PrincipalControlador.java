@@ -36,15 +36,15 @@ public class PrincipalControlador {
         return "index";
     }
 
-    @RequestMapping("/registrarCompetidor")
+    /*@RequestMapping("/registrarCompetidor")
     public String registrarCompetidor() {
-        return "redirect:/registrarCompetidor/";
-    }
+        return "registrarCompetidor";
+    }*/
 
-    @RequestMapping("/manejoAdmin")
+    /*@RequestMapping("/manejoAdmin")
     public String manejoAdmin() { 
         return "manejoAdmin"; 
-    }
+    }*/
 
     @RequestMapping("/registro")
     public String registro() { 

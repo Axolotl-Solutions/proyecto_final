@@ -18,6 +18,7 @@
         </ul>
     </nav>
 </header>
+<!--
 <div>
     <aside class="men-lat">
         <ul>
@@ -32,38 +33,49 @@
     </aside>
 
 </div>
-
+-->
+<div class="lado">
+    <ul>
+        <li><a href="#"><span class="perfil"><i class="icon icon-home"></i></span>Perfil</a></li>
+        <li><a href="#"><span class="registrar"><i class="icon icon-home"></i></span>Registrar</a></li>
+        <li><a href="#"><span class="buscar"><i class="icon icon-home"></i></span>Buscar</a></li>
+    </ul>
+</div>
 <div class="container">
     <div class="title">Registrar competidor</div>
-    <form action="#">
+    <form method="post" th:action="@{/registrarCompetidor/crea}">
         <div class="user-details">
             <div class="input-box">
                 <span class="details">Nombre</span>
-                <input type="text" placeholder="Introduce el nombre">
+                <input type="text" name="nombre" placeholder="Introduce el nombre">
             </div>
             <div class="input-box">
                 <span class="details">Apellido Paterno</span>
-                <input type="text" placeholder="Introduce el apellido paterno">
+                <input type="text" name="apellido_p" placeholder="Introduce el apellido paterno">
             </div>
             <div class="input-box">
                 <span class="details">Apellido Materno</span>
-                <input type="text" placeholder="Introduce el apellido materno">
+                <input type="text" name="apellido_m" placeholder="Introduce el apellido materno">
             </div>
             <div class="input-box">
                 <span class="details">Peso</span>
-                <input type="text" placeholder="Introduce el peso">
+                <input type="text" name="peso" placeholder="Introduce el peso">
             </div>
             <div class="input-box">
-                <span class="details">Altura</span>
-                <input type="number" placeholder="Introduce la altura">
+                <span class="details">Altura (cm)</span>
+                <input type="number" name="altura" placeholder="Introduce la altura en centimetros">
             </div>
             <div class="input-box">
                 <span class="details">Fecha de nacimiento</span>
-                <input type="date" placeholder="Introduce la fecha de nacimiento">
+                <input type="date" name="fecha" placeholder="Introduce la fecha de nacimiento">
             </div>
             <div class="input-box">
                 <span class="details">Contraseña</span>
-                <input type="password" placeholder="Introduzca la contraseña">
+                <input type="password" name="password" placeholder="Introduzca la contraseña">
+            </div>
+            <div class="input-box">
+                <span class="details">Email</span>
+                <input type="text" name="correo" placeholder="Introduce el correo">
             </div>
         </div>
         <div class="sexo-detalles">
@@ -72,13 +84,13 @@
             <span class="sexo-titulo">Sexo</span>
             <div class="category">
                 <label for="dot-1">
-                    <input type="radio" name="gender" id="dot-1">
+                    <input type="radio" value="Masculino" name="sexo" id="dot-1">
                     <span class="">
                         <span class="">Masculino</span>
                     </span>
                 </label>
                 <label for="dot-2">
-                    <input type="radio" name="gender" id="dot-2">
+                    <input type="radio" value="Femenino" name="sexo" id="dot-2">
                     <span class="dot two">
                         <span class="sexo">Femenino</span>
                     </span>
@@ -87,14 +99,17 @@
         </div>
         <div class="button">
             <input type="submit" value="Registrar">
+
         </div>
     </form>
 </div>
 
 <div id="fondo"></div>
-<footer>
-    <a href="https://github.com/Axolotl-Solutions"><img width="50" height="50"th:src="@{/img/axolotl.png}" alt="img"></a>
-    <a href="https://github.com/Axolotl-Solutions"><p>© 2022 Axolotl Solutions</p></a>
-</footer>
+<div class="foot">
+    <footer>
+        <a href="https://github.com/Axolotl-Solutions"><img width="50" height="50"th:src="@{/img/axolotl.png}" alt="img"></a>
+        <a href="https://github.com/Axolotl-Solutions"><p>© 2022 Axolotl Solutions</p></a>
+    </footer>
+</div>
 </body>
 </html>

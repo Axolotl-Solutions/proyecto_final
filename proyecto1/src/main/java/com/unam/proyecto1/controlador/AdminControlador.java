@@ -23,12 +23,12 @@ public class AdminControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    @GetMapping("/")
+    /*@GetMapping("/")
     public String findUsuarios(Model model) {
         List<Usuario> admins = usuarioRepositorio.findAll();
         model.addAttribute("admins", admins);
         return "admins";
-    }
+    }*/
 
    /** @PostMapping("/crea")
     public String crea(HttpServletRequest request, Model model) {
