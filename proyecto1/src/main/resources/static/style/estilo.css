@@ -319,12 +319,7 @@ aside p{
     transform: rotate(360deg);
    }
 }
-footer{
-    background-image: linear-gradient(to right, #434343 0%, black 100%);
-    height: 100px;
-    padding: 20px;
 
-}
 footer p{
     font-family: comfortaa;
     color:#fff;
@@ -332,21 +327,15 @@ footer p{
     position: absolute;
     margin-top: 10px;
     margin-left: 5px;
+    margin-top:30px;
+}
+footer img{
+    margin-top:10px;
 }
 
 /*****************FORMULARIO*****************/
 
-.container{
-    max-width:700px;
-    width:100%;
-    background:#fff;
-    padding: 25px 30px;
-    border-radius:10px;
-    font-family: comfortaa;
-    margin-left:300px;
-    margin-bottom:60px;
-    border:3px solid #d9d9d9;
-}
+
 .container .title{
     font-size:25px;
     font-weight:500;
@@ -444,4 +433,181 @@ form .button input:hover{
     .user-details::-webkit-scrollbar{
         width:0;
     }
+}
+
+/**************Lateral******************/
+footer{
+    background-image: linear-gradient(to right, #434343 0%, black 100%);
+    clear: both;
+    height:80px;
+    text-align:left;
+}
+.foot{
+
+}
+
+.container{
+    max-width:700px;
+    width:100%;
+    background:#fff;
+    padding: 25px 30px;
+    border-radius:10px;
+    font-family: comfortaa;
+    margin: auto;
+    border:3px solid #d9d9d9;
+    float:center;
+}
+
+.lado{
+        max-width:150px;
+        width:100%;
+        background:#fff;
+
+        border-radius:10px;
+        font-family: comfortaa;
+        float:left;
+
+}
+.lado ul{
+	list-style:none;
+}
+.lado > ul{
+	display:table;
+	width:100%;
+	height:100%;
+	background: #fefefe;
+	position:relative;
+}
+.lado > ul li{
+
+}
+.lado > ul li a{
+    color:#000;
+    display:block;
+    line-height:20px;
+    padding:20px;
+    position:relative;
+    text-align:center;
+    text-decoration:none;
+    font-family: comfortaa;
+}
+.lado > ul li h1{
+    color:#000;
+    display:block;
+    line-height:20px;
+    padding:20px;
+    position:relative;
+    text-align:center;
+    text-decoration:none;
+    font-family: comfortaa;
+}
+/*.lado > ul > li a:hover{
+    background: #e3a7eb;
+}*/
+.lado > ul > li > a span{
+    display:block;
+    height:100%;
+    width:100%;
+    top:0;
+    position:absolute;
+    border-radius:10px;
+    left:-143px;
+    -webkit-animation: .5s menr;
+    animation: .5s menr;
+}
+
+.lado > ul > li a:hover > span{
+    -webkit-animation: .5s menur;
+    animation: .5s menur;
+    left:0;
+}
+.lado > ul > li > a span .icon{
+    display:block;
+    line-height:60px;
+}
+
+@-webkit-keyframes menur{
+  0% {
+    left: -143px;
+    }
+  100%{
+    left:0px;
+  }
+}
+@-webkit-keyframes menr{
+  0% {
+    left: 0px;
+    }
+  100%{
+    left:-143px;
+  }
+}
+@-webkit-keyframes menr1{
+  0% {
+      left: -1000px;
+      }
+    100%{
+      left:0px;
+    }
+}
+@-webkit-keyframes menrr{
+  0% {
+    left: 0px;
+    }
+  100%{
+    left:-1000px;
+  }
+}
+
+.perfil{
+    background: #62A971;
+}
+.registrar{
+    background: #e67a4c;
+}
+.buscar{
+    background:#A2CEEA;
+}
+
+@media (max-width: 1000px){
+    .lado{
+        max-width:100%;
+        float:none;
+        position:relative;
+    }
+    .lado > ul > li a > span{
+                display:block;
+                height:100%;
+                width:100%;
+                top:0;
+                position:absolute;
+                border-radius:10px;
+                left:-1000px;
+                -webkit-animation: .6s menrr;
+                animation: .6s menrr;
+        }
+        .lado > ul > li a:hover > span{
+            -webkit-animation: .6s menr1;
+            animation: .6s menr1;
+            left:0px;
+        }
+
+}
+.alerta {
+  padding:10px 10px 10px 10px;
+  background: #ff675c;
+  border-radius:10px;
+  font-size:20px;
+  text-align:center;
+  color:#fff;
+  font-weight: bold;
+}
+.exito{
+      padding:10px 10px 10px 10px;
+      background: #92f08b;
+      border-radius:10px;
+      font-size:20px;
+      text-align:center;
+      color:#fff;
+      font-weight: bold;
 }
