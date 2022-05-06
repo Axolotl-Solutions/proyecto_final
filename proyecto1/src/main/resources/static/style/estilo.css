@@ -453,8 +453,6 @@ footer{
     padding: 25px 30px;
     border-radius:10px;
     font-family: comfortaa;
-    /*margin-left:300px;
-    margin-bottom:60px;*/
     margin: auto;
     border:3px solid #d9d9d9;
     float:center;
@@ -594,4 +592,22 @@ footer{
             left:0px;
         }
 
+}
+.alerta {
+  padding:10px 10px 10px 10px;
+  background: #ff675c;
+  border-radius:10px;
+  font-size:20px;
+  text-align:center;
+  color:#fff;
+  font-weight: bold;
+}
+.exito{
+      padding:10px 10px 10px 10px;
+      background: #92f08b;
+      border-radius:10px;
+      font-size:20px;
+      text-align:center;
+      color:#fff;
+      font-weight: bold;
 }

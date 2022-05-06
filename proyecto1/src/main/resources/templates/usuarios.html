@@ -18,22 +18,6 @@
         </ul>
     </nav>
 </header>
-<!--
-<div>
-    <aside class="men-lat">
-        <ul>
-            <li><h1>User</h1></li>
-            <li><a href="" th:href="@{/registrarCompetidor/}">Registrar</a></li>
-            <li><a href="#">Buscar</a></li>
-            <li><a href="#">Ajustes</a></li>
-            <li><a href="#">Opcion</a></li>
-            <li><a href="#">Opcion</a></li>
-        </ul>
-
-    </aside>
-
-</div>
--->
 <div class="lado">
     <ul>
         <li><a href="#"><span class="perfil"><i class="icon icon-home"></i></span>Perfil</a></li>
@@ -43,39 +27,45 @@
 </div>
 <div class="container">
     <div class="title">Registrar competidor</div>
+    <div th:if="${exito != null && exito}" class="exito" role="alert">
+        Tu registro se ha realizado con éxito.
+    </div>
+    <div th:if="${exito != null && !exito}" class="alerta" role="alert">
+        El correo ya existe.
+    </div>
     <form method="post" th:action="@{/registrarCompetidor/crea}">
         <div class="user-details">
             <div class="input-box">
                 <span class="details">Nombre</span>
-                <input type="text" name="nombre" placeholder="Introduce el nombre">
+                <input type="text" name="nombre" placeholder="Introduce el nombre" required>
             </div>
             <div class="input-box">
                 <span class="details">Apellido Paterno</span>
-                <input type="text" name="apellido_p" placeholder="Introduce el apellido paterno">
+                <input type="text" name="apellido_p" placeholder="Introduce el apellido paterno" required>
             </div>
             <div class="input-box">
                 <span class="details">Apellido Materno</span>
-                <input type="text" name="apellido_m" placeholder="Introduce el apellido materno">
+                <input type="text" name="apellido_m" placeholder="Introduce el apellido materno" required>
             </div>
             <div class="input-box">
                 <span class="details">Peso</span>
-                <input type="text" name="peso" placeholder="Introduce el peso">
+                <input type="number" name="peso" placeholder="Introduce el peso" required>
             </div>
             <div class="input-box">
                 <span class="details">Altura (cm)</span>
-                <input type="number" name="altura" placeholder="Introduce la altura en centimetros">
+                <input type="number" name="altura" placeholder="Introduce la altura en centimetros" required>
             </div>
             <div class="input-box">
                 <span class="details">Fecha de nacimiento</span>
-                <input type="date" name="fecha" placeholder="Introduce la fecha de nacimiento">
+                <input type="date" name="fecha" placeholder="Introduce la fecha de nacimiento" required>
             </div>
             <div class="input-box">
                 <span class="details">Contraseña</span>
-                <input type="password" name="password" placeholder="Introduzca la contraseña">
+                <input type="password" name="password" placeholder="Introduzca la contraseña" required>
             </div>
             <div class="input-box">
                 <span class="details">Email</span>
-                <input type="text" name="correo" placeholder="Introduce el correo">
+                <input type="text" name="correo" placeholder="Introduce el correo" required>
             </div>
         </div>
         <div class="sexo-detalles">
@@ -84,13 +74,13 @@
             <span class="sexo-titulo">Sexo</span>
             <div class="category">
                 <label for="dot-1">
-                    <input type="radio" value="Masculino" name="sexo" id="dot-1">
+                    <input type="radio" value="Masculino" name="sexo" id="dot-1" required>
                     <span class="">
                         <span class="">Masculino</span>
                     </span>
                 </label>
                 <label for="dot-2">
-                    <input type="radio" value="Femenino" name="sexo" id="dot-2">
+                    <input type="radio" value="Femenino" name="sexo" id="dot-2" required>
                     <span class="dot two">
                         <span class="sexo">Femenino</span>
                     </span>
