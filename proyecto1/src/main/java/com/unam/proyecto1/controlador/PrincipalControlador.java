@@ -41,9 +41,9 @@ public class PrincipalControlador {
         return "redirect:/registrarCompetidor/";
     }
 
-    @RequestMapping("/manejoAdmin")
+    @RequestMapping("/admins")
     public String manejoAdmin() { 
-        return "manejoAdmin"; 
+        return "admins"; 
     }
 
     @RequestMapping("/registro")
