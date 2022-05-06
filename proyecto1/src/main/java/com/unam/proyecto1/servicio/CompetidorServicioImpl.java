@@ -30,7 +30,7 @@ public class CompetidorServicioImpl implements  CompetidorServicio{
         nuevoCompetidor.setFecha_nacimiento(fecha_nacimiento);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         nuevoCompetidor.setPassword(passwordEncoder.encode(password));
-        nuevoCompetidor.setRol(Rol.ROLE_USUARIO);
+        nuevoCompetidor.setRol(Rol.ROLE_COMPETITOR);
         return competidorRepo.save(nuevoCompetidor);
     }
 }
