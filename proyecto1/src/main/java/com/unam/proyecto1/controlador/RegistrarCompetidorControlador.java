@@ -26,7 +26,6 @@ public class RegistrarCompetidorControlador {
 
     @PostMapping("/crea")
     public String crea(HttpServletRequest request, Model model) {
-
         Date fecha = Date.valueOf(request.getParameter("fecha"));
         String sexo = request.getParameter("sexo");
         sexo= sexo.equals("Masculino")?"Masculino":"Femenino";
@@ -39,8 +38,7 @@ public class RegistrarCompetidorControlador {
                 Integer.parseInt(request.getParameter("altura")),
                 fecha,
                 request.getParameter("sexo"));
-
-        System.out.printf(competidor.getEmail()+"**********************************");
+        model.addAttribute("exito", competidor != null);
         return "usuarios";
     }
 }

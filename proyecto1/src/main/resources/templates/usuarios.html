@@ -27,6 +27,12 @@
 </div>
 <div class="container">
     <div class="title">Registrar competidor</div>
+    <div th:if="${exito != null && exito}" class="exito" role="alert">
+        Tu registro se ha realizado con éxito.
+    </div>
+    <div th:if="${exito != null && !exito}" class="alerta" role="alert">
+        El correo ya existe.
+    </div>
     <form method="post" th:action="@{/registrarCompetidor/crea}">
         <div class="user-details">
             <div class="input-box">
@@ -43,7 +49,7 @@
             </div>
             <div class="input-box">
                 <span class="details">Peso</span>
-                <input type="text" name="peso" placeholder="Introduce el peso" required>
+                <input type="number" name="peso" placeholder="Introduce el peso" required>
             </div>
             <div class="input-box">
                 <span class="details">Altura (cm)</span>
