@@ -20,7 +20,7 @@ public class EventoServicioImpl implements EventoServicio{
         Evento nuevoEvento = new Evento();
         nuevoEvento.setNombre_Evento(nombre_Evento);
         nuevoEvento.setNombre_Disciplina(nombre_Disciplina);
-        nuevoEvento.setCategoria(categoria);,
+        nuevoEvento.setCategoria(categoria);
         nuevoEvento.setRama(rama);
         nuevoEvento.setFecha(Date.valueOf(LocalDate.now()));
         return eventoRepositorio.save(nuevoEvento);
