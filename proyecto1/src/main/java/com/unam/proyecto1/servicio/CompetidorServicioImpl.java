@@ -10,12 +10,13 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 
 @Service
-public class CompetidorServicioImpl implements  CompetidorServicio{
+public class CompetidorServicioImpl implements CompetidorServicio {
     @Autowired
     private CompetidorRepositorio competidorRepo;
 
     @Override
-    public Competidor creaCompetidor(String email, String password, String nombre, String apellido_p, String apellido_m, int peso, int altura, Date fecha_nacimiento, String sexo) {
+    public Competidor creaCompetidor(String email, String password, String nombre, String apellido_p, String apellido_m,
+            int peso, int altura, Date fecha_nacimiento, String sexo) {
         if (competidorRepo.existsCompetidorByEmail(email)) {
             return null;
         }
