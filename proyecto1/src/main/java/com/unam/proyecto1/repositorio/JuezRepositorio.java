@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface JuezRepositorio extends JpaRepository<Juez, Integer> {
 
     boolean existsJuezByNombreJuezAndCategoriaAndRama(String nombre_Juez, String categoria, String rama);
-    Juez findByNombreJuezAndCategoriaAndRama(String nombreJuez, String categoria, String rama);    
+    Juez findByNombreJuezAndCategoriaAndRama(String nombre_Juez, String categoria, String rama);    
 }
