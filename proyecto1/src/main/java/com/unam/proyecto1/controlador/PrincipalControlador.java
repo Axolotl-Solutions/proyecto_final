@@ -41,17 +41,15 @@ public class PrincipalControlador {
         return "registrarCompetidor";
     }*/
 
-<<<<<<< HEAD
     @RequestMapping("/admins")
     public String manejoAdmin() { 
         return "admins"; 
     }
-=======
+
     /*@RequestMapping("/manejoAdmin")
     public String manejoAdmin() { 
         return "manejoAdmin"; 
     }*/
->>>>>>> 561f93c7f9f7720d75e16e18fcad9826ed769dc0
 
     @RequestMapping("/registro")
     public String registro() { 
