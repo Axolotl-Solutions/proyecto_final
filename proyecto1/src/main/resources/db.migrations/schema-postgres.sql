@@ -22,3 +22,13 @@ CREATE TABLE IF NOT EXISTS Competidor (
     sexo             VARCHAR(20) NOT NULL,
     rol              VARCHAR(20) DEFAULT 'ROLE_COMPETITOR'
 );
+
+
+CREATE TABLE IF NOT EXISTS Evento (
+    id_evento           SERIAL PRIMARY KEY NOT NULL,
+    nombre_Evento       VARCHAR(50) NOT NULL,
+    nombre_Disciplina   VARCHAR(50) NOT NULL,
+    rama                VARCHAR(50) NOT NULL,
+    categoria           VARCHAR(50) NOT NULL,
+    fecha               DATE NOT NULL
+);
