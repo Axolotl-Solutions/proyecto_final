@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -33,10 +34,12 @@ public class EventoControlador {
 
     @PostMapping("/crea")
     public String crea(HttpServletRequest request, Model model) {
+        Date fecha = Date.valueOf(request.getParameter("fecha"));
         Evento evento = eventoServicio.creaEvento(request.getParameter("nombre_Evento"),
                 request.getParameter("nombre_Disciplina"),
                 request.getParameter("categoria"),
-                request.getParameter("rama"));
+                request.getParameter("rama"),
+                fecha);
         model.addAttribute("exito", evento != null);
         return "registro";
     }
