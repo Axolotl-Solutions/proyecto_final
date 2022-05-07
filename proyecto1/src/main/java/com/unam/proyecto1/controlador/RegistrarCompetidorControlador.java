@@ -55,10 +55,17 @@ public class RegistrarCompetidorControlador {
         model.addAttribute("competidores", competidores);
         return "competidores";
     }
+    @GetMapping("/imprime")
+    public String imprime(Model model) {
+        System.out.println("SI entreeeeee a buscar************");
+        model.addAttribute("competidores",null);
+        return "buscar";
+    }
 
-    @GetMapping("/{id}")
-    private String eliminar (@PathVariable Integer id){
-        competidorServicio.eliminarCompetidor(id);
-        return "redirect:/buscar/";
+    @GetMapping("/{id_Competidor}")
+    private String eliminar (@PathVariable("id_Competidor") Integer id_Competidor){
+        System.out.println("ELIMINANDOOOOOO id: "+id_Competidor);
+        competidorServicio.eliminarCompetidor(id_Competidor);
+        return "redirect:/registrarCompetidor/buscar/";
     }
 }

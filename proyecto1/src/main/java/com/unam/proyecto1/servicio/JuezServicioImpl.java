@@ -12,9 +12,9 @@ public class JuezServicioImpl implements JuezServicio {
 
     @Override
     public Juez creaJuez(String nombre_Juez, String nombre_Disciplina, String rama, String categoria) {
-        if(juezRepositorio.existsJuezByNombreJuezAndCategoriaAndRama(nombre_Juez, categoria, rama)){
+        /*if(juezRepositorio.existsJuezByNombreJuezAndCategoriaAndRama(nombre_Juez, categoria, rama)){
             return null;
-        }
+        }*/
         Juez nuevoJuez = new Juez();
         nuevoJuez.setNombreJuez(nombre_Juez);
         nuevoJuez.setNombre_Disciplina(nombre_Disciplina);

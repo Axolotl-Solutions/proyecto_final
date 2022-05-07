@@ -7,35 +7,29 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link rel="stylesheet"  th:href="@{/style/style.css}">
-
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 <header>
     <nav class="nv">
         <ul>
             <li><a href="/"><span class="primero"><i class="icon icon-home"></i></span>Inicio</a></li>
             <li><a href="/registrarCompetidor/competidores"><span class="segundo"><i class="icon icon-image"></i></span>Competidores</a></li>
             <li><a href="#"><span class="tercero"><i class="icon icon-lab"></i></span>Jueces</a></li>
-            <li><a href="/salir"><span class="cuarto"><i class="icon icon-mobile2"></i></span>Salir</a></li>
+            <li><a href="/salir"><span class="cuarto"><i class="bi bi-box-arrow-left"></i></span>Salir</a></li>
         </ul>
     </nav>
 </header>
-<!--
-<div class="lado">
-    <ul>
-        <li><a href="/"><span class="perfil"><i class="icon icon-home"></i></span>Perfil</a></li>
-        <li><a href="/usuarios/registra"><span class="registrar"><i class="icon icon-home"></i></span>Registrar</a></li>
-        <li><a href="#"><span class="buscar"><i class="icon icon-home"></i></span>Buscar</a></li>
-    </ul>
-</div>
--->
 <div class="container">
     <div class="jumbotron">
-        <div class="card text-center">
-            <div class="card-body">
-                <h5 class="card-title">Lista de competidores</h5>
-                <table  class="table table-dark table-striped table-hover table-bordered">
+        <div class="card">
+            <div class="card-body table-responsive" id="tresponsive">
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-success" type="submit"><i class="bi bi-search" style="font-size:20px"></i></button>
+                </form>
+                <table  class="table table-dark table-striped table-hover">
                     <thead>
                     <tr>
                         <th scope="col">#id</th>
@@ -53,20 +47,24 @@
                     </thead>
                     <tbody>
                     <tr th:each="competidor : ${competidores}">
-                        <th th:text="${competidor.getId_Competidor()}" >1</th>
-                        <td th:text="${competidor.getNombre()}">Mark</td>
-                        <td th:text="${competidor.getApellido_P()}">Otto</td>
-                        <td th:text="${competidor.getApellido_M()}">@mdo</td>
-                        <td th:text="${competidor.getPeso()}">lo</td>
-                        <td th:text="${competidor.getAltura()}">l</td>
-                        <td th:text="${competidor.getEmail()}"></td>
-                        <td th:text="${competidor.getFecha_nacimiento()}">je</td>
-                        <td th:text="${competidor.getSexo()}"></td>
-                        <td class="text-right">
-                            <a  class="btn btn-primary">Edit</a>
+                        <th data-title="#Id" th:text="${competidor.getId_Competidor()}" >1</th>
+                        <td data-title="Nombre" th:text="${competidor.getNombre()}">Mark</td>
+                        <td data-title="Apellido paterno" th:text="${competidor.getApellido_P()}">Otto</td>
+                        <td data-title="Apellido materno" th:text="${competidor.getApellido_M()}">@mdo</td>
+                        <td data-title="Peso" th:text="${competidor.getPeso()}">lo</td>
+                        <td data-title="Altura" th:text="${competidor.getAltura()}">l</td>
+                        <td data-title="Correo" th:text="${competidor.getEmail()}"></td>
+                        <td data-title="Fecha nacimiento" th:text="${competidor.getFecha_nacimiento().toString().substring(0,10)}">je</td>
+                        <td data-title="Sexo" th:text="${competidor.getSexo()}"></td>
+                        <td data-title="Editar">
+                            <a type="button" class="btn btn-primary btn-large" value="Guardar">
+                                <i class="bi bi-pencil-square" style="font-size:20px"></i>
+                            </a>
                         </td>
-                        <td class="text-right">
-                            <button  class="btn btn-danger" >Delete</button>
+                        <td data-title="Eliminar">
+                            <a th:href="@{/registrarCompetidor/{id}(id = ${competidor.getId_Competidor()})}" class="btn btn-danger btn-large" style="font-size:20px">
+                                <i class="bi bi-trash" ></i>
+                            </a>
                         </td>
                     </tr>
                     </tbody>
@@ -81,11 +79,9 @@ th:href="@{/registrarCompetidor/eliminar/{id_Competidor}(id_Competidor=${competi
 -->
 
 <div id="fondo"></div>
-<div class="foot">
-    <footer>
+    <footer class="mt-auto">
         <a href="https://github.com/Axolotl-Solutions"><img width="50" height="50" th:src="@{/img/axolotl.png}" alt="img"></a>
         <a href="https://github.com/Axolotl-Solutions"><p>© 2022 Axolotl Solutions</p></a>
     </footer>
-</div>
 </body>
 </html>
