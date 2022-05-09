@@ -270,20 +270,33 @@ body::-webkit-scrollbar{
     width: 8px;
     background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
-body::-webkit-scrollbar-thumb{
+body::-webkit-scrollbar-thumb,{
     border-radius: 20px;
 		background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
 }
 
 
 aside::-webkit-scrollbar{
-		border-radius: 50px;
+	border-radius: 50px;
     width: 5px;
     background-image: linear-gradient(30deg, #59b1de 0%, #8cd2f5 100%);
 }
 body::-webkit-scrollbar-thumb{
     border-radius: 50px;
 		background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+}
+
+figcaption::-webkit-scrollbar{
+    border-radius: 50px;
+    width: 8px;
+    height: 10px;
+    background-image: linear-gradient(30deg, #fff 0%, #fff 100%);
+}
+figcaption::-webkit-scrollbar-thumb{
+    border-radius: 50px;
+    height:2px;
+    width:5px;
+	background-image: linear-gradient(to top,#330867  0%, #d8f0f0 100%);
 }
 .texto{
     width: 70%;

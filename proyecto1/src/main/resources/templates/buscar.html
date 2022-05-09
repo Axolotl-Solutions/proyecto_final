@@ -14,8 +14,8 @@
 <header>
     <nav class="nv">
         <ul>
-            <li><a href="/"><span class="primero"><i class="icon icon-home"></i></span>Inicio</a></li>
-            <li><a href="/registrarCompetidor/competidores"><span class="segundo"><i class="icon icon-image"></i></span>Competidores</a></li>
+            <li><a href="/"><span class="primero"><i class="icon icon-home" ></i></span>Inicio</a></li>
+            <li><a href="/registrarCompetidor/competidores"><span class="segundo"><i class=""></i></span>Competidores</a></li>
             <li><a href="#"><span class="tercero"><i class="icon icon-lab"></i></span>Jueces</a></li>
             <li><a href="/salir"><span class="cuarto"><i class="bi bi-box-arrow-left"></i></span>Salir</a></li>
         </ul>
@@ -29,6 +29,7 @@
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                     <button class="btn btn-success" type="submit"><i class="bi bi-search" style="font-size:20px"></i></button>
                 </form>
+
                 <table  class="table table-dark table-striped table-hover">
                     <thead>
                     <tr>
@@ -56,14 +57,19 @@
                         <td data-title="Correo" th:text="${competidor.getEmail()}"></td>
                         <td data-title="Fecha nacimiento" th:text="${competidor.getFecha_nacimiento().toString().substring(0,10)}">je</td>
                         <td data-title="Sexo" th:text="${competidor.getSexo()}"></td>
-                        <td data-title="Editar">
-                            <a type="button" class="btn btn-primary btn-large" value="Guardar">
-                                <i class="bi bi-pencil-square" style="font-size:20px"></i>
+                        <td class = "tdd" data-title="Editar">
+                            <a th:href="@{/registrarCompetidor/editar/{id}(id = ${competidor.getId_Competidor()})}"  class="btn btn-primary btn-large" value="Editar">
+                                <div class="edit-icon">
+                                </div>
+                                <div class="elim-edit-txt">Editar</div>
                             </a>
                         </td>
-                        <td data-title="Eliminar">
-                            <a th:href="@{/registrarCompetidor/{id}(id = ${competidor.getId_Competidor()})}" class="btn btn-danger btn-large" style="font-size:20px">
-                                <i class="bi bi-trash" ></i>
+                        <td class = "tdd" data-title="Eliminar">
+                            <a th:href="@{/registrarCompetidor/{id}(id = ${competidor.getId_Competidor()})}" class="btn btn-danger btn-large">
+                                <div class="elim-icon">
+
+                                </div>
+                                <div class="elim-edit-txt">Eliminar</div>
                             </a>
                         </td>
                     </tr>

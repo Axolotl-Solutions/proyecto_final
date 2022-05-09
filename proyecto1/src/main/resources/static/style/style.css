@@ -89,18 +89,14 @@ nav > ul > li > a span{
     -webkit-animation: .5s menuup;
     animation: .5s menuup;
 }
-nav > ul > li > a span .icon{
-    display:block;
-    line-height:60px;
-}
+
 nav > ul > li a:hover > span{
     -webkit-animation: .5s menu;
     animation: .5s menu;
     top:0;
 }
 nav > ul > li > a span .icon{
-    display:block;
-    line-height:60px;
+
 }
 @-webkit-keyframes menuup{
   0% {
@@ -328,8 +324,6 @@ footer p{
     margin-top: 10px;
     margin-left: 5px;
     margin-top:30px;
-
-
 }
 footer img{
     margin-top:10px;
@@ -412,8 +406,7 @@ footer{
     left:0;
 }
 .lado > ul > li > a span .icon{
-    display:block;
-    line-height:60px;
+    left:40px;
 }
 
 @-webkit-keyframes menur{
@@ -596,4 +589,16 @@ box tagline{
         position:absolute;
         left:60px;
     }
+    .elim-icon:before{
+        display:center;
+        content: " " url("/img/trash.svg");
+    }
+    .edit-icon:before{
+            display:center;
+            content: " " url("/img/edit.svg");
+        }
+    .elim-edit-txt{
+        display:none;
+    }
 }
+

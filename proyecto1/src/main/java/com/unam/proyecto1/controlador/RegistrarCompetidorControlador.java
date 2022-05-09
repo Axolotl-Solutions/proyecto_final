@@ -64,8 +64,31 @@ public class RegistrarCompetidorControlador {
 
     @GetMapping("/{id_Competidor}")
     private String eliminar (@PathVariable("id_Competidor") Integer id_Competidor){
-        System.out.println("ELIMINANDOOOOOO id: "+id_Competidor);
         competidorServicio.eliminarCompetidor(id_Competidor);
         return "redirect:/registrarCompetidor/buscar/";
+    }
+    @GetMapping("/editar/{id_Competidor}")
+    private String editar(@PathVariable("id_Competidor") Integer id_Competidor, Model modelo){
+        modelo.addAttribute("competidor",competidorServicio.getCompetidorId(id_Competidor));
+        return "editarCompetidor";
+    }
+    @PostMapping("/actualizar/{id}")
+    public String actualizarEstudiante(@PathVariable Integer id,@ModelAttribute Competidor competidor,Model modelo){
+        Competidor antiguo = competidorServicio.getCompetidorId(id);
+        /* Falta ver el caso donde el correo ya esta registrado, pero
+        * que no se el de el mismo :) */
+        antiguo.setPeso(competidor.getPeso());
+        antiguo.setAltura(competidor.getAltura());
+        antiguo.setSexo(competidor.getSexo());
+        System.out.printf("ENTRO A ACTUALIZARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
+        System.out.println(competidor.getFecha_nacimiento()+"**************************************************");
+        antiguo.setFecha_nacimiento(competidor.getFecha_nacimiento());
+        antiguo.setNombre(competidor.getNombre());
+        antiguo.setApellido_P(competidor.getApellido_P());
+        antiguo.setApellido_M(competidor.getApellido_M());
+        antiguo.setEmail(competidor.getEmail());
+
+        competidorServicio.actualizarCompetidor(antiguo);
+        return "redirect:/buscar";
     }
 }
