@@ -21,25 +21,20 @@ import java.security.Principal;
 @Controller
 public class PrincipalControlador {
 
+
     @RequestMapping("/")
     public String index(Model model, String error, Principal principal){
         if (error != null) {
+            System.out.println("Hola error");
             model.addAttribute("error", true);
         }
 
         if (principal != null) {
-            System.out.println("Hola :)");
-            System.out.println(model.toString());
             return "redirect:/usuarios/";
         }
 
         return "index";
     }
-
-    /*@RequestMapping("/registrarCompetidor")
-    public String registrarCompetidor() {
-        return "registrarCompetidor";
-    }*/
 
     @RequestMapping("/admins")
     public String manejoAdmin() { 
@@ -55,6 +50,7 @@ public class PrincipalControlador {
     public  String buscarComp(){
         return "redirect:/registrarCompetidor/buscar/";
     }
+
     @RequestMapping("/registro")
     public String registro() { 
         return "registro";

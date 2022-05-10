@@ -80,8 +80,7 @@ public class RegistrarCompetidorControlador {
         antiguo.setPeso(competidor.getPeso());
         antiguo.setAltura(competidor.getAltura());
         antiguo.setSexo(competidor.getSexo());
-        System.out.printf("ENTRO A ACTUALIZARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        System.out.println(competidor.getFecha_nacimiento()+"**************************************************");
+        System.out.println(competidor.getFecha_nacimiento()+" ¿Fecha de nacimiento null?");
         antiguo.setFecha_nacimiento(competidor.getFecha_nacimiento());
         antiguo.setNombre(competidor.getNombre());
         antiguo.setApellido_P(competidor.getApellido_P());
