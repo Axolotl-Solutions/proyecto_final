@@ -26,6 +26,7 @@ public class UsuarioControlador {
     @GetMapping("/")
     public String findUsuarios(Model model) {
         List<Usuario> usuarios = usuarioRepositorio.findAll();
+         //model.addAttribute("inicio", usuarios);
         model.addAttribute("usuarios", usuarios);
         return "inicio";
     }
