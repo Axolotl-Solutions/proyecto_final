@@ -11,7 +11,7 @@
 <header>
     <nav class="nv">
         <ul>
-            <li><a href=""><span class="primero"><i class="icon icon-home"></i></span>Inicio</a></li>
+            <li><a href="/usuarios/"><span class="primero"><i class="icon icon-home"></i></span>Inicio</a></li>
             <li><a href="/registrarCompetidor/competidores"><span class="segundo"><i class="icon icon-image"></i></span>Competidores</a></li>
             <li><a href="#"><span class="tercero"><i class="icon icon-lab"></i></span>Jueces</a></li>
             <li><a href="/salir"><span class="cuarto"><i class="icon icon-mobile2"></i></span>Salir</a></li>
@@ -35,9 +35,9 @@
             <photo class="animate">
                 <img class="photo" th:src="@{/img/entrenador.jpg}"/>
             </photo>
-            <h1> Entrenador</h1>
-            <tagline>Fernando Gerardo Flores García</tagline>
-            <tagline>fernandondin@ciencias.unam.mx</tagline>
+            <h1 th:text="${usuario.getRol()}">Entrenador</h1>
+            <tagline th:text="${usuario.getNombre()+' '+usuario.getApellido_P() + ' ' + usuario.getApellido_M()}"></tagline>
+            <tagline th:text="${usuario.getEmail()}"></tagline>
         </wrapper>
     </box>
 </div>

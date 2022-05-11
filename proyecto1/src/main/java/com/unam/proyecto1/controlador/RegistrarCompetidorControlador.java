@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -57,7 +58,6 @@ public class RegistrarCompetidorControlador {
     }
     @GetMapping("/imprime")
     public String imprime(Model model) {
-        System.out.println("SI entreeeeee a buscar************");
         model.addAttribute("competidores",null);
         return "buscar";
     }
@@ -73,22 +73,21 @@ public class RegistrarCompetidorControlador {
         return "editarCompetidor";
     }
     @PostMapping("/actualizar/{id}")
-    public String actualizarEstudiante(@PathVariable Integer id,@ModelAttribute Competidor competidor,Model modelo){
+    public String actualizarEstudiante(@PathVariable Integer id,@ModelAttribute Competidor competidor,
+                                       HttpServletRequest request){
         Competidor antiguo = competidorServicio.getCompetidorId(id);
         /* Falta ver el caso donde el correo ya esta registrado, pero
         * que no se el de el mismo :) */
         antiguo.setPeso(competidor.getPeso());
         antiguo.setAltura(competidor.getAltura());
         antiguo.setSexo(competidor.getSexo());
-        System.out.printf("ENTRO A ACTUALIZARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        System.out.println(competidor.getFecha_nacimiento()+"**************************************************");
-        antiguo.setFecha_nacimiento(competidor.getFecha_nacimiento());
+        Date date = Date.valueOf(request.getParameter("fecha"));
+        antiguo.setFecha_nacimiento(date);
         antiguo.setNombre(competidor.getNombre());
         antiguo.setApellido_P(competidor.getApellido_P());
         antiguo.setApellido_M(competidor.getApellido_M());
         antiguo.setEmail(competidor.getEmail());
-
         competidorServicio.actualizarCompetidor(antiguo);
-        return "redirect:/buscar";
+        return "redirect:/registrarCompetidor/buscar";
     }
 }
