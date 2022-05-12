@@ -37,7 +37,6 @@
         <th>Disciplina</th>
         <th>Categoría</th>
         <th>Rama</th>
-        {% comment %} <th>Fecha</th> {% endcomment %}
     </tr>
 
     <tr th:each="juez : ${jueces}">
@@ -45,7 +44,6 @@
         <td th:text="${juez.getNombre_Disciplina()}">Disciplina</td>
         <td th:text="${juez.getCategoria()}">Categoría</td>
         <td th:text="${juez.getRama()}">Rama</td>
-        {% comment %} <td th:text="${juez.getFecha()}">Fecha</td> {% endcomment %}
     </tr>
 </table>
 
