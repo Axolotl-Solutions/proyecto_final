@@ -1,14 +1,16 @@
+DROP TABLE IF EXISTS Administrador;
 
-CREATE TABLE IF NOT EXISTS Usuario (
-    id_Usuario       SERIAL PRIMARY KEY NOT NULL,
+CREATE TABLE IF NOT EXISTS Administrador (
+    id_Administrador SERIAL PRIMARY KEY NOT NULL,
     nombre           VARCHAR(50) NOT NULL,
     apellido_P       VARCHAR(30) NOT NULL,
     apellido_M       VARCHAR(30) NOT NULL,
     email            VARCHAR(50) NOT NULL,
-    password         VARCHAR(60) NOT NULL
+    password         VARCHAR(60) NOT NULL,
+    rol              VARCHAR(20) DEFAULT 'ROLE_ADMIN'
 );
-ALTER TABLE Usuario
-ADD COLUMN IF NOT EXISTS rol VARCHAR(20) DEFAULT 'ROLE_USER';
+
+DROP TABLE IF EXISTS Competidor;
 
 CREATE TABLE IF NOT EXISTS Competidor (
     id_Competidor    SERIAL PRIMARY KEY NOT NULL,
@@ -21,15 +23,33 @@ CREATE TABLE IF NOT EXISTS Competidor (
     email            VARCHAR(50) NOT NULL,
     password         VARCHAR(60) NOT NULL,
     sexo             VARCHAR(20) NOT NULL,
-    rol              VARCHAR(20) DEFAULT 'ROLE_COMPETITOR'
+    rol              VARCHAR(20) DEFAULT 'ROLE_COMPETIDOR'
 );
 
+DROP TABLE IF EXISTS Entrenador;
 
-CREATE TABLE IF NOT EXISTS Evento (
-    id_evento           SERIAL PRIMARY KEY NOT NULL,
-    nombre_Evento       VARCHAR(50) NOT NULL,
-    nombre_Disciplina   VARCHAR(50) NOT NULL,
-    rama                VARCHAR(50) NOT NULL,
-    categoria           VARCHAR(50) NOT NULL,
-    fecha               DATE NOT NULL
+CREATE TABLE IF NOT EXISTS Entrenador (
+    id_Entrenador    SERIAL PRIMARY KEY NOT NULL,
+    nombre           VARCHAR(50) NOT NULL,
+    apellido_P       VARCHAR(30) NOT NULL,
+    apellido_M       VARCHAR(30) NOT NULL,
+    fecha_nacimiento DATE NOT NULL,
+    email            VARCHAR(50) NOT NULL,
+    password         VARCHAR(60) NOT NULL,
+    sexo             VARCHAR(20) NOT NULL,
+    rol              VARCHAR(20) DEFAULT 'ROLE_ENTRENADOR'
+);
+
+DROP TABLE IF EXISTS Juez;
+
+CREATE TABLE IF NOT EXISTS Juez (
+    id_Juez          SERIAL PRIMARY KEY NOT NULL,
+    nombre           VARCHAR(50) NOT NULL,
+    apellido_P       VARCHAR(30) NOT NULL,
+    apellido_M       VARCHAR(30) NOT NULL,
+    fecha_nacimiento DATE NOT NULL,
+    email            VARCHAR(50) NOT NULL,
+    password         VARCHAR(60) NOT NULL,
+    sexo             VARCHAR(20) NOT NULL,
+    rol              VARCHAR(20) DEFAULT 'ROLE_JUEZ'
 );
