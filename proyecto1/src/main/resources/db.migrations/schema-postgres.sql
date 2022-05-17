@@ -1,55 +1,50 @@
-DROP TABLE IF EXISTS Administrador;
+-- Una sola tabla de Usuario.
+DROP TABLE IF EXISTS Usuario CASCADE;
 
-CREATE TABLE IF NOT EXISTS Administrador (
-    id_Administrador SERIAL PRIMARY KEY NOT NULL,
+CREATE TABLE IF NOT EXISTS Usuario (
+    usuario_Id       SERIAL PRIMARY KEY NOT NULL,
     nombre           VARCHAR(50) NOT NULL,
     apellido_P       VARCHAR(30) NOT NULL,
     apellido_M       VARCHAR(30) NOT NULL,
-    email            VARCHAR(50) NOT NULL,
-    password         VARCHAR(60) NOT NULL,
-    rol              VARCHAR(20) DEFAULT 'ROLE_ADMIN'
+    email            VARCHAR(50) NOT NULL UNIQUE,
+    password         VARCHAR(64) NOT NULL,
+    fecha_nacimiento DATE,
+    sexo             VARCHAR(20),
+    peso             INTEGER,
+    altura           INTEGER,
+    enabled 		 INTEGER DEFAULT NULL
 );
 
-DROP TABLE IF EXISTS Competidor;
+-- Tabla de roles
+DROP TABLE IF EXISTS Rol CASCADE;
 
-CREATE TABLE IF NOT EXISTS Competidor (
-    id_Competidor    SERIAL PRIMARY KEY NOT NULL,
-    nombre           VARCHAR(50) NOT NULL,
-    apellido_P       VARCHAR(30) NOT NULL,
-    apellido_M       VARCHAR(30) NOT NULL,
-    peso             INTEGER NOT NULL,
-    altura           INTEGER NOT NULL,
-    fecha_nacimiento DATE NOT NULL,
-    email            VARCHAR(50) NOT NULL,
-    password         VARCHAR(60) NOT NULL,
-    sexo             VARCHAR(20) NOT NULL,
-    rol              VARCHAR(20) DEFAULT 'ROLE_COMPETIDOR'
+CREATE TABLE IF NOT EXISTS Rol(
+    rol_Id			SERIAL PRIMARY KEY NOT NULL,
+    nombre 			VARCHAR(45) NOT NULL
 );
 
-DROP TABLE IF EXISTS Entrenador;
+-- Tabla que relaciona los usuarios con los roles
+DROP TABLE IF EXISTS Usuarios_Roles;
 
-CREATE TABLE IF NOT EXISTS Entrenador (
-    id_Entrenador    SERIAL PRIMARY KEY NOT NULL,
-    nombre           VARCHAR(50) NOT NULL,
-    apellido_P       VARCHAR(30) NOT NULL,
-    apellido_M       VARCHAR(30) NOT NULL,
-    fecha_nacimiento DATE NOT NULL,
-    email            VARCHAR(50) NOT NULL,
-    password         VARCHAR(60) NOT NULL,
-    sexo             VARCHAR(20) NOT NULL,
-    rol              VARCHAR(20) DEFAULT 'ROLE_ENTRENADOR'
+CREATE TABLE IF NOT EXISTS Usuarios_Roles(
+    usuario_Id 		INTEGER,
+    rol_Id			INTEGER
 );
 
-DROP TABLE IF EXISTS Juez;
+ALTER TABLE Usuarios_Roles
+    ADD CONSTRAINT usuarios_roles_pk
+        PRIMARY KEY (usuario_Id, rol_Id);
 
-CREATE TABLE IF NOT EXISTS Juez (
-    id_Juez          SERIAL PRIMARY KEY NOT NULL,
-    nombre           VARCHAR(50) NOT NULL,
-    apellido_P       VARCHAR(30) NOT NULL,
-    apellido_M       VARCHAR(30) NOT NULL,
-    fecha_nacimiento DATE NOT NULL,
-    email            VARCHAR(50) NOT NULL,
-    password         VARCHAR(60) NOT NULL,
-    sexo             VARCHAR(20) NOT NULL,
-    rol              VARCHAR(20) DEFAULT 'ROLE_JUEZ'
-);
+ALTER TABLE Usuarios_Roles
+    ADD CONSTRAINT usuario_fk
+        FOREIGN KEY (usuario_Id)
+            REFERENCES Usuario(usuario_id)
+            ON UPDATE CASCADE
+            ON DELETE CASCADE;
+
+ALTER TABLE Usuarios_Roles
+    ADD CONSTRAINT rol_fk
+        FOREIGN KEY (rol_Id)
+            REFERENCES Rol(rol_id)
+            ON UPDATE CASCADE
+            ON DELETE CASCADE;
