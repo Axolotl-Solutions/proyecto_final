@@ -1,27 +1,12 @@
 package com.unam.proyecto1.controlador;
 
-import com.unam.proyecto1.modelo.Competidor;
-import com.unam.proyecto1.modelo.Usuario;
-import com.unam.proyecto1.repositorio.CompetidorRepositorio;
-import com.unam.proyecto1.servicio.CompetidorServicio;
-import org.hibernate.event.spi.SaveOrUpdateEvent;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.List;
 
 @Controller
 @RequestMapping("/registrarCompetidor")
 public class RegistrarCompetidorControlador {
-    @Autowired
+   /* @Autowired
     private CompetidorRepositorio competidorRepositorio;
 
     @Autowired
@@ -76,8 +61,8 @@ public class RegistrarCompetidorControlador {
     public String actualizarEstudiante(@PathVariable Integer id,@ModelAttribute Competidor competidor,
                                        HttpServletRequest request){
         Competidor antiguo = competidorServicio.getCompetidorId(id);
-        /* Falta ver el caso donde el correo ya esta registrado, pero
-        * que no se el de el mismo :) */
+        *//* Falta ver el caso donde el correo ya esta registrado, pero
+        * que no se el de el mismo :) *//*
         antiguo.setPeso(competidor.getPeso());
         antiguo.setAltura(competidor.getAltura());
         antiguo.setSexo(competidor.getSexo());
@@ -89,5 +74,5 @@ public class RegistrarCompetidorControlador {
         antiguo.setEmail(competidor.getEmail());
         competidorServicio.actualizarCompetidor(antiguo);
         return "redirect:/registrarCompetidor/buscar";
-    }
+    }*/
 }

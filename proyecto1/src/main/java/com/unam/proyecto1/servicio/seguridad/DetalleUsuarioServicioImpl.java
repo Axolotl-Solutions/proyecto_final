@@ -22,12 +22,11 @@ public class DetalleUsuarioServicioImpl implements DetalleUsuarioServicio, UserD
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Usuario usuarioActivo = usuarioRepositorio.findByEmail(email);
+
         if (usuarioActivo == null) {
             throw new UsernameNotFoundException("credentials not found");
         }
-        UserDetails usuarioDetails;
-        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(usuarioActivo.getRol().toString());
-        usuarioDetails = new User(usuarioActivo.getEmail(), usuarioActivo.getPassword(), Arrays.asList(grantedAuthority));
-        return usuarioDetails;
+
+        return new DetalleUsuario(usuarioActivo);
     }
 }
