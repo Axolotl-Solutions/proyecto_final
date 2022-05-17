@@ -35,7 +35,7 @@
             <photo class="animate">
                 <img class="photo" th:src="@{/img/entrenador.jpg}"/>
             </photo>
-            <h1 th:text="${usuario.getRol()}">Entrenador</h1>
+            <h1>Entrenador</h1>
             <tagline th:text="${usuario.getNombre()+' '+usuario.getApellido_P() + ' ' + usuario.getApellido_M()}"></tagline>
             <tagline th:text="${usuario.getEmail()}"></tagline>
         </wrapper>
