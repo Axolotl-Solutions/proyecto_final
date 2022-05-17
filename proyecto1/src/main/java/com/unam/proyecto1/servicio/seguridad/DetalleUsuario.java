@@ -58,7 +58,9 @@ public class DetalleUsuario implements UserDetails {
     }
 
     @Override
-    public boolean isEnabled() {
-        return usuario.isEnabled();
+    public boolean isEnabled(){
+        if(usuario.isEnabled()==1)
+            return true;
+        return false;
     }
 }

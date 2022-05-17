@@ -52,7 +52,8 @@ public class PrincipalControlador {
     }
 
     @RequestMapping("/registro")
-    public String registro() { 
+    public String registro() {
+        System.out.println("registro"); 
         return "registro";
          }
 

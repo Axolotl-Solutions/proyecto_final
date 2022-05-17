@@ -8,10 +8,10 @@ CREATE TABLE IF NOT EXISTS Usuario (
     apellido_M       VARCHAR(30) NOT NULL,
     email            VARCHAR(50) NOT NULL UNIQUE,
     password         VARCHAR(64) NOT NULL,
-    fecha_nacimiento DATE,
-    sexo             VARCHAR(20),
-    peso             INTEGER,
-    altura           INTEGER,
+    fecha_nacimiento DATE DEFAULT NULL,
+    sexo             VARCHAR(20) DEFAULT NULL,
+    peso             INTEGER DEFAULT NULL,
+    altura           INTEGER DEFAULT NULL,
     enabled 		 INTEGER DEFAULT NULL
 );
 

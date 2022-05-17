@@ -42,7 +42,8 @@ public class Usuario {
     @Column
     private Integer altura;
 
-    private boolean enabled;
+    @Column
+    private Integer enabled;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
@@ -136,15 +137,19 @@ public class Usuario {
         return roles;
     }
 
+    public void addRol(Rol rol){
+        roles.add(rol);
+    }
+
     public void setRoles(Set<Rol> roles) {
         this.roles = roles;
     }
 
-    public boolean isEnabled() {
+    public Integer isEnabled() {
         return enabled;
     }
 
-    public void setEnabled(boolean enabled) {
+    public void setEnabled(Integer enabled) {
         this.enabled = enabled;
     }
 
