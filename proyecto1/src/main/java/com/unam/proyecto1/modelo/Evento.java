@@ -13,14 +13,19 @@ public class Evento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_Evento")
     private Integer id_Evento;
+
     @Column(name = "nombre_Evento")
     private String nombreEvento;
-    @Column
-    private String nombre_Disciplina;
+
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Disciplina disciplina;
+
     @Column
     private String rama;
+
     @Column
     private String categoria;
+
     @Column
     private Date fecha;
 
@@ -40,12 +45,12 @@ public class Evento {
         this.nombreEvento = nombreEvento;
     }
 
-    public String getNombre_Disciplina() {
-        return nombre_Disciplina;
+    public Disciplina getDisciplina() {
+        return disciplina;
     }
 
-    public void setNombre_Disciplina(String nombre_Disciplina) {
-        this.nombre_Disciplina = nombre_Disciplina;
+    public void setDisciplina(Disciplina disciplina) {
+        this.disciplina = disciplina;
     }
 
     public String getRama() {

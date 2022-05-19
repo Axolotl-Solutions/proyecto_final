@@ -63,10 +63,10 @@ DROP TABLE IF EXISTS Evento CASCADE;
 
 CREATE TABLE IF NOT EXISTS Evento(
 evento_Id 			SERIAL PRIMARY KEY NOT NULL,
-nombre				VARCHAR(30),
-disciplina_Id		INTEGER,
-rama				VARCHAR(10),
-categoría			VARCHAR(30),
+nombre				VARCHAR(30) NOT NULL,
+disciplina_Id		INTEGER NOT NULL,
+rama				VARCHAR(10) NOT NULL,
+categoría			VARCHAR(30) NOT NULL,
 fecha				DATE
 );
 
