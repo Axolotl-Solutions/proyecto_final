@@ -1,6 +1,5 @@
 package com.unam.proyecto1.modelo;
 
-import com.unam.proyecto1.utils.Disciplina;
 import lombok.Data;
 
 import javax.persistence.*;
