@@ -41,7 +41,8 @@ public class EventoControlador {
                 request.getParameter("rama"),
                 fecha);
         model.addAttribute("exito", evento != null);
-        return "registro";
+        return "registro";//Creo que esto puede derivar en problemas --registro es un template para el registro de
+        //entrendores
     }
 
 }
