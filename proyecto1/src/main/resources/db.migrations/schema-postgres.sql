@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS Usuario (
     sexo             VARCHAR(20) DEFAULT NULL,
     peso             INTEGER DEFAULT NULL,
     altura           INTEGER DEFAULT NULL,
+    entrenador_Id	 INTEGER,
     enabled 		 INTEGER DEFAULT NULL
 );
 
@@ -27,8 +28,8 @@ CREATE TABLE IF NOT EXISTS Rol(
 DROP TABLE IF EXISTS Usuarios_Roles;
 
 CREATE TABLE IF NOT EXISTS Usuarios_Roles(
-    usuario_Id 		INTEGER,
-    rol_Id			INTEGER
+ usuario_Id 		INTEGER,
+ rol_Id			    INTEGER
 );
 
 ALTER TABLE Usuarios_Roles
@@ -38,13 +39,66 @@ ALTER TABLE Usuarios_Roles
 ALTER TABLE Usuarios_Roles
     ADD CONSTRAINT usuario_fk
         FOREIGN KEY (usuario_Id)
-            REFERENCES Usuario(usuario_id)
+            REFERENCES Usuario(usuario_Id)
             ON UPDATE CASCADE
             ON DELETE CASCADE;
 
 ALTER TABLE Usuarios_Roles
     ADD CONSTRAINT rol_fk
         FOREIGN KEY (rol_Id)
-            REFERENCES Rol(rol_id)
+            REFERENCES Rol(rol_Id)
+            ON UPDATE CASCADE
+            ON DELETE CASCADE;
+
+-- Tabla de disciplinas
+DROP TABLE IF EXISTS Disciplina CASCADE;
+
+CREATE TABLE IF NOT EXISTS Disciplina(
+disciplina_Id	 SERIAL PRIMARY KEY NOT NULL,
+nombre 			 VARCHAR(30)
+);
+
+-- Tabla de eventos
+DROP TABLE IF EXISTS Evento CASCADE;
+
+CREATE TABLE IF NOT EXISTS Evento(
+evento_Id 			SERIAL PRIMARY KEY NOT NULL,
+nombre				VARCHAR(30),
+disciplina_Id		INTEGER,
+rama				VARCHAR(10),
+categoría			VARCHAR(30),
+fecha				DATE
+);
+
+ALTER TABLE Evento
+    ADD CONSTRAINT disciplina_fk
+        FOREIGN KEY (disciplina_Id)
+            REFERENCES Disciplina(disciplina_Id)
+            ON UPDATE CASCADE
+            ON DELETE CASCADE;
+
+-- Tabla que relaciona los competidores con los eventos
+DROP TABLE IF EXISTS Competidores_Eventos;
+
+CREATE TABLE IF NOT EXISTS Competidores_Eventos(
+usuario_Id 		INTEGER,
+evento_Id		INTEGER
+);
+
+ALTER TABLE Competidores_Eventos
+    ADD CONSTRAINT competidores_eventos_pk
+        PRIMARY KEY (usuario_Id, evento_Id);
+
+ALTER TABLE Competidores_Eventos
+    ADD CONSTRAINT usuario_fk
+        FOREIGN KEY (usuario_Id)
+            REFERENCES Usuario(usuario_Id)
+            ON UPDATE CASCADE
+            ON DELETE CASCADE;
+
+ALTER TABLE Competidores_Eventos
+    ADD CONSTRAINT evento_Id
+        FOREIGN KEY (evento_Id)
+            REFERENCES Evento(evento_Id)
             ON UPDATE CASCADE
             ON DELETE CASCADE;
