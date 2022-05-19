@@ -15,4 +15,20 @@ public class Disciplina {
 
     @Column
     private String nombre;
+
+    public Integer getDisciplina_Id() {
+        return disciplina_Id;
+    }
+
+    public void setDisciplina_Id(Integer disciplina_Id) {
+        this.disciplina_Id = disciplina_Id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 }
