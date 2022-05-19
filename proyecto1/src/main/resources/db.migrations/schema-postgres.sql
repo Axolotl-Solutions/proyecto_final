@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS Usuario (
     sexo             VARCHAR(20) DEFAULT NULL,
     peso             INTEGER DEFAULT NULL,
     altura           INTEGER DEFAULT NULL,
-    entrenador_Id	 INTEGER,
+    entrenador_Id	 INTEGER DEFAULT NULL,
     enabled 		 INTEGER DEFAULT NULL
 );
 
