@@ -40,6 +40,7 @@ public class AdminControlador {
     public String perfil(Model model,Principal principal){
               Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
         model.addAttribute("usuario", usuario);
+        System.out.println(usuario.getNombre()+" "+usuario.getRol() + "paso por perfil");
         return "inicioAdmin";
     }
 
