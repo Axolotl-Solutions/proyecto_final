@@ -35,18 +35,7 @@ public class RegistroUsuarioControlador {
 
     @PostMapping("/crea")
     public String crea(HttpServletRequest request, Model model) {
-        System.out.println(request.getParameter("email")+
-                request.getParameter("password")+
-                request.getParameter("nombre")+
-                request.getParameter("apellido_p")+
-                request.getParameter("apellido_m"));
-       /** Usuario usuario = usuarioServicio.creaUsuario(request.getParameter("email"),
-                request.getParameter("password"),
-                request.getParameter("nombre"),
-                request.getParameter("apellido_p"),
-                request.getParameter("apellido_m"),
 
-                );*/
                 Usuario usuario = usuarioServicio.creaUsuario(request.getParameter("email"),
                     request.getParameter("password"),
                  request.getParameter("nombre"),

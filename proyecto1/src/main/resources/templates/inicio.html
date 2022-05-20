@@ -146,6 +146,7 @@ nav > ul > li > a span .icon{
                 <img class="photo" th:src="@{/img/entrenador.jpg}"/>
             </photo>
             <h1>Entrenador</h1>
+
             <tagline th:text="${usuario.getNombre()+' '+usuario.getApellido_P() + ' ' + usuario.getApellido_M()}"></tagline>
             <tagline th:text="${usuario.getEmail()}"></tagline>
         </wrapper>
