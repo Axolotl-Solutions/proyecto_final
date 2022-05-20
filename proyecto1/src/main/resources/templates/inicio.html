@@ -136,24 +136,20 @@ nav > ul > li > a span .icon{
         </nav>
     </div>>
 
-</header>
-<div class="container">
-    <div class="row">
-        <div class="col">
-        </div>
-        <div class="col-8">
-            <div>
-                <div class="mb-3">
-                </div>
-                <div class="form-floating">
-                    <p class="p1" th:text="${nombre}">
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-        </div>
-    </div>
+<div class="contenedor">
+    <box>
+        <blur>
+            <img class="blur-photo" src=""/>
+        </blur>
+        <wrapper>
+            <photo class="animate">
+                <img class="photo" th:src="@{/img/entrenador.jpg}"/>
+            </photo>
+            <h1>Entrenador</h1>
+            <tagline th:text="${usuario.getNombre()+' '+usuario.getApellido_P() + ' ' + usuario.getApellido_M()}"></tagline>
+            <tagline th:text="${usuario.getEmail()}"></tagline>
+        </wrapper>
+    </box>
 </div>
 <footer>
     <a href="https://github.com/Axolotl-Solutions"><img src="facebook.png" alt="Axo"></a>

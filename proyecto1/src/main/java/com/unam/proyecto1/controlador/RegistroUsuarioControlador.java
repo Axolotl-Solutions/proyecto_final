@@ -3,8 +3,8 @@ package com.unam.proyecto1.controlador;
 import com.unam.proyecto1.modelo.Usuario;
 import com.unam.proyecto1.repositorio.UsuarioRepositorio;
 import com.unam.proyecto1.servicio.UsuarioServicio;
+import com.unam.proyecto1.modelo.Rol;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
 import java.util.List;
+import java.util.Set;
+import java.util.HashSet;
 
 @Controller
-@RequestMapping("/usuarios")
-public class UsuarioControlador {
+@RequestMapping("/registro")
+public class RegistroUsuarioControlador {
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
@@ -25,28 +26,37 @@ public class UsuarioControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    @GetMapping("/")
-    public String perfil(Model model,Principal principal) {
-        Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
-        model.addAttribute("usuario", usuario);
-        return "inicio";
-    }
     
-    @GetMapping("/registra")
+    @GetMapping("/registro")
     public String registra(){
-        return "usuarios";
+        return "registro";
     }
 
-/**
+
     @PostMapping("/crea")
     public String crea(HttpServletRequest request, Model model) {
-        Usuario usuario = usuarioServicio.creaUsuario(request.getParameter("email"),
+        System.out.println(request.getParameter("email")+
+                request.getParameter("password")+
+                request.getParameter("nombre")+
+                request.getParameter("apellido_p")+
+                request.getParameter("apellido_m"));
+       /** Usuario usuario = usuarioServicio.creaUsuario(request.getParameter("email"),
                 request.getParameter("password"),
                 request.getParameter("nombre"),
                 request.getParameter("apellido_p"),
-                request.getParameter("apellido_m"));
+                request.getParameter("apellido_m"),
+
+                );*/
+                Usuario usuario = usuarioServicio.creaUsuario(request.getParameter("email"),
+                    request.getParameter("password"),
+                 request.getParameter("nombre"),
+                request.getParameter("apellido_p"),
+                request.getParameter("apellido_m")
+                );
+
+
         model.addAttribute("exito", usuario != null);
         return "registro";
-    }*/
+    }
 
 }

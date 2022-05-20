@@ -2,8 +2,9 @@ package com.unam.proyecto1.modelo;
 
 import javax.persistence.*;
 
-import com.unam.proyecto1.utils.Rol;
 import lombok.Data;
+
+import java.util.*;
 
 @Data
 @Table(name = "Usuario")
@@ -11,28 +12,53 @@ import lombok.Data;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_Usuario")
-    private Integer id_Usuario;
+    @Column(name = "usuario_Id")
+    private Integer usuario_Id;
+
     @Column
     private String nombre;
+
     @Column
     private String apellido_P;
+
     @Column
     private String apellido_M;
+
     @Column
     private String email;
+
     @Column
     private String password;
-    @Column
-    @Enumerated(EnumType.STRING)
-    private Rol rol;
 
-    public Integer getId_Usuario() {
-        return id_Usuario;
+    @Column
+    private Date fecha_nacimiento;
+
+    @Column
+    private String sexo;
+
+    @Column
+    private Integer peso;
+
+    @Column
+    private Integer altura;
+
+    @Column
+    private Integer enabled;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "Usuarios_Roles",
+            joinColumns = @JoinColumn(name = "usuario_Id"),
+            inverseJoinColumns = @JoinColumn(name = "rol_Id")
+    )
+    private Set<Rol> roles = new HashSet<>();
+
+    public Integer getUsuario_Id() {
+        return usuario_Id;
     }
 
-    public void setId_Usuario(Integer id_Administrador) {
-        this.id_Usuario = id_Administrador;
+    public void setUsuario_Id(Integer id_Administrador) {
+        this.usuario_Id = id_Administrador;
     }
 
     public String getNombre() {
@@ -75,11 +101,66 @@ public class Usuario {
         this.password = password;
     }
 
-    public Rol getRol() {
-        return rol;
+    public Date getFecha_nacimiento() {
+        return fecha_nacimiento;
     }
 
-    public void setRol(Rol rol) {
-        this.rol = rol;
+    public void setFecha_nacimiento(Date fecha_nacimiento) {
+        this.fecha_nacimiento = fecha_nacimiento;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public Integer getPeso() {
+        return peso;
+    }
+
+    public void setPeso(Integer peso) {
+        this.peso = peso;
+    }
+
+    public Integer getAltura() {
+        return altura;
+    }
+
+    public void setAltura(Integer altura) {
+        this.altura = altura;
+    }
+
+    public Set<Rol> getRoles() {
+        return roles;
+    }
+
+    public void addRol(Rol rol){
+        roles.add(rol);
+    }
+
+    public void setRoles(Set<Rol> roles) {
+        this.roles = roles;
+    }
+
+    public Integer isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Integer enabled) {
+        this.enabled = enabled;
+    }
+
+    public boolean hasRole(String nombreRol){
+        Iterator<Rol> iterator = this.roles.iterator();
+        while(iterator.hasNext()){
+            Rol rol = iterator.next();
+            if(rol.getNombre().equals(nombreRol)){
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -1,6 +1,7 @@
 package com.unam.proyecto1;
 
 
+import com.unam.proyecto1.controlador.LoginSuccessHandler;
 import com.unam.proyecto1.servicio.seguridad.DetalleUsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -18,24 +19,26 @@ public class SeguridadConfiguracion extends WebSecurityConfigurerAdapter {
     @Autowired
     private DetalleUsuarioServicio detalleUsuarioServicio;
 
+    @Autowired
+    private LoginSuccessHandler loginSuccessHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests()
-                .antMatchers("/","/usuarios/","/inicio","/registro").hasRole("ADMIN")
+             http.csrf().disable().authorizeRequests()
+                .antMatchers("/registro", "/registro/crea").permitAll()
+                .antMatchers("/", "/inicio", "/usuarios/").hasAnyAuthority("ROLE_ENTRENADOR", "ROLE_COMPETIDOR", "ROLE_JUEZ", "ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/")
                 .loginProcessingUrl("/").usernameParameter("email").passwordParameter("password")
-                .defaultSuccessUrl("/usuarios/").permitAll()
-                //.defaultSuccessUrl("/manejoAdmin/").permitAll()
+                     .successHandler(loginSuccessHandler)
+                     .permitAll()
                 .and()
                 .logout()// logout configuration
                 .logoutUrl("/salir")
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true)
                 .logoutSuccessUrl("/").permitAll();
-
-
     }
 
 
