@@ -137,6 +137,17 @@ public class Usuario {
         return roles;
     }
 
+    public String getRol(){
+         Iterator<Rol> iterator = this.roles.iterator();
+        while(iterator.hasNext()){
+            Rol rol = iterator.next();
+            String r=rol.getNombre().split("_")[1];
+            if(r.equals("ADMIN"))return "ADMINISTRADOR";
+            return r;
+
+        }
+        return "ROL NOT FOUND";
+    }
     public void addRol(Rol rol){
         roles.add(rol);
     }

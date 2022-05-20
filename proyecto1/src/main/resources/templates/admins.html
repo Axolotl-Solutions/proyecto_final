@@ -1,36 +1,99 @@
-<!DOCTYPE html>
-<<<<<<< HEAD
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
+<html><head>
     <meta charset="UTF-8">
-    <title>Usuarios</title>
+    <title>Administradores</title>
+
+    <link rel="stylesheet" href="/style/estilo.css">
+
 </head>
 <body>
-    <h2>Lista de Usuarios</h2>
+<header>
+    <nav class="nv">
+        <ul>
+            <li><a href="/inicioAdmin"><span class="primero"><i class="icon icon-home"></i></span>Inicio</a></li>
+            <li><a href="/admins/"><span class="segundo"><i class="icon icon-image"></i></span>Disciplinas</a></li>
+            <li><a href="#"><span class="tercero"><i class="icon icon-lab"></i></span>Jueces</a></li>
+            <li><a href="/salir"><span class="cuarto"><i class="icon icon-mobile2"></i></span>Salir</a></li>
+        </ul>
+    </nav>
+</header>
+<div class="lado">
+    <ul>
+        <li><a href="/inicioAdmin"><span class="perfil"><i class="icon icon-home"></i></span>Perfil</a></li>
+        <li><a href="#"><span class="registrar"><i class="icon icon-home"></i></span>Registrar Disciplina</a></li>
 
-    <table>
-        <tr>
-            <th>Id Usuario</th>
-            <th>Nombres</th>
-            <th>Apellido Paterno</th>
-            <th>Apellido Materno</th>
-            <th>Email</th>
-            <th>Contraseña</th>
-            <th>Rol</th>
-        </tr>
+                <li><a href="#Jueces"><span class="registrar"><i class="icon icon-home"></i></span>Registrar Jueces</a></li>
+        
+        <li><a href="/buscarDisciplinas"><span class="buscar"><i class="icon icon-home"></i></span>Buscar Disciplinas</a></li>
 
-        <tr th:each="usuario : ${admins}">
-            <td th:text="${usuario.getId_Usuario()}">Id Administrador</td>
-            <td th:text="${usuario.getNombre()}">Nombre</td>
-            <td th:text="${usuario.getApellido_P()}">Apellido Paterno</td>
-            <td th:text="${usuario.getApellido_M()}">Apellido Materno</td>
-            <td th:text="${usuario.getEmail()}">Email</td>
-            <td th:text="${usuario.getPassword()}">Contraseña</td>
-            <td th:text="${usuario.getRol()}">Rol</td>
-        </tr>
-</table>
-=======
+        <li><a href="/registrarDisciplinas/buscarJueces"><span class="buscar"><i class="icon icon-home"></i></span>Buscar Jueces</a></li>
+    </ul>
+</div>
+<div class="container">
+    <div class="title">Registrar disciplina</div>
+    
+    
+    <form method="post" action="/admins/creaDisciplina">
+        <div class="user-details">
+            <div class="input-box">
+                <span class="details">Disciplina</span>
+                <input type="text" name="disciplina" placeholder="Introduce la disciplina" required="">
+            </div>
+            <div class="input-box">
+                <span class="details">Categoría</span>
+                <input type="text" name="categoria" placeholder="Introduce la categoría" required="">
+            </div>
+            
+            
+            
+            <div class="input-box">
+                <span class="details">Fecha del evento</span>
+                <input type="date" name="fecha" placeholder="Introduce la fecha del evento" required="">
+            </div>
+            
+            <div class="input-box">
+                <span class="details">Nombre</span>
+                <input type="text" name="nombre" placeholder="Introduce el nombre del evento" required="">
+            </div>
+        </div>
+        <div class="sexo-detalles">
 
 
-</body>
-</html>
+            <span class="sexo-titulo">Rama</span>
+            <div class="category">
+                <label for="dot-1">
+                    <input type="radio" value="Masculino" name="rama" id="dot-1" required="">
+                    <span class="">
+                        <span class="">Masculino</span>
+                    </span>
+                </label>
+                <label for="dot-2">
+                    <input type="radio" value="Femenil" name="rama" id="dot-2" required="">
+                    <span class="dot two">
+                        <span class="sexo">Femenil</span>
+                    </span>
+                </label>
+
+    <label for="dot-3">
+                    <input type="radio" value="Mixto" name="rama" id="dot-3" required="">
+                    <span class="dot two">
+                        <span class="sexo">Mixto</span>
+                    </span>
+                </label>
+            </div>
+        </div>
+        <div class="button">
+            <input type="submit" value="Registrar">
+
+        </div>
+    </form>
+</div>
+
+<div id="fondo"></div>
+<div class="foot">
+    <footer>
+        <a href="https://github.com/Axolotl-Solutions"><img width="50" height="50" src="/img/axolotl.png" alt="img"></a>
+        <a href="https://github.com/Axolotl-Solutions"><p>© 2022 Axolotl Solutions</p></a>
+    </footer>
+</div>
+
+</body></html>
