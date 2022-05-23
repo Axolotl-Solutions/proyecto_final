@@ -24,7 +24,7 @@
                     </figure>
 
                     <div>
-                        <p th:text="${'Hola '+usuario.getNombre()+' '+usuario.getApellido_P() + ' ' + usuario.getApellido_M()}" class="card-title">Fernando Gerardo Flores García</p>
+                        <p th:text="${usuario.getNombre()+' '+usuario.getApellido_P() + ' ' + usuario.getApellido_M()}" class="card-title">Fernando Gerardo Flores García</p>
 
                         <p th:text="${usuario.getRol()}"class="card-subtitle">Entrenador</p>
                     </div>
