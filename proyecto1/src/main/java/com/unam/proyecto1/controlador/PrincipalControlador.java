@@ -64,7 +64,6 @@ public class PrincipalControlador {
         model.addAttribute("usuario", usuario);
         model.addAttribute("usuarios", usuarios);
         model.addAttribute("disciplinas",disciplinas);
-
         return "inicioAdmin";
     }
 

@@ -415,7 +415,10 @@ body {
 
 
 /***********Tabla***************/
-.tabla{ gap: 25px; margin-top: 25px; }
+.tabla{
+    gap: 25px;
+    margin-top: 25px;
+}
 .tabla .card{
   overflow-y: auto;
 }
@@ -798,6 +801,7 @@ table {
   text-align: left;
   overflow: hidden;
   font-family: comfortaa;
+  width:100%;
 }
 thead{
   box-shadow: 0 5px 10px #e1e5ee;
@@ -1161,7 +1165,9 @@ th {
 */
 
 @media (max-width: 1200px) {
-  table{}
+  table{
+    width:100%;
+  }
   table tbody{padding: 0 0;}
   table thead{display: none}
   table tbody, table tbody tr{display:block; width: 100%;}

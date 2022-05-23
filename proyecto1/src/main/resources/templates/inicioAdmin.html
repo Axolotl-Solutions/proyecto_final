@@ -80,10 +80,9 @@
                 </div>
             </div>
         </section>
-
+        <!--       EMPIEZA TABLA ---------->
         <section class="tabla">
-            <!--       EMPIEZA TABLA ---------->
-            <div class="card" data-aos="fade-right" data-aos-duration="700">
+            <div class="card" data-aos="zoom-out" data-aos-duration="1200">
                 <table class="table">
                     <thead>
                     <tr class="tabla-t">
@@ -105,7 +104,26 @@
                     </tbody>
                 </table>
             </div>
-
+            <!--       TERMINA TABLA ---------->
+            <!--       EMPIEZA TABLA ---------->
+            <section class="tabla">
+                <div class="card" data-aos="zoom-out" data-aos-duration="1200">
+                    <table class="table">
+                        <thead>
+                        <tr class="tabla-t">
+                            <th>#Id disciplina</th>
+                            <th>Nombre disciplina</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="dis : ${disciplinas}">
+                            <td data-aos="zoom-in-right" data-aos-duration="4000" th:text="${dis.getDisciplina_Id()}" data-title="#Id disciplina" >01</td>
+                            <td data-aos="zoom-in-left" data-aos-duration="4000" th:text= "${dis.getNombre()}" data-title="Nombre disciplina">Fernando Flores</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--       TERMINA TABLA ---------->
 
     </article>
 </main>
