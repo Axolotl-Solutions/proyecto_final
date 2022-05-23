@@ -51,8 +51,10 @@ public class PrincipalControlador {
     }
 
     @RequestMapping("/admins")
-    public String manejoAdmin() { 
-        return "admins"; 
+    public String manejoAdmin(Model model,Principal principal) {
+        Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
+        model.addAttribute("usuario", usuario);
+        return "admins";
     }
 
 

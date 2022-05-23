@@ -1,9 +1,14 @@
 'use strict';
 
+
+/*
+* Redireccionamiento en la barra nav dependiendo de rol
+*/
 var tipoUsuario= document.getElementById("rol-nav");
 if(tipoUsuario.innerHTML === "ADMINISTRADOR"){
     document.getElementById("agregar-nav").href="/admins";
     document.getElementById("agregar-menu").href="/admins";
+    document.getElementById("inicio-nav").href="/inicioAdmin";
 }
 
 
