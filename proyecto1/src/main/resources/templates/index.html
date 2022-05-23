@@ -21,18 +21,6 @@ html,body{
   /* background: linear-gradient(-135deg, #c850c0, #4158d0); */
 }
 body{
-  //background:#bdaf97;
-  //background: linear-gradient(-45deg, #202c56, #ac965a,#202c56,#ac965a);
-  //background: linear-gradient(-45deg, #4c5e9e ,#e3bb5d);
-  //background-size: 500% 500%;
-  //background-position: 80% 40%;
-  //background:#ab9865;
-  //animation: gradient 15s ease infinite;
-  //background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  //background: linear-gradient(-45deg, #dedede, #dedede);
-  //background: linear-gradient(-45deg, #202c56, #ac965a,#202c56,#ac965a);
-  //background-size: 400% 400%;
-  //animation: gradient 15s ease infinite;
   background:hsl(225, 20%, 96%);
 }
 ::selection{
@@ -136,9 +124,6 @@ form .field input[type="submit"]{
   font-size: 20px;
   font-weight: 500;
   cursor: pointer;
-  //background: linear-gradient(-135deg, #202c56, #202c56);
-  //D59F0F
-  //background: linear-gradient(-135deg, #D59F0F, #D59F0F);
   background: #a16e22;
   transition: all 0.3s ease;
 }
@@ -206,9 +191,10 @@ form .signup-link a:hover{
 }
 
     </style>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
-<div class="contenedor">
+<div class="contenedor" data-aos="zoom-out" data-aos-duration="1200">
     <div class="titulo">
         Iniciar Sesión
     </div>
@@ -216,15 +202,15 @@ form .signup-link a:hover{
         Usuario o contraseña incorrectos.
     </div>
     <form method="post" th:action="@{/}">
-        <div class="field">
+        <div class="field" data-aos="fade-left" data-aos-duration="1200">
             <input type="text" name="email" required>
             <label>Correo</label>
         </div>
-        <div class="field">
+        <div class="field" data-aos="fade-left" data-aos-duration="1200">
             <input type="password" name="password" required>
             <label>Contraseña</label>
         </div>
-        <div class="field">
+        <div class="field" data-aos="zoom-in" data-aos-duration="2000">
             <input class="btn" type="submit" value="Entrar">
         </div>
         <div class="signup-link">
@@ -232,5 +218,9 @@ form .signup-link a:hover{
         </div>
     </form>
 </div>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({offset: 100});
+</script>
 </body>
 </html>
