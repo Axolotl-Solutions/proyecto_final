@@ -1,5 +1,8 @@
 package com.unam.proyecto1.controlador;
 
+import com.unam.proyecto1.modelo.Disciplina;
+import com.unam.proyecto1.repositorio.DisciplinaRepositorio;
+import com.unam.proyecto1.servicio.DisciplinaServicio;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -16,14 +19,21 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class PrincipalControlador {
+
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
     @Autowired
     private UsuarioServicio usuarioServicio;
+
+    @Autowired
+    private DisciplinaRepositorio disciplinaRepositorio;
+
+
 
 
     @RequestMapping("/")
@@ -48,10 +58,13 @@ public class PrincipalControlador {
 
     @RequestMapping("/inicioAdmin")
     public String inicioAdmin(Model model, String error, Principal principal) {
-    System.out.println("paso por principal");
-    Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
+        List<Usuario> usuarios = usuarioRepositorio.findAll();
+        List<Disciplina> disciplinas =disciplinaRepositorio.findAll();
+        Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
         model.addAttribute("usuario", usuario);
-        System.out.println(usuario.getNombre()+" "+usuario.getRol() + "paso por perfil");
+        model.addAttribute("usuarios", usuarios);
+        model.addAttribute("disciplinas",disciplinas);
+
         return "inicioAdmin";
     }
 

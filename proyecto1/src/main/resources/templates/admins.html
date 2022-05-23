@@ -1,4 +1,6 @@
-<html><head>
+<html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
     <meta charset="UTF-8">
     <title>Administradores</title>
 
@@ -21,8 +23,8 @@
         <li><a href="/inicioAdmin"><span class="perfil"><i class="icon icon-home"></i></span>Perfil</a></li>
         <li><a href="#"><span class="registrar"><i class="icon icon-home"></i></span>Registrar Disciplina</a></li>
 
-                <li><a href="#Jueces"><span class="registrar"><i class="icon icon-home"></i></span>Registrar Jueces</a></li>
-        
+        <li><a href="#Jueces"><span class="registrar"><i class="icon icon-home"></i></span>Registrar Jueces</a></li>
+
         <li><a href="/buscarDisciplinas"><span class="buscar"><i class="icon icon-home"></i></span>Buscar Disciplinas</a></li>
 
         <li><a href="/registrarDisciplinas/buscarJueces"><span class="buscar"><i class="icon icon-home"></i></span>Buscar Jueces</a></li>
@@ -30,8 +32,8 @@
 </div>
 <div class="container">
     <div class="title">Registrar disciplina</div>
-    
-    
+
+
     <form method="post" action="/admins/creaDisciplina">
         <div class="user-details">
             <div class="input-box">
@@ -42,14 +44,14 @@
                 <span class="details">Categoría</span>
                 <input type="text" name="categoria" placeholder="Introduce la categoría" required="">
             </div>
-            
-            
-            
+
+
+
             <div class="input-box">
                 <span class="details">Fecha del evento</span>
                 <input type="date" name="fecha" placeholder="Introduce la fecha del evento" required="">
             </div>
-            
+
             <div class="input-box">
                 <span class="details">Nombre</span>
                 <input type="text" name="nombre" placeholder="Introduce el nombre del evento" required="">
@@ -73,7 +75,7 @@
                     </span>
                 </label>
 
-    <label for="dot-3">
+                <label for="dot-3">
                     <input type="radio" value="Mixto" name="rama" id="dot-3" required="">
                     <span class="dot two">
                         <span class="sexo">Mixto</span>
