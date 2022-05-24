@@ -15,50 +15,50 @@
 
                     <!-- INICIA FORM  -->
                     <div class="cont">
-                        <div class="title">Editar Competidor</div>
+                        <div class="title">Registrar Competidor</div>
                         <div class="content">
-                            <form method="post" action="/entrenador/registra" th:object="${competidor}">
+                            <form method="post" action="/entrenador/registra" >
                                 <div class="user-details">
                                     <div class="input-box" >
                                         <span  class="details">Nombre</span>
-                                        <input th:field="*{nombre}" name="nombre" type="text" placeholder="Introduce el nombre." required>
+                                        <input name="nombre" type="text" placeholder="Introduce el nombre." required>
                                     </div>
                                     <div class="input-box">
                                         <span  class="details">Apellido Paterno</span>
-                                        <input th:field="*{apellido_P}" name="apellido_p" type="text" placeholder="Introduce el apellido paterno." required>
+                                        <input name="apellido_p" type="text" placeholder="Introduce el apellido paterno." required>
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Apellido Materno</span>
-                                        <input th:field="*{apellido_M}" name="apellido_m" type="text" placeholder="Introduce el apellido materno" required>
+                                        <input name="apellido_m" type="text" placeholder="Introduce el apellido materno" required>
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Contraseña</span>
-                                        <input th:value="*{password}" name="password" id="contraseña" type="password" placeholder="Introduce la contraseña" required>
+                                        <input name="password" id="contraseña" type="password" placeholder="Introduce la contraseña" required>
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Correo</span>
-                                        <input th:field="*{email}" name="email" type="email" placeholder="Introduce el correo" required>
+                                        <input name="email" type="email" placeholder="Introduce el correo" required>
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Confirma</span>
-                                        <input th:value="*{password}" id="confirma-contraseña" type="password" placeholder="Confirma la contraseña" required>
+                                        <input id="confirma-contraseña" type="password" placeholder="Confirma la contraseña" required>
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Altura</span>
-                                        <input th:field="*{peso}" name="peso" type="number" placeholder="Ingresa peso en kg" required>
+                                        <input name="peso" type="number" placeholder="Ingresa peso en kg" required>
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Peso</span>
-                                        <input th:field="*{altura}" name="altura" type="number" placeholder="Ingresa peso en cm" required>
+                                        <input name="altura" type="number" placeholder="Ingresa peso en cm" required>
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Fecha de nacimiento</span>
-                                        <input th:value="${competidor.getFecha_nacimiento().toString().substring(0,10)}" name="fecha" type="date" placeholder="introduce fecha de nacimiento" required>
+                                        <input name="fecha" type="date" placeholder="introduce fecha de nacimiento" required>
                                     </div>
                                 </div>
                                 <div class="gender-details">
-                                    <input th:field="*{sexo}" type="radio" name="sexo" value="Masculino" id="dot-1">
-                                    <input th:field="*{sexo}" type="radio" name="sexo" value="Femenino" id="dot-2">
+                                    <input type="radio" name="sexo" value="Masculino" id="dot-1">
+                                    <input type="radio" name="sexo" value="Femenino" id="dot-2">
                                     <span class="gender-title">Sexo</span>
                                     <div class="category">
                                         <label for="dot-1">
@@ -94,9 +94,37 @@
 </div>
 <footer th:replace="plantillas/plantilla.html :: footer">
 </footer>
-
 <script th:replace="plantillas/plantilla.html :: js">
 </script>
 <script>
+   document.getElementsByClassName("navbar-link")[1].classList.add("active");
+   var error = document.getElementById('error');
+   var exito = document.getElementById('exito');
+    if(error!=null){
+        Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Este correo ya esta registrado',
+              confirmButtonColor: '#002b7a'
+            })
+    }
+    if(exito != null){
+        Swal.fire({
+              icon: 'success',
+              title: 'Agregado correctamente',
+              confirmButtonColor: '#002b7a'
+            })
+    }
+   var contra = document.getElementById("contraseña");
+   var confirmaContra = document.getElementById("confirma-contraseña");
+    function validaContra(){
+      if(contra.value != confirmaContra.value) {
+        confirmaContra.setCustomValidity("Las contraseñas no coinciden");
+      } else {
+        confirmaContra.setCustomValidity('');
+      }
+    }
+    contra.onchange = validaContra;
+    confirmaContra.onkeyup = validaContra;
  </script>
 </body></html>
