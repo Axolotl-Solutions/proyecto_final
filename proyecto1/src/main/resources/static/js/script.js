@@ -13,6 +13,8 @@ if(tipoUsuario.innerHTML === "ADMINISTRADOR"){
     document.getElementById("logo-2").href="/inicioAdmin";
 }
 if(tipoUsuario.innerHTML === "ENTRENADOR"){
+document.getElementById("agregar-nav").href="/entrenador/registrar";
+    document.getElementById("agregar-menu").href="/entrenador/registrar";
     document.getElementById("inicio-nav").href="/entrenador/";
     document.getElementById("logo-1").href="/entrenador/";
     document.getElementById("logo-2").href="/entrenador/";

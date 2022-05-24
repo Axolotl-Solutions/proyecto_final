@@ -1,0 +1,80 @@
+<html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla.html :: head">
+</head>
+<body>
+<header th:replace="plantillas/plantilla.html :: header">
+</header>
+
+<main>
+    <article class="container article">
+
+
+        <!-- Contenedores form -->
+        <section class="form">
+            <div class="form-container " data-aos="zoom-out" data-aos-duration="900">
+                <div class="form-wrapper">
+
+                    <!-- INICIA FORM  -->
+                    <div class="cont">
+                        <div class="title">Registrar Competidor</div>
+                        <div class="content">
+                            <form action="/entrenador/registrar/registra" >
+                                <div class="user-details">
+                                    <div class="input-box" >
+                                        <span class="details">Nombre del Competidor</span>
+                                        <input type="text" placeholder="Introduce el nombre ." required>
+                                    </div>
+                                    <div class="input-box">
+                                        <span class="details">Apellido Paterno</span>
+                                        <input type="text" placeholder="Introduce el apellido paterno." required>
+                                    </div>
+                                    <div class="input-box">
+                                        <span class="details">Apellido Materno</span>
+                                        <input type="text" placeholder="Introduce el apellido materno" required>
+                                    </div>
+                                    <div class="input-box">
+                                        <span class="details">Fecha de nacimiento</span>
+                                        <input type="date" placeholder="introduce fecha de nacimiento" required>
+                                    </div>
+                                </div>
+                                <div class="gender-details">
+                                    <input type="radio" name="gender" id="dot-1">
+                                    <input type="radio" name="gender" id="dot-2">
+                                    <span class="gender-title">Sexo</span>
+                                    <div class="category">
+                                        <label for="dot-1">
+                                            <span class="dot one"></span>
+                                            <span class="gender">Masculino</span>
+                                        </label>
+                                        <label for="dot-2">
+                                            <span class="dot two"></span>
+                                            <span class="gender">Femenino</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="button">
+                                    <input type="submit" value="Registrar">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- TERMINA FORMS  -->
+
+                </div>
+            </div>
+
+        </section>
+
+
+    </article>
+</main>
+<div class="divider card-divider"></div>
+<footer th:replace="plantillas/plantilla.html :: footer">
+</footer>
+<script th:replace="plantillas/plantilla.html :: js">
+</script>
+<script>
+    document.getElementsByClassName("navbar-link")[1].classList.add("active");
+  </script>
+</body></html>

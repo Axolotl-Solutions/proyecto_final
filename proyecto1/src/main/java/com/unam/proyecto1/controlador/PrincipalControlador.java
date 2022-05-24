@@ -98,7 +98,7 @@ public class PrincipalControlador {
     public String registro() {
         System.out.println("registro"); 
         return "registro";
-         }
+    }
 
     @RequestMapping("/salir")
     public String salir(HttpServletRequest request){
