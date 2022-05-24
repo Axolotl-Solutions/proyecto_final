@@ -90,6 +90,7 @@ public class EntrenadorControlador {
         Usuario competidor =  usuarioRepositorio.findByEmail(id_Competidor);
         modelo.addAttribute("usuario", usuario);
         modelo.addAttribute("competidor",competidor);
+        System.out.println(competidor.getSexo()+" sexo");
         return "editarCompetidor";
     }
 
