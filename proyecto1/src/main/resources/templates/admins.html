@@ -1,101 +1,163 @@
 <html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Administradores</title>
-
-    <link rel="stylesheet" href="/style/estilo.css">
-
+<head th:replace="plantillas/plantilla.html :: head">
 </head>
 <body>
-<header>
-    <nav class="nv">
-        <ul>
-            <li><a href="/inicioAdmin"><span class="primero"><i class="icon icon-home"></i></span>Inicio</a></li>
-            <li><a href="/admins/"><span class="segundo"><i class="icon icon-image"></i></span>Disciplinas</a></li>
-            <li><a href="#"><span class="tercero"><i class="icon icon-lab"></i></span>Jueces</a></li>
-            <li><a href="/salir"><span class="cuarto"><i class="icon icon-mobile2"></i></span>Salir</a></li>
-        </ul>
-    </nav>
+<header th:replace="plantillas/plantilla.html :: header">
 </header>
-<div class="lado">
-    <ul>
-        <li><a href="/inicioAdmin"><span class="perfil"><i class="icon icon-home"></i></span>Perfil</a></li>
-        <li><a href="#"><span class="registrar"><i class="icon icon-home"></i></span>Registrar Disciplina</a></li>
 
-        <li><a href="#Jueces"><span class="registrar"><i class="icon icon-home"></i></span>Registrar Jueces</a></li>
+<main>
+    <article class="container article">
 
-        <li><a href="/buscarDisciplinas"><span class="buscar"><i class="icon icon-home"></i></span>Buscar Disciplinas</a></li>
-
-        <li><a href="/registrarDisciplinas/buscarJueces"><span class="buscar"><i class="icon icon-home"></i></span>Buscar Jueces</a></li>
-    </ul>
-</div>
-<div class="container">
-    <div class="title">Registrar disciplina</div>
-
-
-    <form method="post" action="/admins/creaDisciplina">
-        <div class="user-details">
-            <div class="input-box">
-                <span class="details">Disciplina</span>
-                <input type="text" name="disciplina" placeholder="Introduce la disciplina" required="">
-            </div>
-            <div class="input-box">
-                <span class="details">Categoría</span>
-                <input type="text" name="categoria" placeholder="Introduce la categoría" required="">
-            </div>
-
-
-
-            <div class="input-box">
-                <span class="details">Fecha del evento</span>
-                <input type="date" name="fecha" placeholder="Introduce la fecha del evento" required="">
-            </div>
-
-            <div class="input-box">
-                <span class="details">Nombre</span>
-                <input type="text" name="nombre" placeholder="Introduce el nombre del evento" required="">
-            </div>
+        <div class="select" data-aos="fade-right" data-aos-duration="900">
+            <select id="sel" name="select">
+                <option value="juez">Juez</option>
+                <option value="disciplina">Disciplina</option>
+            </select>
         </div>
-        <div class="sexo-detalles">
 
 
-            <span class="sexo-titulo">Rama</span>
-            <div class="category">
-                <label for="dot-1">
-                    <input type="radio" value="Masculino" name="rama" id="dot-1" required="">
-                    <span class="">
-                        <span class="">Masculino</span>
-                    </span>
-                </label>
-                <label for="dot-2">
-                    <input type="radio" value="Femenil" name="rama" id="dot-2" required="">
-                    <span class="dot two">
-                        <span class="sexo">Femenil</span>
-                    </span>
-                </label>
 
-                <label for="dot-3">
-                    <input type="radio" value="Mixto" name="rama" id="dot-3" required="">
-                    <span class="dot two">
-                        <span class="sexo">Mixto</span>
-                    </span>
-                </label>
+        <!--
+          - #HOME
+        -->
+        <div class="divider card-divider"></div>
+        <section class="form">
+
+            <div class="form-container " data-aos="zoom-out" data-aos-duration="900">
+                <div class="form-wrapper">
+
+                    <!-- INICIA FORM  -->
+                    <div class="cont">
+                        <div class="title">Registrar Juez</div>
+                        <div class="content">
+                            <form action="#">
+                                <div class="user-details">
+                                    <div class="input-box" >
+                                        <span class="details">Nombre</span>
+                                        <input type="text" placeholder="Introduce el nombre" required>
+                                    </div>
+                                    <div class="input-box">
+                                        <span class="details">Apellido paterno</span>
+                                        <input type="text" placeholder="Introduce apellido paterno" required>
+                                    </div>
+                                    <div class="input-box">
+                                        <span class="details">Apellido materno</span>
+                                        <input type="password" placeholder="Introduce el apellido materno" required>
+                                    </div>
+                                    <div class="input-box">
+                                        <span class="details">Correo</span>
+                                        <input type="text" placeholder="Introduce el correo " required>
+                                    </div>
+                                    <div class="input-box">
+                                        <span class="details">Fecha de nacimiento</span>
+                                        <input type="date" placeholder="introduce fecha de nacimiento" required>
+                                    </div>
+                                    <div class="input-box">
+                                        <span class="details">Contraseña</span>
+                                        <input type="password" placeholder="Introduce la contraseña" required>
+                                    </div>
+                                </div>
+                                <div class="gender-details">
+                                    <input type="radio" name="gender" id="dot-1">
+                                    <input type="radio" name="gender" id="dot-2">
+                                    <span class="gender-title">Sexo</span>
+                                    <div class="category">
+                                        <label for="dot-1">
+                                            <span class="dot one"></span>
+                                            <span class="gender">Masculino</span>
+                                        </label>
+                                        <label for="dot-2">
+                                            <span class="dot two"></span>
+                                            <span class="gender">Femenino</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="button">
+                                    <input type="submit" value="Registrar">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--FROM Disciplina-->
+                    <div class="cont" style="display:none;">
+                        <div class="title">Registrar Disciplina</div>
+                        <div class="content">
+                            <form action="/admins/creaDisciplina" >
+                                <div class="user-details">
+                                    <div class="input-box" >
+                                        <span class="details">Nombre Disciplina</span>
+                                        <input type="text" placeholder="Introduce el nombre de la disciplina" required>
+                                    </div>
+                                    <div class="input-box">
+                                        <span class="details">Categoria</span>
+                                        <input type="text" placeholder="Introduce la categoria" required>
+                                    </div>
+                                    <div class="input-box">
+                                        <span class="details">Nombre</span>
+                                        <input type="password" placeholder="Introduce el apellido materno" required>
+                                    </div>
+                                    <div class="input-box">
+                                        <span class="details">Fecha del evento</span>
+                                        <input type="date" placeholder="introduce fecha de nacimiento" required>
+                                    </div>
+                                </div>
+                                <div class="gender-details">
+                                    <input type="radio" name="gender" id="dot-1-g">
+                                    <input type="radio" name="gender" id="dot-2-g">
+                                    <input type="radio" name="gender" id="dot-3">
+                                    <span class="gender-title">Sexo</span>
+                                    <div class="category">
+                                        <label for="dot-1-g">
+                                            <span class="dot one"></span>
+                                            <span class="gender">Masculino</span>
+                                        </label>
+                                        <label for="dot-2-g">
+                                            <span class="dot two"></span>
+                                            <span class="gender">Femenino</span>
+                                        </label>
+                                        <label for="dot-3">
+                                            <span class="dot three"></span>
+                                            <span class="gender">Mixto</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="button">
+                                    <input type="submit" value="Registrar">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--FROM Disciplina-->
+                    <!-- TERMINA FORMS  -->
+
+                </div>
             </div>
-        </div>
-        <div class="button">
-            <input type="submit" value="Registrar">
 
-        </div>
-    </form>
-</div>
+        </section>
 
-<div id="fondo"></div>
-<div class="foot">
-    <footer>
-        <a href="https://github.com/Axolotl-Solutions"><img width="50" height="50" src="/img/axolotl.png" alt="img"></a>
-        <a href="https://github.com/Axolotl-Solutions"><p>© 2022 Axolotl Solutions</p></a>
-    </footer>
-</div>
 
+    </article>
+</main>
+
+<footer th:replace="plantillas/plantilla.html :: footer">
+</footer>
+<script th:replace="plantillas/plantilla.html :: js">
+</script>
+<script>
+     var select = document.querySelector('#sel')
+     var cont = document.getElementsByClassName('cont');
+     select.addEventListener('change',function(){
+      if(select.value === "juez"){
+          cont[0].style.cssText += 'animation-name:scale; animation-duration: 1.5s;'
+          cont[0].style.display='grid';
+          cont[1].style.display='none';
+      }
+      else if(select.value === "disciplina"){
+          cont[1].style.cssText += 'animation-name:scale; animation-duration: 1.5s;'
+          cont[1].style.display='grid';
+          cont[0].style.display='none';
+      }
+    });
+  </script>
 </body></html>
