@@ -199,7 +199,7 @@ form .signup-link a:hover{
     <div class="titulo">
         Iniciar Sesión
     </div>
-    <div th:if="${error}" class="alerta" role="alert">
+    <div id="error" th:if="${error}" class="alerta" style="display:none;" role="alert">
         Usuario o contraseña incorrectos.
     </div>
     <form method="post" th:action="@{/}">
@@ -220,8 +220,19 @@ form .signup-link a:hover{
     </form>
 </div>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     AOS.init({offset: 100});
+    var error = document.getElementById('error');
+    if(error!=null){
+        Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Correo o Contraseña incorrectos',
+              confirmButtonColor: '#002b7a'
+            })
+    }
+
 </script>
 </body>
 </html>

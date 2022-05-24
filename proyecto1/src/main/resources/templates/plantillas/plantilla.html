@@ -74,7 +74,7 @@
             </li>
 
             <li>
-              <a id="buscar-nav" href="#" class="navbar-link icon-box">
+              <a id="busca-nav" href="#" class="navbar-link icon-box">
                 <span class="material-symbols-rounded  icon">search</span>
 
                 <span>Buscar</span>
@@ -87,9 +87,9 @@
 
 
 
-            <li class="nr_li dd_main">
+            <li style="cursor:pointer;" class="nr_li dd_main">
                 <figure class="profile-avatar">
-                  <a href="#" class="navbar-link">
+                  <a class="navbar-link">
                   <img src="/img/avatar-1.png" alt="img" width="32" height="32">
                   <div>
                     <p id="nombre-nav" th:text="${usuario.getNombre()}" class="profile-title">Fernando F</p>
@@ -172,6 +172,7 @@
 <div th:fragment="js">
   <script  src="/js/script.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
        AOS.init({offset: 100});
    </script>

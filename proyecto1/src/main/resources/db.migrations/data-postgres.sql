@@ -16,7 +16,7 @@ INSERT INTO Usuario(nombre, apellido_P, apellido_M, email, password, enabled)
 VALUES('Axel David', 'García', 'Beltrán', 'axelgarcia@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', 1);
 
 INSERT INTO Usuario(nombre, apellido_P, apellido_M, email, password, enabled)
-VALUES('Entrenador', 'Prueba', 'de Entrenador', 'entrenador@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', 1);
+VALUES('Fernando Gerardo', 'Flores', 'García', 'entrenador@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', 1);
 
 INSERT INTO Usuario(nombre, apellido_P, apellido_M, email, password, entrenador_Id, enabled)
 VALUES('Competidor', 'Prueba', 'de Competidor', 'competidor@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', 2, 1);

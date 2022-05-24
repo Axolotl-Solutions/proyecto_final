@@ -1,0 +1,89 @@
+<html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla.html :: head">
+</head>
+<body>
+<header th:replace="plantillas/plantilla.html :: header">
+</header>
+
+<main>
+ <article class="container article">
+
+  <div data-aos="fade-right" data-aos-duration="1200" class="search_wrap search_wrap_1">
+   <div class="search_box">
+    <input id="myInput" type="text" class="input" placeholder="Buscar..." onkeyup="myFunction()">
+    <div class="btn btn_common">
+     <i class="fas fa-search"></i>
+    </div>
+   </div>
+  </div>
+
+
+  <div class="divider card-divider"></div>
+  <!--       EMPIEZA TABLA ---------->
+  <section class="tabla">
+   <div class="card" data-aos="zoom-out" data-aos-duration="1200">
+    <table id="myTable" class="table">
+     <thead>
+     <tr class="tabla-t">
+      <th>#Competidor</th>
+      <th>Nombre</th>
+      <th>Correo</th>
+      <th>Rol</th>
+      <th>Editar</th>
+     </tr>
+     </thead>
+     <tbody>
+     <tr th:each="usr : ${usuarios}">
+      <td data-aos="zoom-in-right" data-aos-duration="4000" th:text="${usr.getUsuario_Id()}" data-title="#Competidor" >01</td>
+      <td data-aos="zoom-in-left" data-aos-duration="4000" th:text= "${usr.getNombre()+' '+usr.getApellido_P() + ' ' + usr.getApellido_M()}" data-title="Nombre">Fernando Flores</td>
+      <td data-aos="zoom-in-right" data-aos-duration="4000"th:text="${usr.getEmail()}" data-title="Correo">fernandondin@ciencias.unam.mx</td>
+      <td data-aos="zoom-in-left" data-aos-duration="4000" data-title="Rol">
+       <p th:text="${usr.getRol().toLowerCase()}" class ="rol-usuario">Admin</p>
+      </td>
+      <td data-aos="zoom-in-left" data-aos-duration="4000" data-title="Acción">
+       <form method="get" th:action="@{/entrenador/eliminar/{id}(id = ${usr.getUsuario_Id()})}">
+        <input id="eliminar" type="submit" value="Eliminar">
+       </form>
+       <form method="get" th:action="@{/entrenador/editar/{id}(id = ${usr.getEmail()})}">
+        <input id="editar" type="submit" value="Editar">
+       </form>
+      </td>
+     </tr>
+     </tbody>
+    </table>
+   </div>
+   <!--       TERMINA TABLA ---------->
+
+ </article>
+</main>
+
+
+<footer th:replace="plantillas/plantilla.html :: footer">
+</footer>
+<script th:replace="plantillas/plantilla.html :: js">
+</script>
+<script>
+   document.getElementsByClassName("navbar-link")[4].classList.add("active");
+ </script>
+<script>
+  function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
+</body></html>
