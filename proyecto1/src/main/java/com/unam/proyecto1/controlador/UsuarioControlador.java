@@ -29,7 +29,7 @@ public class UsuarioControlador {
     public String perfil(Model model,Principal principal) {
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
         model.addAttribute("usuario", usuario);
-        return "inicio";
+        return "inicioEntrenador";
     }
     
     @GetMapping("/registra")
