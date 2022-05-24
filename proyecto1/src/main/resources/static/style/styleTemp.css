@@ -288,6 +288,8 @@ form .input-box span.details{
 }
  #dot-1:checked ~ .category label .one,
  #dot-2:checked ~ .category label .two,
+ #dot-1-g:checked ~ .category label .one,
+ #dot-2-g:checked ~ .category label .two,
  #dot-3:checked ~ .category label .three{
    background: var(--unam-blue);
    border-color: #d9d9d9;

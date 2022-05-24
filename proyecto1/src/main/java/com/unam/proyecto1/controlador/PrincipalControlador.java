@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-<<<<<<< HEAD
 import com.unam.proyecto1.modelo.Usuario;
 import com.unam.proyecto1.repositorio.UsuarioRepositorio;
 import com.unam.proyecto1.servicio.UsuarioServicio;
@@ -19,16 +18,12 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-=======
 
-import javax.servlet.http.HttpServletRequest;
->>>>>>> cae55f833a96b06d38b497b5a97bdfddff969079
 import java.security.Principal;
 import java.util.List;
 
 @Controller
 public class PrincipalControlador {
-<<<<<<< HEAD
 
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
@@ -42,7 +37,6 @@ public class PrincipalControlador {
 
 
 
-=======
     @RequestMapping("/inicio")
     public String inicio(HttpServletRequest request, Model model) {
         String nombres=" Lorem ipsum dolor sit amet. Eum autem facilis et facere placeat ut quia praesentium ut provident soluta ut magnam obcaecati At ipsum perspiciatis. Et dolorem assumenda 33 libero blanditiis qui sunt adipisci a consectetur molestiae 33 deleniti dolore non omnis consequatur. Vel officiis quia id omnis impedit sed quibusdam voluptates quo voluptatibus similique ut praesentium animi.\n" +
@@ -57,7 +51,6 @@ public class PrincipalControlador {
         model.addAttribute("nombre", nombres);
         return "inicio";
     }
->>>>>>> cae55f833a96b06d38b497b5a97bdfddff969079
     @RequestMapping("/")
     public String index(Model model, String error, Principal principal){
         if (error != null) {
