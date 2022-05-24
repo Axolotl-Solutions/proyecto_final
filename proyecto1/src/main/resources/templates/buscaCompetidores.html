@@ -29,8 +29,8 @@
       <th>#Competidor</th>
       <th>Nombre</th>
       <th>Correo</th>
-      <th>Rol</th>
-      <th>Editar</th>
+      <th style="text-align: center;">Rol</th>
+      <th>Acción</th>
      </tr>
      </thead>
      <tbody>
@@ -39,7 +39,7 @@
       <td th:text= "${usr.getNombre()+' '+usr.getApellido_P() + ' ' + usr.getApellido_M()}" data-title="Nombre">Fernando Flores</td>
       <td th:text="${usr.getEmail()}" data-title="Correo">fernandondin@ciencias.unam.mx</td>
       <td data-title="Rol">
-       <p th:text="${usr.getRol().toLowerCase()}" class ="rol-usuario">Admin</p>
+       <p  th:text="${usr.getRol().toLowerCase()}" class ="rol-usuario">Admin</p>
       </td>
       <td data-title="Acción" >
        <form method="get" th:action="@{/entrenador/eliminar/{id}(id = ${usr.getUsuario_Id()})}">

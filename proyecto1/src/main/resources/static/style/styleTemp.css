@@ -1058,8 +1058,12 @@ form input[type="submit"]:active{
     font-family:comfortaa;
     border-radius:5px;
     margin-top:5px;
+    width:100%;
+    text:center;
 }
 #editar{
+    text:center;
+    width:100%;
     margin-top:5px;
     background-color: #04AA6D;
     border: none;
