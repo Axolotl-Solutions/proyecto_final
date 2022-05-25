@@ -11,13 +11,14 @@ import java.sql.Date;
 public class Evento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_Evento")
-    private Integer id_Evento;
+    @Column(name = "evento_Id")
+    private Integer evento_Id;
 
-    @Column(name = "nombre_Evento")
+    @Column(name = "nombre")
     private String nombreEvento;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "disciplina_Id")
     private Disciplina disciplina;
 
     @Column
@@ -29,12 +30,12 @@ public class Evento {
     @Column
     private Date fecha;
 
-    public Integer getId_Evento() {
-        return id_Evento;
+    public Integer getEvento_Id() {
+        return evento_Id;
     }
 
-    public void setId_Evento(Integer id_Evento) {
-        this.id_Evento = id_Evento;
+    public void setEvento_Id(Integer evento_Id) {
+        this.evento_Id = evento_Id;
     }
 
     public String getNombreEvento() {
