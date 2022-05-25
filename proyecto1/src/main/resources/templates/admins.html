@@ -79,41 +79,44 @@
                     <div class="cont" style="display:none;">
                         <div class="title">Registrar Evento</div>
                         <div class="content">
-                            <form action="/admins/creaEvento" >
+                            <form method="post" th:action="@{/admins/creaEvento}">
                                 <div class="user-details">
                                     <div class="input-box" >
                                         <span class="details">Nombre Evento</span>
-                                        <input type="text" placeholder="Introduce el nombre del evento" required>
+                                        <input type="text" id="nombreEvento" name="nombreEvento" placeholder="Introduce el nombre del evento" required>
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Categoria</span>
-                                        <input type="text" placeholder="Introduce la categoria" required>
+                                        <input type="text" id="categoria" name="categoria" placeholder="Introduce la categoria" required>
                                     </div>
-                                    <div class="select" data-aos="fade-right" data-aos-duration="900">
-                                        <select id="select_dis" name="select_dis">
-                                            <option th:each="dis : ${disciplinas}" th:value="${dis.getNombre()}" th:text="${dis.getNombre()}">Selecciona la disciplina</option>
-                                        </select>
+                                    <div>
+                                        <span class="details">Disciplina</span>
+                                        <div class="select" data-aos="fade-right" data-aos-duration="900">
+                                            <select id="nombreDisciplina" name="nombreDisciplina">
+                                                <option th:each="dis : ${disciplinas}" th:value="${dis.getNombre()}" th:text="${dis.getNombre()}"></option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Fecha del evento</span>
-                                        <input type="date" placeholder="Introduce la fecha del evento" required>
+                                        <input type="date" id="fecha" name="fecha" placeholder="Introduce la fecha del evento" required>
                                     </div>
                                 </div>
                                 <div class="gender-details">
-                                    <input type="radio" name="gender" id="dot-1-g">
-                                    <input type="radio" name="gender" id="dot-2-g">
-                                    <input type="radio" name="gender" id="dot-3">
+                                    <input type="radio" name="rama" value="Varonil" id="dot-1-rama">
+                                    <input type="radio" name="rama" value="Femenil" id="dot-2-rama">
+                                    <input type="radio" name="rama" value="Mixto" id="dot-3-rama">
                                     <span class="gender-title">Rama</span>
                                     <div class="category">
-                                        <label for="dot-1-g">
+                                        <label for="dot-1-rama">
                                             <span class="dot one"></span>
-                                            <span class="gender">Masculino</span>
+                                            <span class="gender">Varonil</span>
                                         </label>
-                                        <label for="dot-2-g">
+                                        <label for="dot-2-rama">
                                             <span class="dot two"></span>
-                                            <span class="gender">Femenino</span>
+                                            <span class="gender">Femenil</span>
                                         </label>
-                                        <label for="dot-3">
+                                        <label for="dot-3-rama">
                                             <span class="dot three"></span>
                                             <span class="gender">Mixto</span>
                                         </label>
