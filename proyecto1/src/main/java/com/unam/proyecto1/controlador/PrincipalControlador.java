@@ -69,6 +69,8 @@ public class PrincipalControlador {
     public String manejoAdmin(Model model,Principal principal) {
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
         model.addAttribute("usuario", usuario);
+        List<Disciplina> disciplinas = disciplinaRepositorio.findAll();
+        model.addAttribute("disciplinas", disciplinas);
         return "admins";
     }
 

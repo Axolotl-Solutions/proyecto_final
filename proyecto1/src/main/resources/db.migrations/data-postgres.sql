@@ -45,7 +45,7 @@ VALUES('Fútbol'),
       ('Taekwondo');
 
 -- Insertar eventos, cada uno relacionado con su disciplina
-INSERT INTO Evento(nombre, disciplina_Id, rama, categoría, fecha)
+INSERT INTO Evento(nombre, disciplina_Id, rama, categoria, fecha)
 VALUES('100 metros planos', 7, 'Varonil', '18+ años', '2022-06-15'),
       ('100 metros planos', 7, 'Femenil', '18+ años', '2022-06-15'),
       ('Relevos', 7, 'Varonil', '18+ años', '2022-06-15'),
@@ -74,9 +74,9 @@ SELECT Entrenador.usuario_Id entrenador_Id, Entrenador.nombre entrenador_Nombre,
 FROM Usuario AS Entrenador JOIN Usuario as Competidor ON Entrenador.usuario_Id = Competidor.entrenador_Id;
 
 -- Competidores con los eventos en los que participarán
-SELECT Competidor.usuario_Id competidor_Id, Competidor.nombre competidor_Nombre, Disciplinas_Eventos.evento_Nombre, Disciplinas_Eventos.disciplina_Nombre, Disciplinas_Eventos.rama, Disciplinas_Eventos.categoría, Disciplinas_Eventos.fecha
+SELECT Competidor.usuario_Id competidor_Id, Competidor.nombre competidor_Nombre, Disciplinas_Eventos.evento_Nombre, Disciplinas_Eventos.disciplina_Nombre, Disciplinas_Eventos.rama, Disciplinas_Eventos.categoria, Disciplinas_Eventos.fecha
 FROM (Usuario AS Competidor NATURAL JOIN Competidores_Eventos) JOIN (
-    SELECT Evento.evento_id, Evento.nombre evento_Nombre, Disciplina.nombre disciplina_Nombre, Evento.rama, Evento.categoría, Evento.fecha
+    SELECT Evento.evento_id, Evento.nombre evento_Nombre, Disciplina.nombre disciplina_Nombre, Evento.rama, Evento.categoria, Evento.fecha
     FROM Evento JOIN Disciplina USING(disciplina_Id)
 ) AS Disciplinas_Eventos USING(evento_Id);
 
