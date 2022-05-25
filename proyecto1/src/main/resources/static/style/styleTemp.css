@@ -351,6 +351,9 @@ form .input-box span.details{
 }
  #dot-1:checked ~ .category label .one,
  #dot-2:checked ~ .category label .two,
+ #dot-1-rama:checked ~ .category label .one,
+ #dot-2-rama:checked ~ .category label .two,
+ #dot-3-rama:checked ~ .category label .three,
  #dot-1-g:checked ~ .category label .one,
  #dot-2-g:checked ~ .category label .two,
  #dot-3:checked ~ .category label .three{
@@ -1058,8 +1061,12 @@ form input[type="submit"]:active{
     font-family:comfortaa;
     border-radius:5px;
     margin-top:5px;
+    width:100%;
+    text:center;
 }
 #editar{
+    text:center;
+    width:100%;
     margin-top:5px;
     background-color: #04AA6D;
     border: none;
