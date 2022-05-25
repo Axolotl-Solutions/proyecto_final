@@ -12,7 +12,7 @@
         <div class="select" data-aos="fade-right" data-aos-duration="900">
             <select id="sel" name="select">
                 <option value="juez">Juez</option>
-                <option value="disciplina">Disciplina</option>
+                <option value="evento">Evento</option>
             </select>
         </div>
 
@@ -77,32 +77,33 @@
                     </div>
                     <!--FROM Disciplina-->
                     <div class="cont" style="display:none;">
-                        <div class="title">Registrar Disciplina</div>
+                        <div class="title">Registrar Evento</div>
                         <div class="content">
-                            <form action="/admins/creaDisciplina" >
+                            <form action="/admins/creaEvento" >
                                 <div class="user-details">
                                     <div class="input-box" >
-                                        <span class="details">Nombre Disciplina</span>
-                                        <input type="text" placeholder="Introduce el nombre de la disciplina" required>
+                                        <span class="details">Nombre Evento</span>
+                                        <input type="text" placeholder="Introduce el nombre del evento" required>
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Categoria</span>
                                         <input type="text" placeholder="Introduce la categoria" required>
                                     </div>
-                                    <div class="input-box">
-                                        <span class="details">Nombre</span>
-                                        <input type="password" placeholder="Introduce el apellido materno" required>
+                                    <div class="select" data-aos="fade-right" data-aos-duration="900">
+                                        <select id="select_dis" name="select_dis">
+                                            <option th:each="dis : ${disciplinas}" th:value="${dis.getNombre()}" th:text="${dis.getNombre()}">Selecciona la disciplina</option>
+                                        </select>
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Fecha del evento</span>
-                                        <input type="date" placeholder="introduce fecha de nacimiento" required>
+                                        <input type="date" placeholder="Introduce la fecha del evento" required>
                                     </div>
                                 </div>
                                 <div class="gender-details">
                                     <input type="radio" name="gender" id="dot-1-g">
                                     <input type="radio" name="gender" id="dot-2-g">
                                     <input type="radio" name="gender" id="dot-3">
-                                    <span class="gender-title">Sexo</span>
+                                    <span class="gender-title">Rama</span>
                                     <div class="category">
                                         <label for="dot-1-g">
                                             <span class="dot one"></span>
@@ -149,7 +150,7 @@
           cont[0].style.display='grid';
           cont[1].style.display='none';
       }
-      else if(select.value === "disciplina"){
+      else if(select.value === "evento"){
           cont[1].style.cssText += 'animation-name:scale; animation-duration: 1.5s;'
           cont[1].style.display='grid';
           cont[0].style.display='none';

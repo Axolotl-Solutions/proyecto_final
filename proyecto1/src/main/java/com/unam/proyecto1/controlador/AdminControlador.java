@@ -1,6 +1,8 @@
 package com.unam.proyecto1.controlador;
 
+import com.unam.proyecto1.modelo.Disciplina;
 import com.unam.proyecto1.modelo.Usuario;
+import com.unam.proyecto1.repositorio.DisciplinaRepositorio;
 import com.unam.proyecto1.repositorio.UsuarioRepositorio;
 import com.unam.proyecto1.servicio.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class AdminControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
+    @Autowired
+    private DisciplinaRepositorio disciplinaRepositorio;
+
     @GetMapping("/")
     public String findUsuarios(Model model) {
         List<Usuario> admins = usuarioRepositorio.findAll();
@@ -40,12 +45,17 @@ public class AdminControlador {
         return "inicioAdmin";
     }
 
-    @GetMapping("/buscarDisciplinas")
-    public String buscar(){
-
-        return "buscarDisciplinas";
+    @RequestMapping("/admins")
+    public String findDisciplinas(Model model, Principal principal) {
+        List<Disciplina> disciplinas = disciplinaRepositorio.findAll();
+        model.addAttribute("disciplinas", disciplinas);
+        for (Disciplina disciplina : disciplinas) {
+            System.out.println(disciplina.getNombre());
+        }
+        return "admins";
     }
-    @PostMapping("/creaDisciplina")
+
+    @PostMapping("/creaEvento")
     public String crea(HttpServletRequest request, Model model) {
         /*Usuario usuario = usuarioServicio.creaUsuario(request.getParameter("email"),
                 request.getParameter("password"),
@@ -54,12 +64,11 @@ public class AdminControlador {
                 request.getParameter("apellido_m"));
         model.addAttribute("exito", usuario != null);
         return "registro";*/
-
-        String disciplina = request.getParameter("disciplina");
+        String evento = request.getParameter("evento");
         String categoria = request.getParameter("categoria");
         String fecha = request.getParameter("fecha");
         String nombre_evento = request.getParameter("nombre");
-        System.out.println(disciplina +" "+categoria+" "+fecha+" "+ nombre_evento);
+        System.out.println(evento +" "+categoria+" "+fecha+" "+ nombre_evento);
         return "admins";
     }
 
