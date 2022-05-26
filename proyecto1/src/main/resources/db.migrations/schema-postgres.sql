@@ -66,7 +66,7 @@ evento_Id 			SERIAL PRIMARY KEY NOT NULL,
 nombre				VARCHAR(30) NOT NULL,
 disciplina_Id		INTEGER NOT NULL,
 rama				VARCHAR(10) NOT NULL,
-categoría			VARCHAR(30) NOT NULL,
+categoria			VARCHAR(30) NOT NULL,
 fecha				DATE
 );
 

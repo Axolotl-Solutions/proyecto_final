@@ -7,6 +7,12 @@
   /**
    * colores
    */
+   --eliminar-btn: #e73b3b;
+   --eliminar-btn-hover: #f16b6b;
+   --editar-btn: #4885d6;
+   --confirmar-btn:hsl(144, 62%, 53%);
+   --editar-btn-hover:#6fa2e7;
+   --sw-cancelar:#f27474;
   --rol-competidor: #388e3c;
   --rol-admin: #ffcdd2;
   --rol-entrenador: #a68b00;
@@ -35,6 +41,7 @@
   --coral: hsl(15, 100%, 65%);
   --white: hsl(0, 0%, 100%);
   --onyx: hsl(207, 8%, 21%);
+
 
   /**
    * tipografía
@@ -131,8 +138,41 @@ body {
 
 ::-webkit-scrollbar-thumb:hover { background: hsl(0, 0%, 70%); }
 
-/*Estilos para forms*/
+/*Estilo botones para eliminar y buscar */
+.sw-confirmar-btn{
+    background: var(--editar-btn);
+}
+.sw-cancelar-btn{
+    background:var(--eliminar-btn);
+}
+.eliminar-btn {
+  font-weight: var(--fw-500);
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+  border-radius: var(--radius-6);
+  background:var(--eliminar-btn);
+}
+.editar-btn {
+  font-weight: var(--fw-500);
+  align-items: center;
+  gap: 5px;
+  padding: 5px;
+  border-radius: var(--radius-6);
+  background:var(--editar-btn);
+}
+#td{
+    display:grid;
+    gap:5px;
+    content:center;
+    font-size:12px;
+}
 
+#td a{
+    display:grid;
+    grid-template-columns: auto auto auto;
+    color:var(--cultured);
+}
 
 /**Personalizando un select***/
 select {
@@ -179,6 +219,69 @@ select::-ms-expand {
 .select:hover::after {
    color: var(--cultured);
 }
+/*******Barra busqueda********/
+
+.search_wrap{
+	width: 40%;
+	z-index:-1;
+	border-radius:20px;
+}
+
+.search_wrap .search_box{
+	position: relative;
+	width: 100%;
+	height: 50px;
+	border-radius:20px;
+	box-shadow:var(--shadow-card);
+}
+
+
+.search_wrap .search_box .input{
+	position: absolute;
+	outline:none;
+	border:0px;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding: 10px 20px;
+	border-radius:20px;
+	font-size: 18px;
+}
+
+.search_wrap .search_box .btn{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 60px;
+	height: 100%;
+	background: transparent;
+	cursor: pointer;
+	border-radius:50px;
+	transition: .5s all;
+}
+
+
+.search_wrap .search_box .btn.btn_common .fas{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	color: var(--unam-blue);
+	font-size: 20px;
+}
+
+.search_wrap.search_wrap_1 .search_box .btn{
+	right: 0;
+}
+
+.search_wrap.search_wrap_1 .search_box .input{
+	padding-right: 80px;
+}
+
+
+
+
 
 /****FORM******/
 /*.home .form-wrapper { grid-template-columns: 1fr 1fr; }*/
@@ -289,13 +392,18 @@ form .input-box span.details{
  #dot-1:checked ~ .category label .one,
  #dot-2:checked ~ .category label .two,
  #dot-1-g:checked ~ .category label .one,
-  #dot-2-g:checked ~ .category label .two,
+ #dot-2-g:checked ~ .category label .two,
+ #dot-1-rama:checked ~ .category label .one,
+ #dot-2-rama:checked ~ .category label .two,
+ #dot-3-rama:checked ~ .category label .three,
+ #dot-1-g:checked ~ .category label .one,
+ #dot-2-g:checked ~ .category label .two,
  #dot-3:checked ~ .category label .three{
    background: var(--unam-blue);
    border-color: #d9d9d9;
  }
  form input[type="radio"]{
-   display: none;
+   display:none;
  }
  form .button{
    height: 45px;
@@ -987,6 +1095,33 @@ form input[type="submit"]:active{
 
 
 /*Tabla*/
+#eliminar{
+    background-color: #eb491e;
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    text-decoration: none;
+    cursor: pointer;
+    font-family:comfortaa;
+    border-radius:5px;
+    margin-top:5px;
+    width:100%;
+    text:center;
+}
+#editar{
+    text:center;
+    width:100%;
+    margin-top:5px;
+    background-color: #04AA6D;
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    text-decoration: none;
+    cursor: pointer;
+    font-family:comfortaa;
+    border-radius:5px;
+}
+
 table {
   border-collapse: collapse;
   box-shadow: 0 5px 10px #e1e5ee;
@@ -1006,7 +1141,6 @@ th {
     font-size: 0.7rem;
     font-weight: 900;
   }
-
   td {
     padding: 1rem 2rem;
   }
