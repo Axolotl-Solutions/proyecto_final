@@ -17,7 +17,7 @@
                     <div class="cont">
                         <div class="title">Registrar Competidor</div>
                         <div class="content">
-                            <form method="post" action="/entrenador/registra" >
+                            <form method="post" action="/entrenador/registra" onsubmit='return valida(this)'>
                                 <div class="user-details">
                                     <div class="input-box" >
                                         <span  class="details">Nombre</span>
@@ -56,11 +56,15 @@
                                         <input name="fecha" type="date" placeholder="introduce fecha de nacimiento" required>
                                     </div>
                                 </div>
+                                <div id="tooltip" class="tooltip">
+                                    <span class="tooltiptext">Selecciona un sexo</span>
+                                </div>
                                 <div class="gender-details">
-                                    <input type="radio" name="sexo" value="Masculino" id="dot-1">
-                                    <input type="radio" name="sexo" value="Femenino" id="dot-2">
+                                    <input type="radio" name="sexo" value="Masculino" id="dot-1" >
+                                    <input type="radio" name="sexo" value="Femenino" id="dot-2" >
                                     <span class="gender-title">Sexo</span>
                                     <div class="category">
+
                                         <label for="dot-1">
                                             <span class="dot one"></span>
                                             <span class="gender">Masculino</span>
@@ -72,7 +76,7 @@
                                     </div>
                                 </div>
                                 <div class="button">
-                                    <input type="submit" value="Registrar">
+                                    <input id="btn" type="submit" value="Registrar">
                                 </div>
                             </form>
                         </div>
@@ -95,6 +99,28 @@
 <footer th:replace="plantillas/plantilla.html :: footer">
 </footer>
 <script th:replace="plantillas/plantilla.html :: js">
+</script>
+<script>
+    function valida(f) {
+     const tooltip = document.querySelector('#tooltip');
+      var ok = true;
+      var msg = "Mal perro"
+      console.log("entro aquí");
+      if(f[9].checked==false && f[10].checked==false){
+        ok = false;
+      }
+      let timer;
+      if(ok == false){
+        tooltip.classList.add('activo');
+        timer = setTimeout(() => {
+            tooltip.classList.remove('activo');
+        }, 1500);
+
+       }
+      return ok;
+    }
+
+
 </script>
 <script>
    document.getElementsByClassName("navbar-link")[1].classList.add("active");
