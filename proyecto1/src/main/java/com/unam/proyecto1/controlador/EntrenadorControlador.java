@@ -80,14 +80,14 @@ public class EntrenadorControlador {
     @GetMapping("eliminar/{id_Competidor}")
     private String eliminar (@PathVariable("id_Competidor") Integer id_Competidor){
         //error, elimina tambien el Rol
-        //usuarioServicio.eliminarUsuario(id_Competidor);
+        usuarioServicio.eliminarUsuario(id_Competidor);
         return "redirect:/entrenador/buscar";
     }
-    @GetMapping("editar/{id_Competidor}")
-    private String editar(@PathVariable("id_Competidor") String id_Competidor, Model modelo,Principal principal
-    ){
+    @GetMapping("editar/{email}")
+    private String editar(@PathVariable("email") String email, Model modelo,
+                          Principal principal){
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
-        Usuario competidor =  usuarioRepositorio.findByEmail(id_Competidor);
+        Usuario competidor =  usuarioRepositorio.findByEmail(email);
         modelo.addAttribute("usuario", usuario);
         modelo.addAttribute("competidor",competidor);
         System.out.println(competidor.getSexo()+" sexo");
