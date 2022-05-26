@@ -17,7 +17,7 @@
                     <div class="cont">
                         <div class="title">Editar Competidor</div>
                         <div class="content">
-                            <form method="post" action="/entrenador/registra" th:object="${competidor}">
+                            <form method="post" th:action="@{/entrenador/edita/{id}(id=${competidor.getUsuario_Id()})}" th:object="${competidor}">
                                 <div class="user-details">
                                     <div class="input-box" >
                                         <span  class="details">Nombre</span>
@@ -32,16 +32,8 @@
                                         <input th:field="*{apellido_M}" name="apellido_m" type="text" placeholder="Introduce el apellido materno" required>
                                     </div>
                                     <div class="input-box">
-                                        <span class="details">Contraseña</span>
-                                        <input th:value="*{password}" name="password" id="contraseña" type="password" placeholder="Introduce la contraseña" required>
-                                    </div>
-                                    <div class="input-box">
                                         <span class="details">Correo</span>
                                         <input th:field="*{email}" name="email" type="email" placeholder="Introduce el correo" required>
-                                    </div>
-                                    <div class="input-box">
-                                        <span class="details">Confirma</span>
-                                        <input th:value="*{password}" id="confirma-contraseña" type="password" placeholder="Confirma la contraseña" required>
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Altura</span>
@@ -57,8 +49,8 @@
                                     </div>
                                 </div>
                                 <div class="gender-details">
-                                    <input th:field="*{sexo}" type="radio" name="sexo" value="Masculino" id="dot-1">
-                                    <input th:field="*{sexo}" type="radio" name="sexo" value="Femenino" id="dot-2">
+                                    <input th:field="*{sexo}" type="radio" name="sexo" value="Masculino" id="dot-1" required>
+                                    <input th:field="*{sexo}" type="radio" name="sexo" value="Femenino" id="dot-2" required>
                                     <span class="gender-title">Sexo</span>
                                     <div class="category">
                                         <label for="dot-1">
@@ -98,5 +90,23 @@
 <script th:replace="plantillas/plantilla.html :: js">
 </script>
 <script>
+    var error = document.getElementById('error');
+    var exito = document.getElementById('exito');
+    if(error!=null){
+        Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'El correo ya esta asociado a otro competidor',
+              confirmButtonColor: 'var(--confirmar-btn)'
+            })
+    }
+    if(exito!=null){
+        Swal.fire({
+              icon: 'success',
+              title: 'Editado',
+              text: 'Competidor editado correctamente',
+              confirmButtonColor: 'var(--confirmar-btn)'
+            })
+    }
  </script>
 </body></html>

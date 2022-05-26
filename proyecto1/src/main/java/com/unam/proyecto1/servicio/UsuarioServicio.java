@@ -14,4 +14,5 @@ public interface UsuarioServicio {
                                          String apellido_p, String apellido_m, String sexo, Date fecha,
                                          int peso, int altura);
     public void eliminarUsuario(Integer id);
+    public Usuario actualizarUsuario(Usuario usuario);
 }
