@@ -69,4 +69,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     public void eliminarUsuario(Integer id){
         usuarioRepo.deleteById(id);
     }
+    @Override
+    public Usuario actualizarUsuario(Usuario competidor) {
+        return usuarioRepo.save(competidor);
+    }
 }

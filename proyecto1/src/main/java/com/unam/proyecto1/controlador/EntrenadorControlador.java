@@ -8,10 +8,7 @@ import com.unam.proyecto1.servicio.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
@@ -40,6 +37,33 @@ public class EntrenadorControlador {
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
         model.addAttribute("usuario", usuario);
         return "registraCompetidor";
+    }
+    @PostMapping("/edita/{id}")
+    public String edita(@PathVariable Integer id,@ModelAttribute Usuario competidor,
+                                       HttpServletRequest request,Principal principal,
+                                        Model model){
+        Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
+        model.addAttribute("usuario",usuario);
+        Usuario antiguo = usuarioRepositorio.getById(id);
+        Usuario duplicado = usuarioRepositorio.findByEmail(competidor.getEmail());
+        if(duplicado!= null && !duplicado.getEmail().equals(antiguo.getEmail())){
+            model.addAttribute("error",true);
+            model.addAttribute("competidor",antiguo);
+            return "editarCompetidor";
+        }
+        antiguo.setEmail(competidor.getEmail());
+        antiguo.setPeso(competidor.getPeso());
+        antiguo.setAltura(competidor.getAltura());
+        antiguo.setSexo(competidor.getSexo());
+        Date date = Date.valueOf(request.getParameter("fecha"));
+        antiguo.setFecha_nacimiento(date);
+        antiguo.setNombre(competidor.getNombre());
+        antiguo.setApellido_P(competidor.getApellido_P());
+        antiguo.setApellido_M(competidor.getApellido_M());
+        usuarioServicio.actualizarUsuario(antiguo);
+        model.addAttribute("exito",true);
+        model.addAttribute("competidor",antiguo);
+        return "editarCompetidor";
     }
     @PostMapping("/registra")
     public String registra(HttpServletRequest request, Model model,Principal principal) {
@@ -90,7 +114,7 @@ public class EntrenadorControlador {
         Usuario competidor =  usuarioRepositorio.findByEmail(email);
         modelo.addAttribute("usuario", usuario);
         modelo.addAttribute("competidor",competidor);
-        System.out.println(competidor.getSexo()+" sexo");
+        modelo.addAttribute("competidor",usuarioRepositorio.findByEmail(email));
         return "editarCompetidor";
     }
 
