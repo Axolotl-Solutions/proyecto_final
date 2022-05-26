@@ -138,6 +138,42 @@ body {
 
 ::-webkit-scrollbar-thumb:hover { background: hsl(0, 0%, 70%); }
 
+/*Tooltips básicos*/
+.tooltip {
+  position: absolute;
+  background:#000;
+  visibility:hidden;
+}
+.tooltip:after{
+  	content: "";
+  	position: absolute;
+  	top: 0px;
+  	right: -30px;
+  	border: 10px solid;
+  	border-color: var(--eliminar-btn-hover) transparent transparent transparent;
+  	z-index:2;
+  }
+.tooltip .tooltiptext {
+  box-shadow:var(--shadow-card);
+  width: 150px;
+  background-color: var(--eliminar-btn-hover);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 5px;
+  font-size: 15px;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+.tooltip.activo {
+  visibility: visible;
+}
+
+
 /*Estilo botones para eliminar y buscar */
 .sw-confirmar-btn{
     background: var(--editar-btn);
@@ -403,7 +439,7 @@ form .input-box span.details{
    border-color: #d9d9d9;
  }
  form input[type="radio"]{
-   display:none;
+   visibility:hidden;
  }
  form .button{
    height: 45px;
