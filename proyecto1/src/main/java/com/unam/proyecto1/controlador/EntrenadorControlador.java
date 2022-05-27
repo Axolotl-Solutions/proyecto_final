@@ -87,18 +87,17 @@ public class EntrenadorControlador {
     @RequestMapping("/buscar")
     public String busca(Model model, String error, Principal principal) {
         List<Usuario> usuarios = usuarioRepositorio.findAll();
-        for (int i=0; i< usuarios.size();i++){
-            if(usuarios.get(i) != null){
-                if(!usuarios.get(i).getRol().equals("COMPETIDOR")){
-                    System.out.println(usuarios.get(i).getRol());
-                    usuarios.remove(i);
-                }
+        List<Usuario> competidores = new ArrayList<>();
+
+        for(Usuario usuario : usuarios){
+            if(usuario.hasRole("ROLE_COMPETIDOR")){
+                competidores.add(usuario);
             }
         }
         System.out.println(usuarios.size()+" SIZE");
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
         model.addAttribute("usuario", usuario);
-        model.addAttribute("usuarios", usuarios);
+        model.addAttribute("usuarios", competidores);
         return "buscaCompetidores";
     }
     @GetMapping("eliminar/{id_Competidor}")
