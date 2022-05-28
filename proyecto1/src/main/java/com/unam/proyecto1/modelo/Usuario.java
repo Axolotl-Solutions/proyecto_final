@@ -42,12 +42,8 @@ public class Usuario {
     @Column
     private Integer altura;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "Disciplina",
-            joinColumns = @JoinColumn(name = "disciplina_Juez"),
-            inverseJoinColumns = @JoinColumn(name = "disciplina_Id")
-    )
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "disciplina_Juez")
     private Disciplina disciplinaJuez;
 
     @Column

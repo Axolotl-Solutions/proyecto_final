@@ -55,6 +55,14 @@
                                         <span class="details">Contraseña</span>
                                         <input type="password" id="passwordJuez" name="passwordJuez" placeholder="Introduce la contraseña" required>
                                     </div>
+                                    <div>
+                                        <span class="details">Disciplina</span>
+                                        <div class="select" data-aos="fade-right" data-aos-duration="900">
+                                            <select id="nombreDisciplinaJuez" name="nombreDisciplinaJuez">
+                                                <option th:each="dis : ${disciplinas}" th:value="${dis.getNombre()}" th:text="${dis.getNombre()}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!--
                                 <div class="gender-details">

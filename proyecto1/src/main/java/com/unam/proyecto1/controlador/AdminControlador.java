@@ -79,7 +79,8 @@ public class AdminControlador {
         String nombreJuez = request.getParameter("nombreJuez");
         String apellidoPJuez = request.getParameter("apellidoPJuez");
         String apellidoMJuez = request.getParameter("apellidoMJuez");
-        Usuario nuevoJuez = usuarioServicio.creaUsuarioJuez(emailJuez, passwordJuez, nombreJuez, apellidoPJuez, apellidoMJuez);
+        String nombreDisciplinaJuez = request.getParameter("nombreDisciplinaJuez");
+        Usuario nuevoJuez = usuarioServicio.creaUsuarioJuez(emailJuez, passwordJuez, nombreJuez, apellidoPJuez, apellidoMJuez, nombreDisciplinaJuez);
         model.addAttribute("exito", nuevoJuez != null);
         Usuario usuarioActual =  usuarioRepositorio.findByEmail(principal.getName());
         model.addAttribute("usuario", usuarioActual);
