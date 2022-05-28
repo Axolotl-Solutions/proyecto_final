@@ -53,18 +53,19 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public Usuario creaUsuarioCompetidor(String email, String password, String nombre,
-                                         String apellido_p, String apellido_m, String sexo, Date fecha_nac,
-                                         int peso, int altura){
+    public Usuario creaUsuarioCompetidor(String email, String password, String nombre, String apellido_p, String apellido_m,
+                                         String sexo, Date fecha_nac, int peso, int altura, String entrenador_email){
         if (usuarioRepositorio.existsUsuarioByEmail(email)) {
             return null;
         }
         Rol rol = rolRepositorio.findByNombre("ROLE_COMPETIDOR");
+        Usuario entrenador = usuarioRepositorio.findByEmail(entrenador_email);
         Usuario nuevoCompetidor = creaUsuario(email, password, nombre, apellido_p, apellido_m);
         nuevoCompetidor.setPeso(peso);
         nuevoCompetidor.setAltura(altura);
         nuevoCompetidor.setSexo(sexo);
         nuevoCompetidor.setFecha_nacimiento(fecha_nac);
+        nuevoCompetidor.setEntrenador(entrenador);
         nuevoCompetidor.addRol(rol);
         return usuarioRepositorio.save(nuevoCompetidor);
     }
