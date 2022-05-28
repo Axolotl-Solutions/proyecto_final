@@ -42,6 +42,14 @@ public class Usuario {
     @Column
     private Integer altura;
 
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "entrenador_Id")
+    private Usuario entrenador;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "disciplina_Juez")
+    private Disciplina disciplinaJuez;
+
     @Column
     private Integer enabled;
 
@@ -173,5 +181,21 @@ public class Usuario {
             }
         }
         return false;
+    }
+
+    public Disciplina getDisciplinaJuez() {
+        return disciplinaJuez;
+    }
+
+    public void setDisciplinaJuez(Disciplina disciplinaJuez) {
+        this.disciplinaJuez = disciplinaJuez;
+    }
+
+    public Usuario getEntrenador() {
+        return entrenador;
+    }
+
+    public void setEntrenador(Usuario entrenador) {
+        this.entrenador = entrenador;
     }
 }

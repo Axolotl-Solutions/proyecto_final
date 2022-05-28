@@ -21,12 +21,12 @@ public class EventoServicioImpl implements EventoServicio{
 
     @Override
     public Evento creaEvento(String nombreEvento, String nombreDisciplina, String rama, String categoria, Date fecha) {
-        if(eventoRepositorio.existsEventoByNombreEventoAndCategoriaAndRama(nombreEvento, categoria, rama)){
+        Disciplina disciplina = disciplinaRepositorio.findByNombre(nombreDisciplina);
+        if(eventoRepositorio.existsEventoByNombreEventoAndDisciplinaAndCategoriaAndRama(nombreEvento, disciplina, categoria, rama)){
             return null;
         }
         Evento nuevoEvento = new Evento();
         nuevoEvento.setNombreEvento(nombreEvento);
-        Disciplina disciplina = disciplinaRepositorio.findByNombre(nombreDisciplina);
         nuevoEvento.setDisciplina(disciplina);
         nuevoEvento.setCategoria(categoria);
         nuevoEvento.setRama(rama);

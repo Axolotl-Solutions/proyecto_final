@@ -65,9 +65,11 @@ public class EntrenadorControlador {
         model.addAttribute("competidor",antiguo);
         return "editarCompetidor";
     }
+
     @PostMapping("/registra")
     public String registra(HttpServletRequest request, Model model,Principal principal) {
         Usuario usuarioActual =  usuarioRepositorio.findByEmail(principal.getName());
+        String entrenador_email = usuarioActual.getEmail();
         model.addAttribute("usuario", usuarioActual);
         Date fecha = Date.valueOf(request.getParameter("fecha"));
         Usuario usuario = usuarioServicio.creaUsuarioCompetidor(request.getParameter("email"),
@@ -78,7 +80,8 @@ public class EntrenadorControlador {
                 request.getParameter("sexo"),
                 fecha,
                 Integer.parseInt(request.getParameter("peso")),
-                Integer.parseInt(request.getParameter("altura"))
+                Integer.parseInt(request.getParameter("altura")),
+                entrenador_email
         );
         model.addAttribute("error", usuario == null);
         model.addAttribute("exito", usuario != null);
@@ -86,17 +89,18 @@ public class EntrenadorControlador {
     }
     @RequestMapping("/buscar")
     public String busca(Model model, String error, Principal principal) {
-        List<Usuario> usuarios1 = usuarioRepositorio.findAll();
-        List<Usuario> usuarios = new ArrayList<>();
-        for(Usuario u: usuarios1){
-            if(u.hasRole("ROLE_COMPETIDOR")){
-                usuarios.add(u);
+        List<Usuario> usuarios = usuarioRepositorio.findAll();
+        List<Usuario> competidores = new ArrayList<>();
+
+        for(Usuario usuario : usuarios){
+            if(usuario.hasRole("ROLE_COMPETIDOR")){
+                competidores.add(usuario);
             }
         }
         System.out.println(usuarios.size()+" SIZE");
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
         model.addAttribute("usuario", usuario);
-        model.addAttribute("usuarios", usuarios);
+        model.addAttribute("usuarios", competidores);
         return "buscaCompetidores";
     }
     @GetMapping("eliminar/{id_Competidor}")
