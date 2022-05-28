@@ -65,9 +65,11 @@ public class EntrenadorControlador {
         model.addAttribute("competidor",antiguo);
         return "editarCompetidor";
     }
+
     @PostMapping("/registra")
     public String registra(HttpServletRequest request, Model model,Principal principal) {
         Usuario usuarioActual =  usuarioRepositorio.findByEmail(principal.getName());
+        String entrenador_email = usuarioActual.getEmail();
         model.addAttribute("usuario", usuarioActual);
         Date fecha = Date.valueOf(request.getParameter("fecha"));
         Usuario usuario = usuarioServicio.creaUsuarioCompetidor(request.getParameter("email"),
@@ -78,7 +80,8 @@ public class EntrenadorControlador {
                 request.getParameter("sexo"),
                 fecha,
                 Integer.parseInt(request.getParameter("peso")),
-                Integer.parseInt(request.getParameter("altura"))
+                Integer.parseInt(request.getParameter("altura")),
+                entrenador_email
         );
         model.addAttribute("error", usuario == null);
         model.addAttribute("exito", usuario != null);
