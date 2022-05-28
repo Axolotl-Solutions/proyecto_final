@@ -1,7 +1,9 @@
 package com.unam.proyecto1.servicio;
 
+import com.unam.proyecto1.modelo.Disciplina;
 import com.unam.proyecto1.modelo.Usuario;
 import com.unam.proyecto1.modelo.Rol;
+import com.unam.proyecto1.repositorio.DisciplinaRepositorio;
 import com.unam.proyecto1.repositorio.RolRepositorio;
 import com.unam.proyecto1.repositorio.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Autowired
     private RolRepositorio rolRepositorio;
+
+    @Autowired
+    private DisciplinaRepositorio disciplinaRepositorio;
 
     @Override
     public Usuario creaUsuario(String email, String password, String nombre, String apellido_p, String apellido_m) {
@@ -65,12 +70,14 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public Usuario creaUsuarioJuez(String email, String password, String nombre, String apellido_p, String apellido_m) {
+    public Usuario creaUsuarioJuez(String email, String password, String nombre, String apellido_p, String apellido_m, String nombreDisciplnaJuez) {
         if (usuarioRepositorio.existsUsuarioByEmail(email)) {
             return null;
         }
         Rol rol = rolRepositorio.findByNombre("ROLE_JUEZ");
+        Disciplina discplinaJuez = disciplinaRepositorio.findByNombre(nombreDisciplnaJuez);
         Usuario nuevoJuez = creaUsuario(email, password, nombre, apellido_p, apellido_m);
+        nuevoJuez.setDisciplinaJuez(discplinaJuez);
         nuevoJuez.addRol(rol);
         return usuarioRepositorio.save(nuevoJuez);
     }

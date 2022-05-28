@@ -42,6 +42,14 @@ public class Usuario {
     @Column
     private Integer altura;
 
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "Disciplina",
+            joinColumns = @JoinColumn(name = "disciplina_Juez"),
+            inverseJoinColumns = @JoinColumn(name = "disciplina_Id")
+    )
+    private Disciplina disciplinaJuez;
+
     @Column
     private Integer enabled;
 
@@ -173,5 +181,13 @@ public class Usuario {
             }
         }
         return false;
+    }
+
+    public Disciplina getDisciplinaJuez() {
+        return disciplinaJuez;
+    }
+
+    public void setDisciplinaJuez(Disciplina disciplinaJuez) {
+        this.disciplinaJuez = disciplinaJuez;
     }
 }

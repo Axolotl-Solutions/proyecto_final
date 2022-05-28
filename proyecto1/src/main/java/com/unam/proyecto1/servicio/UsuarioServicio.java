@@ -14,7 +14,7 @@ public interface UsuarioServicio {
     Usuario creaUsuarioCompetidor(String email, String password, String nombre,
                                          String apellido_p, String apellido_m, String sexo, Date fecha,
                                          int peso, int altura);
-    Usuario creaUsuarioJuez(String email, String password, String nombre, String apellido_p, String apellido_m);
+    Usuario creaUsuarioJuez(String email, String password, String nombre, String apellido_p, String apellido_m, String nombre_Disciplina_Juez);
     public void eliminarUsuario(Integer id);
     public Usuario actualizarUsuario(Usuario usuario);
 }

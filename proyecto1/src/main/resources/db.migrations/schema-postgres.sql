@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS Usuario (
     peso             INTEGER DEFAULT NULL,
     altura           INTEGER DEFAULT NULL,
     entrenador_Id	 INTEGER DEFAULT NULL,
-    disciplina_juez  INTEGER DEFAULT NULL,
+    disciplina_Juez  INTEGER DEFAULT NULL,
     enabled 		 INTEGER DEFAULT NULL
 );
 
