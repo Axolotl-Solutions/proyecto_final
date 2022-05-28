@@ -80,6 +80,9 @@ Array.prototype.forEach.call(p, function(e) {
    }else if (e.innerHTML === "entrenador") {
      e.classList.add("rol");
      e.classList.add("rol-entrenador");
+   }else if (e.innerHTML === "juez") {
+         e.classList.add("rol");
+         e.classList.add("rol-juez");
    }
 });
 

@@ -29,6 +29,10 @@ public class EntrenadorControlador {
     @GetMapping("/")
     public String perfil(Model model, Principal principal) {
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
+        List<Usuario> usuarios = usuarioRepositorio.findCompetidoresRegistrados(usuario.getUsuario_Id());
+        List<Integer> ndisciplinas = usuarioRepositorio.cuentaEventosEntrenador(usuario.getUsuario_Id());
+        System.out.println(ndisciplinas+" Numero de disciplinas");
+        model.addAttribute("numCompetidores", usuarios.size());
         model.addAttribute("usuario", usuario);
         return "inicioEntrenador";
     }
@@ -89,18 +93,10 @@ public class EntrenadorControlador {
     }
     @RequestMapping("/buscar")
     public String busca(Model model, String error, Principal principal) {
-        List<Usuario> usuarios = usuarioRepositorio.findAll();
-        List<Usuario> competidores = new ArrayList<>();
-
-        for(Usuario usuario : usuarios){
-            if(usuario.hasRole("ROLE_COMPETIDOR")){
-                competidores.add(usuario);
-            }
-        }
-        System.out.println(usuarios.size()+" SIZE");
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
         model.addAttribute("usuario", usuario);
-        model.addAttribute("usuarios", competidores);
+        List<Usuario> usuarios = usuarioRepositorio.findCompetidoresRegistrados(usuario.getUsuario_Id());
+        model.addAttribute("usuarios", usuarios);
         return "buscaCompetidores";
     }
     @GetMapping("eliminar/{id_Competidor}")
