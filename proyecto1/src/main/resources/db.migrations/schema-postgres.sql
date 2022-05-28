@@ -78,6 +78,10 @@ ALTER TABLE Evento
             ON UPDATE CASCADE
             ON DELETE CASCADE;
 
+ALTER TABLE Evento
+    ADD CONSTRAINT nombre_disciplina_rama_categoria_unique
+        UNIQUE (nombre, disciplina_Id, rama, categoria);
+
 -- Tabla que relaciona los competidores con los eventos
 DROP TABLE IF EXISTS Competidores_Eventos;
 
