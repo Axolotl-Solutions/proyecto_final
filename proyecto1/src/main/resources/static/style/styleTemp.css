@@ -143,6 +143,9 @@ body {
   position: absolute;
   background:#000;
   visibility:hidden;
+  opacity:0;
+  transition: .8s;
+  transform: scale(0.5);
 }
 .tooltip:after{
   	content: "";
@@ -151,7 +154,7 @@ body {
   	right: -30px;
   	border: 10px solid;
   	border-color: var(--eliminar-btn-hover) transparent transparent transparent;
-  	z-index:2;
+  	z-index:1;
   }
 .tooltip .tooltiptext {
   box-shadow:var(--shadow-card);
@@ -171,6 +174,9 @@ body {
 }
 .tooltip.activo {
   visibility: visible;
+  opacity:1;
+  transform: scale(1);
+
 }
 
 
