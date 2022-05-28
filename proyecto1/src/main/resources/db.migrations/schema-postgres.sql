@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS Usuario (
     peso             INTEGER DEFAULT NULL,
     altura           INTEGER DEFAULT NULL,
     entrenador_Id	 INTEGER DEFAULT NULL,
+    disciplina_juez  INTEGER DEFAULT NULL,
     enabled 		 INTEGER DEFAULT NULL
 );
 
@@ -28,8 +29,8 @@ CREATE TABLE IF NOT EXISTS Rol(
 DROP TABLE IF EXISTS Usuarios_Roles;
 
 CREATE TABLE IF NOT EXISTS Usuarios_Roles(
- usuario_Id 		INTEGER,
- rol_Id			    INTEGER
+    usuario_Id 		INTEGER,
+    rol_Id			    INTEGER
 );
 
 ALTER TABLE Usuarios_Roles
@@ -54,20 +55,20 @@ ALTER TABLE Usuarios_Roles
 DROP TABLE IF EXISTS Disciplina CASCADE;
 
 CREATE TABLE IF NOT EXISTS Disciplina(
-disciplina_Id	 SERIAL PRIMARY KEY NOT NULL,
-nombre 			 VARCHAR(30)
+    disciplina_Id	 SERIAL PRIMARY KEY NOT NULL,
+    nombre 			 VARCHAR(30)
 );
 
 -- Tabla de eventos
 DROP TABLE IF EXISTS Evento CASCADE;
 
 CREATE TABLE IF NOT EXISTS Evento(
-evento_Id 			SERIAL PRIMARY KEY NOT NULL,
-nombre				VARCHAR(30) NOT NULL,
-disciplina_Id		INTEGER NOT NULL,
-rama				VARCHAR(10) NOT NULL,
-categoria			VARCHAR(30) NOT NULL,
-fecha				DATE
+    evento_Id 			SERIAL PRIMARY KEY NOT NULL,
+    nombre				VARCHAR(30) NOT NULL,
+    disciplina_Id		INTEGER NOT NULL,
+    rama				VARCHAR(10) NOT NULL,
+    categoria			VARCHAR(30) NOT NULL,
+    fecha				DATE
 );
 
 ALTER TABLE Evento
@@ -81,8 +82,8 @@ ALTER TABLE Evento
 DROP TABLE IF EXISTS Competidores_Eventos;
 
 CREATE TABLE IF NOT EXISTS Competidores_Eventos(
-usuario_Id 		INTEGER,
-evento_Id		INTEGER
+    usuario_Id 		INTEGER,
+    evento_Id		INTEGER
 );
 
 ALTER TABLE Competidores_Eventos
@@ -100,5 +101,42 @@ ALTER TABLE Competidores_Eventos
     ADD CONSTRAINT evento_Id
         FOREIGN KEY (evento_Id)
             REFERENCES Evento(evento_Id)
+            ON UPDATE CASCADE
+            ON DELETE CASCADE;
+
+-- Tabla de calificaciones
+DROP TABLE IF EXISTS Calificacion;
+
+CREATE TABLE IF NOT EXISTS Calificacion(
+    calificacion_Id 	SERIAL PRIMARY KEY NOT NULL,
+    evento_Id			INTEGER NOT NULL,
+    juez_Id				INTEGER NOT NULL,
+    competidor_Id		INTEGER NOT NULL,
+    puntaje				INTEGER NOT NULL,
+    comentario			VARCHAR(140) NOT NULL
+);
+
+ALTER TABLE Calificacion
+    ADD CONSTRAINT evento_juez_competidor_unique
+        UNIQUE (evento_Id, juez_Id, competidor_Id);
+
+ALTER TABLE Calificacion
+    ADD CONSTRAINT evento_fk
+        FOREIGN KEY (evento_Id)
+            REFERENCES Evento(evento_Id)
+            ON UPDATE CASCADE
+            ON DELETE CASCADE;
+
+ALTER TABLE Calificacion
+    ADD CONSTRAINT juez_fk
+        FOREIGN KEY (juez_Id)
+            REFERENCES Usuario(usuario_Id)
+            ON UPDATE CASCADE
+            ON DELETE CASCADE;
+
+ALTER TABLE Calificacion
+    ADD CONSTRAINT competidor_fk
+        FOREIGN KEY (competidor_Id)
+            REFERENCES Usuario(usuario_Id)
             ON UPDATE CASCADE
             ON DELETE CASCADE;
