@@ -58,7 +58,7 @@ public class AdminControlador {
     }
 
     @PostMapping("/creaEvento")
-    public String crea(HttpServletRequest request, Model model, Principal principal) {
+    public String creaEvento(HttpServletRequest request, Model model, Principal principal) {
         String nombreEvento = request.getParameter("nombreEvento");
         String rama = request.getParameter("rama");
         String categoria = request.getParameter("categoria");
@@ -67,6 +67,20 @@ public class AdminControlador {
         String nombreDisciplina = request.getParameter("nombreDisciplina");
         Evento evento = eventoServicio.creaEvento(nombreEvento, nombreDisciplina, rama, categoria, fecha);
         model.addAttribute("exito", evento != null);
+        Usuario usuarioActual =  usuarioRepositorio.findByEmail(principal.getName());
+        model.addAttribute("usuario", usuarioActual);
+        return "admins";
+    }
+
+    @PostMapping("/creaJuez")
+    public String creaJuez(HttpServletRequest request, Model model, Principal principal){
+        String emailJuez = request.getParameter("emailJuez");
+        String passwordJuez = request.getParameter("passwordJuez");
+        String nombreJuez = request.getParameter("nombreJuez");
+        String apellidoPJuez = request.getParameter("apellidoPJuez");
+        String apellidoMJuez = request.getParameter("apellidoMJuez");
+        Usuario nuevoJuez = usuarioServicio.creaUsuarioJuez(emailJuez, passwordJuez, nombreJuez, apellidoPJuez, apellidoMJuez);
+        model.addAttribute("exito", nuevoJuez != null);
         Usuario usuarioActual =  usuarioRepositorio.findByEmail(principal.getName());
         model.addAttribute("usuario", usuarioActual);
         return "admins";

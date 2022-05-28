@@ -27,33 +27,36 @@
                     <div class="cont">
                         <div class="title">Registrar Juez</div>
                         <div class="content">
-                            <form action="#">
+                            <form method="post" th:action="@{/admins/creaJuez}">
                                 <div class="user-details">
                                     <div class="input-box" >
                                         <span class="details">Nombre</span>
-                                        <input type="text" placeholder="Introduce el nombre" required>
+                                        <input type="text" id="nombreJuez" name="nombreJuez" placeholder="Introduce el nombre" required>
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Apellido paterno</span>
-                                        <input type="text" placeholder="Introduce apellido paterno" required>
+                                        <input type="text" id="apellidoPJuez" name="apellidoPJuez" placeholder="Introduce el apellido paterno" required>
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Apellido materno</span>
-                                        <input type="password" placeholder="Introduce el apellido materno" required>
+                                        <input type="text" id="apelidoMJuez" name="apellidoMJuez" placeholder="Introduce el apellido materno" required>
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Correo</span>
-                                        <input type="text" placeholder="Introduce el correo " required>
+                                        <input type="text" id="emailJuez" name="emailJuez" placeholder="Introduce el correo electrónico" required>
                                     </div>
+                                    <!--
                                     <div class="input-box">
                                         <span class="details">Fecha de nacimiento</span>
                                         <input type="date" placeholder="introduce fecha de nacimiento" required>
                                     </div>
+                                    -->
                                     <div class="input-box">
                                         <span class="details">Contraseña</span>
-                                        <input type="password" placeholder="Introduce la contraseña" required>
+                                        <input type="password" id="passwordJuez" name="passwordJuez" placeholder="Introduce la contraseña" required>
                                     </div>
                                 </div>
+                                <!--
                                 <div class="gender-details">
                                     <input type="radio" name="gender" id="dot-1">
                                     <input type="radio" name="gender" id="dot-2">
@@ -69,6 +72,7 @@
                                         </label>
                                     </div>
                                 </div>
+                                -->
                                 <div class="button">
                                     <input type="submit" value="Registrar">
                                 </div>

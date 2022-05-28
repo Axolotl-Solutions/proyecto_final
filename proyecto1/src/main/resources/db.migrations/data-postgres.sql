@@ -21,6 +21,9 @@ VALUES('Fernando Gerardo', 'Flores', 'García', 'entrenador@ciencias.unam.mx', '
 INSERT INTO Usuario(nombre, apellido_P, apellido_M, email, password, fecha_nacimiento, sexo, peso, altura, entrenador_Id, enabled)
 VALUES('Competidor', 'Prueba', 'de Competidor', 'competidor@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', '2000-05-17', 'Masculino', 85, 180, 2, 1);
 
+INSERT INTO Usuario(nombre, apellido_P, apellido_M, email, password, enabled)
+VALUES('Juez', 'Prueba', 'de Juez', 'juez@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', 1);
+
 -- Relacionar usuarios con sus roles
 INSERT INTO Usuarios_Roles(usuario_Id, rol_Id)
 VALUES(1, 1);
@@ -30,6 +33,9 @@ VALUES(2, 2);
 
 INSERT INTO Usuarios_Roles(usuario_Id, rol_Id)
 VALUES(3, 3);
+
+INSERT INTO Usuarios_Roles(usuario_Id, rol_Id)
+VALUES(4, 4);
 
 -- Insertar disciplinas
 INSERT INTO Disciplina(nombre)
