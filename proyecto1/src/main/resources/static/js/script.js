@@ -1,6 +1,7 @@
 'use strict';
 
 
+
 /*
 * Redireccionamiento en la barra nav dependiendo de rol
 */

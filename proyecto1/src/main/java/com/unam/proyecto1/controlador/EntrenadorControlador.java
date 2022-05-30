@@ -30,10 +30,11 @@ public class EntrenadorControlador {
     public String perfil(Model model, Principal principal) {
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
         List<Usuario> usuarios = usuarioRepositorio.findCompetidoresRegistrados(usuario.getUsuario_Id());
-        List<Integer> ndisciplinas = usuarioRepositorio.cuentaEventosEntrenador(usuario.getUsuario_Id());
+        int ndisciplinas = usuarioRepositorio.cuentaEventosEntrenador(usuario.getUsuario_Id());
         System.out.println(ndisciplinas+" Numero de disciplinas");
         model.addAttribute("numCompetidores", usuarios.size());
         model.addAttribute("usuario", usuario);
+        model.addAttribute("nDisciplinas",ndisciplinas);
         return "inicioEntrenador";
     }
     @GetMapping("/registrar")
