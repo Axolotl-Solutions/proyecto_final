@@ -105,10 +105,12 @@
      const tooltip = document.querySelector('#tooltip');
       var ok = true;
       var msg = "Mal perro"
-      console.log("entro aquí");
+
       if(f[9].checked==false && f[10].checked==false){
         ok = false;
+        console.log("entro aquí");
       }
+
       let timer;
       if(ok == false){
         tooltip.classList.add('activo');
@@ -119,8 +121,6 @@
        }
       return ok;
     }
-
-
 </script>
 <script>
    document.getElementsByClassName("navbar-link")[1].classList.add("active");
