@@ -18,7 +18,6 @@
    </div>
   </div>
 
-
   <div class="divider card-divider"></div>
   <!--       EMPIEZA TABLA ---------->
   <section class="tabla">
@@ -26,21 +25,19 @@
     <table id="myTable" class="table">
      <thead>
      <tr class="tabla-t">
-      <th>#Competidor</th>
       <th>Nombre</th>
       <th>Correo</th>
-      <th style="text-align: center;">Rol</th>
+      <th>Estatura</th>
+      <th style="text-align: center;">Peso</th>
       <th>Acción</th>
      </tr>
      </thead>
      <tbody>
-     <tr th:each="usr : ${usuarios}">
-      <td th:text="${usr.getUsuario_Id()}" data-title="#Competidor" >01</td>
+     <tr  th:each="usr : ${usuarios}">
       <td th:text= "${usr.getNombre()+' '+usr.getApellido_P() + ' ' + usr.getApellido_M()}" data-title="Nombre">Fernando Flores</td>
       <td th:text="${usr.getEmail()}" data-title="Correo">fernandondin@ciencias.unam.mx</td>
-      <td data-title="Rol">
-       <p  th:text="${usr.getRol().toLowerCase()}" class ="rol-usuario">Admin</p>
-      </td>
+      <td th:text="${usr.getAltura()+'cm'}" data-title="Estatura" >01</td>
+      <td th:text="${usr.getPeso()+'kg'}" data-title="Peso"></td>
       <td data-title="Acción" id="td">
        <a href="#" class="eliminar-btn" active>
         <span class="material-symbols-rounded  icon">delete</span>
@@ -89,7 +86,6 @@
   }
 }
 </script>
-
 <script>
   var eliminar = document.getElementsByClassName("eliminar-btn");
   var links = document.getElementsByClassName("a-href");
