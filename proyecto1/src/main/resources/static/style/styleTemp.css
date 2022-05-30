@@ -14,8 +14,13 @@
    --editar-btn-hover:#6fa2e7;
    --sw-cancelar:#f27474;
   --rol-competidor: #388e3c;
-  --rol-admin: #ffcdd2;
+  --rol-competidor-background: #c8e6c9;
+  --rol-juez-background: #c8d6e6;
+  --rol-juez:#38878e;
+  --rol-admin-background: #ffcdd2;
+  --rol-admin: #c62828;
   --rol-entrenador: #a68b00;
+  --rol-entrenador-background:#fff0c2;
   --unam-gold: #D59F0F;
   --unam-blue:#002b7a;
   --imperial-red_12: hsla(357, 86%, 57%, 0.12);
@@ -143,6 +148,9 @@ body {
   position: absolute;
   background:#000;
   visibility:hidden;
+  opacity:0;
+  transition: .8s;
+  transform: scale(0.5);
 }
 .tooltip:after{
   	content: "";
@@ -151,7 +159,7 @@ body {
   	right: -30px;
   	border: 10px solid;
   	border-color: var(--eliminar-btn-hover) transparent transparent transparent;
-  	z-index:2;
+  	z-index:1;
   }
 .tooltip .tooltiptext {
   box-shadow:var(--shadow-card);
@@ -171,6 +179,9 @@ body {
 }
 .tooltip.activo {
   visibility: visible;
+  opacity:1;
+  transform: scale(1);
+
 }
 
 
@@ -1185,28 +1196,35 @@ th {
     text-decoration: none;
     color: var(--onyx);
   }
-
+  .rol-juez{
+       border-radius: 0.2rem;
+       padding: 0.2rem 1rem;
+       text-align: center;
+       background-color: var(--rol-juez-background);
+       color: var(--rol-juez);
+   }
   .rol-entrenador{
     border-radius: 0.2rem;
     padding: 0.2rem 1rem;
     text-align: center;
-    background-color: #fff0c2;
+    background-color: var(--rol-entrenador-background);
     color: var(--rol-entrenador);
   }
   .rol-competidor{
     border-radius: 0.2rem;
     padding: 0.2rem 1rem;
     text-align: center;
-    background-color: #c8e6c9;
+    background-color: var(--rol-competidor-background);
     color: var(--rol-competidor);
   }
   .rol-admin{
     border-radius: 0.2rem;
     padding: 0.2rem 1rem;
     text-align: center;
-    background-color: var(--rol-admin);
-    color: #c62828;
+    background-color: var(--rol-admin-background);
+    color: var(--rol-admin);
   }
+
 
   tr:nth-child(even):hover{
     background:hsla(52, 89%, 40%, 0.58);

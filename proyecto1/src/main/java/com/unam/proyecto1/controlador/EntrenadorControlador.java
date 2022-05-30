@@ -29,6 +29,10 @@ public class EntrenadorControlador {
     @GetMapping("/")
     public String perfil(Model model, Principal principal) {
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
+        List<Usuario> usuarios = usuarioRepositorio.findCompetidoresRegistrados(usuario.getUsuario_Id());
+        List<Integer> ndisciplinas = usuarioRepositorio.cuentaEventosEntrenador(usuario.getUsuario_Id());
+        System.out.println(ndisciplinas+" Numero de disciplinas");
+        model.addAttribute("numCompetidores", usuarios.size());
         model.addAttribute("usuario", usuario);
         return "inicioEntrenador";
     }
@@ -65,9 +69,11 @@ public class EntrenadorControlador {
         model.addAttribute("competidor",antiguo);
         return "editarCompetidor";
     }
+
     @PostMapping("/registra")
     public String registra(HttpServletRequest request, Model model,Principal principal) {
         Usuario usuarioActual =  usuarioRepositorio.findByEmail(principal.getName());
+        String entrenador_email = usuarioActual.getEmail();
         model.addAttribute("usuario", usuarioActual);
         Date fecha = Date.valueOf(request.getParameter("fecha"));
         Usuario usuario = usuarioServicio.creaUsuarioCompetidor(request.getParameter("email"),
@@ -78,7 +84,8 @@ public class EntrenadorControlador {
                 request.getParameter("sexo"),
                 fecha,
                 Integer.parseInt(request.getParameter("peso")),
-                Integer.parseInt(request.getParameter("altura"))
+                Integer.parseInt(request.getParameter("altura")),
+                entrenador_email
         );
         model.addAttribute("error", usuario == null);
         model.addAttribute("exito", usuario != null);
@@ -86,18 +93,9 @@ public class EntrenadorControlador {
     }
     @RequestMapping("/buscar")
     public String busca(Model model, String error, Principal principal) {
-        List<Usuario> usuarios = usuarioRepositorio.findAll();
-        for (int i=0; i< usuarios.size();i++){
-            if(usuarios.get(i) != null){
-                if(!usuarios.get(i).getRol().equals("COMPETIDOR")){
-                    System.out.println(usuarios.get(i).getRol());
-                    usuarios.remove(i);
-                }
-            }
-        }
-        System.out.println(usuarios.size()+" SIZE");
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
         model.addAttribute("usuario", usuario);
+        List<Usuario> usuarios = usuarioRepositorio.findCompetidoresRegistrados(usuario.getUsuario_Id());
         model.addAttribute("usuarios", usuarios);
         return "buscaCompetidores";
     }
