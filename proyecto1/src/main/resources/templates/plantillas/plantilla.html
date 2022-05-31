@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" th:href="@{/img/unam.svg}" type="image/svg+xml">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="/style/styleTemp.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;900&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+
+</head>
+
+<body>
+
+  <!--
+    - #HEADER
+  -->
+
+  <header th:fragment="header" class="header" data-header>
+    <div class="container">
+      <h1>
+        <a id="logo-1" href="#" class="logo">Olimpiadas</a>
+        <a id="logo-2" href="#" class="logo-1">Univeritarias</a>
+      </h1>
+
+      <button class="menu-toggle-btn icon-box" data-menu-toggle-btn aria-label="Toggle Menu">
+        <span class="material-symbols-rounded  icon">menu</span>
+      </button>
+
+      <nav class="navbar">
+        <div class="container">
+
+          <ul class="navbar-list">
+            <li>
+              <a id="inicio-nav" href="#" class="navbar-link icon-box">
+                <span class="material-symbols-rounded  icon">grid_view</span>
+
+                <span>Inicio</span>
+              </a>
+            </li>
+
+            <li>
+              <a id="agregar-nav" href="#" class="navbar-link icon-box">
+                <span class="material-symbols-rounded  icon">add</span>
+
+                <span>Agregar</span>
+              </a>
+            </li>
+
+            <li>
+              <a id="calificaciones-nav" href="#" class="navbar-link icon-box">
+                <span class="material-symbols-rounded  icon">military_tech</span>
+
+                <span>Calificaciones</span>
+              </a>
+            </li>
+
+            <li>
+              <a id="tabla-nav" href="#" class="navbar-link icon-box">
+                <span class="material-symbols-rounded  icon">bar_chart</span>
+
+                <span>Tabla</span>
+              </a>
+            </li>
+
+            <li>
+              <a id="busca-nav" href="#" class="navbar-link icon-box">
+                <span class="material-symbols-rounded  icon">search</span>
+
+                <span>Buscar</span>
+              </a>
+            </li>
+
+          </ul>
+
+          <ul class="user-action-list">
+
+
+
+            <li style="cursor:pointer;" class="nr_li dd_main">
+                <figure class="profile-avatar">
+                  <a class="navbar-link">
+                  <img src="/img/avatar-1.png" alt="img" width="32" height="32">
+                  <div>
+                    <p id="nombre-nav" th:text="${usuario.getNombre()}" class="profile-title">Fernando F</p>
+
+                    <p id="rol-nav" th:text="${usuario.getRol()}" class="profile-subtitle">Entrenador</p>
+                  </div>
+                 </a>
+                  <div class="dd_menu">
+        						<div class="dd_left">
+        							<ul>
+        								<li><i class="fas fa-plus"></i></li>
+        								<li><i class="fas fa-medal"></i></li>
+        								<li><i class="fas fa-cog"></i></li>
+        								<li><i class="fas fa-sign-out-alt"></i></li>
+        							</ul>
+        						</div>
+        						<div class="dd_right">
+        							<ul>
+        								<li> <a id="agregar-menu" href="">Agregar</a></li>
+        								<li><a id="calificaciones-menu" href="">Calificaciones</a></li>
+        								<li><a id= "ajustes-menu" href="">Ajustes</a></li>
+        								<li><a href="/salir">Salir</a></li>
+        							</ul>
+        						</div>
+        					</div>
+                </figure>
+            </li>
+
+
+          </ul>
+
+
+        </div>
+      </nav>
+
+    </div>
+
+  </header>
+
+
+
+
+  <!--EMPIEZA FOOTER-->
+
+  <footer th:fragment="footer" class="footer">
+    <div class="container">
+
+      <ul class="footer-list">
+
+        <li class="footer-item">
+          <a href="#" class="footer-link">Acerca de</a>
+        </li>
+
+        <li class="footer-item">
+          <a href="#" class="footer-link">Privacidad</a>
+        </li>
+
+        <li class="footer-item">
+          <a href="#" class="footer-link">Términos</a>
+        </li>
+
+        <li class="footer-item">
+          <a href="#" class="footer-link">Desarrolladores</a>
+        </li>
+
+        <li class="footer-item">
+          <a href="#" class="footer-link">Soporte</a>
+        </li>
+
+
+      </ul>
+
+      <p class="copyright">
+        &copy; 2022 <a href="https://github.com/Axolotl-Solutions" class="copyright-link">Axolotl Solutions Inc</a>.
+      </p>
+
+    </div>
+  </footer>
+  <!--TERMINA FOOTER-->
+<div th:fragment="js">
+  <script  src="/js/script.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+       AOS.init({offset: 100});
+   </script>
+</div>
+
+</body>
+</html>

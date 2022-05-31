@@ -1,0 +1,131 @@
+<html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla.html :: head">
+</head>
+<body>
+<header th:replace="plantillas/plantilla.html :: header">
+</header>
+
+<main>
+ <article class="container article">
+
+  <div data-aos="fade-right" data-aos-duration="1200" class="search_wrap search_wrap_1">
+   <div class="search_box">
+    <input id="myInput" type="text" class="input" placeholder="Buscar..." onkeyup="myFunction()">
+    <div class="btn btn_common">
+     <i class="fas fa-search"></i>
+    </div>
+   </div>
+  </div>
+
+  <div class="divider card-divider"></div>
+  <!--       EMPIEZA TABLA ---------->
+  <section class="tabla">
+   <div class="card" data-aos="zoom-out" data-aos-duration="1200" >
+    <table id="myTable" class="table">
+     <thead>
+     <tr class="tabla-t">
+      <th>Nombre</th>
+      <th>Correo</th>
+      <th>Estatura</th>
+      <th style="text-align: center;">Peso</th>
+      <th>Acción</th>
+     </tr>
+     </thead>
+     <tbody>
+     <tr  th:each="usr : ${usuarios}">
+      <td th:text= "${usr.getNombre()+' '+usr.getApellido_P() + ' ' + usr.getApellido_M()}" data-title="Nombre">Fernando Flores</td>
+      <td th:text="${usr.getEmail()}" data-title="Correo">fernandondin@ciencias.unam.mx</td>
+      <td th:text="${usr.getAltura()+'cm'}" data-title="Estatura" >01</td>
+      <td th:text="${usr.getPeso()+'kg'}" data-title="Peso"></td>
+      <td data-title="Acción" id="td">
+       <a href="#" class="eliminar-btn" active>
+        <span class="material-symbols-rounded  icon">delete</span>
+        <span>Eliminar</span>
+       </a>
+       <a  th:href="@{/entrenador/editar/{id}(id = ${usr.getEmail()})}" class="editar-btn" active>
+        <span class="material-symbols-rounded  icon">edit</span>
+        <span>Editar</span>
+       </a>
+       <a class="a-href" style="display:none" th:href="@{/entrenador/editar/{email}(email = ${usr.getEmail()})}"></a>
+      </td>
+     </tr>
+     </tbody>
+    </table>
+   </div>
+   <!--       TERMINA TABLA ---------->
+
+ </article>
+</main>
+
+
+<footer th:replace="plantillas/plantilla.html :: footer">
+</footer>
+<script th:replace="plantillas/plantilla.html :: js">
+</script>
+<script>
+   document.getElementsByClassName("navbar-link")[4].classList.add("active");
+ </script>
+<script>
+  function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
+<script>
+  var eliminar = document.getElementsByClassName("eliminar-btn");
+  var links = document.getElementsByClassName("a-href");
+  for (let i = 0; i < eliminar.length; i++) {
+   eliminar[i].addEventListener("click", function(){
+
+   Swal.fire({
+     title: '¿Está seguro?',
+     text: "No podrá revertir esta acción.",
+     icon: 'warning',
+     iconColor: 'var(--sw-cancelar)',
+     showCancelButton: true,
+     confirmButtonText: 'Yes, delete it!',
+     cancelButtonText: 'No, cancel!',
+     confirmButtonColor:'var(--confirmar-btn)',
+     cancelButtonColor: 'var(--eliminar-btn)',
+     reverseButtons: true
+   }).then((result) => {
+     if (result.isConfirmed) {
+       Swal.fire({
+        title: 'Eliminado',
+        text: "Se elimino correctamente.",
+        icon: 'success',
+        confirmButtonText: '¡Bien!',
+        confirmButtonColor:'var(--confirmar-btn)'
+      })
+       window.setTimeout(function(){
+        window.location.href = links[i].href;
+      }, 500);
+     } else if (result.dismiss === Swal.DismissReason.cancel){
+       Swal.fire({
+        title: 'Cancelado',
+        text: "No se elimino el competidor",
+        icon: 'error',
+        confirmButtonText: '¡Bien!',
+        confirmButtonColor:'var(--confirmar-btn)'
+      })
+     }
+   })
+   });
+  }
+</script>
+</body></html>

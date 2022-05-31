@@ -3,64 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <title>Sistema de Olimpiadas</title>
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-            crossorigin="anonymous"></script>
+    <link rel="shortcut icon" th:href="@{/img/unam.svg}" type="image/svg+xml">
     <style>
-                body{
-         background: linear-gradient(0deg, rgba(41,51,157,1) 0%, rgba(236,183,68,1) 100%); 
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Comfortaa', sans-serif;
+}
+
+html,body{
+  display: grid;
+  height: 100%;
+  width: 100%;
+  place-items: center;
+  background: #f2f4f6;
+  /* background: linear-gradient(-135deg, #c850c0, #4158d0); */
+}
+body{
+  background:hsl(225, 20%, 96%);
+}
+::selection{
+  background: #4158d0;
+  color: #fff;
+}
+.contenedor{
+  width: 580px;
+  background: #fff;
+  border-radius: 25px 85px 25px 85px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
+}
+.contenedor .titulo{
+  font-size: 35px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 100px;
+  color: #fff;
+  user-select: none;
+  border-radius: 15px 85px 0 0;
+  background: linear-gradient(-45deg, #202c56, #202c56);
+  /* Animación
+  background-size: 200% 200%;
+  animation: gradient 5s ease infinite;*/
+
+}
+.contenedor form{
+  padding: 10px 30px 50px 30px;
+}
+.contenedor form .field{
+  height: 50px;
+  width: 100%;
+  margin-top: 20px;
+  position: relative;
+}
+.contenedor form .field input{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  font-size: 17px;
+  padding-left: 20px;
+  border: 1px solid lightgrey;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  border: none;
+  border-bottom: 1px solid #adadad;
+}
+.contenedor form .field .btn{
+  border-radius: 15px;
+}
+.contenedor form .field input:focus,
+form .field input:valid{
+  border-color: #4158d0;
+}
+.contenedor form .field label{
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  color: #999999;
+  font-weight: 400;
+  font-size: 17px;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+}
+form .field input:focus ~ label,
+form .field input:valid ~ label{
+  top: 0%;
+  font-size: 16px;
+  color: #4158d0;
+  background: #fff;
+  transform: translateY(-50%);
+}
+form .content{
+  display: flex;
+  width: 100%;
+  height: 50px;
+  font-size: 16px;
+  align-items: center;
+  justify-content: space-around;
+}
+form .content input{
+  width: 15px;
+  height: 15px;
+  background: red;
+}
+form .content label{
+  color: #262626;
+  user-select: none;
+  padding-left: 5px;
+}
+form .content .pass-link{
+  color: "";
+}
+form .field input[type="submit"]{
+  color: #fff;
+  border: none;
+  padding-left: 0;
+  margin-top: -10px;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  background: #a16e22;
+  transition: all 0.3s ease;
+}
+form .field input[type="submit"]:hover{
+  cursor: pointer;
+  transform: scale(1.05);
+  animation: gradient 4s ease infinite;
+  background-size: 400% 400%;
+  transition: all 0.3s ease;
+}
+form .field input[type="submit"]:active{
+  transform: scale(0.95);
+}
+form .signup-link{
+  color: #262626;
+  margin-top: 20px;
+  text-align: center;
+}
+form .pass-link a,
+form .signup-link a{
+  color: #4158d0;
+  text-decoration: none;
+}
+form .pass-link a:hover,
+form .signup-link a:hover{
+  text-decoration: underline;
+}
+/*****************Animaciones**********************/
+@keyframes corners-con {
+    0% {
+        border-radius: 25px 85px 25px 85px;
+    }
+    100% {
+        border-radius: 25px 25px 25px 25px;
+    }
+}
+@keyframes corners-ti {
+    0% {
+        border-radius: 15px 85px 0 0;
+    }
+    100% {
+        border-radius: 15px 15px 0 0;
+    }
+}
+/******************Responsive**********************/
+@media (max-width:600px){
+  .contenedor{
+	width: 380px;
+	animation: corners-con 2s ease;
+        border-radius: 25px 25px 25px 25px;
    }
-         
-        #tarjeta {
-              background-color: rgb(255,255,255,30); border: 1px solid lightgray;
-            border-radius: 11px;
-            padding: 22px;
-            box-shadow: 2px 2px lightgray;
-            height: 500px
-        }
- button.btn.btn-warning{ 
-            background-color:rgb(236,183,68,1); 
-            float:left;
-            border: 1px solid lightgray;
-        }   
+  .contenedor .titulo{
+	animation: corners-ti 2s ease;
+	border-radius: 15px 15px 0 0;
+  }
+}
+        .alerta {
+  padding:10px 10px 10px 10px;
+  background: #ff675c;
+  border-radius:10px;
+  font-size:20px;
+  text-align:center;
+  color:#fff;
+  font-weight: bold;
+}
+
     </style>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col">
-        </div>
-        <div class="col-8">
-            <h1>Iniciar sesión</h1>
-            <div class="alert alert-warning" role="alert" th:if="${error}">
-                <p>Usuario o contraseña incorrectos</p>
-            </div>
-            <div id="tarjeta">
-                <form method="post" th:action="@{/}">
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Correo electrónico</label>
-                        <input type="text" id="email" name="email" class="form-control"
-                               placeholder="Introduce el correo electrónico" required/>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" minlength="4" id="password" name="password" class="form-control"
-                               placeholder="Introduce la contraseña" required/>
-                    </div>
-                    <div class="mb-3">
-                        <button style="float:left" class="btn btn-warning" type="submit">Continuar</button>
-                        <span style="float:right"> ¿No tienes una cuenta? <a th:href="@{/registro}">Registrate</a>.</span>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="col">
-        </div>
-
+<div class="contenedor" data-aos="zoom-out" data-aos-duration="1200">
+    <div class="titulo">
+        Iniciar Sesión
     </div>
+    <div id="error" th:if="${error}" class="alerta" style="display:none;" role="alert">
+        Usuario o contraseña incorrectos.
+    </div>
+    <form method="post" th:action="@{/}">
+        <div class="field" data-aos="fade-left" data-aos-duration="1200">
+            <input type="text" name="email" required>
+            <label>Correo</label>
+        </div>
+        <div class="field" data-aos="fade-left" data-aos-duration="1200">
+            <input type="password" name="password" required>
+            <label>Contraseña</label>
+        </div>
+        <div class="field" data-aos="zoom-in" data-aos-duration="2000">
+            <input class="btn" type="submit" value="Entrar">
+        </div>
+        <div class="signup-link">
+            ¿No tienes cuenta? <a th:href="@{/registro}">Registrate</a>
+        </div>
+    </form>
 </div>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    AOS.init({offset: 100});
+    var error = document.getElementById('error');
+    var exito = document.getElementById('exito');
+    if(error!=null){
+        Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Correo o Contraseña incorrectos',
+              confirmButtonColor: 'hsl(144, 62%, 53%)'
+            })
+    }
+</script>
 </body>
 </html>

@@ -15,44 +15,56 @@
 
                     <!-- INICIA FORM  -->
                     <div class="cont">
-                        <div class="title">Editar Competidor</div>
+                        <div class="title">Registrar Competidor</div>
                         <div class="content">
-                            <form method="post" th:action="@{/entrenador/edita/{id}(id=${competidor.getUsuario_Id()})}" th:object="${competidor}">
+                            <form method="post" action="/entrenador/registra" onsubmit='return valida(this)'>
                                 <div class="user-details">
                                     <div class="input-box" >
                                         <span  class="details">Nombre</span>
-                                        <input th:field="*{nombre}" name="nombre" type="text" placeholder="Introduce el nombre." required>
+                                        <input name="nombre" type="text" placeholder="Introduce el nombre." required>
                                     </div>
                                     <div class="input-box">
                                         <span  class="details">Apellido Paterno</span>
-                                        <input th:field="*{apellido_P}" name="apellido_p" type="text" placeholder="Introduce el apellido paterno." required>
+                                        <input name="apellido_p" type="text" placeholder="Introduce el apellido paterno." required>
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Apellido Materno</span>
-                                        <input th:field="*{apellido_M}" name="apellido_m" type="text" placeholder="Introduce el apellido materno" required>
+                                        <input name="apellido_m" type="text" placeholder="Introduce el apellido materno" required>
+                                    </div>
+                                    <div class="input-box">
+                                        <span class="details">Contraseña</span>
+                                        <input name="password" id="contraseña" type="password" placeholder="Introduce la contraseña" required>
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Correo</span>
-                                        <input th:field="*{email}" name="email" type="email" placeholder="Introduce el correo" required>
+                                        <input name="email" type="email" placeholder="Introduce el correo" required>
+                                    </div>
+                                    <div class="input-box">
+                                        <span class="details">Confirma</span>
+                                        <input id="confirma-contraseña" type="password" placeholder="Confirma la contraseña" required>
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Altura</span>
-                                        <input th:field="*{peso}" name="peso" type="number" placeholder="Ingresa peso en kg" required>
+                                        <input name="peso" type="number" placeholder="Ingresa altura en cm" required>
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Peso</span>
-                                        <input th:field="*{altura}" name="altura" type="number" placeholder="Ingresa altura en cm" required>
+                                        <input name="altura" type="number" placeholder="Ingresa peso en kg" required>
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Fecha de nacimiento</span>
-                                        <input th:value="${competidor.getFecha_nacimiento().toString().substring(0,10)}" name="fecha" type="date" placeholder="introduce fecha de nacimiento" required>
+                                        <input name="fecha" type="date" placeholder="Introduce fecha de nacimiento" required>
                                     </div>
                                 </div>
+                                <div id="tooltip" class="tooltip">
+                                    <span class="tooltiptext">Selecciona un sexo</span>
+                                </div>
                                 <div class="gender-details">
-                                    <input th:field="*{sexo}" type="radio" name="sexo" value="Masculino" id="dot-1" required/>
-                                    <input th:field="*{sexo}" type="radio" name="sexo" value="Femenino" id="dot-2" required/>
+                                    <input type="radio" name="sexo" value="Masculino" id="dot-1" >
+                                    <input type="radio" name="sexo" value="Femenino" id="dot-2" >
                                     <span class="gender-title">Sexo</span>
                                     <div class="category">
+
                                         <label for="dot-1">
                                             <span class="dot one"></span>
                                             <span class="gender">Masculino</span>
@@ -64,7 +76,7 @@
                                     </div>
                                 </div>
                                 <div class="button">
-                                    <input type="submit" value="Editar">
+                                    <input id="btn" type="submit" value="Registrar">
                                 </div>
                             </form>
                         </div>
@@ -86,27 +98,59 @@
 </div>
 <footer th:replace="plantillas/plantilla.html :: footer">
 </footer>
-
 <script th:replace="plantillas/plantilla.html :: js">
 </script>
 <script>
-    var error = document.getElementById('error');
-    var exito = document.getElementById('exito');
+    function valida(f) {
+     const tooltip = document.querySelector('#tooltip');
+      var ok = true;
+      var msg = "Mal perro"
+
+      if(f[9].checked==false && f[10].checked==false){
+        ok = false;
+        console.log("entro aquí");
+      }
+
+      let timer;
+      if(ok == false){
+        tooltip.classList.add('activo');
+        timer = setTimeout(() => {
+            tooltip.classList.remove('activo');
+        }, 2500);
+
+       }
+      return ok;
+    }
+</script>
+<script>
+   document.getElementsByClassName("navbar-link")[1].classList.add("active");
+   var error = document.getElementById('error');
+   var exito = document.getElementById('exito');
     if(error!=null){
         Swal.fire({
               icon: 'error',
               title: 'Error',
-              text: 'El correo ya esta asociado a otro competidor',
-              confirmButtonColor: 'var(--confirmar-btn)'
+              text: 'Este correo ya esta registrado',
+              confirmButtonColor: '#002b7a'
             })
     }
-    if(exito!=null){
+    if(exito != null){
         Swal.fire({
               icon: 'success',
-              title: 'Editado',
-              text: 'Competidor editado correctamente',
-              confirmButtonColor: 'var(--confirmar-btn)'
+              title: 'Agregado correctamente',
+              confirmButtonColor: '#002b7a'
             })
     }
+   var contra = document.getElementById("contraseña");
+   var confirmaContra = document.getElementById("confirma-contraseña");
+    function validaContra(){
+      if(contra.value != confirmaContra.value) {
+        confirmaContra.setCustomValidity("Las contraseñas no coinciden");
+      } else {
+        confirmaContra.setCustomValidity('');
+      }
+    }
+    contra.onchange = validaContra;
+    confirmaContra.onkeyup = validaContra;
  </script>
 </body></html>
