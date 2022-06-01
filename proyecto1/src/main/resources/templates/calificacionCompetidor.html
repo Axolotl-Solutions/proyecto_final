@@ -33,7 +33,7 @@
                     <img src="/img/avatar-1.png" alt="" width="48" height="48">
                 </figure>
                 <div>
-                    <p th:text="${competidor.getNombre()}" class="card-title">Fernando Gerardo Flores García</p>
+                    <p th:text="${competidor.getNombre() +' '+ competidor.getApellido_P()}" class="card-title">Fernando Gerardo Flores García</p>
                     <p class="card-subtitle">Competidor</p>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="progress-label">
-                        <p th:text="${'Calificación en '+evento.getNombreEvento()}" class="progress-title">Calificación 100 mts</p>
+                        <p th:text="${'Calificación en '+evento.getNombreEvento()+' ('+evento.getDisciplina().getNombre()+')'}" class="progress-title">Calificación 100 mts</p>
                         <data th:text="${calificacionesRepositorio.promedioPorEvento(competidor.getUsuario_Id(),evento.getEvento_Id())}" class="progress-data">8.5</data>
                     </div>
                     <div class="progress-bar">
@@ -95,7 +95,7 @@
                             </figure>
                         </div>
                         <div>
-                            <p th:text="${calificacion.getJuez().getNombre()}">Alan Romero</p>
+                            <p th:text="${calificacion.getJuez().getNombre() + ' '+ calificacion.getJuez().getApellido_P()}">Alan Romero</p>
                             <p class="card-subtitle" >Juez</p>
                         </div>
                     </div>
@@ -103,7 +103,7 @@
                     <div class="juez-calificación">
                         <p th:text="${'Calificación: '+calificacion.getPuntaje()}">Calificación: 5.8</p>
                         <span class="material-symbols-rounded  icon">star</span>
-                        <p th:text="${'('+calificacion.getEvento().getNombreEvento()+')'}"></p>
+                        <p th:text="${'('+calificacion.getEvento().getNombreEvento()+' - '+calificacion.getEvento().getDisciplina().getNombre()+')'}"></p>
                     </div>
                     <div class="juez-texto">
                         <p th:text="${calificacion.getComentario()}"></p>

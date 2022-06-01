@@ -956,7 +956,7 @@ form input[type="submit"]:active{
 }
 
 .progress {
-  --bg: var(--coral);
+  --bg:#fc031c;
   height: 100%;
   background: var(--bg, var(--onyx));
 
