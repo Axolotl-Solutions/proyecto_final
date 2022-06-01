@@ -14,5 +14,5 @@ public interface CalificacionRepositorio extends JpaRepository<Calificacion, Int
     Calificacion findByEventoAndJuezAndCompetidor(Evento evento, Usuario juez, Usuario competidor);
     List<Calificacion> findByCompetidor(Usuario competidor);
     @Query(nativeQuery = true, value = "select avg(puntaje) from calificacion where competidor_Id= :idu and evento_Id = :ide group by evento_id;")
-    Integer promedioPorEvento(@Param("idu")Integer idu,@Param("ide")Integer ide);
+    Double promedioPorEvento(@Param("idu")Integer idu,@Param("ide")Integer ide);
 }
