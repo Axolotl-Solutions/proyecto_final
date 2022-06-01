@@ -76,7 +76,8 @@ VALUES(3, 1),
 INSERT INTO Calificacion(evento_Id, juez_Id, competidor_Id, puntaje, comentario)
 VALUES(1, 4, 3, 8, 'Estuvo chido, pero no tanto, la neta padrino, tu puedes mejorar.'),
       (3, 4, 3, 10, 'Esta actuación fue lo más bonito que he visto en mi vida, ni cuando me casé me emocione tanto.'),
-      (5, 5, 3, 2.5, 'Pésima actuación, si yo fuera tu no hubiese venido al chilaquildren');
+      (5, 5, 3, 2.5, 'Pésima actuación, si yo fuera tu no hubiese venido al chilaquildren'),
+      (3, 5, 3, 9.5, 'Excepcional, pero te falta casí nada para que sea perfecto');
 
 -- CONSULTAS DE PRUEBA
 -- Eventos con sus disciplinas
