@@ -68,8 +68,8 @@ VALUES(3, 1),
 
 -- Crear calificaciones, relacionando jueces con eventos con competidores
 INSERT INTO Calificacion(evento_Id, juez_Id, competidor_Id, puntaje, comentario)
-VALUES(1, 4, 3, 8, 'Hola, esto es un comentario. Lo hizo bien, pero puede mejorar.'),
-      (3, 4, 3, 10, 'Hola, esto es un comentario. Lo hizo perfecto.');
+VALUES(1, 4, 3, 8.5, 'Estuvo chido, pero no tanto, la neta padrino, tu puedes mejorar.'),
+      (3, 4, 3, 10, 'Esta actuación fue lo más bonito que he visto en mi vida, ni cuando me casé me emocione tanto.');
 
 -- CONSULTAS DE PRUEBA
 -- Eventos con sus disciplinas

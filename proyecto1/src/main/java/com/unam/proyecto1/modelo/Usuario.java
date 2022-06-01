@@ -70,6 +70,8 @@ public class Usuario {
     private Set<Evento> eventos = new HashSet<>();
 
 
+
+
     public Integer getUsuario_Id() {
         return usuario_Id;
     }

@@ -143,6 +143,86 @@ body {
 
 ::-webkit-scrollbar-thumb:hover { background: hsl(0, 0%, 70%); }
 
+/*Calificaciones*/
+
+.juez-calificación span{
+  color: var(--pacific-blue);
+}
+
+.juez-calificación{
+  padding-left: 15px;
+  font-size: 15px;
+  display: flex;
+  gap:5px;
+  align-items: flex-end;
+}
+.juez-texto{
+  padding: 15px;
+  font-size: 15px;
+  background: var(--pacific-blue_12);
+  border-radius: var(--radius-6);
+  padding: 25px;
+  text-align: justify;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+.juez-texto::before{
+  content: "";
+  position: absolute;
+  margin-top: -45px;
+  border: 10px solid;
+  border-color: transparent transparent var(--pacific-blue_12) transparent;
+}
+.juez-titulo{
+  display: flex;
+  padding: 15px;
+  align-items: center;
+  gap:5px;
+}
+.juez-comentario{
+  display: grid;
+  grid-template-columns: 1fr;
+  padding: 15px;
+  gap:10px;
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+  border-radius: var(--radius-6);
+  margin-top: 45px;
+}
+.card-titulo {
+  overflow: hidden;
+  border-radius: var(--radius-6);
+  background: #fff;
+}
+.calificaciones{
+  padding: 25px 25px;
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 10px;
+  grid-template-rows: 500px;
+  overflow:hidden;
+}
+.calificaciones .card{
+  overflow: auto;
+}
+.comentarios{
+  display: grid;
+  background: #fff;
+  border-radius: var(--radius-6);
+  padding: 25px;
+  box-shadow: var(--shadow-card);
+  grid-template-columns: 1fr;
+  gap:15px;
+  overflow: auto;
+}
+.comentarios-titulo{
+  color: var(--onyx);
+  font-size: 25px;
+}
+.titulo-comentario{
+  display: flex;
+  gap:10px;
+  align-items: center;
+}
 
 
 /*Tooltips básicos*/
