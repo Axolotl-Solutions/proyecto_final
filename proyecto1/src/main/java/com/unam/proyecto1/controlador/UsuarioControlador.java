@@ -37,6 +37,10 @@ public class UsuarioControlador {
         return "usuarios";
     }
 
+    @GetMapping("/calificaciones")
+    public String calificaciones(){
+        return "calififaciones";
+    }
 /**
     @PostMapping("/crea")
     public String crea(HttpServletRequest request, Model model) {
