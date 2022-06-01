@@ -1,8 +1,9 @@
 package com.unam.proyecto1.controlador;
 
-import com.unam.proyecto1.modelo.Disciplina;
+import com.unam.proyecto1.modelo.Evento;
 import com.unam.proyecto1.modelo.Usuario;
 import com.unam.proyecto1.repositorio.DisciplinaRepositorio;
+import com.unam.proyecto1.repositorio.EventoRepositorio;
 import com.unam.proyecto1.repositorio.UsuarioRepositorio;
 import com.unam.proyecto1.servicio.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -25,13 +25,14 @@ public class EntrenadorControlador {
     private UsuarioServicio usuarioServicio;
     @Autowired
     private DisciplinaRepositorio disciplinaRepositorio;
+    @Autowired
+    private EventoRepositorio eventoRepositorio;
 
     @GetMapping("/")
     public String perfil(Model model, Principal principal) {
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
         List<Usuario> usuarios = usuarioRepositorio.findCompetidoresRegistrados(usuario.getUsuario_Id());
         int ndisciplinas = usuarioRepositorio.cuentaEventosEntrenador(usuario.getUsuario_Id());
-        System.out.println(ndisciplinas+" Numero de disciplinas");
         model.addAttribute("numCompetidores", usuarios.size());
         model.addAttribute("usuario", usuario);
         model.addAttribute("nDisciplinas",ndisciplinas);
@@ -39,8 +40,10 @@ public class EntrenadorControlador {
     }
     @GetMapping("/registrar")
     public String registrar(HttpServletRequest request,Model model, Principal principal) {
+        List<Evento> eventos = eventoRepositorio.findAll();
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
         model.addAttribute("usuario", usuario);
+        model.addAttribute("eventos", eventos);
         return "registraCompetidor";
     }
     @PostMapping("/edita/{id}")
@@ -74,9 +77,11 @@ public class EntrenadorControlador {
     @PostMapping("/registra")
     public String registra(HttpServletRequest request, Model model,Principal principal) {
         Usuario usuarioActual =  usuarioRepositorio.findByEmail(principal.getName());
+        List<Evento> eventos = eventoRepositorio.findAll();
         String entrenador_email = usuarioActual.getEmail();
         model.addAttribute("usuario", usuarioActual);
         Date fecha = Date.valueOf(request.getParameter("fecha"));
+        System.out.println(request.getParameter("eventos")+  "Evento");
         Usuario usuario = usuarioServicio.creaUsuarioCompetidor(request.getParameter("email"),
                 request.getParameter("password"),
                 request.getParameter("nombre"),
@@ -86,10 +91,12 @@ public class EntrenadorControlador {
                 fecha,
                 Integer.parseInt(request.getParameter("peso")),
                 Integer.parseInt(request.getParameter("altura")),
-                entrenador_email
+                entrenador_email,
+                Integer.parseInt(request.getParameter("eventos"))
         );
         model.addAttribute("error", usuario == null);
         model.addAttribute("exito", usuario != null);
+        model.addAttribute("eventos", eventos);
         return "registraCompetidor";
     }
     @RequestMapping("/buscar")
@@ -97,6 +104,7 @@ public class EntrenadorControlador {
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
         model.addAttribute("usuario", usuario);
         List<Usuario> usuarios = usuarioRepositorio.findCompetidoresRegistrados(usuario.getUsuario_Id());
+        if (usuarios!=null)
         model.addAttribute("usuarios", usuarios);
         return "buscaCompetidores";
     }
@@ -105,6 +113,13 @@ public class EntrenadorControlador {
         //error, elimina tambien el Rol
         usuarioServicio.eliminarUsuario(id_Competidor);
         return "redirect:/entrenador/buscar";
+    }
+    @GetMapping("calificacion/{email}")
+    private String calificacion(@PathVariable String email,Principal principal,Model modelo){
+        Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
+        Usuario usr = usuarioRepositorio.findByEmail(email);
+        modelo.addAttribute("usuario", usuario);
+        return "calificacionCompetidor";
     }
     @GetMapping("editar/{email}")
     private String editar(@PathVariable("email") String email, Model modelo,
