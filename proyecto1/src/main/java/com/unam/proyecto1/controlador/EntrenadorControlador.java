@@ -1,7 +1,9 @@
 package com.unam.proyecto1.controlador;
 
+import com.unam.proyecto1.modelo.Calificacion;
 import com.unam.proyecto1.modelo.Evento;
 import com.unam.proyecto1.modelo.Usuario;
+import com.unam.proyecto1.repositorio.CalificacionRepositorio;
 import com.unam.proyecto1.repositorio.DisciplinaRepositorio;
 import com.unam.proyecto1.repositorio.EventoRepositorio;
 import com.unam.proyecto1.repositorio.UsuarioRepositorio;
@@ -27,6 +29,8 @@ public class EntrenadorControlador {
     private DisciplinaRepositorio disciplinaRepositorio;
     @Autowired
     private EventoRepositorio eventoRepositorio;
+    @Autowired
+    private CalificacionRepositorio calificacionRepositorio;
 
     @GetMapping("/")
     public String perfil(Model model, Principal principal) {
@@ -118,7 +122,11 @@ public class EntrenadorControlador {
     private String calificacion(@PathVariable String email,Principal principal,Model modelo){
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
         Usuario usr = usuarioRepositorio.findByEmail(email);
+        List<Calificacion> calificaciones = calificacionRepositorio.findByCompetidor(usr);
         modelo.addAttribute("usuario", usuario);
+        modelo.addAttribute("competidor",usr);
+        modelo.addAttribute("calificaciones",calificaciones);
+        modelo.addAttribute("usuarioRepositorio",usuarioRepositorio);
         return "calificacionCompetidor";
     }
     @GetMapping("editar/{email}")

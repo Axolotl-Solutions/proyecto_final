@@ -8,7 +8,6 @@
 
 <section>
     <div class="calificaciones" >
-
         <div class="card profile-card" data-aos="fade-right" data-aos-duration="700">
             <button class="card-menu-btn icon-box" aria-label="More" data-menu-btn>
                 <span class="material-symbols-rounded  icon">more_horiz</span>
@@ -34,7 +33,7 @@
                     <img src="/img/avatar-1.png" alt="" width="48" height="48">
                 </figure>
                 <div>
-                    <p class="card-title">Fernando Gerardo Flores García</p>
+                    <p th:text="${competidor.getNombre()}" class="card-title">Fernando Gerardo Flores García</p>
                     <p class="card-subtitle">Competidor</p>
                 </div>
             </div>
@@ -42,46 +41,36 @@
                 <li>
                     <a class="contact-link icon-box">
                         <span class="material-symbols-rounded  icon">monitor_weight</span>
-                        <p class="text">80 kg</p>
+                        <p th:text="${competidor.getPeso()+ 'kg'}" class="text">80 kg</p>
                     </a>
                 </li>
                 <li>
                     <a class="contact-link icon-box">
                         <span class="material-symbols-rounded  icon">height</span>
-                        <p class="text">174 cm</p>
+                        <p th:text="${competidor.getAltura()+' cm'}" class="text">174 cm</p>
                     </a>
                 </li>
                 <li>
-                    <a class="contact-link icon-box">
-                        <span class="material-symbols-rounded  icon">female</span>
+                    <a th:if="${competidor.getSexo().equals('Masculino')}" class="contact-link icon-box">
+                        <span class="material-symbols-rounded  icon">male</span>
                         <p class="text">Masculino</p>
+                    </a>
+                    <a th:if="${competidor.getSexo().equals('Femenino')}" class="contact-link icon-box">
+                        <span class="material-symbols-rounded  icon">female</span>
+                        <p class="text">Femenino</p>
                     </a>
                 </li>
             </ul>
             <div class="divider card-divider"></div>
             <ul class="progress-list">
-                <li class="progress-item">
+                <li th:each="evento : ${competidor.getEventos()}" class="progress-item">
                     <div class="thumbs">
                         <span class="material-symbols-rounded  icon">star</span>
                     </div>
 
                     <div class="progress-label">
-                        <p class="progress-title">Calificación 100 mts</p>
-                        <data class="progress-data" value="7.5">8.5</data>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress" ></div>
-                    </div>
-                </li>
-
-                <li class="progress-item">
-                    <div class="thumbs">
-                        <span class="material-symbols-rounded  icon">star</span>
-                    </div>
-
-                    <div class="progress-label">
-                        <p class="progress-title">Calificación Taekwondo</p>
-                        <data class="progress-data" value="7.5">6.5</data>
+                        <p th:text="${'Calificación en '+evento.getNombreEvento()}" class="progress-title">Calificación 100 mts</p>
+                        <data class="progress-data">8.5</data>
                     </div>
                     <div class="progress-bar">
                         <div class="progress" ></div>
@@ -98,7 +87,7 @@
                 </div>
                 <div class="divider card-divider"></div>
 
-                <div class="juez-comentario">
+                <div th:each="calificacion : ${calificaciones}" class="juez-comentario">
                     <div class="juez-titulo">
                         <div>
                             <figure class="card-titulo">
@@ -106,48 +95,21 @@
                             </figure>
                         </div>
                         <div>
-                            <p>Alan Romero</p>
+                            <p th:text="${calificacion.getJuez().getNombre()}">Alan Romero</p>
                             <p class="card-subtitle" >Juez</p>
                         </div>
                     </div>
                     <div class="divider card-divider"></div>
                     <div class="juez-calificación">
-                        <p>Calificación: 5.8</p>
+                        <p th:text="${'Calificación: '+calificacion.getPuntaje()}">Calificación: 5.8</p>
                         <span class="material-symbols-rounded  icon">star</span>
+                        <p th:text="${'('+calificacion.getEvento().getNombreEvento()+')'}"></p>
                     </div>
                     <div class="juez-texto">
-                        <p>Esto es un comentario muy largo Esto es un comentario muy largo Esto es un comentario muy largo Esto es un comentario muy largo
-                            Esto es un comentario muy largo Esto es un comentario muy largo Esto es un comentario muy largo Esto es un comentario muy largo
-                            Esto es un comentario muy largo Esto es un comentario muy largo Esto es un comentario muy largo Esto es un comentario muy largo Esto es un comentario muy largo
-                            Esto es un comentario muy largo Esto es un comentario muy largo Esto es un comentario muy largo Esto es un comentario muy largo Esto es un comentario muy largo </p>
+                        <p th:text="${calificacion.getComentario()}"></p>
                     </div>
                 </div>
 
-
-                <div class="juez-comentario" >
-                    <div class="juez-titulo">
-                        <div>
-                            <figure class="card-titulo">
-                                <img src="/img/avatar-1.png" alt="" width="48" height="48">
-                            </figure>
-                        </div>
-                        <div>
-                            <p>Alan Romero</p>
-                            <p class="card-subtitle" >Juez</p>
-                        </div>
-                    </div>
-                    <div class="divider card-divider"></div>
-                    <div class="juez-calificación">
-                        <p>Calificación: 5.8</p>
-                        <span class="material-symbols-rounded  icon">star</span>
-                    </div>
-                    <div class="juez-texto">
-                        <p>Esto es un comentario muy largo Esto es un comentario muy largo Esto es un comentario muy largo Esto es un comentario muy largo
-                            Esto es un comentario muy largo Esto es un comentario muy largo Esto es un comentario muy largo Esto es un comentario muy largo
-                            Esto es un comentario muy largo Esto es un comentario muy largo Esto es un comentario muy largo Esto es un comentario muy largo Esto es un comentario muy largo
-                            Esto es un comentario muy largo Esto es un comentario muy largo Esto es un comentario muy largo Esto es un comentario muy largo Esto es un comentario muy largo </p>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
