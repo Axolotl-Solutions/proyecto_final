@@ -959,7 +959,7 @@ form input[type="submit"]:active{
   --bg:#fc031c;
   height: 100%;
   background: var(--bg, var(--onyx));
-
+  border-radius: var(--radius-6);
 }
 
 .home .card-wrapper {
