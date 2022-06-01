@@ -70,7 +70,7 @@
 
                     <div class="progress-label">
                         <p th:text="${'Calificación en '+evento.getNombreEvento()}" class="progress-title">Calificación 100 mts</p>
-                        <data class="progress-data">8.5</data>
+                        <data th:text="${calificacionesRepositorio.promedioPorEvento(competidor.getUsuario_Id(),evento.getEvento_Id())}" class="progress-data">8.5</data>
                     </div>
                     <div class="progress-bar">
                         <div class="progress" ></div>

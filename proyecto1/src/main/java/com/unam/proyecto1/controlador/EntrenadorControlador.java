@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.sql.Date;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/entrenador")
@@ -126,7 +127,7 @@ public class EntrenadorControlador {
         modelo.addAttribute("usuario", usuario);
         modelo.addAttribute("competidor",usr);
         modelo.addAttribute("calificaciones",calificaciones);
-        modelo.addAttribute("usuarioRepositorio",usuarioRepositorio);
+        modelo.addAttribute("calificacionesRepositorio",calificacionRepositorio);
         return "calificacionCompetidor";
     }
     @GetMapping("editar/{email}")
