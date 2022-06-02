@@ -37,6 +37,7 @@ public class RegistroUsuarioControlador {
                 request.getParameter("apellido_p"),
                 request.getParameter("apellido_m"));
         model.addAttribute("exito", usuario != null);
+        System.out.println("llegué a aquí"+ usuario);
         return "registro";
     }
 

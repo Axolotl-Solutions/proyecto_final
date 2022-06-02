@@ -21,6 +21,8 @@ if(tipoUsuario.innerHTML === "ADMINISTRADOR"){
     document.getElementById("logo-2").href="/inicioAdmin";
 }
 if(tipoUsuario.innerHTML === "ENTRENADOR"){
+    document.getElementById("calificaciones-nav").href="/entrenador/calificaciones";
+    document.getElementById("calificaciones-menu").href="/entrenador/calificaciones";
     document.getElementById("busca-nav").href="/entrenador/buscar";
     document.getElementById("agregar-nav").href="/entrenador/registrar";
     document.getElementById("agregar-menu").href="/entrenador/registrar";
