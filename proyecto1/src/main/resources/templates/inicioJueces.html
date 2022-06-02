@@ -43,7 +43,23 @@
                 </ul>
             </div>
 
+            <div class="card task-card" data-aos="fade-left" data-aos-duration="1000">
+
+                <div class="card-icon icon-box blue">
+                    <span class="material-symbols-rounded  icon">sports_gymnastics</span>
+                </div>
+
+                <div>
+                    <data th:text="${usuario.getDisciplinaJuez().getNombre()}" class="card-data" value="21">9</data>
+
+                    <p class="card-text">Tu disciplina</p>
+                </div>
+
+            </div>
+
+            <!--
             <div class="card-wrapper">
+
 
                 <div class="card task-card" data-aos="fade-left">
 
@@ -52,27 +68,17 @@
                     </div>
 
                     <div>
-                        <data th:text="${numCompetidores}" class="card-data" value="21">15</data>
+                        <data th:text="${eventos.get(0).getNombreEvento()}" class="card-data" value="21">15</data>
 
                         <p class="card-text">Competidores Registrados</p>
                     </div>
 
                 </div>
 
-                <div class="card task-card" data-aos="fade-left" data-aos-duration="1000">
 
-                    <div class="card-icon icon-box blue">
-                        <span class="material-symbols-rounded  icon">sports_gymnastics</span>
-                    </div>
 
-                    <div>
-                        <data th:text="${nDisciplinas}" class="card-data" value="21">9</data>
-
-                        <p class="card-text">Disciplinas distintas entre tus competidores</p>
-                    </div>
-
-                </div>
             </div>
+            -->
         </section>
     </article>
 </main>
