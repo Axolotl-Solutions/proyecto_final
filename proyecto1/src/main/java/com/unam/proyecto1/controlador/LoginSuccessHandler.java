@@ -26,7 +26,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         } else if(detalleUsuario.hasRole("ROLE_ENTRENADOR")){
             redirectUrl = "entrenador/";
         } else if(detalleUsuario.hasRole("ROLE_COMPETIDOR")){
-            redirectUrl = "competidores/";
+            redirectUrl = "usuarios/";
         } else if(detalleUsuario.hasRole("ROLE_JUEZ")){
             redirectUrl = "usuarios/";
         }
