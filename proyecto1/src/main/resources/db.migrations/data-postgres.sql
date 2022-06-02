@@ -39,6 +39,9 @@ VALUES('Adan', 'Ramirez', 'Mora', 'juez@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mn
 
 INSERT INTO Usuario(nombre, apellido_P, apellido_M, email, password, disciplina_juez, enabled)
 VALUES('German', 'Allende', 'Valderrama', 'german@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', 5, 1);
+
+INSERT INTO Usuario(nombre, apellido_P, apellido_M, email, password, fecha_nacimiento, sexo, peso, altura, entrenador_Id, enabled)
+VALUES('Pablo', 'Morales', 'Gallardo', 'pablo@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', '2000-05-17', 'Femenino', 75, 178, 2, 1);
 -- Relacionar usuarios con sus roles
 INSERT INTO Usuarios_Roles(usuario_Id, rol_Id)
 VALUES(1, 1);
@@ -55,6 +58,9 @@ VALUES(4, 4);
 INSERT INTO Usuarios_Roles(usuario_Id, rol_Id)
 VALUES(5, 4);
 
+INSERT INTO Usuarios_Roles(usuario_Id, rol_Id)
+VALUES(6, 3);
+
 -- Insertar eventos, cada uno relacionado con su disciplina
 INSERT INTO Evento(nombre, disciplina_Id, rama, categoria, fecha)
 VALUES('100 metros planos', 7, 'Varonil', '18+ años', '2022-06-15'),
@@ -70,14 +76,16 @@ VALUES('100 metros planos', 7, 'Varonil', '18+ años', '2022-06-15'),
 INSERT INTO Competidores_Eventos(usuario_Id, evento_Id)
 VALUES(3, 1),
       (3, 3),
-      (3, 5);
+      (3, 5),
+      (6, 7);
 
 -- Crear calificaciones, relacionando jueces con eventos con competidores
 INSERT INTO Calificacion(evento_Id, juez_Id, competidor_Id, puntaje, comentario)
 VALUES(1, 4, 3, 8, 'Estuvo chido, pero no tanto, la neta padrino, tu puedes mejorar.'),
       (3, 4, 3, 10, 'Esta actuación fue lo más bonito que he visto en mi vida, ni cuando me casé me emocione tanto.'),
       (5, 5, 3, 2.5, 'Pésima actuación, si yo fuera tu no hubiese venido al chilaquildren'),
-      (3, 5, 3, 9.5, 'Excepcional, pero te falta casí nada para que sea perfecto');
+      (3, 5, 3, 9.5, 'Excepcional, pero te falta casí nada para que sea perfecto'),
+      (7, 5, 6, 4.2, 'Más feo que cuando me engañaron 7 veces seguidas.');
 
 -- CONSULTAS DE PRUEBA
 -- Eventos con sus disciplinas

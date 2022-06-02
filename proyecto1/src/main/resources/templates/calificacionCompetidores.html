@@ -1,0 +1,168 @@
+<html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla.html :: head">
+</head>
+<body>
+<header th:replace="plantillas/plantilla.html :: header">
+</header>
+
+<section th:each="competidor : ${competidores}" >
+  <div class="calificaciones" >
+    <div class="card profile-card" data-aos="fade-right" data-aos-duration="700">
+      <button class="card-menu-btn icon-box" aria-label="More" data-menu-btn>
+        <span class="material-symbols-rounded  icon">more_horiz</span>
+      </button>
+      <ul class="ctx-menu">
+        <li class="ctx-item">
+          <a th:href="@{/entrenador/editar/{id}(id = ${competidor.getEmail()})}" class="ctx-menu-btn icon-box">
+            <span class="material-symbols-rounded  icon" aria-hidden="true">edit</span>
+            <span class="ctx-menu-text">Editar</span>
+          </a>
+        </li>
+        <li class="divider"></li>
+        <li class="ctx-item">
+          <button class="ctx-menu-btn red icon-box" name="eliminar-btn">
+            <span class="material-symbols-rounded  icon" aria-hidden="true">delete</span>
+            <span class="ctx-menu-text">Eliminar</span>
+          </button>
+          <a class="a-href" style="display:none" th:href="@{/entrenador/eliminarc/{id}(id = ${competidor.getUsuario_Id()})}"></a>
+        </li>
+      </ul>
+      <div class="profile-card-wrapper">
+        <figure class="card-avatar">
+          <img src="/img/avatar-1.png" alt="" width="48" height="48">
+        </figure>
+        <div>
+          <p th:text="${competidor.getNombre() +' '+ competidor.getApellido_P()}" class="card-title">Fernando Gerardo Flores García</p>
+          <p class="card-subtitle">Competidor</p>
+        </div>
+      </div>
+      <ul class="contact-list">
+        <li>
+          <a class="contact-link icon-box">
+            <span class="material-symbols-rounded  icon">monitor_weight</span>
+            <p th:text="${competidor.getPeso()+ 'kg'}" class="text">80 kg</p>
+          </a>
+        </li>
+        <li>
+          <a class="contact-link icon-box">
+            <span class="material-symbols-rounded  icon">height</span>
+            <p th:text="${competidor.getAltura()+' cm'}" class="text">174 cm</p>
+          </a>
+        </li>
+        <li>
+          <a th:if="${competidor.getSexo().equals('Masculino')}" class="contact-link icon-box">
+            <span class="material-symbols-rounded  icon">male</span>
+            <p class="text">Masculino</p>
+          </a>
+          <a th:if="${competidor.getSexo().equals('Femenino')}" class="contact-link icon-box">
+            <span class="material-symbols-rounded  icon">female</span>
+            <p class="text">Femenino</p>
+          </a>
+        </li>
+      </ul>
+      <div class="divider card-divider"></div>
+      <ul class="progress-list">
+        <li th:each="evento : ${competidor.getEventos()}" class="progress-item">
+          <div class="thumbs">
+            <span class="material-symbols-rounded  icon">star</span>
+          </div>
+
+          <div class="progress-label">
+            <p th:text="${'Calificación en '+evento.getNombreEvento()+' ('+evento.getDisciplina().getNombre()+')'}" class="progress-title">Calificación 100 mts</p>
+            <data th:text="${calificacionesRepositorio.promedioPorEvento(competidor.getUsuario_Id(),evento.getEvento_Id())}" class="progress-data">8.5</data>
+          </div>
+          <div class="progress-bar">
+            <div class="progress" ></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="comentarios" data-aos="fade-left" data-aos-duration="700">
+      <div class="titulo-comentarios">
+        <div class="titulo-comentario">
+          <p class="comentarios-titulo">Comentarios</p>
+          <span class="material-symbols-rounded  icon" aria-hidden="true">chat</span>
+        </div>
+        <div class="divider card-divider"></div>
+
+        <div th:each="calificacion : ${calificacionesRepositorio.findByCompetidor(competidor)}" class="juez-comentario">
+          <div class="juez-titulo">
+            <div>
+              <figure class="card-titulo">
+                <img src="/img/avatar-1.png" alt="" width="48" height="48">
+              </figure>
+            </div>
+            <div>
+              <p th:text="${calificacion.getJuez().getNombre() + ' '+ calificacion.getJuez().getApellido_P()}">Alan Romero</p>
+              <p class="card-subtitle" >Juez</p>
+            </div>
+          </div>
+          <div class="divider card-divider"></div>
+          <div class="juez-calificación">
+            <p th:text="${'Calificación: '+calificacion.getPuntaje()}">Calificación: 5.8</p>
+            <span class="material-symbols-rounded  icon">star</span>
+            <p th:text="${'('+calificacion.getEvento().getNombreEvento()+' - '+calificacion.getEvento().getDisciplina().getNombre()+')'}"></p>
+          </div>
+          <div class="juez-texto">
+            <p th:text="${calificacion.getComentario()}"></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="divider card-divider" style="background:#cecece;"></div>
+</section>
+
+
+<footer th:replace="plantillas/plantilla.html :: footer">
+</footer>
+<script th:replace="plantillas/plantilla.html :: js">
+</script>
+<script>
+  document.getElementsByClassName("navbar-link")[2].classList.add("active");
+  var eliminar = document.getElementsByName("eliminar-btn");
+  var links = document.getElementsByClassName("a-href");
+  for (let i = 0; i < eliminar.length; i++) {
+   eliminar[i].addEventListener("click", function(){
+
+   Swal.fire({
+     title: '¿Está seguro?',
+     text: "No podrá revertir esta acción.",
+     icon: 'warning',
+     iconColor: 'var(--sw-cancelar)',
+     showCancelButton: true,
+     confirmButtonText: 'Si, eliminar',
+     cancelButtonText: 'No, cancelar',
+     confirmButtonColor:'var(--confirmar-btn)',
+     cancelButtonColor: 'var(--eliminar-btn)',
+     reverseButtons: true
+   }).then((result) => {
+     if (result.isConfirmed) {
+       Swal.fire({
+        title: 'Eliminado',
+        text: "Se elimino correctamente.",
+        icon: 'success',
+        confirmButtonText: '¡Bien!',
+        confirmButtonColor:'var(--confirmar-btn)'
+      })
+       window.setTimeout(function(){
+        window.location.href = links[i].href;
+      }, 500);
+     } else if (result.dismiss === Swal.DismissReason.cancel){
+       Swal.fire({
+        title: 'Cancelado',
+        text: "No se elimino el competidor",
+        icon: 'error',
+        confirmButtonText: '¡Bien!',
+        confirmButtonColor:'var(--confirmar-btn)'
+      })
+     }
+   })
+   });
+  }
+</script>
+</body>
+</html>

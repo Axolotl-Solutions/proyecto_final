@@ -115,9 +115,30 @@ public class EntrenadorControlador {
     }
     @GetMapping("eliminar/{id_Competidor}")
     private String eliminar (@PathVariable("id_Competidor") Integer id_Competidor){
-        //error, elimina tambien el Rol
         usuarioServicio.eliminarUsuario(id_Competidor);
         return "redirect:/entrenador/buscar";
+    }
+    @GetMapping("eliminarc/{id_Competidor}")
+    private String eliminarc (@PathVariable("id_Competidor") Integer id_Competidor){
+        usuarioServicio.eliminarUsuario(id_Competidor);
+        return "redirect:/entrenador/calificaciones";
+    }
+    @RequestMapping("/calificaciones")
+    public String calificaciones(Model modelo, String error, Principal principal) {
+        Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
+        modelo.addAttribute("usuario", usuario);
+        List<Usuario> competidores = usuarioRepositorio.findCompetidoresRegistrados(usuario.getUsuario_Id());
+        if (competidores!=null)
+            modelo.addAttribute("competidores", competidores);
+        modelo.addAttribute("calificacionesRepositorio",calificacionRepositorio);
+        return "calificacionCompetidores";
+    }
+    @RequestMapping("/tabla")
+    public String tabla(Model modelo, String error, Principal principal) {
+        Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
+        modelo.addAttribute("usuario", usuario);
+
+        return "Tabla";
     }
     @GetMapping("calificacion/{email}")
     private String calificacion(@PathVariable String email,Principal principal,Model modelo){
