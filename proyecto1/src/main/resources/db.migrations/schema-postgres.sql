@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS Calificacion(
     evento_Id			INTEGER NOT NULL,
     juez_Id				INTEGER NOT NULL,
     competidor_Id		INTEGER NOT NULL,
-    puntaje				INTEGER NOT NULL,
+    puntaje				DOUBLE PRECISION NOT NULL,
     comentario			VARCHAR(140) NOT NULL
 );
 

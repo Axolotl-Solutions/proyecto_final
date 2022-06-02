@@ -51,6 +51,11 @@
                                         <span class="details">Peso</span>
                                         <input name="altura" type="number" placeholder="Ingresa peso en kg" required>
                                     </div>
+                                    <div class="select">
+                                        <select id="sel" name="eventos">
+                                            <option th:each="evento : ${eventos}" th:value="${evento.getEvento_Id()}" th:text="${evento.getNombreEvento()+' : '+evento.getFecha()+' '+evento.getRama()}"></option>
+                                        </select>
+                                    </div>
                                     <div class="input-box">
                                         <span class="details">Fecha de nacimiento</span>
                                         <input name="fecha" type="date" placeholder="Introduce fecha de nacimiento" required>
@@ -105,10 +110,12 @@
      const tooltip = document.querySelector('#tooltip');
       var ok = true;
       var msg = "Mal perro"
-      console.log("entro aquí");
-      if(f[9].checked==false && f[10].checked==false){
+
+      if(f[10].checked==false && f[11].checked==false){
         ok = false;
+        console.log("entro aquí");
       }
+
       let timer;
       if(ok == false){
         tooltip.classList.add('activo');
@@ -119,8 +126,6 @@
        }
       return ok;
     }
-
-
 </script>
 <script>
    document.getElementsByClassName("navbar-link")[1].classList.add("active");
@@ -131,14 +136,14 @@
               icon: 'error',
               title: 'Error',
               text: 'Este correo ya esta registrado',
-              confirmButtonColor: '#002b7a'
+              confirmButtonColor: 'var(--confirmar-btn)'
             })
     }
     if(exito != null){
         Swal.fire({
               icon: 'success',
               title: 'Agregado correctamente',
-              confirmButtonColor: '#002b7a'
+              confirmButtonColor: 'var(--confirmar-btn)'
             })
     }
    var contra = document.getElementById("contraseña");

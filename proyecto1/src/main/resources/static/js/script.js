@@ -1,6 +1,7 @@
 'use strict';
 
 
+
 /*
 * Redireccionamiento en la barra nav dependiendo de rol
 */
@@ -20,6 +21,10 @@ if(tipoUsuario.innerHTML === "ADMINISTRADOR"){
     document.getElementById("logo-2").href="/inicioAdmin";
 }
 if(tipoUsuario.innerHTML === "ENTRENADOR"){
+    document.getElementById("tabla-nav").href="/entrenador/tabla";
+    document.getElementById("tabla-menu").href="/entrenador/tabla";
+    document.getElementById("calificaciones-nav").href="/entrenador/calificaciones";
+    document.getElementById("calificaciones-menu").href="/entrenador/calificaciones";
     document.getElementById("busca-nav").href="/entrenador/buscar";
     document.getElementById("agregar-nav").href="/entrenador/registrar";
     document.getElementById("agregar-menu").href="/entrenador/registrar";
@@ -97,13 +102,29 @@ let barra = document.getElementsByClassName("progress");
 let pro = document.getElementsByClassName("progress-data");
 for (let i = 0; i < barra.length; i++) {
   var cssA = document.createElement("style");
+  var color = "";
+  if(pro[i].innerHTML*10 <= 20){
+    color="ff0000";
+  }else if(pro[i].innerHTML*10 <= 40){
+    color="ff5900";
+  }else if(pro[i].innerHTML*10 <= 60){
+    color="ff5900";
+  }
+  else if(pro[i].innerHTML*10 <= 80){
+    color="ffd900";
+  }else if(pro[i].innerHTML*10 <= 90){
+    color="d4ff00";
+  }else {
+    color="2fff00";
+  }
+  console.log(color);
   let reglas = document.createTextNode('@-webkit-keyframes slider'+i+'{'+
-  'from { width:0%; }'+
+  'from { width:0%;}'+
   'to { width:'+pro[i].innerHTML*10+'%; }'+
   '}');
   cssA.appendChild(reglas);
   document.getElementsByTagName("head")[0].appendChild(cssA);
-  barra[i].style.cssText += 'animation-name:slider'+i+'; animation-duration: 1.8s;'+'width:'+pro[i].innerHTML*10+'%;';
+  barra[i].style.cssText += 'transition: background 3s; animation-name:slider'+i+';animation-duration: 3.8s;'+'width:'+pro[i].innerHTML*10+'%; background:#'+color+";";
 }
 /*
 Array.prototype.forEach.call(barra, function(e) {

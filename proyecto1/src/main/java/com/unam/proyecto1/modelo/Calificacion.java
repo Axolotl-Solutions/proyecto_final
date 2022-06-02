@@ -26,7 +26,7 @@ public class Calificacion {
     private Usuario competidor;
 
     @Column
-    private Integer puntaje;
+    private Double puntaje;
 
     @Column
     private String comentario;
@@ -63,11 +63,11 @@ public class Calificacion {
         this.competidor = competidor;
     }
 
-    public Integer getPuntaje() {
+    public Double getPuntaje() {
         return puntaje;
     }
 
-    public void setPuntaje(Integer puntaje) {
+    public void setPuntaje(Double puntaje) {
         this.puntaje = puntaje;
     }
 
