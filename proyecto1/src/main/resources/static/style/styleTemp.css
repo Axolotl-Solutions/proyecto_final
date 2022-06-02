@@ -143,6 +143,63 @@ body {
 
 ::-webkit-scrollbar-thumb:hover { background: hsl(0, 0%, 70%); }
 
+
+
+/*********************Tabla posiciones*************************************/
+
+.tabla-posiciones{
+  margin-top: 15px;
+  display:grid;
+  padding: 15px 15px;
+}
+
+/******************Tabla Calificaciones******************************/
+
+
+
+.primeros{
+  display: grid;
+  padding: 25px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap:10px;
+}
+.primeros .task-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.primeros .task-card .card-icon.silver {
+  --background: #dee2e2;
+  --color: #3c4646;
+}
+.primeros .task-card .card-icon.gold {
+  --background: #f7ef8a;
+  --color: #926f34;
+}
+.primeros .task-card .card-icon.bronze {
+  --background: #d0ba8e;
+  --color: #7f6534;
+}
+.primeros .task-card .icon {
+  font-size: 28px;
+  color: var(--color);
+}
+.primeros .task-card .card-icon {
+  background: var(--background);
+  padding: 10px;
+  border-radius: var(--radius-6);
+}
+.primeros .task-card .card-data {
+  color: var(--onyx-2);
+  font-size: var(--fs-3);
+  font-weight: var(--fw-600);
+  margin-bottom: 5px;
+}
+.primeros .task-card .card-text {
+  color: var(--cool-gray);
+  font-size: 17px;
+}
+
 /*Calificaciones*/
 
 .juez-calificación span{

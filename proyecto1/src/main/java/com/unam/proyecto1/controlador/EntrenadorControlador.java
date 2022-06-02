@@ -133,6 +133,13 @@ public class EntrenadorControlador {
         modelo.addAttribute("calificacionesRepositorio",calificacionRepositorio);
         return "calificacionCompetidores";
     }
+    @RequestMapping("/tabla")
+    public String tabla(Model modelo, String error, Principal principal) {
+        Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
+        modelo.addAttribute("usuario", usuario);
+
+        return "Tabla";
+    }
     @GetMapping("calificacion/{email}")
     private String calificacion(@PathVariable String email,Principal principal,Model modelo){
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
