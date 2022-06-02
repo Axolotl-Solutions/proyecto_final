@@ -959,7 +959,7 @@ form input[type="submit"]:active{
   --bg:#fc031c;
   height: 100%;
   background: var(--bg, var(--onyx));
-
+  border-radius: var(--radius-6);
 }
 
 .home .card-wrapper {
@@ -1235,7 +1235,7 @@ form input[type="submit"]:active{
 
 
 
-/*Tabla*/
+/***************************Tabla***************/
 #eliminar{
     background-color: #eb491e;
     border: none;
@@ -1484,7 +1484,6 @@ th {
 @media (min-width: 768px) {
 
   .container { max-width: 700px; }
-
   /**
    * home
    */
@@ -1633,12 +1632,13 @@ th {
   .card-price { --fs-2: 1.780rem; }
 
 }
-
+@media (max-width: 900px){
+  .calificaciones{grid-template-columns: 1fr;grid-template-rows: 300px 300px;}
+}
 /*
 *   Contenido para ventana menos grande que 1200px
 *   (Lo use para la tabla)
 */
-
 @media (max-width: 1200px) {
   table{
     width:100%;
