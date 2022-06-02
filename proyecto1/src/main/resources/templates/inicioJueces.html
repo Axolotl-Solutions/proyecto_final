@@ -84,88 +84,11 @@
         <!-- Tarjetas de eventos y usuarios -->
         <section class="eventos">
 
-            <div class="card" data-aos="zoom-in" data-aos-duration="700">
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-            </div>
-
-            <div class="card" data-aos="zoom-in" data-aos-duration="700">
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-            </div>
-
-            <div class="card" data-aos="zoom-in" data-aos-duration="700">
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-            </div>
-
-            <div class="card" data-aos="zoom-in" data-aos-duration="700">
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-            </div>
-
-            <div class="card" data-aos="zoom-in" data-aos-duration="700">
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-            </div>
-
-            <div class="card" data-aos="zoom-in" data-aos-duration="700">
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-            </div>
-
-            <div class="card" data-aos="zoom-in" data-aos-duration="700">
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-            </div>
-
-            <div class="card" data-aos="zoom-in" data-aos-duration="700">
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-            </div>
-
-            <div class="card" data-aos="zoom-in" data-aos-duration="700">
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-            </div>
-
-            <div class="card" data-aos="zoom-in" data-aos-duration="700">
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-            </div>
-
-            <div class="card" data-aos="zoom-in" data-aos-duration="700">
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-            </div>
-
-            <div class="card" data-aos="zoom-in" data-aos-duration="700">
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-            </div>
-
-            <div class="card" data-aos="zoom-in" data-aos-duration="700">
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-            </div>
-
-            <div class="card" data-aos="zoom-in" data-aos-duration="700">
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
-                <div class="evento_tarjeta"> Hola </div>
+            <div class="card" data-aos="zoom-in" data-aos-duration="700" th:each="evento : ${eventos}">
+                <div class="evento_tarjeta" th:text= "${evento.getNombreEvento()}"> Hola </div>
+                <div class="evento_tarjeta" th:text= "${evento.getDisciplina().getNombre()}"> Hola </div>
+                <div class="evento_tarjeta" th:text= "${evento.getRama()}"> Hola </div>
+                <div class="evento_tarjeta" th:text= "${evento.getCategoria()}"> Hola </div>
             </div>
 
         </section>
