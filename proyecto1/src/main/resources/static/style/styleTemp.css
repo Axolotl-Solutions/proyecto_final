@@ -1689,8 +1689,10 @@ th {
   .card-price { --fs-2: 1.780rem; }
 
 }
+
 @media (max-width: 900px){
   .calificaciones{grid-template-columns: 1fr;grid-template-rows: 300px 300px;}
+  .primeros{grid-template-columns: 1fr;}
 }
 /*
 *   Contenido para ventana menos grande que 1200px
