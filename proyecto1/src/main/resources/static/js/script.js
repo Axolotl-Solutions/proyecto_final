@@ -32,17 +32,17 @@ if(tipoUsuario.innerHTML === "ENTRENADOR"){
     document.getElementById("logo-1").href="/entrenador/";
     document.getElementById("logo-2").href="/entrenador/";
 }
-if(tipoUsuario.innerHTML === "ENTRENADOR"){
-    document.getElementById("tabla-nav").href="/entrenador/tabla";
-    document.getElementById("tabla-menu").href="/entrenador/tabla";
-    document.getElementById("calificaciones-nav").href="/entrenador/calificaciones";
-    document.getElementById("calificaciones-menu").href="/entrenador/calificaciones";
-    document.getElementById("busca-nav").href="/entrenador/buscar";
-    document.getElementById("agregar-nav").href="/entrenador/registrar";
-    document.getElementById("agregar-menu").href="/entrenador/registrar";
-    document.getElementById("inicio-nav").href="/entrenador/";
-    document.getElementById("logo-1").href="/entrenador/";
-    document.getElementById("logo-2").href="/entrenador/";
+if(tipoUsuario.innerHTML === "COMPETIDOR"){
+    document.getElementById("tabla-nav").href="/competidor/tabla";
+    document.getElementById("tabla-menu").href="/competidor/tabla";
+    document.getElementById("calificaciones-nav").href="/competidor/calificaciones";
+    document.getElementById("calificaciones-menu").href="/competidor/calificaciones";
+    document.getElementById("inicio-nav").href="/competidor/";
+    document.getElementById("logo-1").href="/competidor/";
+    document.getElementById("logo-2").href="/competidor/";
+    if(document.URL === 'http://127.0.0.1:8080/competidor/calificaciones'){
+        document.getElementsByClassName("navbar-link")[2].classList.add("active");
+     }
 }
 
 /**
