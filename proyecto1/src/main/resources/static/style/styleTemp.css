@@ -8,6 +8,7 @@
    * colores
    */
    --eliminar-btn: #e73b3b;
+   --axolotl-solutions: #e761c6;
    --eliminar-btn-hover: #f16b6b;
    --editar-btn: #4885d6;
    --confirmar-btn:hsl(144, 62%, 53%);
@@ -1279,7 +1280,7 @@ form input[type="submit"]:active{
   transition: var(--transition);
 }
 
-:is(.footer-link, .copyright-link):is(:hover, :focus) { color: var(--blue-ryb); }
+:is(.footer-link, .copyright-link):is(:hover, :focus) { color: var(--axolotl-solutions); }
 
 .footer-item:not(:last-child)::after {
   content: "-";
