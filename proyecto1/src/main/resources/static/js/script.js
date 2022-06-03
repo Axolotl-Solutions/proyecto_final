@@ -11,12 +11,6 @@ if(tipoUsuario.innerHTML === "ADMINISTRADOR"){
     document.getElementById("agregar-nav").href="/admins";
     document.getElementById("agregar-menu").href="/admins";
     document.getElementById("inicio-nav").href="/inicioAdmin";
-    if(document.URL === 'http://127.0.0.1:8080/admins'){
-        document.getElementsByClassName("navbar-link")[1].classList.add('active');
-    }
-    if(document.URL === 'http://127.0.0.1:8080/inicioAdmin'){
-         document.getElementsByClassName("navbar-link")[0].classList.add('active');
-    }
     document.getElementById("logo-1").href="/inicioAdmin";
     document.getElementById("logo-2").href="/inicioAdmin";
 }
