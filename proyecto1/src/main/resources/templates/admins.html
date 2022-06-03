@@ -161,6 +161,7 @@
 <script th:replace="plantillas/plantilla.html :: js">
 </script>
 <script>
+     document.getElementsByClassName("navbar-link")[1].classList.add('active');
      var select = document.querySelector('#sel')
      var cont = document.getElementsByClassName('cont');
      select.addEventListener('change',function(){

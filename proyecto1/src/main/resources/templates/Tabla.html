@@ -10,15 +10,14 @@
 
     <article class="container article">
         <div data-aos="fade-right" data-aos-duration="1300" class="select">
-            <select id="sel" name="select">
-                <option value="juez">100 mts planos</option>
-                <option value="disciplina">Salto de longitud</option>
+            <select id="sel" name="eventos" >
+                <option value="">Seleccione un evento</option>
+                <option th:each="evento : ${eventos}" th:value="${evento.getEvento_Id()}" th:text="${evento.getNombreEvento()+' : '+evento.getFecha()+' '+evento.getRama()}"></option>
             </select>
         </div>
-
         <div class="divider card-divider"></div>
-
-        <div class="primeros" data-aos="fade-left" data-aos-duration="1000">
+        <h2 data-aos="zoom-out" data-aos-duration="900" class="h2 article-title" th:text="${evento.getNombreEvento()+' - '+evento.getRama()+ ' ('+ evento.getDisciplina().getNombre()+')'}"></h2>
+        <div  class="primeros" data-aos="fade-left" data-aos-duration="1000">
 
             <div class="card task-card" data-aos="fade-left" data-aos-duration="200">
 
@@ -27,7 +26,7 @@
                 </div>
 
                 <div>
-                    <p class="card-text" style="color:#3c4646;">Gonzalo Medina Juarez</p>
+                    <p class="card-text" style="color:#3c4646;" th:text="${segundo}">Gonzalo Medina Juarez</p>
                 </div>
 
             </div>
@@ -39,7 +38,7 @@
                 </div>
 
                 <div>
-                    <p class="card-text" style="color:#926f34;" >Mariano Nuñez Díaz</p>
+                    <p class="card-text" style="color:#926f34;" th:text="${primero}">Mariano Nuñez Díaz</p>
                 </div>
             </div>
 
@@ -50,7 +49,7 @@
                 </div>
 
                 <div>
-                    <p class="card-text" style="color:#7f6534;">Pablo Dominguez Sandoval</p>
+                    <p class="card-text" style="color:#7f6534;" th:text="${tercero}">Pablo Dominguez Sandoval</p>
                 </div>
 
             </div>
@@ -69,35 +68,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td data-title="#Posicion">01</td>
-                    <td data-title="Nombre">Mariano Nuñez Díaz</td>
-                    <td data-title="Evento">100 mts planos</td>
-                    <td data-title="Calificacion">9.5</td>
-                </tr>
-                <tr>
-                    <td data-title="#Posicion">02</td>
-                    <td data-title="Nombre">Gonzalo Medina Juarez</td>
-                    <td data-title="Evento">100 mts planos</td>
-                    <td data-title="Calificacion">9.2</td>
-                </tr>
-                <tr>
-                    <td data-title="#Posicion">03</td>
-                    <td data-title="Nombre">Pablo Dominguez Sandoval</td>
-                    <td data-title="Evento">100 mts planos</td>
-                    <td data-title="Calificacion">9.1</td>
-                </tr>
-                <tr>
-                    <td data-title="#Posicion">04</td>
-                    <td data-title="Nombre">Mariano Nuñez Díaz</td>
-                    <td data-title="Evento">100 mts planos</td>
-                    <td data-title="Calificacion">9.5</td>
-                </tr>
-                <tr>
-                    <td data-title="#Posicion">05</td>
-                    <td data-title="Nombre">Mariano Nuñez Díaz</td>
-                    <td data-title="Evento">100 mts planos</td>
-                    <td data-title="Calificacion">9.5</td>
+                <tr th:each="par,posStat : ${map}">
+                    <td data-title="#Posicion"th:text="${posStat.count}"></td>
+                    <td data-title="Nombre" th:text="${par.key.getNombre()}"></td>
+                    <td data-title="Evento" th:text="${evento.getNombreEvento()}"></td>
+                    <td data-title="Calificacion" th:text="${par.value}"></td>
                 </tr>
                 </tbody>
             </table>
@@ -113,6 +88,12 @@
 </script>
 <script>
   document.getElementsByClassName("navbar-link")[3].classList.add("active");
+  var sel = document.querySelector('#sel')
+  var op = document.getElementsByTagName("option");
+  sel.addEventListener('change',function(){
+       console.log(sel.value);
+       window.location.href = "/entrenador/tabla/"+sel.value;
+  });
 </script>
 </body>
 </html>
