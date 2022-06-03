@@ -32,8 +32,18 @@ if(tipoUsuario.innerHTML === "ENTRENADOR"){
     document.getElementById("logo-1").href="/entrenador/";
     document.getElementById("logo-2").href="/entrenador/";
 }
-
-
+if(tipoUsuario.innerHTML === "ENTRENADOR"){
+    document.getElementById("tabla-nav").href="/entrenador/tabla";
+    document.getElementById("tabla-menu").href="/entrenador/tabla";
+    document.getElementById("calificaciones-nav").href="/entrenador/calificaciones";
+    document.getElementById("calificaciones-menu").href="/entrenador/calificaciones";
+    document.getElementById("busca-nav").href="/entrenador/buscar";
+    document.getElementById("agregar-nav").href="/entrenador/registrar";
+    document.getElementById("agregar-menu").href="/entrenador/registrar";
+    document.getElementById("inicio-nav").href="/entrenador/";
+    document.getElementById("logo-1").href="/entrenador/";
+    document.getElementById("logo-2").href="/entrenador/";
+}
 
 /**
 * Cambiamos al estado activo cuando hacemos clicl en
