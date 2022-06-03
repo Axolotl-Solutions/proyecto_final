@@ -40,7 +40,7 @@ if(tipoUsuario.innerHTML === "COMPETIDOR"){
     document.getElementById("inicio-nav").href="/competidor/";
     document.getElementById("logo-1").href="/competidor/";
     document.getElementById("logo-2").href="/competidor/";
-    if(document.URL === 'http://127.0.0.1:8080/competidor/calificaciones'){
+    if(document.URL.endsWith('/calificaciones')){
         document.getElementsByClassName("navbar-link")[2].classList.add("active");
      }
 }
