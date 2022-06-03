@@ -18,6 +18,8 @@ import java.security.Principal;
 import java.sql.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/competidor")
@@ -58,10 +60,64 @@ public class CompetidorControlador {
     @RequestMapping("/tabla")
     public String tabla(Model modelo, String error, Principal principal) {
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
+        List<Evento> eventos = eventoRepositorio.findAll();
+        if (eventos.size()>0){
+            return "redirect:/competidor/tabla/1";
+        }
+        List<Calificacion> cal = calificacionRepositorio.findAll();
+        List<Usuario> usuarios = usuarioRepositorio.findAll();
         modelo.addAttribute("usuario", usuario);
-
+        modelo.addAttribute("eventos",eventos);
         return "Tabla";
     }
+
+        @GetMapping("tabla/{id}")
+    private String tabla(@PathVariable Integer id,Principal principal,Model modelo){
+        Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
+        Evento e = eventoRepositorio.getById(id);
+        List<Integer> idCompetidores=  calificacionRepositorio.getIdCompetidoresPuntaje(id);
+        Usuario primero,segundo,tercero = null;
+        if (idCompetidores.size()>=3){
+            Usuario usr = usuarioRepositorio.getById(idCompetidores.get(0));
+            Usuario usr1 = usuarioRepositorio.getById(idCompetidores.get(1));
+            Usuario usr2 = usuarioRepositorio.getById(idCompetidores.get(2));
+            modelo.addAttribute("primero",
+                    usr.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
+            modelo.addAttribute("segundo",
+                    usr1.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
+            modelo.addAttribute("tercero",
+                    usr2.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
+        }else if(idCompetidores.size()==2){
+            Usuario usr = usuarioRepositorio.getById(idCompetidores.get(0));
+            Usuario usr1 = usuarioRepositorio.getById(idCompetidores.get(1));
+            modelo.addAttribute("primero",
+                    usr.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
+            modelo.addAttribute("segundo",
+                    usr1.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
+            modelo.addAttribute("tercero","N/E");
+        }else if(idCompetidores.size()==1){
+            Usuario usr = usuarioRepositorio.getById(idCompetidores.get(0));
+            modelo.addAttribute("primero",
+                    usr.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
+            modelo.addAttribute("segundo","N/E");
+            modelo.addAttribute("tercero","N/E");
+        }else{
+            modelo.addAttribute("primero","N/E");
+            modelo.addAttribute("segundo","N/E");
+            modelo.addAttribute("tercero","N/E");
+        }
+        List<Double> calificaciones= calificacionRepositorio.getPuntajePromCompetidores(id);
+        Map<Usuario, Double> map = IntStream.range(0, idCompetidores.size())
+                .boxed()
+                .collect(Collectors.toMap(i -> usuarioRepositorio.getById(idCompetidores.get(i)), i -> calificaciones.get(i)));
+        modelo.addAttribute("map",map);
+        modelo.addAttribute("usuario", usuario);
+        modelo.addAttribute("evento",e);
+        modelo.addAttribute("eventos",eventoRepositorio.findAll());
+        return "Tabla";
+    }
+
+
     @GetMapping("calificacion/{email}")
     private String calificacion(@PathVariable String email,Principal principal,Model modelo){
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
