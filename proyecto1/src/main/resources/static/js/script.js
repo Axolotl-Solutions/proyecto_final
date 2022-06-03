@@ -32,8 +32,18 @@ if(tipoUsuario.innerHTML === "ENTRENADOR"){
     document.getElementById("logo-1").href="/entrenador/";
     document.getElementById("logo-2").href="/entrenador/";
 }
-
-
+if(tipoUsuario.innerHTML === "COMPETIDOR"){
+    document.getElementById("tabla-nav").href="/competidor/tabla";
+    document.getElementById("tabla-menu").href="/competidor/tabla";
+    document.getElementById("calificaciones-nav").href="/competidor/calificaciones";
+    document.getElementById("calificaciones-menu").href="/competidor/calificaciones";
+    document.getElementById("inicio-nav").href="/competidor/";
+    document.getElementById("logo-1").href="/competidor/";
+    document.getElementById("logo-2").href="/competidor/";
+    if(document.URL.endsWith('/calificaciones')){
+        document.getElementsByClassName("navbar-link")[2].classList.add("active");
+     }
+}
 
 /**
 * Cambiamos al estado activo cuando hacemos clicl en
