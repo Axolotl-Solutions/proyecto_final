@@ -25,6 +25,7 @@ public class UsuarioControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
+
     @GetMapping("/")
     public String perfil(Model model,Principal principal) {
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());

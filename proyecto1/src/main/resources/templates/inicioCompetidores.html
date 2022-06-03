@@ -1,8 +1,9 @@
-<html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="plantillas/plantilla.html :: head">
 </head>
 <body>
+
 <header th:replace="plantillas/plantilla.html :: header">
 </header>
 
@@ -26,7 +27,7 @@
                     <div>
                         <p th:text="${usuario.getNombre()+' '+usuario.getApellido_P() + ' ' + usuario.getApellido_M()}" class="card-title">Fernando Gerardo Flores García</p>
 
-                        <p th:text="${usuario.getRol()}"class="card-subtitle">Entrenador</p>
+                        <p th:text="${usuario.getRol()}"class="card-subtitle">Competidor</p>
                     </div>
 
                 </div>
@@ -42,115 +43,56 @@
                 </ul>
             </div>
 
-            
-        </section>
-        <!--       EMPIEZA TABLA ---------->
+            <div class="card-wrapper">
 
-            <!--       TERMINA TABLA ---------->
-            <!--       EMPIEZA TABLA ---------->
-            <section class="tabla">
-                <div class="card" data-aos="zoom-out" data-aos-duration="1200">
-                    <table class="table">
-                        <thead>
-                        <tr class="tabla-t">
-                            <th>#Juez</th>
-                            <th>Comentarios</th>
-                            <th>Puntaje</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="cals : ${calificaciones}">
-                            <td data-aos="zoom-in-right" data-aos-duration="4000" th:text="${cals.getJuez()}" data-title="#Juez" >01</td>
-                            <td data-aos="zoom-in-left" data-aos-duration="4000" th:text= "${cals.getComentario())}" data-title="Comentarios">Fernando Flores</td>
-                            <td data-aos="zoom-in-left" data-aos-duration="4000" th:text= "${cals.getPuntaje())}" data-title="Puntaje obtenido">Fernando Flores</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                <div class="card task-card" data-aos="fade-left">
+
+                    <div class="card-icon icon-box blue">
+                        <span class="material-symbols-rounded  icon">person</span>
+                    </div>
+
+                    <div>
+                        <data th:text="${idcompetidor}" class="card-data" value="21">15</data>
+
+                        <p class="card-text">Número del competidor</p>
+                    </div>
+
                 </div>
-                <!--       TERMINA TABLA ---------->
 
+                <div class="card task-card" data-aos="fade-left" data-aos-duration="1000">
+
+                    <div class="card-icon icon-box blue">
+                        <span class="material-symbols-rounded  icon">sports_gymnastics</span>
+                    </div>
+
+                    <div>
+                        <data th:text="${nDisciplinas}" class="card-data" value="21">9</data>
+
+                        <p class="card-text">Eventos inscritos para competir</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
     </article>
 </main>
-<!--
-<div class="lado">
-    <ul>
-        <li><a href="/inicioAdmin"><span class="perfil"><i class="icon icon-home"></i></span>Perfil</a></li>
-        <li><a href="#"><span class="registrar"><i class="icon icon-home"></i></span>Registrar Disciplina</a></li>
-
-        <li><a href="#Jueces"><span class="registrar"><i class="icon icon-home"></i></span>Registrar Jueces</a></li>
-
-        <li><a href="/buscarDisciplinas"><span class="buscar"><i class="icon icon-home"></i></span>Buscar Disciplinas</a></li>
-
-        <li><a href="/registrarDisciplinas/buscarJueces"><span class="buscar"><i class="icon icon-home"></i></span>Buscar Jueces</a></li>
-    </ul>
-</div>
-<div class="container">
-    <div class="title">Registrar disciplina</div>
-
-
-    <form method="post" action="/admins/creaDisciplina">
-        <div class="user-details">
-            <div class="input-box">
-                <span class="details">Disciplina</span>
-                <input type="text" name="disciplina" placeholder="Introduce la disciplina" required="">
-            </div>
-            <div class="input-box">
-                <span class="details">Categoría</span>
-                <input type="text" name="categoria" placeholder="Introduce la categoría" required="">
-            </div>
-
-
-
-            <div class="input-box">
-                <span class="details">Fecha del evento</span>
-                <input type="date" name="fecha" placeholder="Introduce la fecha del evento" required="">
-            </div>
-
-            <div class="input-box">
-                <span class="details">Nombre</span>
-                <input type="text" name="nombre" placeholder="Introduce el nombre del evento" required="">
-            </div>
-        </div>
-        <div class="sexo-detalles">
-
-
-            <span class="sexo-titulo">Rama</span>
-            <div class="category">
-                <label for="dot-1">
-                    <input type="radio" value="Masculino" name="rama" id="dot-1" required="">
-                    <span class="">
-                        <span class="">Masculino</span>
-                    </span>
-                </label>
-                <label for="dot-2">
-                    <input type="radio" value="Femenil" name="rama" id="dot-2" required="">
-                    <span class="dot two">
-                        <span class="sexo">Femenil</span>
-                    </span>
-                </label>
-
-                <label for="dot-3">
-                    <input type="radio" value="Mixto" name="rama" id="dot-3" required="">
-                    <span class="dot two">
-                        <span class="sexo">Mixto</span>
-                    </span>
-                </label>
-            </div>
-        </div>
-        <div class="button">
-            <input type="submit" value="Registrar">
-
-        </div>
-    </form>
-</div>
--->
 
 <footer th:replace="plantillas/plantilla.html :: footer">
 </footer>
+
 <script th:replace="plantillas/plantilla.html :: js">
 </script>
-
 <script>
     document.getElementsByClassName("navbar-link")[0].classList.add("active");
+    if(tipoUsuario.innerHTML === "COMPETIDOR"){
+    document.getElementById("tabla-nav").href="/competidor/tabla";
+    document.getElementById("tabla-menu").href="/competidor/tabla";
+    document.getElementById("calificaciones-nav").href="/competidor/calificaciones";
+    document.getElementById("calificaciones-menu").href="/competidor/calificaciones";
+    document.getElementById("inicio-nav").href="/competidor/";
+    document.getElementById("logo-1").href="/competidor/";
+    document.getElementById("logo-2").href="/competidor/";
+    }
 </script>
-</body></html>
+</body>
+</html>
