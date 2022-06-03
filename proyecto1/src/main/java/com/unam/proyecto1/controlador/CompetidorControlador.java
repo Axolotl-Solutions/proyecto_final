@@ -47,12 +47,12 @@ public class CompetidorControlador {
     @RequestMapping("/calificaciones")
     public String calificaciones(Model modelo, String error, Principal principal) {
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
+        List<Calificacion> calificaciones = calificacionRepositorio.findByCompetidor(usuario);
         modelo.addAttribute("usuario", usuario);
-        List<Usuario> competidores = usuarioRepositorio.findCompetidoresRegistrados(usuario.getUsuario_Id());
-        if (competidores!=null)
-            modelo.addAttribute("competidores", competidores);
+        modelo.addAttribute("competidor",usuario);
+        modelo.addAttribute("calificaciones",calificaciones);
         modelo.addAttribute("calificacionesRepositorio",calificacionRepositorio);
-        return "calificacionCompetidores";
+        return "calificacionCompetidor";
     }
 
     @RequestMapping("/tabla")
