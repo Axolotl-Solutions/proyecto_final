@@ -106,11 +106,7 @@ public class CompetidorControlador {
             modelo.addAttribute("segundo","N/E");
             modelo.addAttribute("tercero","N/E");
         }
-        List<Double> calificaciones= calificacionRepositorio.getPuntajePromCompetidores(id);
-        Map<Usuario, Double> map = IntStream.range(0, idCompetidores.size())
-                .boxed()
-                .collect(Collectors.toMap(i -> usuarioRepositorio.getById(idCompetidores.get(i)), i -> calificaciones.get(i)));
-        modelo.addAttribute("map",map);
+        modelo.addAttribute("calificacionRepositorio",calificacionRepositorio);
         modelo.addAttribute("usuario", usuario);
         modelo.addAttribute("evento",e);
         modelo.addAttribute("eventos",eventoRepositorio.findAll());
