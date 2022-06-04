@@ -153,16 +153,16 @@ public class EntrenadorControlador {
             modelo.addAttribute("primero",
                     usr.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
             modelo.addAttribute("segundo",
-                    usr1.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
+                    usr1.getNombre() +" "+ usr1.getApellido_P()+" "+usr1.getApellido_M());
             modelo.addAttribute("tercero",
-                    usr2.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
+                    usr2.getNombre() +" "+ usr2.getApellido_P()+" "+usr2.getApellido_M());
         }else if(idCompetidores.size()==2){
             Usuario usr = usuarioRepositorio.getById(idCompetidores.get(0));
             Usuario usr1 = usuarioRepositorio.getById(idCompetidores.get(1));
             modelo.addAttribute("primero",
                     usr.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
             modelo.addAttribute("segundo",
-                    usr1.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
+                    usr1.getNombre() +" "+ usr1.getApellido_P()+" "+usr1.getApellido_M());
             modelo.addAttribute("tercero","N/E");
         }else if(idCompetidores.size()==1){
             Usuario usr = usuarioRepositorio.getById(idCompetidores.get(0));
