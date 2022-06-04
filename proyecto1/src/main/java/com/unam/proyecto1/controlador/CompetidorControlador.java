@@ -81,36 +81,36 @@ public class CompetidorControlador {
         for (Integer i: idCompetidores) {
             competidores.add(usuarioRepositorio.getById(i));
         }
-        Usuario primero,segundo,tercero = null;
-        if (idCompetidores.size()>=3){
-            Usuario usr = usuarioRepositorio.getById(idCompetidores.get(0));
-            Usuario usr1 = usuarioRepositorio.getById(idCompetidores.get(1));
-            Usuario usr2 = usuarioRepositorio.getById(idCompetidores.get(2));
-            modelo.addAttribute("primero",
-                    usr.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
-            modelo.addAttribute("segundo",
-                    usr1.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
-            modelo.addAttribute("tercero",
-                    usr2.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
-        }else if(idCompetidores.size()==2){
-            Usuario usr = usuarioRepositorio.getById(idCompetidores.get(0));
-            Usuario usr1 = usuarioRepositorio.getById(idCompetidores.get(1));
-            modelo.addAttribute("primero",
-                    usr.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
-            modelo.addAttribute("segundo",
-                    usr1.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
-            modelo.addAttribute("tercero","N/E");
-        }else if(idCompetidores.size()==1){
-            Usuario usr = usuarioRepositorio.getById(idCompetidores.get(0));
-            modelo.addAttribute("primero",
-                    usr.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
-            modelo.addAttribute("segundo","N/E");
-            modelo.addAttribute("tercero","N/E");
-        }else{
-            modelo.addAttribute("primero","N/E");
-            modelo.addAttribute("segundo","N/E");
-            modelo.addAttribute("tercero","N/E");
-        }
+            Usuario primero,segundo,tercero = null;
+            if (idCompetidores.size()>=3){
+                Usuario usr = usuarioRepositorio.getById(idCompetidores.get(0));
+                Usuario usr1 = usuarioRepositorio.getById(idCompetidores.get(1));
+                Usuario usr2 = usuarioRepositorio.getById(idCompetidores.get(2));
+                modelo.addAttribute("primero",
+                        usr.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
+                modelo.addAttribute("segundo",
+                        usr1.getNombre() +" "+ usr1.getApellido_P()+" "+usr1.getApellido_M());
+                modelo.addAttribute("tercero",
+                        usr2.getNombre() +" "+ usr2.getApellido_P()+" "+usr2.getApellido_M());
+            }else if(idCompetidores.size()==2){
+                Usuario usr = usuarioRepositorio.getById(idCompetidores.get(0));
+                Usuario usr1 = usuarioRepositorio.getById(idCompetidores.get(1));
+                modelo.addAttribute("primero",
+                        usr.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
+                modelo.addAttribute("segundo",
+                        usr1.getNombre() +" "+ usr1.getApellido_P()+" "+usr1.getApellido_M());
+                modelo.addAttribute("tercero","N/E");
+            }else if(idCompetidores.size()==1){
+                Usuario usr = usuarioRepositorio.getById(idCompetidores.get(0));
+                modelo.addAttribute("primero",
+                        usr.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
+                modelo.addAttribute("segundo","N/E");
+                modelo.addAttribute("tercero","N/E");
+            }else{
+                modelo.addAttribute("primero","N/E");
+                modelo.addAttribute("segundo","N/E");
+                modelo.addAttribute("tercero","N/E");
+            }
         modelo.addAttribute("calificacionRepositorio",calificacionRepositorio);
         modelo.addAttribute("competidores",competidores);
         modelo.addAttribute("usuario", usuario);
