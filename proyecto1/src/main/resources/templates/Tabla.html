@@ -7,16 +7,15 @@
 </header>
 
 <main>
-
     <article class="container article">
+        <h2 data-aos="zoom-out" data-aos-duration="900" class="h2 article-title" th:text="${evento.getNombreEvento()+' - '+evento.getRama()+ ' ('+ evento.getDisciplina().getNombre()+')'}"></h2>
         <div data-aos="fade-right" data-aos-duration="1300" class="select">
             <select id="sel" name="eventos" >
                 <option value="">Seleccione un evento</option>
                 <option th:each="evento : ${eventos}" th:value="${evento.getEvento_Id()}" th:text="${evento.getNombreEvento()+' : '+evento.getFecha()+' '+evento.getRama()}"></option>
             </select>
         </div>
-        <div class="divider card-divider"></div>
-        <h2 data-aos="zoom-out" data-aos-duration="900" class="h2 article-title" th:text="${evento.getNombreEvento()+' - '+evento.getRama()+ ' ('+ evento.getDisciplina().getNombre()+')'}"></h2>
+
         <div  class="primeros" data-aos="fade-left" data-aos-duration="1000">
 
             <div class="card task-card" data-aos="fade-left" data-aos-duration="200">
@@ -68,11 +67,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="par,posStat : ${map}">
+                <tr th:each="competidor,posStat : ${competidores}">
                     <td data-title="#Posicion"th:text="${posStat.count}"></td>
-                    <td data-title="Nombre" th:text="${par.key.getNombre()}"></td>
-                    <td data-title="Evento" th:text="${evento.getNombreEvento()}"></td>
-                    <td data-title="Calificacion" th:text="${par.value}"></td>
+                    <td data-title="Nombre" th:text="${competidor.getNombre()+' '+competidor.getApellido_P()+' '+competidor.getApellido_M()}"></td>
+                    <td data-title="Evento" th:text="${evento.getNombreEvento()+' ('+evento.getDisciplina().getNombre()+')'}"></td>
+                    <td data-title="Calificacion" th:text="${calificacionRepositorio.promedioPorEvento(competidor.getUsuario_Id(),evento.getEvento_Id())}"></td>
                 </tr>
                 </tbody>
             </table>

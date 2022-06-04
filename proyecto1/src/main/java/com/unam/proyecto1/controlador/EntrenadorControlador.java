@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -140,6 +141,10 @@ public class EntrenadorControlador {
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
         Evento e = eventoRepositorio.getById(id);
         List<Integer> idCompetidores=  calificacionRepositorio.getIdCompetidoresPuntaje(id);
+        List<Usuario> competidores = new ArrayList<>();
+        for (Integer i: idCompetidores) {
+            competidores.add(usuarioRepositorio.getById(i));
+        }
         Usuario primero,segundo,tercero = null;
         if (idCompetidores.size()>=3){
             Usuario usr = usuarioRepositorio.getById(idCompetidores.get(0));
@@ -170,11 +175,8 @@ public class EntrenadorControlador {
             modelo.addAttribute("segundo","N/E");
             modelo.addAttribute("tercero","N/E");
         }
-        List<Double> calificaciones= calificacionRepositorio.getPuntajePromCompetidores(id);
-        Map<Usuario, Double> map = IntStream.range(0, idCompetidores.size())
-                .boxed()
-                .collect(Collectors.toMap(i -> usuarioRepositorio.getById(idCompetidores.get(i)), i -> calificaciones.get(i)));
-        modelo.addAttribute("map",map);
+        modelo.addAttribute("competidores",competidores);
+        modelo.addAttribute("calificacionRepositorio",calificacionRepositorio);
         modelo.addAttribute("usuario", usuario);
         modelo.addAttribute("evento",e);
         modelo.addAttribute("eventos",eventoRepositorio.findAll());
