@@ -26,7 +26,7 @@
                     <div>
                         <p th:text="${usuario.getNombre()+' '+usuario.getApellido_P() + ' ' + usuario.getApellido_M()}" class="card-title">Fernando Gerardo Flores García</p>
 
-                        <p th:text="${usuario.getRol()}"class="card-subtitle">Entrenador</p>
+                        <p th:text="${usuario.getRol()}" class="card-subtitle">Entrenador</p>
                     </div>
 
                 </div>
@@ -89,7 +89,7 @@
                     <tr th:each="usr : ${usuarios}">
                         <td data-aos="zoom-in-right" data-aos-duration="4000" th:text="${usr.getUsuario_Id()}" data-title="#Competidor" >01</td>
                         <td data-aos="zoom-in-left" data-aos-duration="4000" th:text= "${usr.getNombre()+' '+usr.getApellido_P() + ' ' + usr.getApellido_M()}" data-title="Nombre">Fernando Flores</td>
-                        <td data-aos="zoom-in-right" data-aos-duration="4000"th:text="${usr.getEmail()}" data-title="Correo">fernandondin@ciencias.unam.mx</td>
+                        <td data-aos="zoom-in-right" data-aos-duration="4000" th:text="${usr.getEmail()}" data-title="Correo">fernandondin@ciencias.unam.mx</td>
                         <td data-aos="zoom-in-left" data-aos-duration="4000" data-title="Rol">
                             <p th:text="${usr.getRol().toLowerCase()}" class ="rol-usuario">Admin</p>
                         </td>
@@ -116,8 +116,9 @@
                         </tbody>
                     </table>
                 </div>
+            </section>
+        </section>
                 <!--       TERMINA TABLA ---------->
-
     </article>
 </main>
 <!--
