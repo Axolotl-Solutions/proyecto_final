@@ -77,7 +77,9 @@ INSERT INTO Competidores_Eventos(usuario_Id, evento_Id)
 VALUES(3, 1),
       (3, 3),
       (3, 5),
-      (6, 7);
+      (6, 7),
+      (6, 1),
+      (6, 3);
 
 -- Crear calificaciones, relacionando jueces con eventos con competidores
 INSERT INTO Calificacion(evento_Id, juez_Id, competidor_Id, puntaje, comentario)
@@ -85,7 +87,9 @@ VALUES(1, 4, 3, 8, 'Estuvo chido, pero no tanto, la neta padrino, tu puedes mejo
       (3, 4, 3, 10, 'Esta actuación fue lo más bonito que he visto en mi vida, ni cuando me casé me emocione tanto.'),
       (5, 5, 3, 2.5, 'Pésima actuación, si yo fuera tu no hubiese venido al chilaquildren'),
       (3, 5, 3, 9.5, 'Excepcional, pero te falta casí nada para que sea perfecto'),
-      (7, 5, 6, 4.2, 'Más feo que cuando me engañaron 7 veces seguidas.');
+      (7, 5, 6, 4.2, 'Más feo que cuando me engañaron 7 veces seguidas.'),
+      (1, 4, 6, 9, 'Bonito bonito, que bonito es lo bonito'),
+      (3, 4, 6, 5, 'feo feo, que feo es lo feo');
 
 -- CONSULTAS DE PRUEBA
 -- Eventos con sus disciplinas
