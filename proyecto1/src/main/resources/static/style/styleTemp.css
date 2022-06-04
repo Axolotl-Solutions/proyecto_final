@@ -1173,6 +1173,18 @@ form input[type="submit"]:active{
 .card-avatar-item:not(:first-child) { margin-left: -15px; }
 
 
+/**************** Eventos ****************/
+.eventos {
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 25px;
+}
+
+.evento_tarjeta {
+    display: grid;
+    gap: 15px;
+}
 
 
 

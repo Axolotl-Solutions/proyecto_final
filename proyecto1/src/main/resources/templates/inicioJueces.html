@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla.html :: head">
+</head>
+<body>
+
+<header th:replace="plantillas/plantilla.html :: header">
+</header>
+
+<main>
+    <article class="container article">
+
+        <h2 data-aos="zoom-out" data-aos-duration="900" class="h2 article-title" th:text="${'Hola '+usuario.getNombre()+' '+usuario.getApellido_P() + ' ' + usuario.getApellido_M()}"></h2>
+
+        <p data-aos="fade-right" data-aos-duration="800" class="article-subtitle">¡Bienvenido al Sistema Univeritario de Olimpiadas!</p>
+
+        <section class="home">
+
+            <div class="card profile-card" data-aos="fade-right" data-aos-duration="700">
+
+                <div class="profile-card-wrapper">
+
+                    <figure class="card-avatar">
+                        <img src="/img/avatar-1.png" alt="Elizabeth Foster" width="48" height="48">
+                    </figure>
+
+                    <div>
+                        <p th:text="${usuario.getNombre()+' '+usuario.getApellido_P() + ' ' + usuario.getApellido_M()}" class="card-title">Fernando Gerardo Flores García</p>
+
+                        <p th:text="${usuario.getRol()}"class="card-subtitle">Entrenador</p>
+                    </div>
+
+                </div>
+                <div class="divider card-divider"></div>
+                <ul class="contact-list">
+                    <li>
+                        <a th:href="${'mailto:'+usuario.getEmail()}" class="contact-link icon-box">
+                            <span class="material-symbols-rounded  icon">mail</span>
+
+                            <p th:text="${usuario.getEmail()}" class="text">fernandondin@ciencias.unam.mx</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card task-card" data-aos="fade-left" data-aos-duration="1000">
+
+                <div class="card-icon icon-box blue">
+                    <span class="material-symbols-rounded  icon">sports_gymnastics</span>
+                </div>
+
+                <div>
+                    <data th:text="${usuario.getDisciplinaJuez().getNombre()}" class="card-data" value="21">9</data>
+
+                    <p class="card-text">Tu disciplina</p>
+                </div>
+
+            </div>
+
+            <!--
+            <div class="card-wrapper">
+
+
+                <div class="card task-card" data-aos="fade-left">
+
+                    <div class="card-icon icon-box blue">
+                        <span class="material-symbols-rounded  icon">person</span>
+                    </div>
+
+                    <div>
+                        <data th:text="${eventos.get(0).getNombreEvento()}" class="card-data" value="21">15</data>
+
+                        <p class="card-text">Competidores Registrados</p>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+            -->
+        </section>
+
+        <!-- Tarjetas de eventos y usuarios -->
+        <section class="eventos">
+
+            <div class="card" data-aos="zoom-in" data-aos-duration="700" th:each="evento : ${eventos}">
+                <div class="evento_tarjeta" th:text= "${evento.getNombreEvento()}"> Hola </div>
+                <div class="evento_tarjeta" th:text= "${evento.getDisciplina().getNombre()}"> Hola </div>
+                <div class="evento_tarjeta" th:text= "${evento.getRama()}"> Hola </div>
+                <div class="evento_tarjeta" th:text= "${evento.getCategoria()}"> Hola </div>
+            </div>
+
+        </section>
+
+
+
+    </article>
+</main>
+
+<footer th:replace="plantillas/plantilla.html :: footer">
+</footer>
+
+<script th:replace="plantillas/plantilla.html :: js">
+</script>
+<script>
+    document.getElementsByClassName("navbar-link")[0].classList.add("active");
+</script>
+</body>
+</html>

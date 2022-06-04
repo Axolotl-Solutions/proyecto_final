@@ -26,6 +26,9 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, Integer> {
     Integer cuentaEventosCompetidor(@Param("id") Integer id);
 
 
+    @Query(nativeQuery = true, value = "select * from usuario natural join competidores_eventos where evento_Id = :id")
+    List<Usuario> findCompetidoresByEvento(@Param("id")Integer id);
+
     /*
     SELECT  FK_OrgId, COUNT(DISTINCT FK_UserId)
     FROM    TableName
