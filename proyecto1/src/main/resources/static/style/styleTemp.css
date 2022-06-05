@@ -144,7 +144,20 @@ body {
 
 ::-webkit-scrollbar-thumb:hover { background: hsl(0, 0%, 70%); }
 
-
+/***********************Error**********************************/
+.imagen{
+  margin:10px auto;
+  padding:13px;
+  width:700px;
+  height:500px;
+  background-size: 100% 100%;
+  background-repeat:no-repeat;
+  background:url(/img/404.svg);
+  background-size: cover;
+}
+.imagen img{
+  width: 100%;
+}
 /*********************Tabla posiciones*************************************/
 
 .tabla-posiciones{
