@@ -40,12 +40,10 @@ public class JuezControlador {
         return "inicioJueces";
     }
 
-    @GetMapping("calificacion/{idCalificacion}")
+    @GetMapping("/calificacion/{idCalificacion}")
     private String calificacion(@PathVariable Integer idCalificacion, Principal principal, Model modelo) {
-
         Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
         Calificacion calificacion = calificacionRepositorio.findByCalificacionId(idCalificacion);
-
         modelo.addAttribute("usuario", usuario);
         modelo.addAttribute("calificacion", calificacion);
         modelo.addAttribute("calificacionesRepositorio", calificacionRepositorio);
