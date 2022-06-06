@@ -66,8 +66,10 @@ public class AdminControlador {
         Date fecha = Date.valueOf(fechaString);
         String nombreDisciplina = request.getParameter("nombreDisciplina");
         Evento evento = eventoServicio.creaEvento(nombreEvento, nombreDisciplina, rama, categoria, fecha);
-        model.addAttribute("exito", evento != null);
+        model.addAttribute("exito", true);
         Usuario usuarioActual =  usuarioRepositorio.findByEmail(principal.getName());
+        List<Disciplina> disciplinas = disciplinaRepositorio.findAll();
+        model.addAttribute("disciplinas",disciplinas);
         model.addAttribute("usuario", usuarioActual);
         return "admins";
     }
@@ -81,8 +83,13 @@ public class AdminControlador {
         String apellidoMJuez = request.getParameter("apellidoMJuez");
         String nombreDisciplinaJuez = request.getParameter("nombreDisciplinaJuez");
         Usuario nuevoJuez = usuarioServicio.creaUsuarioJuez(emailJuez, passwordJuez, nombreJuez, apellidoPJuez, apellidoMJuez, nombreDisciplinaJuez);
-        model.addAttribute("exito", nuevoJuez != null);
+        if(nuevoJuez==null)
+            model.addAttribute("error", true);
+        else
+            model.addAttribute("exito",true);
         Usuario usuarioActual =  usuarioRepositorio.findByEmail(principal.getName());
+        List<Disciplina> disciplinas = disciplinaRepositorio.findAll();
+        model.addAttribute("disciplinas",disciplinas);
         model.addAttribute("usuario", usuarioActual);
         return "admins";
     }

@@ -48,7 +48,7 @@
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Contraseña</span>
-                                        <input type="password" id="passwordJuez" name="passwordJuez" placeholder="Introduce la contraseña" required>
+                                        <input type="password" id="contraseña" name="passwordJuez" placeholder="Introduce la contraseña" required>
                                     </div>
                                     <div>
                                         <span class="details">Disciplina</span>
@@ -152,10 +152,43 @@
 
     </article>
 </main>
-
+<div id="exito" th:if="${exito}" style="display:none;">
+</div>
+<div id="error" th:if="${error}" style="display:none;">
+</div>
 <footer th:replace="plantillas/plantilla.html :: footer">
 </footer>
 <script th:replace="plantillas/plantilla.html :: js">
+</script>
+<script>
+    var exito = document.getElementById('exito');
+    var erro = document.getElementById('error');
+    if(exito!=null){
+        Swal.fire({
+              icon: 'success',
+              title: 'Agregado correctamente',
+              confirmButtonColor: 'var(--confirmar-btn)'
+            })
+    }
+    if(erro != null){
+        Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Este correo ya esta registrado',
+              confirmButtonColor: 'var(--confirmar-btn)'
+            })
+    }
+   var contra = document.getElementById("contraseña");
+   var confirmaContra = document.getElementById("confirma-contraseña");
+    function validaContra(){
+      if(contra.value != confirmaContra.value) {
+        confirmaContra.setCustomValidity("Las contraseñas no coinciden");
+      } else {
+        confirmaContra.setCustomValidity('');
+      }
+    }
+    contra.onchange = validaContra;
+    confirmaContra.onkeyup = validaContra;
 </script>
 <script>
     function valida(f) {
