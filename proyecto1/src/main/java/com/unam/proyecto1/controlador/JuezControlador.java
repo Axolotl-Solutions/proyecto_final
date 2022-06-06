@@ -46,6 +46,7 @@ public class JuezControlador {
         Calificacion calificacion = calificacionRepositorio.findByCalificacionId(idCalificacion);
         modelo.addAttribute("usuario", usuario);
         modelo.addAttribute("calificacion", calificacion);
+        System.out.println(calificacion);
         modelo.addAttribute("calificacionesRepositorio", calificacionRepositorio);
         return "calificacionCompetidorJuez";
     }
