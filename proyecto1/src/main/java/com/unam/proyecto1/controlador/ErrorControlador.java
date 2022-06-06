@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.security.Principal;
 
 @Controller
-public class ErrorControlador implements ErrorController {
+public class ErrorControlador /*implements ErrorController*/ {
+    /*
     @Autowired
     private UsuarioRepositorio usuarioRepositorio;
 
@@ -21,4 +22,5 @@ public class ErrorControlador implements ErrorController {
         model.addAttribute("usuario", usuario);
         return "error";
     }
+    */
 }

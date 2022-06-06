@@ -41,7 +41,7 @@ INSERT INTO Usuario(nombre, apellido_P, apellido_M, email, password, disciplina_
 VALUES('German', 'Allende', 'Valderrama', 'german@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', 5, 1);
 
 INSERT INTO Usuario(nombre, apellido_P, apellido_M, email, password, fecha_nacimiento, sexo, peso, altura, entrenador_Id, enabled)
-VALUES('Pablo', 'Morales', 'Gallardo', 'pablo@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', '2000-05-17', 'Femenino', 75, 178, 2, 1);
+VALUES('Pablo', 'Morales', 'Gallardo', 'pablo@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', '2000-05-17', 'Masculino', 75, 178, 2, 1);
 -- Relacionar usuarios con sus roles
 INSERT INTO Usuarios_Roles(usuario_Id, rol_Id)
 VALUES(1, 1);
