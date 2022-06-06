@@ -36,6 +36,7 @@ public class JuezControlador {
             List<Usuario> usuariosEvento = usuarioRepositorio.findCompetidoresByEvento(evento.getEvento_Id());
             usuariosPorEvento.add(usuariosEvento);
         }
+        model.addAttribute("disciplina",disciplinaJuez.getNombre());
         model.addAttribute("eventos", eventos);
         model.addAttribute("usuariosPorEvento", usuariosPorEvento);
         return "inicioJueces";
