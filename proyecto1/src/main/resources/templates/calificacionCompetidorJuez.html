@@ -11,7 +11,7 @@
         <div class="comentarios" data-aos="fade-left" data-aos-duration="700">
             <div class="titulo-comentarios">
                 <div class="titulo-comentario">
-                    <p class="comentarios-titulo">Comentarios</p>
+                    <p class="comentarios-titulo">Calificación</p>
                     <span class="material-symbols-rounded  icon" aria-hidden="true">chat</span>
                 </div>
                 <div class="divider card-divider"></div>
@@ -24,7 +24,7 @@
                             </figure>
                         </div>
                         <div>
-                            <p th:text="${calificacion.getJuez().getNombre() + ' '+ calificacion.getJuez().getApellido_P()}">Alan Romero</p>
+                            <p th:text="${calificacion.getCompetidor().getNombre() + ' '+ calificacion.getCompetidor().getApellido_P()}">Alan Romero</p>
                             <p class="card-subtitle" >Juez</p>
                         </div>
                     </div>

@@ -16,7 +16,7 @@ import java.security.Principal;
 import java.util.List;
 
 @Controller
-@RequestMapping("/jueces")
+@RequestMapping("/juez")
 public class JuezControlador {
 
     @Autowired
@@ -44,7 +44,7 @@ public class JuezControlador {
     private String calificacion(@PathVariable Integer idCalificacion, Principal principal, Model modelo) {
 
         Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
-        Calificacion calificacion = calificacionRepositorio.findByCalificacionId(idCalificacion);
+        Calificacion calificacion = calificacionRepositorio.getById(idCalificacion);
 
         modelo.addAttribute("usuario", usuario);
         modelo.addAttribute("calificacion", calificacion);
