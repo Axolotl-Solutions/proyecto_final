@@ -8,7 +8,7 @@
 
 <section style="margin-top:30px;">
     <div style="margin-left:30px;display:flex;align-items:center;gap:15px;">
-        <form method="get" style="display:flex;gap:5px;" th:action="@{/entrenador/agregarEvento/{idC}(idC = ${competidor.getUsuario_Id()})}">
+        <form method="get" style="display:flex;gap:10px;" th:action="@{/entrenador/agregarEvento/{idC}(idC = ${competidor.getUsuario_Id()})}">
             <div data-aos="fade-right" data-aos-duration="1300" class="select">
                 <select id="sel" name="eventos" >
                     <option th:each="evento : ${eventosAll}" th:value="${evento.getEvento_Id()}" th:text="${evento.getNombreEvento()+' : '+evento.getFecha()+' '+evento.getRama()}"></option>
@@ -16,7 +16,6 @@
             </div>
             <button type="submit" data-aos="fade-left" data-aos-duration="1300" class="inscribir">
                 <span class="material-symbols-rounded  icon">add_circle</span>
-                Inscribir
             </button>
         </form>
     </div>
