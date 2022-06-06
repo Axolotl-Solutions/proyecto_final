@@ -8,6 +8,7 @@ import com.unam.proyecto1.repositorio.DisciplinaRepositorio;
 import com.unam.proyecto1.repositorio.EventoRepositorio;
 import com.unam.proyecto1.repositorio.UsuarioRepositorio;
 import com.unam.proyecto1.servicio.UsuarioServicio;
+import jdk.jfr.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +19,7 @@ import java.security.Principal;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/entrenador")
@@ -53,6 +52,57 @@ public class EntrenadorControlador {
         model.addAttribute("usuario", usuario);
         model.addAttribute("eventos", eventos);
         return "registraCompetidor";
+    }
+    @GetMapping("agregarEvento/{idC}")
+    private String agregarEvento (@PathVariable("idC") Integer idC,Principal principal,HttpServletRequest request, Model model){
+        Usuario competidor = usuarioRepositorio.getById(idC);
+        Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
+        Evento evento = eventoRepositorio.getById(Integer.valueOf(request.getParameter("eventos")));
+        List<Evento> eventosAll = eventoRepositorio.findAll();
+        Set<Evento> eventos = competidor.getEventos();
+        String sexo = evento.getRama().equals("Femenil")? "Femenino":"Masculino";
+        sexo = evento.getRama().equals("Mixto")?competidor.getSexo():sexo;
+        if(!competidor.hasEvento(evento) && sexo.equals(competidor.getSexo())) {
+            competidor.getEventos().add(evento);
+        }else{
+            model.addAttribute("error",true);
+        }
+        usuarioServicio.actualizarUsuario(competidor);
+        model.addAttribute("usuario",usuario);
+        model.addAttribute("competidor",competidor);
+        model.addAttribute("eventos",eventos);
+        model.addAttribute("eventosAll",eventosAll);
+        model.addAttribute("calificacionRepositorio",calificacionRepositorio);
+        return "eventosCompetidor";
+    }
+    @GetMapping("eliminarEvento/{idC}/{idE}")
+    private String eliminarEvento (@PathVariable("idC") Integer idC, @PathVariable("idE") Integer idE){
+        Usuario competidor = usuarioRepositorio.getById(idC);
+        Evento evento = eventoRepositorio.getById(idE);
+        System.out.println(evento+ " A eliminar");
+        System.out.println(competidor.getNombre()+" NOMBRE");
+        System.out.println(competidor.getEventos());
+        competidor.getEventos().remove(eventoRepositorio.getById(idE));
+        System.out.println(competidor.getEventos());
+        usuarioServicio.actualizarUsuario(competidor);
+        return "redirect:/entrenador/editarEventos/"+competidor.getEmail();
+    }
+    @GetMapping("/editarEventos/{email}")
+    public String editaEvento(@PathVariable String email,@ModelAttribute Usuario competidor,
+                        HttpServletRequest request,Principal principal,
+                        Model model){
+        List<Evento> eventosAll = eventoRepositorio.findAll();
+        Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
+        Usuario comp = usuarioRepositorio.findByEmail(email);
+        Set<Evento> eventos = competidor.getEventos();
+        System.out.println(request.getParameter("email"));
+        model.addAttribute("usuario",usuario);
+        model.addAttribute("competidor",comp);
+        model.addAttribute("eventos",eventos);
+        model.addAttribute("eventosAll",eventosAll);
+        model.addAttribute("calificacionRepositorio",calificacionRepositorio);
+        System.out.println("Entre aquí");
+        return "eventosCompetidor";
     }
     @PostMapping("/edita/{id}")
     public String edita(@PathVariable Integer id,@ModelAttribute Usuario competidor,
@@ -90,21 +140,30 @@ public class EntrenadorControlador {
         model.addAttribute("usuario", usuarioActual);
         Date fecha = Date.valueOf(request.getParameter("fecha"));
         System.out.println(request.getParameter("eventos")+  "Evento");
-        Usuario usuario = usuarioServicio.creaUsuarioCompetidor(request.getParameter("email"),
-                request.getParameter("password"),
-                request.getParameter("nombre"),
-                request.getParameter("apellido_p"),
-                request.getParameter("apellido_m"),
-                request.getParameter("sexo"),
-                fecha,
-                Integer.parseInt(request.getParameter("peso")),
-                Integer.parseInt(request.getParameter("altura")),
-                entrenador_email,
-                Integer.parseInt(request.getParameter("eventos"))
-        );
+        String sexo = eventoRepositorio.getById(Integer.valueOf(request.getParameter("eventos"))).getRama().equals("Femenil")?"Femenino":"Masculino";
+        sexo = eventoRepositorio.getById(Integer.valueOf(request.getParameter("eventos"))).getRama().equals("Mixto")?request.getParameter("sexo"):sexo;
+        model.addAttribute("eventos", eventos);
+        System.out.println(sexo+" SEXOOOOO");
+        Usuario usuario = null;
+        if (sexo.equals(request.getParameter("sexo"))) {
+             usuario = usuarioServicio.creaUsuarioCompetidor(request.getParameter("email"),
+                    request.getParameter("password"),
+                    request.getParameter("nombre"),
+                    request.getParameter("apellido_p"),
+                    request.getParameter("apellido_m"),
+                    request.getParameter("sexo"),
+                    fecha,
+                    Integer.parseInt(request.getParameter("peso")),
+                    Integer.parseInt(request.getParameter("altura")),
+                    entrenador_email,
+                    Integer.parseInt(request.getParameter("eventos"))
+            );
+        }else{
+            model.addAttribute("errorSexo",true);
+            return "registraCompetidor";
+        }
         model.addAttribute("error", usuario == null);
         model.addAttribute("exito", usuario != null);
-        model.addAttribute("eventos", eventos);
         return "registraCompetidor";
     }
     @RequestMapping("/buscar")
@@ -116,6 +175,7 @@ public class EntrenadorControlador {
         model.addAttribute("usuarios", usuarios);
         return "buscaCompetidores";
     }
+
     @GetMapping("eliminar/{id_Competidor}")
     private String eliminar (@PathVariable("id_Competidor") Integer id_Competidor){
         usuarioServicio.eliminarUsuario(id_Competidor);

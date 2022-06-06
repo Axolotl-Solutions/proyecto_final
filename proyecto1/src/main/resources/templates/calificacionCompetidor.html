@@ -63,9 +63,16 @@
             </ul>
             <div class="divider card-divider"></div>
             <ul class="progress-list">
+                <li th:if="${competidor.getEventos().size()==0}">
+                    <p class="card-subtitle">No hay eventos registrados</p>
+                </li>
                 <li th:each="evento : ${competidor.getEventos()}" class="progress-item">
-                    <div class="thumbs">
+                    <div th:if= "${calificacionesRepositorio.promedioPorEvento(competidor.getUsuario_Id(),evento.getEvento_Id()) != null }" class="thumbs">
                         <span class="material-symbols-rounded  icon">star</span>
+                    </div>
+                    <div th:if= "${calificacionesRepositorio.promedioPorEvento(competidor.getUsuario_Id(),evento.getEvento_Id()) == null }" class="thumbs">
+                        <p class="card-subtitle">Sin calificación</p>
+                        <span class="material-symbols-rounded  icon" style="color:var(--cool-gray);">star</span>
                     </div>
 
                     <div class="progress-label">
@@ -86,8 +93,10 @@
                     <span class="material-symbols-rounded  icon" aria-hidden="true">chat</span>
                 </div>
                 <div class="divider card-divider"></div>
-
-                <div th:each="calificacion : ${calificaciones}" class="juez-comentario">
+                <div th:if="${calificaciones.size()==0}">
+                    Todivía no hay comentarios
+                </div>
+                <div th:if="${calificaciones.size()>0}" th:each="calificacion : ${calificaciones}" class="juez-comentario">
                     <div class="juez-titulo">
                         <div>
                             <figure class="card-titulo">

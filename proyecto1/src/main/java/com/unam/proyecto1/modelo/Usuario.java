@@ -175,6 +175,11 @@ public class Usuario {
         }
         return "EVENTO NOT FOUND";
     }
+
+    public Set<Evento> getEventos() {
+        return this.eventos;
+    }
+
     public void addRol(Rol rol){
         roles.add(rol);
     }
@@ -203,11 +208,11 @@ public class Usuario {
         }
         return false;
     }
-    public boolean hasEvento(String nombreEvento){
+    public boolean hasEvento(Evento nombreEvento){
         Iterator<Evento> iterator = this.eventos.iterator();
         while(iterator.hasNext()){
             Evento eve = iterator.next();
-            if(eve.getNombreEvento().equals(nombreEvento)){
+            if(eve.equals(nombreEvento)){
                 return true;
             }
         }

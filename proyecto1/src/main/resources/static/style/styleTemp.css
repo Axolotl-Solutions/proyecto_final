@@ -12,6 +12,7 @@
    --eliminar-btn-hover: #f16b6b;
    --editar-btn: #4885d6;
    --confirmar-btn:hsl(144, 62%, 53%);
+   --confirmar-btn-hover:hsl(144, 89%, 64%);
    --editar-btn-hover:#6fa2e7;
    --sw-cancelar:#f27474;
   --rol-competidor: #388e3c;
@@ -165,6 +166,41 @@ body {
   display:grid;
   padding: 15px 15px;
 }
+/*********************No eventos Competidor*****************************/
+.inscribir{
+    background:var(--confirmar-btn);
+    color:var(--cultured);
+    padding:10px;
+    border-radius:var(--radius-6);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+}
+.inscribir:hover{
+    background:var(--confirmar-btn-hover);
+    cursor:pointer;
+}
+
+.eventos-competidor .task-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.eventos-competidor .task-card .card-icon .icon{
+  color: #ff000d;
+}
+.eventos-competidor .task-card .card-icon {
+  background: rgba(232, 71, 71, 0.43);
+  padding: 10px;
+  border-radius: var(--radius-6);
+}
+.eventos-competidor .task-card .card-data {
+  color: var(--eliminar-btn);
+  font-size: var(--fs-3);
+  font-weight: var(--fw-600);
+  margin-bottom: 5px;
+}
 
 /******************Tabla Calificaciones******************************/
 
@@ -212,6 +248,25 @@ body {
   color: var(--cool-gray);
   font-size: 17px;
 }
+/*Eventos competidor*/
+.eventos-competidor{
+    padding: 25px 25px;
+    margin-top: 25px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+.input-box .editar-btn{
+    font-weight: var(--fw-500);
+    display:flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+    border-radius: var(--radius-6);
+    background:var(--editar-btn);
+    cursor:pointer;
+}
+
 
 /*Calificaciones*/
 
