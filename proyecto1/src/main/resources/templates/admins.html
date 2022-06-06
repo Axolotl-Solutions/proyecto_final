@@ -129,7 +129,7 @@
                     <div class="cont" style="display:none;">
                         <div class="title">Registrar Disciplina</div>
                         <div class="content">
-                            <form method="post" th:action="@{/admins/creaEvento}">
+                            <form method="post" th:action="@{/admins/creaDisciplina}">
                                 <div class="user-details" >
                                     <div class="input-box" style="width:100%;">
                                         <span class="details">Nombre Disciplina</span>
@@ -156,6 +156,8 @@
 </div>
 <div id="error" th:if="${error}" style="display:none;">
 </div>
+<div id="errorDisciplina" th:if="${errorDisciplina}" style="display:none;">
+</div>
 <footer th:replace="plantillas/plantilla.html :: footer">
 </footer>
 <script th:replace="plantillas/plantilla.html :: js">
@@ -175,6 +177,14 @@
               icon: 'error',
               title: 'Error',
               text: 'Este correo ya esta registrado',
+              confirmButtonColor: 'var(--confirmar-btn)'
+            })
+    }
+    if(errorDisciplina != null){
+        Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Esta disciplina ya esta registrada',
               confirmButtonColor: 'var(--confirmar-btn)'
             })
     }

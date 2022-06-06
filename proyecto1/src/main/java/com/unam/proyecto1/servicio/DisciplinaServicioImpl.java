@@ -3,7 +3,9 @@ package com.unam.proyecto1.servicio;
 import com.unam.proyecto1.modelo.Disciplina;
 import com.unam.proyecto1.repositorio.DisciplinaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DisciplinaServicioImpl implements DisciplinaServicio {
 
     @Autowired
@@ -16,6 +18,6 @@ public class DisciplinaServicioImpl implements DisciplinaServicio {
         }
         Disciplina nuevaDisciplina = new Disciplina();
         nuevaDisciplina.setNombre(nombre);
-        return nuevaDisciplina;
+        return disciplinaRepositorio.save(nuevaDisciplina);
     }
 }

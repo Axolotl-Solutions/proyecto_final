@@ -5,6 +5,7 @@ import com.unam.proyecto1.modelo.Evento;
 import com.unam.proyecto1.modelo.Usuario;
 import com.unam.proyecto1.repositorio.DisciplinaRepositorio;
 import com.unam.proyecto1.repositorio.UsuarioRepositorio;
+import com.unam.proyecto1.servicio.DisciplinaServicio;
 import com.unam.proyecto1.servicio.EventoServicio;
 import com.unam.proyecto1.servicio.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class AdminControlador {
     private DisciplinaRepositorio disciplinaRepositorio;
 
     @Autowired
+    private DisciplinaServicio disciplinaServicio;
+
+    @Autowired
     private EventoServicio eventoServicio;
 
     @GetMapping("/")
@@ -56,7 +60,20 @@ public class AdminControlador {
 
         return "buscarDisciplinas";
     }
-
+    @PostMapping("/creaDisciplina")
+    public String creaDisciplina(HttpServletRequest request, Model model, Principal principal) {
+        String nombreDisciplina = request.getParameter("nombreDisciplina");
+        Disciplina disciplina = disciplinaServicio.creaDisciplina(nombreDisciplina);
+        if (disciplina==null)
+            model.addAttribute("errorDisciplina", true);
+        else
+            model.addAttribute("exito", true);
+        Usuario usuarioActual =  usuarioRepositorio.findByEmail(principal.getName());
+        List<Disciplina> disciplinas = disciplinaRepositorio.findAll();
+        model.addAttribute("disciplinas",disciplinas);
+        model.addAttribute("usuario", usuarioActual);
+        return "admins";
+    }
     @PostMapping("/creaEvento")
     public String creaEvento(HttpServletRequest request, Model model, Principal principal) {
         String nombreEvento = request.getParameter("nombreEvento");
