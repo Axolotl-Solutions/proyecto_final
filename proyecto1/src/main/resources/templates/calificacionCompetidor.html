@@ -9,7 +9,7 @@
 <section>
     <div class="calificaciones" >
         <div class="card" data-aos="fade-right" data-aos-duration="700">
-            <button class="card-menu-btn icon-box" aria-label="More" data-menu-btn>
+            <button id= "button-over-card" class="card-menu-btn icon-box" aria-label="More" data-menu-btn>
                 <span class="material-symbols-rounded  icon">more_horiz</span>
             </button>
             <ul class="ctx-menu">
@@ -130,7 +130,17 @@
 </script>
 <script>
   document.getElementsByClassName("navbar-link")[4].classList.add("active");
-  var eliminar = document.getElementsByName("eliminar-btn");
+  var eliminar = document.getElementsByName("eliminar-btn");    
+    if(tipoUsuario.innerHTML === "COMPETIDOR"){
+     document.getElementById("button-over-card").disabled=true;
+      document.getElementById('button-over-card').style.visibility = 'hidden'; 
+      document.getElementById("agregar-nav ").disabled=true;
+      document.getElementById('agregar-nav ').style.visibility = 'hidden';
+       
+    } 
+
+      if(tipoUsuario.innerHTML === "ENTRENADOR"){
+          var eliminar = document.getElementsByName("eliminar-btn");
   var links = document.getElementsByClassName("a-href");
   for (let i = 0; i < eliminar.length; i++) {
    eliminar[i].addEventListener("click", function(){
@@ -170,6 +180,8 @@
    })
    });
   }
+      }
+
 </script>
 </body>
 </html>

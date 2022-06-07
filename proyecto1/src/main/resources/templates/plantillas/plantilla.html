@@ -191,6 +191,16 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
        AOS.init({offset: 100});
+
+        if(tipoUsuario.innerHTML === "COMPETIDOR"){
+            document.getElementById("agregar-nav").style.display = 'block';
+    // hide the lorem ipsum text
+            document.getElementById("agregar-nav").style.display = 'none';
+               document.getElementById("busca-nav").style.display = 'block';
+    // hide the lorem ipsum text
+            document.getElementById("busca-nav").style.display = 'none';
+           
+    }
    </script>
 </div>
 
