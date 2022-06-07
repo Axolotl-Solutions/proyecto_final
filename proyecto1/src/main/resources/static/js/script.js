@@ -39,11 +39,11 @@ if(tipoUsuario.innerHTML === "COMPETIDOR"){
      }
 }
 if(tipoUsuario.innerHTML === "JUEZ"){
-    document.getElementById("agregar-nav").href="/jueces/";
-    document.getElementById("agregar-menu").href="/jueces/";
-    document.getElementById("inicio-nav").href="/jueces/";
-    document.getElementById("logo-1").href="/jueces/";
-    document.getElementById("logo-2").href="/jueces/";
+    document.getElementById("agregar-nav").href="/juez/";
+    document.getElementById("agregar-menu").href="/juez/";
+    document.getElementById("inicio-nav").href="/juez/";
+    document.getElementById("logo-1").href="/juez/";
+    document.getElementById("logo-2").href="/juez/";
 }
 
 /**

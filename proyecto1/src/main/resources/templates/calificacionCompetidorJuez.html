@@ -7,7 +7,7 @@
 </header>
 
 <section>
-    <div class="calificaciones" >
+    <div class="calificacionesJuez" >
         <div class="comentarios" data-aos="fade-left" data-aos-duration="700">
             <div class="titulo-comentarios">
                 <div class="titulo-comentario">
@@ -17,15 +17,22 @@
                 <div class="divider card-divider"></div>
 
                 <div class="juez-comentario">
-                    <div class="juez-titulo">
-                        <div>
-                            <figure class="card-titulo">
-                                <img src="/img/avatar-1.png" alt="" width="48" height="48">
-                            </figure>
+                    <div class="juez-titulo" style="justify-content: space-between;">
+                        <div style="display: flex; padding: 15px; align-items: center; gap:5px;">
+                            <div>
+                                <figure class="card-titulo">
+                                    <img src="/img/avatar-1.png" alt="" width="48" height="48">
+                                </figure>
+                            </div>
+                            <div>
+                                <p th:text="${calificacion.getCompetidor().getNombre() + ' '+ calificacion.getCompetidor().getApellido_P()}">Alan Romero</p>
+                                <p class="card-subtitle" >Juez</p>
+                            </div>
                         </div>
                         <div>
-                            <p th:text="${calificacion.getCompetidor().getNombre() + ' '+ calificacion.getCompetidor().getApellido_P()}">Alan Romero</p>
-                            <p class="card-subtitle" >Juez</p>
+                            <a class="guardar-btn" active>
+                                <span class="material-symbols-rounded  icon" style="color:#fff;">save</span>
+                            </a>
                         </div>
                     </div>
                     <div class="divider card-divider"></div>
@@ -34,8 +41,10 @@
                         <span class="material-symbols-rounded  icon">star</span>
                         <p th:text="${'('+calificacion.getEvento().getNombreEvento()+' - '+calificacion.getEvento().getDisciplina().getNombre()+')'}"></p>
                     </div>
-                    <div class="juez-texto">
-                        <p th:text="${calificacion.getComentario()}"></p>
+                    <div class="juez-texto-jueces">
+                        <label>
+                            <textarea class="jueces-textarea" th:text="${calificacion.getComentario()}" contentEditable="true" placeholder="Escribe un comentario sobre esta actuación..."></textarea>
+                        </label>
                     </div>
                 </div>
 
