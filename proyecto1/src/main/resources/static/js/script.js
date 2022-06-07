@@ -37,9 +37,6 @@ if(tipoUsuario.innerHTML === "COMPETIDOR"){
     document.getElementById("inicio-nav").href="/competidor/";
     document.getElementById("logo-1").href="/competidor/";
     document.getElementById("logo-2").href="/competidor/";
-    if(document.URL.endsWith('/calificaciones')){
-        document.getElementsByClassName("navbar-link")[2].classList.add("active");
-     }
 }
 
 /**

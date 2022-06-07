@@ -129,15 +129,13 @@
 <script th:replace="plantillas/plantilla.html :: js">
 </script>
 <script>
-  document.getElementsByClassName("navbar-link")[4].classList.add("active");
+
   var eliminar = document.getElementsByName("eliminar-btn");    
     if(tipoUsuario.innerHTML === "COMPETIDOR"){
-     document.getElementById("button-over-card").disabled=true;
-      document.getElementById('button-over-card').style.visibility = 'hidden'; 
-      document.getElementById("agregar-nav ").disabled=true;
-      document.getElementById('agregar-nav ').style.visibility = 'hidden';
-       
-    } 
+     document.getElementsByClassName("navbar-link")[1].classList.add("active");
+    }else{
+        document.getElementsByClassName("navbar-link")[4].classList.add("active");
+    }
 
       if(tipoUsuario.innerHTML === "ENTRENADOR"){
           var eliminar = document.getElementsByName("eliminar-btn");

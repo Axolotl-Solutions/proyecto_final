@@ -49,7 +49,7 @@
             </li>
 
             <li>
-              <a id="agregar-nav" href="#" class="navbar-link icon-box">
+              <a th:if="${!usuario.getRol().equals('COMPETIDOR')}" id="agregar-nav" href="#" class="navbar-link icon-box">
                 <span class="material-symbols-rounded  icon">add</span>
 
                 <span>Agregar</span>
@@ -87,7 +87,7 @@
             </li>
 
             <li>
-              <a id="busca-nav" href="#" class="navbar-link icon-box">
+              <a th:if="${!usuario.getRol().equals('COMPETIDOR')}" id="busca-nav" href="#" class="navbar-link icon-box">
                 <span class="material-symbols-rounded  icon">search</span>
 
                 <span>Buscar</span>

@@ -86,7 +86,12 @@
 <script th:replace="plantillas/plantilla.html :: js">
 </script>
 <script>
-  document.getElementsByClassName("navbar-link")[3].classList.add("active");
+    if(tipoUsuario.innerHTML === "COMPETIDOR"){
+        document.getElementsByClassName("navbar-link")[2].classList.add("active");
+    }else{
+        document.getElementsByClassName("navbar-link")[3].classList.add("active");
+    }
+
   var sel = document.querySelector('#sel')
   var op = document.getElementsByTagName("option");
   sel.addEventListener('change',function(){
