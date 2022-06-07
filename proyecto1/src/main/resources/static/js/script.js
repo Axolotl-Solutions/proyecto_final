@@ -38,6 +38,13 @@ if(tipoUsuario.innerHTML === "COMPETIDOR"){
     document.getElementById("logo-1").href="/competidor/";
     document.getElementById("logo-2").href="/competidor/";
 }
+if(tipoUsuario.innerHTML === "JUEZ"){
+    document.getElementById("agregar-nav").href="/juez/";
+    document.getElementById("agregar-menu").href="/juez/";
+    document.getElementById("inicio-nav").href="/juez/";
+    document.getElementById("logo-1").href="/juez/";
+    document.getElementById("logo-2").href="/juez/";
+}
 
 /**
 * Cambiamos al estado activo cuando hacemos clicl en
