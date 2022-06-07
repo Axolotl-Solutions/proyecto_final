@@ -99,6 +99,7 @@
 <script th:replace="plantillas/plantilla.html :: js">
 </script>
 <script>
+    document.getElementsByClassName("navbar-link")[4].classList.add("active");
     var error = document.getElementById('error');
     var exito = document.getElementById('exito');
     if(error!=null){

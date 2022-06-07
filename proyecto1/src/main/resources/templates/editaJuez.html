@@ -1,0 +1,85 @@
+<html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla.html :: head">
+</head>
+<body>
+<header th:replace="plantillas/plantilla.html :: header">
+</header>
+
+<main>
+    <article class="container article">
+        <!-- Contenedores form -->
+        <section class="form">
+            <div class="form-container " data-aos="zoom-out" data-aos-duration="900">
+                <div class="form-wrapper">
+
+                    <!-- INICIA FORM  -->
+                    <div class="cont">
+                        <div class="title">Editar Juez</div>
+                        <div class="content">
+                            <form method="post" th:action="@{/admins/edita/{id}(id=${competidor.getUsuario_Id()})}" th:object="${competidor}">
+                                <div class="user-details">
+                                    <div class="input-box" >
+                                        <span  class="details">Nombre</span>
+                                        <input th:field="*{nombre}" name="nombre" type="text" placeholder="Introduce el nombre." required>
+                                    </div>
+                                    <div class="input-box">
+                                        <span  class="details">Apellido Paterno</span>
+                                        <input th:field="*{apellido_P}" name="apellido_p" type="text" placeholder="Introduce el apellido paterno." required>
+                                    </div>
+                                    <div class="input-box">
+                                        <span class="details">Apellido Materno</span>
+                                        <input th:field="*{apellido_M}" name="apellido_m" type="text" placeholder="Introduce el apellido materno" required>
+                                    </div>
+                                    <div class="input-box">
+                                        <span class="details">Correo</span>
+                                        <input th:field="*{email}" name="email" type="email" placeholder="Introduce el correo" required>
+                                    </div>
+                                    <div class="button" style="width:100%;">
+                                        <input type="submit" value="Editar">
+                                    </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- TERMINA FORMS  -->
+
+                </div>
+            </div>
+
+        </section>
+
+
+    </article>
+</main>
+<div class="divider card-divider"></div>
+<div id="error" th:if="${error}" class="alerta" style="display:none;" role="alert">
+</div>
+<div id="exito" th:if="${exito}" class="alerta" style="display:none;" role="alert">
+</div>
+<footer th:replace="plantillas/plantilla.html :: footer">
+</footer>
+
+<script th:replace="plantillas/plantilla.html :: js">
+</script>
+<script>
+    document.getElementsByClassName("navbar-link")[3].classList.add("active");
+    var error = document.getElementById('error');
+    var exito = document.getElementById('exito');
+    if(error!=null){
+        Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'El correo ya esta asociado a otro juez',
+              confirmButtonColor: 'var(--confirmar-btn)'
+            })
+    }
+    if(exito!=null){
+        Swal.fire({
+              icon: 'success',
+              title: 'Editado',
+              text: 'Juez editado correctamente',
+              confirmButtonColor: 'var(--confirmar-btn)'
+            })
+    }
+ </script>
+</body></html>

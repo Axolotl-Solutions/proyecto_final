@@ -129,6 +129,7 @@
 <script th:replace="plantillas/plantilla.html :: js">
 </script>
 <script>
+  document.getElementsByClassName("navbar-link")[4].classList.add("active");
   var eliminar = document.getElementsByName("eliminar-btn");
   var links = document.getElementsByClassName("a-href");
   for (let i = 0; i < eliminar.length; i++) {

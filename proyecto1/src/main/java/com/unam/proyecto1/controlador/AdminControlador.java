@@ -55,6 +55,69 @@ public class AdminControlador {
 
         return "inicioAdmin";
     }
+    @PostMapping("/edita/{id}")
+    public String edita(@PathVariable Integer id,@ModelAttribute Usuario competidor,
+                        HttpServletRequest request,Principal principal,
+                        Model model){
+        Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
+        model.addAttribute("usuario",usuario);
+        Usuario antiguo = usuarioRepositorio.getById(id);
+        Usuario duplicado = usuarioRepositorio.findByEmail(competidor.getEmail());
+        if(duplicado!= null && !duplicado.getEmail().equals(antiguo.getEmail())){
+            model.addAttribute("error",true);
+            model.addAttribute("competidor",antiguo);
+            return "editaJuez";
+        }
+        antiguo.setEmail(competidor.getEmail());
+        antiguo.setNombre(competidor.getNombre());
+        antiguo.setApellido_P(competidor.getApellido_P());
+        antiguo.setApellido_M(competidor.getApellido_M());
+        usuarioServicio.actualizarUsuario(antiguo);
+        model.addAttribute("exito",true);
+        model.addAttribute("competidor",antiguo);
+        return "editaJuez";
+    }
+    @GetMapping("editarJuez/{email}")
+    private String editar(@PathVariable("email") String email, Model modelo,
+                          Principal principal){
+        Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
+        Usuario competidor =  usuarioRepositorio.findByEmail(email);
+        modelo.addAttribute("usuario", usuario);
+        modelo.addAttribute("competidor",competidor);
+        return "editaJuez";
+    }
+    @GetMapping("eliminarJuez/{id}")
+    private String eliminarJuez(@PathVariable("id") Integer id,Principal principal,Model model){
+        usuarioServicio.eliminarUsuario(id);
+        Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
+        model.addAttribute("usuario", usuario);
+        List<Usuario> usuarios = usuarioRepositorio.findAll();
+        List<Usuario> nuevos = new ArrayList<>();
+        for (Usuario u:usuarios){
+            if(u.hasRole("ROLE_JUEZ")){
+                nuevos.add(u);
+            }
+        }
+        if (usuarios!=null)
+            model.addAttribute("usuarios", nuevos);
+        model.addAttribute("exito",true);
+        return "buscaJuez";
+    }
+    @RequestMapping("/buscaJuez")
+    public String buscaJuez(Model model, String error, Principal principal) {
+        Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
+        model.addAttribute("usuario", usuario);
+        List<Usuario> usuarios = usuarioRepositorio.findAll();
+        List<Usuario> nuevos = new ArrayList<>();
+        for (Usuario u:usuarios){
+            if(u.hasRole("ROLE_JUEZ")){
+                nuevos.add(u);
+            }
+        }
+        if (usuarios!=null)
+            model.addAttribute("usuarios", nuevos);
+        return "buscaJuez";
+    }
     @RequestMapping("/busca")
     public String busca(Model model, String error, Principal principal) {
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
