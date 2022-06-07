@@ -109,7 +109,7 @@
                     <p id="nombre-nav" th:text="${usuario.getNombre()}" class="profile-title">Fernando F</p>
 
                     <p th:if="${!usuario.getRol().equals('JUEZ')}" id="rol-nav" th:text="${usuario.getRol()}" class="profile-subtitle">Entrenador</p>
-                    <p th:if="${usuario.getRol().equals('JUEZ')}" id="rol-nav" th:text="${usuario.getRol()+' ('+disciplina+')'}" class="profile-subtitle">Entrenador</p>
+                    <p th:if="${usuario.getRol().equals('JUEZ')}" id="rol-nav" th:text="${usuario.getRol()+' ('+disciplina.getNombre()+')'}" class="profile-subtitle">Entrenador</p>
                   </div>
                  </a>
                   <div class="dd_menu">
