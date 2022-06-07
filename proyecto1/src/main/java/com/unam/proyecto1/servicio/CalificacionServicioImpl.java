@@ -27,7 +27,7 @@ public class CalificacionServicioImpl implements CalificacionServicio {
     DisciplinaRepositorio disciplinaRepositorio;
 
     @Override
-    public Calificacion creaCalificacion(String nombreEvento, String categoria, String rama, String nombreDisciplina, String emailJuez, String emailCompetidor, int puntaje, String comentario) {
+    public Calificacion creaCalificacion(String nombreEvento, String categoria, String rama, String nombreDisciplina, String emailJuez, String emailCompetidor, double puntaje, String comentario) {
         Disciplina disciplina = disciplinaRepositorio.findByNombre(nombreDisciplina);
         Evento evento = eventoRepositorio.findByNombreEventoAndDisciplinaAndCategoriaAndRama(nombreEvento, disciplina, categoria, rama);
         Usuario juez = usuarioRepositorio.findByEmail(emailJuez);

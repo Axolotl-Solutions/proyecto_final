@@ -51,6 +51,11 @@
                                         <span class="details">Peso</span>
                                         <input name="altura" type="number" placeholder="Ingresa peso en kg" required>
                                     </div>
+                                    <div class="select">
+                                        <select id="sel" name="eventos">
+                                            <option th:each="evento : ${eventos}" th:value="${evento.getEvento_Id()}" th:text="${evento.getNombreEvento()+' : '+evento.getFecha()+' '+evento.getRama()}"></option>
+                                        </select>
+                                    </div>
                                     <div class="input-box">
                                         <span class="details">Fecha de nacimiento</span>
                                         <input name="fecha" type="date" placeholder="Introduce fecha de nacimiento" required>
@@ -96,6 +101,8 @@
 </div>
 <div id="exito" th:if="${exito}" class="alerta" style="display:none;" role="alert">
 </div>
+<div id="errorSexo" th:if="${errorSexo}" class="alerta" style="display:none;" role="alert">
+</div>
 <footer th:replace="plantillas/plantilla.html :: footer">
 </footer>
 <script th:replace="plantillas/plantilla.html :: js">
@@ -106,7 +113,7 @@
       var ok = true;
       var msg = "Mal perro"
 
-      if(f[9].checked==false && f[10].checked==false){
+      if(f[10].checked==false && f[11].checked==false){
         ok = false;
         console.log("entro aquí");
       }
@@ -123,6 +130,15 @@
     }
 </script>
 <script>
+   var errorSexo=document.getElementById('errorSexo');
+   if(errorSexo!=null){
+    Swal.fire({
+              icon: 'error',
+              title: 'El competidor no puede participar en esta rama',
+              text: 'Verifique el sexo.',
+              confirmButtonColor: 'var(--confirmar-btn)'
+            })
+   }
    document.getElementsByClassName("navbar-link")[1].classList.add("active");
    var error = document.getElementById('error');
    var exito = document.getElementById('exito');
@@ -131,14 +147,14 @@
               icon: 'error',
               title: 'Error',
               text: 'Este correo ya esta registrado',
-              confirmButtonColor: '#002b7a'
+              confirmButtonColor: 'var(--confirmar-btn)'
             })
     }
     if(exito != null){
         Swal.fire({
               icon: 'success',
               title: 'Agregado correctamente',
-              confirmButtonColor: '#002b7a'
+              confirmButtonColor: 'var(--confirmar-btn)'
             })
     }
    var contra = document.getElementById("contraseña");

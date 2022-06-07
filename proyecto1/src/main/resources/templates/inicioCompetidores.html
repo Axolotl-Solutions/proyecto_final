@@ -15,16 +15,21 @@
         <p data-aos="fade-right" data-aos-duration="800" class="article-subtitle">¡Bienvenido al Sistema Univeritario de Olimpiadas!</p>
 
         <section class="home">
+
             <div class="card profile-card" data-aos="fade-right" data-aos-duration="700">
+
                 <div class="profile-card-wrapper">
+
                     <figure class="card-avatar">
                         <img src="/img/avatar-1.png" alt="Elizabeth Foster" width="48" height="48">
                     </figure>
+
                     <div>
                         <p th:text="${usuario.getNombre()+' '+usuario.getApellido_P() + ' ' + usuario.getApellido_M()}" class="card-title">Fernando Gerardo Flores García</p>
 
-                        <p th:text="${usuario.getRol()}"class="card-subtitle">Entrenador</p>
+                        <p th:text="${usuario.getRol()}"class="card-subtitle">Competidor</p>
                     </div>
+
                 </div>
                 <div class="divider card-divider"></div>
                 <ul class="contact-list">
@@ -37,6 +42,7 @@
                     </li>
                 </ul>
             </div>
+
             <div class="card-wrapper">
 
                 <div class="card task-card" data-aos="fade-left">
@@ -46,9 +52,9 @@
                     </div>
 
                     <div>
-                        <data th:text="${numCompetidores}" class="card-data" value="21">15</data>
+                        <data th:text="${idcompetidor}" class="card-data" value="21">15</data>
 
-                        <p class="card-text">Competidores Registrados</p>
+                        <p class="card-text">Número del competidor</p>
                     </div>
 
                 </div>
@@ -62,7 +68,7 @@
                     <div>
                         <data th:text="${nDisciplinas}" class="card-data" value="21">9</data>
 
-                        <p class="card-text">Disciplinas distintas entre tus competidores</p>
+                        <p class="card-text">Eventos inscritos para competir</p>
                     </div>
 
                 </div>
@@ -78,6 +84,16 @@
 </script>
 <script>
     document.getElementsByClassName("navbar-link")[0].classList.add("active");
+    if(tipoUsuario.innerHTML === "COMPETIDOR"){
+    document.getElementById("tabla-nav").href="/competidor/tabla";
+    document.getElementById("tabla-menu").href="/competidor/tabla";
+    document.getElementById("calificaciones-nav").href="/competidor/calificaciones";
+
+    document.getElementById("calificaciones-menu").href="/competidor/calificaciones";
+    document.getElementById("inicio-nav").href="/competidor/";
+    document.getElementById("logo-1").href="/competidor/";
+    document.getElementById("logo-2").href="/competidor/";
+    }
 </script>
 </body>
 </html>

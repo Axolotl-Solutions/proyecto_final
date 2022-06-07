@@ -95,9 +95,15 @@ public class PrincipalControlador {
         return "redirect:/registrarCompetidor/buscar/";
     }
 
+    @RequestMapping("/inicioCompetidor")
+    public String competidor() {
+        System.out.println("competidor");
+
+        return "inicioCompetidor/";
+    }
     @RequestMapping("/registro")
     public String registro() {
-        System.out.println("registro"); 
+      
         return "registro";
     }
 

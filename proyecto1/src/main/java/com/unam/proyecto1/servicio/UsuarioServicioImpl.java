@@ -1,9 +1,11 @@
 package com.unam.proyecto1.servicio;
 
 import com.unam.proyecto1.modelo.Disciplina;
+import com.unam.proyecto1.modelo.Evento;
 import com.unam.proyecto1.modelo.Usuario;
 import com.unam.proyecto1.modelo.Rol;
 import com.unam.proyecto1.repositorio.DisciplinaRepositorio;
+import com.unam.proyecto1.repositorio.EventoRepositorio;
 import com.unam.proyecto1.repositorio.RolRepositorio;
 import com.unam.proyecto1.repositorio.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class UsuarioServicioImpl implements UsuarioServicio {
@@ -23,6 +26,9 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Autowired
     private DisciplinaRepositorio disciplinaRepositorio;
+
+    @Autowired
+    private EventoRepositorio eventoRepositorio;
 
     @Override
     public Usuario creaUsuario(String email, String password, String nombre, String apellido_p, String apellido_m) {
@@ -54,11 +60,12 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Override
     public Usuario creaUsuarioCompetidor(String email, String password, String nombre, String apellido_p, String apellido_m,
-                                         String sexo, Date fecha_nac, int peso, int altura, String entrenador_email){
+                                         String sexo, Date fecha_nac, int peso, int altura, String entrenador_email,int idEvento){
         if (usuarioRepositorio.existsUsuarioByEmail(email)) {
             return null;
         }
         Rol rol = rolRepositorio.findByNombre("ROLE_COMPETIDOR");
+        Evento evento = eventoRepositorio.findById(idEvento);
         Usuario entrenador = usuarioRepositorio.findByEmail(entrenador_email);
         Usuario nuevoCompetidor = creaUsuario(email, password, nombre, apellido_p, apellido_m);
         nuevoCompetidor.setPeso(peso);
@@ -67,6 +74,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         nuevoCompetidor.setFecha_nacimiento(fecha_nac);
         nuevoCompetidor.setEntrenador(entrenador);
         nuevoCompetidor.addRol(rol);
+        nuevoCompetidor.addEvento(evento);
         return usuarioRepositorio.save(nuevoCompetidor);
     }
 

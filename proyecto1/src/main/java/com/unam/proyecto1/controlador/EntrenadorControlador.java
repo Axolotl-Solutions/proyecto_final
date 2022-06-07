@@ -1,10 +1,14 @@
 package com.unam.proyecto1.controlador;
 
-import com.unam.proyecto1.modelo.Disciplina;
+import com.unam.proyecto1.modelo.Calificacion;
+import com.unam.proyecto1.modelo.Evento;
 import com.unam.proyecto1.modelo.Usuario;
+import com.unam.proyecto1.repositorio.CalificacionRepositorio;
 import com.unam.proyecto1.repositorio.DisciplinaRepositorio;
+import com.unam.proyecto1.repositorio.EventoRepositorio;
 import com.unam.proyecto1.repositorio.UsuarioRepositorio;
 import com.unam.proyecto1.servicio.UsuarioServicio;
+import jdk.jfr.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +19,7 @@ import java.security.Principal;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/entrenador")
@@ -25,13 +30,16 @@ public class EntrenadorControlador {
     private UsuarioServicio usuarioServicio;
     @Autowired
     private DisciplinaRepositorio disciplinaRepositorio;
+    @Autowired
+    private EventoRepositorio eventoRepositorio;
+    @Autowired
+    private CalificacionRepositorio calificacionRepositorio;
 
     @GetMapping("/")
     public String perfil(Model model, Principal principal) {
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
         List<Usuario> usuarios = usuarioRepositorio.findCompetidoresRegistrados(usuario.getUsuario_Id());
         int ndisciplinas = usuarioRepositorio.cuentaEventosEntrenador(usuario.getUsuario_Id());
-        System.out.println(ndisciplinas+" Numero de disciplinas");
         model.addAttribute("numCompetidores", usuarios.size());
         model.addAttribute("usuario", usuario);
         model.addAttribute("nDisciplinas",ndisciplinas);
@@ -39,9 +47,62 @@ public class EntrenadorControlador {
     }
     @GetMapping("/registrar")
     public String registrar(HttpServletRequest request,Model model, Principal principal) {
+        List<Evento> eventos = eventoRepositorio.findAll();
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
         model.addAttribute("usuario", usuario);
+        model.addAttribute("eventos", eventos);
         return "registraCompetidor";
+    }
+    @GetMapping("agregarEvento/{idC}")
+    private String agregarEvento (@PathVariable("idC") Integer idC,Principal principal,HttpServletRequest request, Model model){
+        Usuario competidor = usuarioRepositorio.getById(idC);
+        Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
+        Evento evento = eventoRepositorio.getById(Integer.valueOf(request.getParameter("eventos")));
+        List<Evento> eventosAll = eventoRepositorio.findAll();
+        Set<Evento> eventos = competidor.getEventos();
+        String sexo = evento.getRama().equals("Femenil")? "Femenino":"Masculino";
+        sexo = evento.getRama().equals("Mixto")?competidor.getSexo():sexo;
+        if(!competidor.hasEvento(evento) && sexo.equals(competidor.getSexo())) {
+            competidor.getEventos().add(evento);
+        }else{
+            model.addAttribute("error",true);
+        }
+        usuarioServicio.actualizarUsuario(competidor);
+        model.addAttribute("usuario",usuario);
+        model.addAttribute("competidor",competidor);
+        model.addAttribute("eventos",eventos);
+        model.addAttribute("eventosAll",eventosAll);
+        model.addAttribute("calificacionRepositorio",calificacionRepositorio);
+        return "eventosCompetidor";
+    }
+    @GetMapping("eliminarEvento/{idC}/{idE}")
+    private String eliminarEvento (@PathVariable("idC") Integer idC, @PathVariable("idE") Integer idE){
+        Usuario competidor = usuarioRepositorio.getById(idC);
+        Evento evento = eventoRepositorio.getById(idE);
+        System.out.println(evento+ " A eliminar");
+        System.out.println(competidor.getNombre()+" NOMBRE");
+        System.out.println(competidor.getEventos());
+        competidor.getEventos().remove(eventoRepositorio.getById(idE));
+        System.out.println(competidor.getEventos());
+        usuarioServicio.actualizarUsuario(competidor);
+        return "redirect:/entrenador/editarEventos/"+competidor.getEmail();
+    }
+    @GetMapping("/editarEventos/{email}")
+    public String editaEvento(@PathVariable String email,@ModelAttribute Usuario competidor,
+                        HttpServletRequest request,Principal principal,
+                        Model model){
+        List<Evento> eventosAll = eventoRepositorio.findAll();
+        Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
+        Usuario comp = usuarioRepositorio.findByEmail(email);
+        Set<Evento> eventos = competidor.getEventos();
+        System.out.println(request.getParameter("email"));
+        model.addAttribute("usuario",usuario);
+        model.addAttribute("competidor",comp);
+        model.addAttribute("eventos",eventos);
+        model.addAttribute("eventosAll",eventosAll);
+        model.addAttribute("calificacionRepositorio",calificacionRepositorio);
+        System.out.println("Entre aquí");
+        return "eventosCompetidor";
     }
     @PostMapping("/edita/{id}")
     public String edita(@PathVariable Integer id,@ModelAttribute Usuario competidor,
@@ -74,20 +135,33 @@ public class EntrenadorControlador {
     @PostMapping("/registra")
     public String registra(HttpServletRequest request, Model model,Principal principal) {
         Usuario usuarioActual =  usuarioRepositorio.findByEmail(principal.getName());
+        List<Evento> eventos = eventoRepositorio.findAll();
         String entrenador_email = usuarioActual.getEmail();
         model.addAttribute("usuario", usuarioActual);
         Date fecha = Date.valueOf(request.getParameter("fecha"));
-        Usuario usuario = usuarioServicio.creaUsuarioCompetidor(request.getParameter("email"),
-                request.getParameter("password"),
-                request.getParameter("nombre"),
-                request.getParameter("apellido_p"),
-                request.getParameter("apellido_m"),
-                request.getParameter("sexo"),
-                fecha,
-                Integer.parseInt(request.getParameter("peso")),
-                Integer.parseInt(request.getParameter("altura")),
-                entrenador_email
-        );
+        System.out.println(request.getParameter("eventos")+  "Evento");
+        String sexo = eventoRepositorio.getById(Integer.valueOf(request.getParameter("eventos"))).getRama().equals("Femenil")?"Femenino":"Masculino";
+        sexo = eventoRepositorio.getById(Integer.valueOf(request.getParameter("eventos"))).getRama().equals("Mixto")?request.getParameter("sexo"):sexo;
+        model.addAttribute("eventos", eventos);
+        System.out.println(sexo+" SEXOOOOO");
+        Usuario usuario = null;
+        if (sexo.equals(request.getParameter("sexo"))) {
+             usuario = usuarioServicio.creaUsuarioCompetidor(request.getParameter("email"),
+                    request.getParameter("password"),
+                    request.getParameter("nombre"),
+                    request.getParameter("apellido_p"),
+                    request.getParameter("apellido_m"),
+                    request.getParameter("sexo"),
+                    fecha,
+                    Integer.parseInt(request.getParameter("peso")),
+                    Integer.parseInt(request.getParameter("altura")),
+                    entrenador_email,
+                    Integer.parseInt(request.getParameter("eventos"))
+            );
+        }else{
+            model.addAttribute("errorSexo",true);
+            return "registraCompetidor";
+        }
         model.addAttribute("error", usuario == null);
         model.addAttribute("exito", usuario != null);
         return "registraCompetidor";
@@ -97,14 +171,100 @@ public class EntrenadorControlador {
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
         model.addAttribute("usuario", usuario);
         List<Usuario> usuarios = usuarioRepositorio.findCompetidoresRegistrados(usuario.getUsuario_Id());
+        if (usuarios!=null)
         model.addAttribute("usuarios", usuarios);
         return "buscaCompetidores";
     }
+
     @GetMapping("eliminar/{id_Competidor}")
     private String eliminar (@PathVariable("id_Competidor") Integer id_Competidor){
-        //error, elimina tambien el Rol
         usuarioServicio.eliminarUsuario(id_Competidor);
         return "redirect:/entrenador/buscar";
+    }
+    @GetMapping("eliminarc/{id_Competidor}")
+    private String eliminarc (@PathVariable("id_Competidor") Integer id_Competidor){
+        usuarioServicio.eliminarUsuario(id_Competidor);
+        return "redirect:/entrenador/calificaciones";
+    }
+    @RequestMapping("/calificaciones")
+    public String calificaciones(Model modelo, String error, Principal principal) {
+        Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
+        modelo.addAttribute("usuario", usuario);
+        List<Usuario> competidores = usuarioRepositorio.findCompetidoresRegistrados(usuario.getUsuario_Id());
+        if (competidores!=null)
+            modelo.addAttribute("competidores", competidores);
+        modelo.addAttribute("calificacionesRepositorio",calificacionRepositorio);
+        return "calificacionCompetidores";
+    }
+    @GetMapping("tabla/{id}")
+    private String tabla(@PathVariable Integer id,Principal principal,Model modelo){
+        Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
+        Evento e = eventoRepositorio.getById(id);
+        List<Integer> idCompetidores=  calificacionRepositorio.getIdCompetidoresPuntaje(id);
+        List<Usuario> competidores = new ArrayList<>();
+        for (Integer i: idCompetidores) {
+            competidores.add(usuarioRepositorio.getById(i));
+        }
+        Usuario primero,segundo,tercero = null;
+        if (idCompetidores.size()>=3){
+            Usuario usr = usuarioRepositorio.getById(idCompetidores.get(0));
+            Usuario usr1 = usuarioRepositorio.getById(idCompetidores.get(1));
+            Usuario usr2 = usuarioRepositorio.getById(idCompetidores.get(2));
+            modelo.addAttribute("primero",
+                    usr.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
+            modelo.addAttribute("segundo",
+                    usr1.getNombre() +" "+ usr1.getApellido_P()+" "+usr1.getApellido_M());
+            modelo.addAttribute("tercero",
+                    usr2.getNombre() +" "+ usr2.getApellido_P()+" "+usr2.getApellido_M());
+        }else if(idCompetidores.size()==2){
+            Usuario usr = usuarioRepositorio.getById(idCompetidores.get(0));
+            Usuario usr1 = usuarioRepositorio.getById(idCompetidores.get(1));
+            modelo.addAttribute("primero",
+                    usr.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
+            modelo.addAttribute("segundo",
+                    usr1.getNombre() +" "+ usr1.getApellido_P()+" "+usr1.getApellido_M());
+            modelo.addAttribute("tercero","N/E");
+        }else if(idCompetidores.size()==1){
+            Usuario usr = usuarioRepositorio.getById(idCompetidores.get(0));
+            modelo.addAttribute("primero",
+                    usr.getNombre() +" "+ usr.getApellido_P()+" "+usr.getApellido_M());
+            modelo.addAttribute("segundo","N/E");
+            modelo.addAttribute("tercero","N/E");
+        }else{
+            modelo.addAttribute("primero","N/E");
+            modelo.addAttribute("segundo","N/E");
+            modelo.addAttribute("tercero","N/E");
+        }
+        modelo.addAttribute("competidores",competidores);
+        modelo.addAttribute("calificacionRepositorio",calificacionRepositorio);
+        modelo.addAttribute("usuario", usuario);
+        modelo.addAttribute("evento",e);
+        modelo.addAttribute("eventos",eventoRepositorio.findAll());
+        return "Tabla";
+    }
+    @RequestMapping("/tabla")
+    public String tabla(Model modelo, String error, Principal principal) {
+        Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
+        List<Evento> eventos = eventoRepositorio.findAll();
+        if (eventos.size()>0){
+            return "redirect:/entrenador/tabla/1";
+        }
+        List<Calificacion> cal = calificacionRepositorio.findAll();
+        List<Usuario> usuarios = usuarioRepositorio.findAll();
+        modelo.addAttribute("usuario", usuario);
+        modelo.addAttribute("eventos",eventos);
+        return "Tabla";
+    }
+    @GetMapping("calificacion/{email}")
+    private String calificacion(@PathVariable String email,Principal principal,Model modelo){
+        Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
+        Usuario usr = usuarioRepositorio.findByEmail(email);
+        List<Calificacion> calificaciones = calificacionRepositorio.findByCompetidor(usr);
+        modelo.addAttribute("usuario", usuario);
+        modelo.addAttribute("competidor",usr);
+        modelo.addAttribute("calificaciones",calificaciones);
+        modelo.addAttribute("calificacionesRepositorio",calificacionRepositorio);
+        return "calificacionCompetidor";
     }
     @GetMapping("editar/{email}")
     private String editar(@PathVariable("email") String email, Model modelo,

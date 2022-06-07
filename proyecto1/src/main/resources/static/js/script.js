@@ -11,16 +11,14 @@ if(tipoUsuario.innerHTML === "ADMINISTRADOR"){
     document.getElementById("agregar-nav").href="/admins";
     document.getElementById("agregar-menu").href="/admins";
     document.getElementById("inicio-nav").href="/inicioAdmin";
-    if(document.URL === 'http://127.0.0.1:8080/admins'){
-        document.getElementsByClassName("navbar-link")[1].classList.add('active');
-    }
-    if(document.URL === 'http://127.0.0.1:8080/inicioAdmin'){
-         document.getElementsByClassName("navbar-link")[0].classList.add('active');
-    }
     document.getElementById("logo-1").href="/inicioAdmin";
     document.getElementById("logo-2").href="/inicioAdmin";
 }
 if(tipoUsuario.innerHTML === "ENTRENADOR"){
+    document.getElementById("tabla-nav").href="/entrenador/tabla";
+    document.getElementById("tabla-menu").href="/entrenador/tabla";
+    document.getElementById("calificaciones-nav").href="/entrenador/calificaciones";
+    document.getElementById("calificaciones-menu").href="/entrenador/calificaciones";
     document.getElementById("busca-nav").href="/entrenador/buscar";
     document.getElementById("agregar-nav").href="/entrenador/registrar";
     document.getElementById("agregar-menu").href="/entrenador/registrar";
@@ -28,8 +26,18 @@ if(tipoUsuario.innerHTML === "ENTRENADOR"){
     document.getElementById("logo-1").href="/entrenador/";
     document.getElementById("logo-2").href="/entrenador/";
 }
-
-
+if(tipoUsuario.innerHTML === "COMPETIDOR"){
+    document.getElementById("tabla-nav").href="/competidor/tabla";
+    document.getElementById("tabla-menu").href="/competidor/tabla";
+    document.getElementById("calificaciones-nav").href="/competidor/calificaciones";
+    document.getElementById("calificaciones-menu").href="/competidor/calificaciones";
+    document.getElementById("inicio-nav").href="/competidor/";
+    document.getElementById("logo-1").href="/competidor/";
+    document.getElementById("logo-2").href="/competidor/";
+    if(document.URL.endsWith('/calificaciones')){
+        document.getElementsByClassName("navbar-link")[2].classList.add("active");
+     }
+}
 
 /**
 * Cambiamos al estado activo cuando hacemos clicl en
@@ -98,13 +106,29 @@ let barra = document.getElementsByClassName("progress");
 let pro = document.getElementsByClassName("progress-data");
 for (let i = 0; i < barra.length; i++) {
   var cssA = document.createElement("style");
+  var color = "";
+  if(pro[i].innerHTML*10 <= 20){
+    color="ff0000";
+  }else if(pro[i].innerHTML*10 <= 40){
+    color="ff5900";
+  }else if(pro[i].innerHTML*10 <= 60){
+    color="ff5900";
+  }
+  else if(pro[i].innerHTML*10 <= 80){
+    color="ffd900";
+  }else if(pro[i].innerHTML*10 <= 90){
+    color="d4ff00";
+  }else {
+    color="2fff00";
+  }
+  console.log(color);
   let reglas = document.createTextNode('@-webkit-keyframes slider'+i+'{'+
-  'from { width:0%; }'+
+  'from { width:0%;}'+
   'to { width:'+pro[i].innerHTML*10+'%; }'+
   '}');
   cssA.appendChild(reglas);
   document.getElementsByTagName("head")[0].appendChild(cssA);
-  barra[i].style.cssText += 'animation-name:slider'+i+'; animation-duration: 1.8s;'+'width:'+pro[i].innerHTML*10+'%;';
+  barra[i].style.cssText += 'transition: background 3s; animation-name:slider'+i+';animation-duration: 3.8s;'+'width:'+pro[i].innerHTML*10+'%; background:#'+color+";";
 }
 /*
 Array.prototype.forEach.call(barra, function(e) {

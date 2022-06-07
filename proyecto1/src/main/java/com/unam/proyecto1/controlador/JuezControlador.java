@@ -1,6 +1,9 @@
 package com.unam.proyecto1.controlador;
 
+import com.unam.proyecto1.modelo.Disciplina;
+import com.unam.proyecto1.modelo.Evento;
 import com.unam.proyecto1.modelo.Usuario;
+import com.unam.proyecto1.repositorio.EventoRepositorio;
 import com.unam.proyecto1.repositorio.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,10 +22,23 @@ public class JuezControlador {
     @Autowired
     UsuarioRepositorio usuarioRepositorio;
 
+    @Autowired
+    EventoRepositorio eventoRepositorio;
+
     @GetMapping("/")
     public String perfil(Model model, Principal principal) {
         Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
         model.addAttribute("usuario", usuario);
+        Disciplina disciplinaJuez = usuario.getDisciplinaJuez();
+        List<Evento> eventos = eventoRepositorio.findEventosByDisciplina(disciplinaJuez.getDisciplina_Id());
+        List<List<Usuario>> usuariosPorEvento = new ArrayList<>();
+        for(Evento evento : eventos){
+            List<Usuario> usuariosEvento = usuarioRepositorio.findCompetidoresByEvento(evento.getEvento_Id());
+            usuariosPorEvento.add(usuariosEvento);
+        }
+        model.addAttribute("eventos", eventos);
+        model.addAttribute("usuariosPorEvento", usuariosPorEvento);
         return "inicioJueces";
     }
+
 }

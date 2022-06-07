@@ -42,24 +42,35 @@ public class Usuario {
     @Column
     private Integer altura;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne( fetch = FetchType.EAGER)
     @JoinColumn(name = "entrenador_Id")
     private Usuario entrenador;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne( fetch = FetchType.EAGER)
     @JoinColumn(name = "disciplina_Juez")
     private Disciplina disciplinaJuez;
 
     @Column
     private Integer enabled;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "Usuarios_Roles",
             joinColumns = @JoinColumn(name = "usuario_Id"),
             inverseJoinColumns = @JoinColumn(name = "rol_Id")
     )
     private Set<Rol> roles = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name="Competidores_Eventos",
+            joinColumns = @JoinColumn(name="usuario_Id"),
+            inverseJoinColumns = @JoinColumn(name="evento_Id")
+    )
+    private Set<Evento> eventos = new HashSet<>();
+
+
+
 
     public Integer getUsuario_Id() {
         return usuario_Id;
@@ -152,14 +163,29 @@ public class Usuario {
             String r=rol.getNombre().split("_")[1];
             if(r.equals("ADMIN"))return "ADMINISTRADOR";
             return r;
-
         }
         return "ROL NOT FOUND";
     }
+    public String getEvento(){
+        Iterator<Evento> iterator = this.eventos.iterator();
+        while(iterator.hasNext()){
+            Evento evento = iterator.next();
+            String e=evento.getNombreEvento();
+            return e;
+        }
+        return "EVENTO NOT FOUND";
+    }
+
+    public Set<Evento> getEventos() {
+        return this.eventos;
+    }
+
     public void addRol(Rol rol){
         roles.add(rol);
     }
-
+    public void addEvento(Evento evento){
+        eventos.add(evento);
+    }
     public void setRoles(Set<Rol> roles) {
         this.roles = roles;
     }
@@ -177,6 +203,16 @@ public class Usuario {
         while(iterator.hasNext()){
             Rol rol = iterator.next();
             if(rol.getNombre().equals(nombreRol)){
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean hasEvento(Evento nombreEvento){
+        Iterator<Evento> iterator = this.eventos.iterator();
+        while(iterator.hasNext()){
+            Evento eve = iterator.next();
+            if(eve.equals(nombreEvento)){
                 return true;
             }
         }

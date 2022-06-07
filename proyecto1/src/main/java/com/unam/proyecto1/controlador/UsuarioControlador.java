@@ -25,6 +25,7 @@ public class UsuarioControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
+
     @GetMapping("/")
     public String perfil(Model model,Principal principal) {
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
@@ -37,6 +38,10 @@ public class UsuarioControlador {
         return "usuarios";
     }
 
+    @GetMapping("/calificaciones")
+    public String calificaciones(){
+        return "calififaciones";
+    }
 /**
     @PostMapping("/crea")
     public String crea(HttpServletRequest request, Model model) {

@@ -1,0 +1,98 @@
+<html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla.html :: head">
+</head>
+<body>
+<header th:replace="plantillas/plantilla.html :: header">
+</header>
+
+<main>
+    <article class="container article">
+        <h2 data-aos="zoom-out" data-aos-duration="900" class="h2 article-title" th:text="${evento.getNombreEvento()+' - '+evento.getRama()+ ' ('+ evento.getDisciplina().getNombre()+')'}"></h2>
+        <div data-aos="fade-right" data-aos-duration="1300" class="select">
+            <select id="sel" name="eventos" >
+                <option value="">Seleccione un evento</option>
+                <option th:each="evento : ${eventos}" th:value="${evento.getEvento_Id()}" th:text="${evento.getNombreEvento()+' : '+evento.getFecha()+' '+evento.getRama()}"></option>
+            </select>
+        </div>
+
+        <div  class="primeros" data-aos="fade-left" data-aos-duration="1000">
+
+            <div class="card task-card" data-aos="fade-left" data-aos-duration="200">
+
+                <div class="card-icon icon-box silver" >
+                    <span class="material-symbols-rounded  icon">workspace_premium</span>
+                </div>
+
+                <div>
+                    <p class="card-text" style="color:#3c4646;" th:text="${segundo}">Gonzalo Medina Juarez</p>
+                </div>
+
+            </div>
+
+            <div class="card task-card" data-aos="fade-left" data-aos-duration="1000">
+
+                <div class="card-icon icon-box gold">
+                    <span class="material-symbols-rounded  icon">workspace_premium</span>
+                </div>
+
+                <div>
+                    <p class="card-text" style="color:#926f34;" th:text="${primero}">Mariano Nuñez Díaz</p>
+                </div>
+            </div>
+
+            <div class="card task-card" data-aos="fade-left" data-aos-duration="1500">
+
+                <div class="card-icon icon-box bronze">
+                    <span class="material-symbols-rounded  icon">workspace_premium</span>
+                </div>
+
+                <div>
+                    <p class="card-text" style="color:#7f6534;" th:text="${tercero}">Pablo Dominguez Sandoval</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--Tabla inicia-->
+        <div class="tabla-posiciones" data-aos="fade-right" data-aos-duration="1000">
+            <table class="table">
+                <thead>
+                <tr class="tabla-t">
+                    <th>#Posicion</th>
+                    <th>Nombre</th>
+                    <th>Evento</th>
+                    <th>Calificación</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="competidor,posStat : ${competidores}">
+                    <td data-title="#Posicion"th:text="${posStat.count}"></td>
+                    <td data-title="Nombre" th:text="${competidor.getNombre()+' '+competidor.getApellido_P()+' '+competidor.getApellido_M()}"></td>
+                    <td data-title="Evento" th:text="${evento.getNombreEvento()+' ('+evento.getDisciplina().getNombre()+')'}"></td>
+                    <td data-title="Calificacion" th:text="${calificacionRepositorio.promedioPorEvento(competidor.getUsuario_Id(),evento.getEvento_Id())}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </article>
+</main>
+
+
+<footer th:replace="plantillas/plantilla.html :: footer">
+</footer>
+<script th:replace="plantillas/plantilla.html :: js">
+</script>
+<script>
+  document.getElementsByClassName("navbar-link")[3].classList.add("active");
+  var sel = document.querySelector('#sel')
+  var op = document.getElementsByTagName("option");
+  sel.addEventListener('change',function(){
+       console.log(sel.value);
+       window.location.href = "/entrenador/tabla/"+sel.value;
+  });
+</script>
+</body>
+</html>
