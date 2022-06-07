@@ -11,13 +11,14 @@ import com.unam.proyecto1.servicio.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/admins")
@@ -54,11 +55,67 @@ public class AdminControlador {
 
         return "inicioAdmin";
     }
+    @RequestMapping("/busca")
+    public String busca(Model model, String error, Principal principal) {
+        Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
+        model.addAttribute("usuario", usuario);
+        List<Usuario> usuarios = usuarioRepositorio.findAll();
+        List<Usuario> nuevos = new ArrayList<>();
+        for (Usuario u:usuarios){
+            if(u.hasRole("ROLE_COMPETIDOR") || u.hasRole("ROLE_ENTRENADOR")){
+                nuevos.add(u);
+            }
+        }
+        if (usuarios!=null)
+            model.addAttribute("usuarios", nuevos);
+        return "buscaCompetidorEntrenador";
+    }
+    @PostMapping("/actualizaDisciplina/{id}")
+    private String actualizaDisciplina(@PathVariable("id") Integer id,Model modelo,
+                                    Principal principal,HttpServletRequest request){
+        Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
+        Disciplina antigua = disciplinaRepositorio.getById(id);
+        Disciplina nueva = disciplinaRepositorio.findByNombre(request.getParameter("nombreDisciplina"));
+        if (nueva == null || antigua.getNombre().equals(nueva.getNombre())){
+            antigua.setNombre(request.getParameter("nombreDisciplina"));
+            disciplinaServicio.actualizarDisciplina(antigua);
+        }
+        modelo.addAttribute("error", nueva != null);
+        modelo.addAttribute("exito", nueva == null);
+        modelo.addAttribute("usuario", usuario);
+        modelo.addAttribute("disciplina", antigua);
+        return "editarDisciplina";
+    }
+    @GetMapping("editaDisciplina/{id}")
+    private String editarDisciplina(@PathVariable("id") Integer id, Model modelo,
+                          Principal principal){
+        Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
+        Disciplina disciplina =  disciplinaRepositorio.getById(id);
 
-    @GetMapping("/buscarDisciplinas")
-    public String buscar(){
-
-        return "buscarDisciplinas";
+        modelo.addAttribute("usuario", usuario);
+        modelo.addAttribute("disciplina",disciplina);
+        System.out.println("LOL XD");
+        System.out.println(disciplina.getNombre());
+        return "editarDisciplina";
+    }
+    @GetMapping("/eliminarDisciplina/{id}")
+    public String editaEvento(@PathVariable Integer id, Principal principal, Model model){
+        Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
+        disciplinaServicio.eliminaDisciplina(id);
+        List<Disciplina> disciplinas = disciplinaRepositorio.findAll();
+        model.addAttribute("disciplinas",disciplinas);
+        model.addAttribute("usuario",usuario);
+        model.addAttribute("exito",true);
+        System.out.println("IDDisciplina: "+id);
+        return "buscarDisciplina";
+    }
+    @GetMapping("/buscarDisciplina")
+    public String buscar(Principal principal,Model model){
+        Usuario usuarioActual =  usuarioRepositorio.findByEmail(principal.getName());
+        List<Disciplina> disciplinas = disciplinaRepositorio.findAll();
+        model.addAttribute("usuario", usuarioActual);
+        model.addAttribute("disciplinas",disciplinas);
+        return "buscarDisciplina";
     }
     @PostMapping("/creaDisciplina")
     public String creaDisciplina(HttpServletRequest request, Model model, Principal principal) {

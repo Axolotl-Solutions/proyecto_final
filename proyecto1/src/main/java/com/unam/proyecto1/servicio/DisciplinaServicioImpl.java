@@ -20,4 +20,12 @@ public class DisciplinaServicioImpl implements DisciplinaServicio {
         nuevaDisciplina.setNombre(nombre);
         return disciplinaRepositorio.save(nuevaDisciplina);
     }
+    @Override
+    public void eliminaDisciplina(Integer id){
+        disciplinaRepositorio.deleteById(id);
+    }
+    @Override
+    public Disciplina actualizarDisciplina(Disciplina disciplina) {
+        return disciplinaRepositorio.save(disciplina);
+    }
 }
