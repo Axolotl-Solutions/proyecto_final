@@ -37,6 +37,7 @@ public class JuezControlador {
         model.addAttribute("eventos", eventos);
         model.addAttribute("usuarioRepositorio", usuarioRepositorio);
         model.addAttribute("calificacionRepositorio", calificacionRepositorio);
+        model.addAttribute("disciplina",disciplinaJuez);
         return "inicioJueces";
     }
 

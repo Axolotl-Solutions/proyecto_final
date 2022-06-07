@@ -38,7 +38,7 @@ if(tipoUsuario.innerHTML === "COMPETIDOR"){
     document.getElementById("logo-1").href="/competidor/";
     document.getElementById("logo-2").href="/competidor/";
 }
-if(tipoUsuario.innerHTML === "JUEZ"){
+if(tipoUsuario.innerHTML.includes("JUEZ")){
     document.getElementById("agregar-nav").href="/juez/";
     document.getElementById("agregar-menu").href="/juez/";
     document.getElementById("inicio-nav").href="/juez/";
