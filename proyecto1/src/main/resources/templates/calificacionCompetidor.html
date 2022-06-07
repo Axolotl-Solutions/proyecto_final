@@ -8,11 +8,11 @@
 
 <section>
     <div class="calificaciones" >
-        <div class="card profile-card" data-aos="fade-right" data-aos-duration="700">
-            <button class="card-menu-btn icon-box" aria-label="More" data-menu-btn>
+        <div class="card" data-aos="fade-right" data-aos-duration="700">
+            <button th:if="${usuario.getRol().equals('ENTRENADOR')}" id="button-over-card" class="card-menu-btn icon-box" aria-label="More" data-menu-btn>
                 <span class="material-symbols-rounded  icon">more_horiz</span>
             </button>
-            <ul class="ctx-menu">
+            <ul class="ctx-menu" th:if="${usuario.getRol().equals('ENTRENADOR')}">
                 <li class="ctx-item">
                     <a th:href="@{/entrenador/editar/{id}(id = ${competidor.getEmail()})}" class="ctx-menu-btn icon-box">
                         <span class="material-symbols-rounded  icon" aria-hidden="true">edit</span>
@@ -63,9 +63,16 @@
             </ul>
             <div class="divider card-divider"></div>
             <ul class="progress-list">
+                <li th:if="${competidor.getEventos().size()==0}">
+                    <p class="card-subtitle">No hay eventos registrados</p>
+                </li>
                 <li th:each="evento : ${competidor.getEventos()}" class="progress-item">
-                    <div class="thumbs">
+                    <div th:if= "${calificacionesRepositorio.promedioPorEvento(competidor.getUsuario_Id(),evento.getEvento_Id()) != null }" class="thumbs">
                         <span class="material-symbols-rounded  icon">star</span>
+                    </div>
+                    <div th:if= "${calificacionesRepositorio.promedioPorEvento(competidor.getUsuario_Id(),evento.getEvento_Id()) == null }" class="thumbs">
+                        <p class="card-subtitle">Sin calificación</p>
+                        <span class="material-symbols-rounded  icon" style="color:var(--cool-gray);">star</span>
                     </div>
 
                     <div class="progress-label">
@@ -86,8 +93,10 @@
                     <span class="material-symbols-rounded  icon" aria-hidden="true">chat</span>
                 </div>
                 <div class="divider card-divider"></div>
-
-                <div th:each="calificacion : ${calificaciones}" class="juez-comentario">
+                <div th:if="${calificaciones.size()==0}">
+                    Todivía no hay comentarios
+                </div>
+                <div th:if="${calificaciones.size()>0}" th:each="calificacion : ${calificaciones}" class="juez-comentario">
                     <div class="juez-titulo">
                         <div>
                             <figure class="card-titulo">
@@ -120,7 +129,16 @@
 <script th:replace="plantillas/plantilla.html :: js">
 </script>
 <script>
-  var eliminar = document.getElementsByName("eliminar-btn");
+
+  var eliminar = document.getElementsByName("eliminar-btn");    
+    if(tipoUsuario.innerHTML === "COMPETIDOR"){
+     document.getElementsByClassName("navbar-link")[1].classList.add("active");
+    }else{
+        document.getElementsByClassName("navbar-link")[4].classList.add("active");
+    }
+
+      if(tipoUsuario.innerHTML === "ENTRENADOR"){
+          var eliminar = document.getElementsByName("eliminar-btn");
   var links = document.getElementsByClassName("a-href");
   for (let i = 0; i < eliminar.length; i++) {
    eliminar[i].addEventListener("click", function(){
@@ -160,6 +178,8 @@
    })
    });
   }
+      }
+
 </script>
 </body>
 </html>

@@ -13,6 +13,7 @@
             <select id="sel" name="select">
                 <option value="juez">Juez</option>
                 <option value="evento">Evento</option>
+                <option value="disciplina">Disciplina</option>
             </select>
         </div>
 
@@ -45,15 +46,9 @@
                                         <span class="details">Correo</span>
                                         <input type="text" id="emailJuez" name="emailJuez" placeholder="Introduce el correo electrónico" required>
                                     </div>
-                                    <!--
-                                    <div class="input-box">
-                                        <span class="details">Fecha de nacimiento</span>
-                                        <input type="date" placeholder="introduce fecha de nacimiento" required>
-                                    </div>
-                                    -->
                                     <div class="input-box">
                                         <span class="details">Contraseña</span>
-                                        <input type="password" id="passwordJuez" name="passwordJuez" placeholder="Introduce la contraseña" required>
+                                        <input type="password" id="contraseña" name="passwordJuez" placeholder="Introduce la contraseña" required>
                                     </div>
                                     <div>
                                         <span class="details">Disciplina</span>
@@ -68,23 +63,6 @@
                                         <input id="confirma-contraseña" type="password" placeholder="Confirma la contraseña" required>
                                     </div>
                                 </div>
-                                <!--
-                                <div class="gender-details">
-                                    <input type="radio" name="gender" id="dot-1">
-                                    <input type="radio" name="gender" id="dot-2">
-                                    <span class="gender-title">Sexo</span>
-                                    <div class="category">
-                                        <label for="dot-1">
-                                            <span class="dot one"></span>
-                                            <span class="gender">Masculino</span>
-                                        </label>
-                                        <label for="dot-2">
-                                            <span class="dot two"></span>
-                                            <span class="gender">Femenino</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                -->
                                 <div class="button">
                                     <input type="submit" value="Registrar">
                                 </div>
@@ -95,7 +73,7 @@
                     <div class="cont" style="display:none;">
                         <div class="title">Registrar Evento</div>
                         <div class="content">
-                            <form method="post" th:action="@{/admins/creaEvento}">
+                            <form method="post" th:action="@{/admins/creaEvento}" onsubmit='return valida(this)'>
                                 <div class="user-details">
                                     <div class="input-box" >
                                         <span class="details">Nombre Evento</span>
@@ -117,6 +95,9 @@
                                         <span class="details">Fecha del evento</span>
                                         <input type="date" id="fecha" name="fecha" placeholder="Introduce la fecha del evento" required>
                                     </div>
+                                </div>
+                                <div id="tooltip" class="tooltip">
+                                    <span class="tooltiptext">Selecciona un sexo</span>
                                 </div>
                                 <div class="gender-details">
                                     <input type="radio" name="rama" value="Varonil" id="dot-1-rama">
@@ -145,6 +126,22 @@
                         </div>
                     </div>
                     <!--FROM Disciplina-->
+                    <div class="cont" style="display:none;">
+                        <div class="title">Registrar Disciplina</div>
+                        <div class="content">
+                            <form method="post" th:action="@{/admins/creaDisciplina}">
+                                <div class="user-details" >
+                                    <div class="input-box" style="width:100%;">
+                                        <span class="details">Nombre Disciplina</span>
+                                        <input type="text" id="disciplina" name="nombreDisciplina" placeholder="Introduce el nombre del evento" required>
+                                    </div>
+                                </div>
+                                <div class="button">
+                                    <input type="submit" value="Registrar">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                     <!-- TERMINA FORMS  -->
 
                 </div>
@@ -155,10 +152,72 @@
 
     </article>
 </main>
-
+<div id="exito" th:if="${exito}" style="display:none;">
+</div>
+<div id="error" th:if="${error}" style="display:none;">
+</div>
+<div id="errorDisciplina" th:if="${errorDisciplina}" style="display:none;">
+</div>
 <footer th:replace="plantillas/plantilla.html :: footer">
 </footer>
 <script th:replace="plantillas/plantilla.html :: js">
+</script>
+<script>
+    var exito = document.getElementById('exito');
+    var erro = document.getElementById('error');
+    if(exito!=null){
+        Swal.fire({
+              icon: 'success',
+              title: 'Agregado correctamente',
+              confirmButtonColor: 'var(--confirmar-btn)'
+            })
+    }
+    if(erro != null){
+        Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Este correo ya esta registrado',
+              confirmButtonColor: 'var(--confirmar-btn)'
+            })
+    }
+    if(errorDisciplina != null){
+        Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Esta disciplina ya esta registrada',
+              confirmButtonColor: 'var(--confirmar-btn)'
+            })
+    }
+   var contra = document.getElementById("contraseña");
+   var confirmaContra = document.getElementById("confirma-contraseña");
+    function validaContra(){
+      if(contra.value != confirmaContra.value) {
+        confirmaContra.setCustomValidity("Las contraseñas no coinciden");
+      } else {
+        confirmaContra.setCustomValidity('');
+      }
+    }
+    contra.onchange = validaContra;
+    confirmaContra.onkeyup = validaContra;
+</script>
+<script>
+    function valida(f) {
+     const tooltip = document.querySelector('#tooltip');
+      var ok = true;
+      if(f[4].checked==false && f[5].checked==false && f[6].checked==false){
+        ok = false;
+      }
+
+      let timer;
+      if(ok == false){
+        tooltip.classList.add('activo');
+        timer = setTimeout(() => {
+            tooltip.classList.remove('activo');
+        }, 2500);
+
+       }
+      return ok;
+    }
 </script>
 <script>
      document.getElementsByClassName("navbar-link")[1].classList.add('active');
@@ -169,11 +228,18 @@
           cont[0].style.cssText += 'animation-name:scale; animation-duration: 1.5s;'
           cont[0].style.display='grid';
           cont[1].style.display='none';
+          cont[2].style.display='none'
       }
       else if(select.value === "evento"){
           cont[1].style.cssText += 'animation-name:scale; animation-duration: 1.5s;'
           cont[1].style.display='grid';
           cont[0].style.display='none';
+          cont[2].style.display='none';
+      }else if(select.value === "disciplina"){
+          cont[2].style.cssText += 'animation-name:scale; animation-duration: 1.5s;grid-template-columns:1fr;'
+          cont[2].style.display='grid';
+          cont[0].style.display='none';
+          cont[1].style.display='none';
       }
     });
     document.getElementsByClassName("navbar-link")[1].classList.add("active");

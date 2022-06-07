@@ -1,0 +1,184 @@
+<html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla.html :: head">
+</head>
+<body>
+<header th:replace="plantillas/plantilla.html :: header">
+</header>
+
+<section style="margin-top:30px;">
+    <div style="margin-left:30px;display:flex;align-items:center;gap:15px;">
+        <form method="get" style="display:flex;gap:10px;" th:action="@{/entrenador/agregarEvento/{idC}(idC = ${competidor.getUsuario_Id()})}">
+            <div data-aos="fade-right" data-aos-duration="1300" class="select">
+                <select id="sel" name="eventos" >
+                    <option th:each="evento : ${eventosAll}" th:value="${evento.getEvento_Id()}" th:text="${evento.getNombreEvento()+' : '+evento.getFecha()+' '+evento.getRama()}"></option>
+                </select>
+            </div>
+            <button type="submit" data-aos="fade-left" data-aos-duration="1300" class="inscribir">
+                <span class="material-symbols-rounded  icon">add_circle</span>
+            </button>
+        </form>
+    </div>
+    <div style="margin-left:30px;display:grid;margin-top:30px;">
+        <h2 data-aos="zoom-out" data-aos-duration="900" class="h2 article-title" th:text="${'Eventos de: '+competidor.getNombre()+' '+competidor.getApellido_P() + ' ' + competidor.getApellido_M()+ ' (' + competidor.getSexo()+')'}"></h2>
+    </div>
+    <div class="eventos-competidor">
+        <div th:if="${competidor.getEventos().size()==0}" class="card task-card" data-aos="fade-left" data-aos-duration="1000">
+            <div class="card-icon icon-box">
+                <span class="material-symbols-rounded  icon">warning</span>
+            </div>
+            <div>
+                <p class="card-text">No hay eventos registrados</p>
+            </div>
+        </div>
+        <div th:each="evento : ${competidor.getEventos()}" class="card" data-aos="fade-right" data-aos-duration="700">
+            <button class="card-menu-btn icon-box" aria-label="More" data-menu-btn>
+                <span class="material-symbols-rounded  icon">more_horiz</span>
+            </button>
+            <ul class="ctx-menu">
+                <li th:if="${calificacionRepositorio.promedioPorEvento(competidor.getUsuario_Id(),evento.getEvento_Id()) == null}" class="ctx-item">
+                    <button  class="ctx-menu-btn red icon-box" name="eliminar-btn">
+                        <span class="material-symbols-rounded  icon" aria-hidden="true">delete</span>
+                        <span class="ctx-menu-text">Eliminar</span>
+                    </button>
+                    <a class="a-href" th:href="@{/entrenador/eliminarEvento/{idC}/{idE}(idC = ${competidor.getUsuario_Id()}, idE = ${evento.getEvento_Id()})}" style="display:none" ></a>
+                </li>
+                <li th:if="${calificacionRepositorio.promedioPorEvento(competidor.getUsuario_Id(),evento.getEvento_Id()) != null}" class="ctx-item">
+                    <button onclick="error()" class="ctx-menu-btn red icon-box" name="">
+                        <span class="material-symbols-rounded  icon" aria-hidden="true">delete</span>
+                        <span class="ctx-menu-text">Eliminar</span>
+                    </button>
+                </li>
+            </ul>
+            <div class="profile-card-wrapper">
+                <div>
+                    <p th:text="${evento.getNombreEvento()}" class="card-title">Fernando Gerardo Flores García</p>
+                    <p th:text="${evento.getDisciplina().getNombre()}" class="card-subtitle">Competidor</p>
+                </div>
+                <div th:if="${calificacionRepositorio.promedioPorEvento(competidor.getUsuario_Id(),evento.getEvento_Id()) != null}">
+                    <span class="material-symbols-rounded icon" style="color:var(--pacific-blue);">verified</span>
+                </div>
+                <div th:if="${calificacionRepositorio.promedioPorEvento(competidor.getUsuario_Id(),evento.getEvento_Id()) == null}">
+                    <span class="material-symbols-rounded icon" style="color:var(--cool-gray);">verified</span>
+                </div>
+            </div>
+            <div class="divider card-divider"></div>
+            <ul class="contact-list">
+                <li th:if="${calificacionRepositorio.promedioPorEvento(competidor.getUsuario_Id(),evento.getEvento_Id()) != null}">
+                    <a class="contact-link icon-box" style="color:var(--pacific-blue);">
+                        <span class="material-symbols-rounded  icon" >star</span>
+                        <p th:text="${calificacionRepositorio.promedioPorEvento(competidor.getUsuario_Id(),evento.getEvento_Id())}" class="text"></p>
+                    </a>
+                </li>
+                <li th:if="${evento.getRama().equals('Varonil')}">
+                    <a class="contact-link icon-box">
+                        <span class="material-symbols-rounded  icon">male</span>
+                        <p th:text="${evento.getRama()}" class="text">80 kg</p>
+                    </a>
+                </li>
+                <li th:if="${evento.getRama().equals('Femenil')}">
+                    <a class="contact-link icon-box">
+                        <span class="material-symbols-rounded  icon">female</span>
+                        <p th:text="${evento.getRama()}" class="text">80 kg</p>
+                    </a>
+                </li>
+                <li th:if="${evento.getRama().equals('Mixto')}">
+                    <a class="contact-link icon-box">
+                        <span class="material-symbols-rounded  icon">male</span>
+                        <span class="material-symbols-rounded  icon">female</span>
+                        <p th:text="${evento.getRama()}" class="text">80 kg</p>
+                    </a>
+                </li>
+                <li>
+                    <a class="contact-link icon-box">
+                        <span class="material-symbols-rounded  icon">calendar_month</span>
+                        <p th:text="${evento.getCategoria()}" class="text">174 cm</p>
+                    </a>
+                </li>
+                <li>
+                    <a  class="contact-link icon-box">
+                        <span class="material-symbols-rounded  icon">event</span>
+                        <p th:text="${evento.getFecha()}" class="text"></p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<div th:if="${error}" id="error"></div>
+
+<footer th:replace="plantillas/plantilla.html :: footer">
+</footer>
+<script th:replace="plantillas/plantilla.html :: js">
+</script>
+<script>
+  var err= document.getElementById('error');
+  console.log(err);
+  if(err != null){
+    Swal.fire({
+     title: 'No se pudo agregar al competidor al evento',
+     text: "El competidor ya esta inscrito o no es apto para la rama del evento",
+     icon: 'warning',
+     iconColor: 'var(--sw-cancelar)',
+     confirmButtonText: 'Bien!',
+     confirmButtonColor:'var(--confirmar-btn)',
+   })
+  }
+  function agregaEvento(){
+    var sel = document.getElementById('sel');
+    var link = document.getElementById('link');
+    window.location.href = link.href;
+  }
+  function error(){
+    Swal.fire({
+     title: 'No se puede eliminar este evento',
+     text: "El competidor ya tiene calificación",
+     icon: 'warning',
+     iconColor: 'var(--sw-cancelar)',
+     confirmButtonText: 'Bien!',
+     confirmButtonColor:'var(--confirmar-btn)',
+   })
+  }
+  var eliminar = document.getElementsByName("eliminar-btn");
+  var links = document.getElementsByClassName("a-href");
+  for (let i = 0; i < eliminar.length; i++) {
+   eliminar[i].addEventListener("click", function(){
+   Swal.fire({
+     title: '¿Está seguro?',
+     text: "No podrá revertir esta acción.",
+     icon: 'warning',
+     iconColor: 'var(--sw-cancelar)',
+     showCancelButton: true,
+     confirmButtonText: 'Si, eliminar',
+     cancelButtonText: 'No, cancelar',
+     confirmButtonColor:'var(--confirmar-btn)',
+     cancelButtonColor: 'var(--eliminar-btn)',
+     reverseButtons: true
+   }).then((result) => {
+     if (result.isConfirmed) {
+       Swal.fire({
+        title: 'Eliminado',
+        text: "Se elimino correctamente.",
+        icon: 'success',
+        confirmButtonText: '¡Bien!',
+        confirmButtonColor:'var(--confirmar-btn)'
+      })
+       window.setTimeout(function(){
+        window.location.href = links[i].href;
+      }, 500);
+     } else if (result.dismiss === Swal.DismissReason.cancel){
+       Swal.fire({
+        title: 'Cancelado',
+        text: "No se elimino el competidor",
+        icon: 'error',
+        confirmButtonText: '¡Bien!',
+        confirmButtonColor:'var(--confirmar-btn)'
+      })
+     }
+   })
+   });
+  }
+</script>
+</body>
+</html>
