@@ -9,10 +9,10 @@
 <section>
     <div class="calificaciones" >
         <div class="card" data-aos="fade-right" data-aos-duration="700">
-            <button id= "button-over-card" class="card-menu-btn icon-box" aria-label="More" data-menu-btn>
+            <button th:if="${usuario.getRol().equals('ENTRENADOR')}" id="button-over-card" class="card-menu-btn icon-box" aria-label="More" data-menu-btn>
                 <span class="material-symbols-rounded  icon">more_horiz</span>
             </button>
-            <ul class="ctx-menu">
+            <ul class="ctx-menu" th:if="${usuario.getRol().equals('ENTRENADOR')}">
                 <li class="ctx-item">
                     <a th:href="@{/entrenador/editar/{id}(id = ${competidor.getEmail()})}" class="ctx-menu-btn icon-box">
                         <span class="material-symbols-rounded  icon" aria-hidden="true">edit</span>
