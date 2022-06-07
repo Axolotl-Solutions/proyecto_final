@@ -34,7 +34,6 @@ public class Calificacion {
     public Integer getCalificacion_Id() {
         return calificacion_Id;
     }
-
     public void setCalificacion_Id(Integer calificacion_Id) {
         this.calificacion_Id = calificacion_Id;
     }

@@ -56,19 +56,33 @@
               </a>
             </li>
 
-            <li>
+            <li th:if="${!usuario.getRol().equals('ADMINISTRADOR')}">
               <a id="calificaciones-nav" href="#" class="navbar-link icon-box">
                 <span class="material-symbols-rounded  icon">military_tech</span>
 
                 <span>Calificaciones</span>
               </a>
             </li>
+            <li th:if="${usuario.getRol().equals('ADMINISTRADOR')}">
+              <a id="disciplinas-nav" href="#" class="navbar-link icon-box">
+                <span class="material-symbols-rounded  icon">pool</span>
+                <span>Disciplinas</span>
+              </a>
+            </li>
 
-            <li>
+            <li th:if="${!usuario.getRol().equals('ADMINISTRADOR')}">
               <a id="tabla-nav" href="#" class="navbar-link icon-box">
                 <span class="material-symbols-rounded  icon">bar_chart</span>
 
                 <span>Tabla</span>
+              </a>
+            </li>
+
+            <li th:if="${usuario.getRol().equals('ADMINISTRADOR')}">
+              <a id="jueces-nav" href="#" class="navbar-link icon-box">
+                <span class="material-symbols-rounded  icon">gavel</span>
+
+                <span>Jueces</span>
               </a>
             </li>
 
@@ -79,6 +93,7 @@
                 <span>Buscar</span>
               </a>
             </li>
+
 
           </ul>
 
@@ -93,7 +108,8 @@
                   <div>
                     <p id="nombre-nav" th:text="${usuario.getNombre()}" class="profile-title">Fernando F</p>
 
-                    <p id="rol-nav" th:text="${usuario.getRol()}" class="profile-subtitle">Entrenador</p>
+                    <p th:if="${!usuario.getRol().equals('JUEZ')}" id="rol-nav" th:text="${usuario.getRol()}" class="profile-subtitle">Entrenador</p>
+                    <p th:if="${usuario.getRol().equals('JUEZ')}" id="rol-nav" th:text="${usuario.getRol()+' ('+disciplina+')'}" class="profile-subtitle">Entrenador</p>
                   </div>
                  </a>
                   <div class="dd_menu">

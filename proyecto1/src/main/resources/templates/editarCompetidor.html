@@ -52,8 +52,8 @@
                                             Editar eventos
                                         </span>
                                         <a th:href="@{/entrenador/editarEventos/{email}(email = ${competidor.getEmail()})}" class="editar-btn" active>
-                                            <span class="material-symbols-rounded  icon">edit</span>
                                             <span>Eventos</span>
+                                            <span class="material-symbols-rounded  icon">edit</span>
                                         </a>
                                     </div>
                                 </div>
@@ -99,6 +99,7 @@
 <script th:replace="plantillas/plantilla.html :: js">
 </script>
 <script>
+    document.getElementsByClassName("navbar-link")[4].classList.add("active");
     var error = document.getElementById('error');
     var exito = document.getElementById('exito');
     if(error!=null){

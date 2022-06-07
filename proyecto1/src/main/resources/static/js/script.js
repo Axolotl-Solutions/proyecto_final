@@ -8,8 +8,11 @@
 
 var tipoUsuario= document.getElementById("rol-nav");
 if(tipoUsuario.innerHTML === "ADMINISTRADOR"){
+    document.getElementById("jueces-nav").href="/admins/buscaJuez";
+    document.getElementById("busca-nav").href="/admins/busca";
     document.getElementById("agregar-nav").href="/admins";
     document.getElementById("agregar-menu").href="/admins";
+    document.getElementById("disciplinas-nav").href="/admins/buscarDisciplina";
     document.getElementById("inicio-nav").href="/inicioAdmin";
     document.getElementById("logo-1").href="/inicioAdmin";
     document.getElementById("logo-2").href="/inicioAdmin";
@@ -130,18 +133,7 @@ for (let i = 0; i < barra.length; i++) {
   document.getElementsByTagName("head")[0].appendChild(cssA);
   barra[i].style.cssText += 'transition: background 3s; animation-name:slider'+i+';animation-duration: 3.8s;'+'width:'+pro[i].innerHTML*10+'%; background:#'+color+";";
 }
-/*
-Array.prototype.forEach.call(barra, function(e) {
-  var cssA = document.createElement("style");
-  let reglas = document.createTextNode('@-webkit-keyframes slider {'+
-  'from { width:0%; }'+
-  'to { width:100%; }'+
-  '}');
-  cssA.appendChild(reglas);
-  document.getElementsByTagName("head")[0].appendChild(cssA);
-  e.style.cssText += 'animation-name:slider; animation-duration: 1.8s;';
-});
-*/
+
 
 
 
