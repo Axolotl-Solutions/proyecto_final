@@ -104,10 +104,9 @@
             <li style="cursor:pointer;" class="nr_li dd_main">
                 <figure class="profile-avatar">
                   <a class="navbar-link">
-                  <img src="/img/avatar-1.png" alt="img" width="32" height="32">
+                  <img style="border-radius:55px;" th:src="@{${'/img/'+usuario.getImagen()}}" alt="" width="32" height="32">
                   <div>
                     <p id="nombre-nav" th:text="${usuario.getNombre()}" class="profile-title">Fernando F</p>
-
                     <p th:if="${!usuario.getRol().equals('JUEZ')}" id="rol-nav" th:text="${usuario.getRol()}" class="profile-subtitle">Entrenador</p>
                     <p th:if="${usuario.getRol().equals('JUEZ')}" id="rol-nav" th:text="${usuario.getRol()+' ('+disciplina.getNombre()+')'}" class="profile-subtitle">Entrenador</p>
                   </div>
@@ -191,16 +190,6 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
        AOS.init({offset: 100});
-
-        if(tipoUsuario.innerHTML === "COMPETIDOR"){
-            document.getElementById("agregar-nav").style.display = 'block';
-    // hide the lorem ipsum text
-            document.getElementById("agregar-nav").style.display = 'none';
-               document.getElementById("busca-nav").style.display = 'block';
-    // hide the lorem ipsum text
-            document.getElementById("busca-nav").style.display = 'none';
-           
-    }
    </script>
 </div>
 

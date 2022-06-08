@@ -1,6 +1,15 @@
 'use strict';
 
+function getFile() {
+  document.getElementById("upfile").click();
+}
 
+function sub(obj) {
+  var archivo = obj.value;
+  var nombreArchivo = archivo.split("\\");
+  document.getElementById("subir").innerHTML = '<data>'+nombreArchivo[nombreArchivo.length - 1]+'</data>'+'<span class="material-symbols-rounded  icon">file_upload</span>';
+  event.preventDefault();
+}
 
 /*
 * Redireccionamiento en la barra nav dependiendo de rol

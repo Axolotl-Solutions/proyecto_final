@@ -13,8 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -133,7 +138,7 @@ public class EntrenadorControlador {
     }
 
     @PostMapping("/registra")
-    public String registra(HttpServletRequest request, Model model,Principal principal) {
+    public String registra(@RequestParam("imagen") MultipartFile imagen, HttpServletRequest request, Model model, Principal principal) {
         Usuario usuarioActual =  usuarioRepositorio.findByEmail(principal.getName());
         List<Evento> eventos = eventoRepositorio.findAll();
         String entrenador_email = usuarioActual.getEmail();
@@ -143,7 +148,7 @@ public class EntrenadorControlador {
         String sexo = eventoRepositorio.getById(Integer.valueOf(request.getParameter("eventos"))).getRama().equals("Femenil")?"Femenino":"Masculino";
         sexo = eventoRepositorio.getById(Integer.valueOf(request.getParameter("eventos"))).getRama().equals("Mixto")?request.getParameter("sexo"):sexo;
         model.addAttribute("eventos", eventos);
-        System.out.println(sexo+" SEXOOOOO");
+        System.out.println(request.getParameter("imagen"));
         Usuario usuario = null;
         if (sexo.equals(request.getParameter("sexo"))) {
              usuario = usuarioServicio.creaUsuarioCompetidor(request.getParameter("email"),
@@ -161,6 +166,23 @@ public class EntrenadorControlador {
         }else{
             model.addAttribute("errorSexo",true);
             return "registraCompetidor";
+        }
+        System.out.println(imagen+" IMAGENNENENENEN");
+        System.out.println(imagen.isEmpty());
+        if (!imagen.isEmpty()){
+            Path directorioImagenes = Paths.get("src//main//resources//static//img");
+            String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+            try {
+                byte[] bytesImg = imagen.getBytes();
+                Path rutaCompleta = Paths.get(rutaAbsoluta+"//"+imagen.getOriginalFilename());
+                Files.write(rutaCompleta,bytesImg);
+                if (usuario!=null) {
+                    usuario.setImagen(imagen.getOriginalFilename());
+                    usuarioServicio.actualizarUsuario(usuario);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         model.addAttribute("error", usuario == null);
         model.addAttribute("exito", usuario != null);

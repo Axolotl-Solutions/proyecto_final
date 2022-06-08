@@ -7,6 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;900&display=swap"
+          rel="stylesheet">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+            rel="stylesheet" />
     <style media="screen">
     @import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
     *{
@@ -50,7 +57,7 @@
 .contenedor form .field{
   height: 50px;
   width: 100%;
-  margin-top: 10px;
+  margin-top: 20px;
   position: relative;
 }
 .contenedor form .field input{
@@ -147,6 +154,26 @@ form .pass-link a:hover,
 form .signup-link a:hover{
   text-decoration: underline;
 }
+#subir{
+    border-radius:8px;
+    padding:8px;
+    margin-top:5px;
+    background:#ccc;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    transition: all 0.5s ease;
+    overflow:hidden;
+}
+#subir:hover{
+    color:#fefefc;
+}
+.form{
+    display:grid;
+    gap:20px;
+    grid-template-columns:1fr 1fr;
+}
 
 /*****************Animaciones**********************/
 @keyframes corners-con {
@@ -188,31 +215,46 @@ form .signup-link a:hover{
     </div>
     <div id="error" th:if="${exito==false}" class="alert alert-warning" role="alert">
     </div>
-    <form method="post" th:action="@{registro/crea}">
-        <div class="field" data-aos="fade-left" data-aos-duration="1200">
-            <input type="text" name="nombre" required>
-            <label>Nombre</label>
+    <form method="post" th:action="@{registro/crea}" enctype="multipart/form-data">
+        <div class="form">
+            <div class="field" data-aos="fade-left" data-aos-duration="1200">
+                <input type="text" name="nombre" required>
+                <label>Nombre</label>
+            </div>
+            <div class="field"  data-aos="fade-left" data-aos-duration="1200">
+                <input type="text" name="apellido_p" required>
+                <label>Apellido paterno</label>
+            </div>
+            <div class="field" data-aos="fade-left" data-aos-duration="1200">
+                <input type="text" name="apellido_m" required>
+                <label>Apellido materno</label>
+            </div>
+            <div class="field" data-aos="fade-left" data-aos-duration="1200">
+                <input type="email" name="email" required>
+                <label>Correo</label>
+            </div>
+            <div class="field" data-aos="fade-left" data-aos-duration="1200">
+                <input id="contraseña" type="password" name="password" required>
+                <label>Contraseña</label>
+            </div>
+            <div class="field" data-aos="fade-left" data-aos-duration="1200">
+                <input id="confirma-contraseña" type="password" required>
+                <label>Confirma contraseña</label>
+            </div>
+            <div class="" style="border:none;">
+                <div>
+                    <span>Subir imagen.</span>
+                    <a id="subir" onclick="getFile()">
+                        <data>Selecionar archivo</data>
+                        <span class="material-symbols-rounded  icon">file_upload</span>
+                    </a>
+                </div>
+                <div style='height: 0px;width: 0px; overflow:hidden;'>
+                    <input id="upfile" type="file" value="upload" onchange="sub(this)" accept="image/png, image/jpeg" name="imagen"/>
+                </div>
+            </div>
         </div>
-        <div class="field"  data-aos="fade-left" data-aos-duration="1200">
-            <input type="text" name="apellido_p" required>
-            <label>Apellido paterno</label>
-        </div>
-        <div class="field" data-aos="fade-left" data-aos-duration="1200">
-            <input type="text" name="apellido_m" required>
-            <label>Apellido materno</label>
-        </div>
-        <div class="field" data-aos="fade-left" data-aos-duration="1200">
-            <input type="email" name="email" required>
-            <label>Correo</label>
-        </div>
-        <div class="field" data-aos="fade-left" data-aos-duration="1200">
-            <input id="contraseña" type="password" name="password" required>
-            <label>Contraseña</label>
-        </div>
-        <div class="field" data-aos="fade-left" data-aos-duration="1200">
-            <input id="confirma-contraseña" type="password" required>
-            <label>Confirma contraseña</label>
-        </div>
+
         <div class="field" data-aos="zoom-in" data-aos-duration="2000">
             <input class="btn" type="submit" value="Registrarse">
         </div>
@@ -224,7 +266,17 @@ form .signup-link a:hover{
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    AOS.init({offset: 100});
+    AOS.init({offset: 100,once: true});
+    function getFile() {
+      document.getElementById("upfile").click();
+    }
+
+    function sub(obj) {
+      var archivo = obj.value;
+      var nombreArchivo = archivo.split("\\");
+      document.getElementById("subir").innerHTML = '<data>'+nombreArchivo[nombreArchivo.length - 1]+'</data>'+'<span class="material-symbols-rounded  icon">file_upload</span>';
+      event.preventDefault();
+    }
     var error = document.getElementById('error');
     var exito = document.getElementById('exito');
     if(error!=null){

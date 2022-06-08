@@ -25,23 +25,23 @@ VALUES('Fútbol'),
       ('Taekwondo');
 
 -- Insertar usuarios
-INSERT INTO Usuario(nombre, apellido_P, apellido_M, email, password, enabled)
+INSERT INTO Usuario(nombre, apellido_P, apellido_M, email, password,enabled)
 VALUES('Axel David', 'García', 'Beltrán', 'axelgarcia@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', 1);
 
 INSERT INTO Usuario(nombre, apellido_P, apellido_M, email, password, enabled)
 VALUES('Fernando Gerardo', 'Flores', 'García', 'entrenador@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', 1);
 
-INSERT INTO Usuario(nombre, apellido_P, apellido_M, email, password, fecha_nacimiento, sexo, peso, altura, entrenador_Id, enabled)
-VALUES('Competidor', 'Prueba', 'de Competidor', 'competidor@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', '2000-05-17', 'Masculino', 85, 180, 2, 1);
+INSERT INTO Usuario(nombre, apellido_P, apellido_M, email, password, fecha_nacimiento, sexo, peso, altura, entrenador_Id,imagen, enabled)
+VALUES('Competidor', 'Prueba', 'de Competidor', 'competidor@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', '2000-05-17', 'Masculino', 85, 180, 2, 'carah1.jpeg',  1);
 
-INSERT INTO Usuario(nombre, apellido_P, apellido_M, email, password, disciplina_juez, enabled)
-VALUES('Adan', 'Ramirez', 'Mora', 'juez@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', 7, 1);
+INSERT INTO Usuario(nombre, apellido_P, apellido_M, email, password, disciplina_juez, imagen, enabled)
+VALUES('Adan', 'Ramirez', 'Mora', 'juez@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', 7, 'carah2.jpeg',1);
 
-INSERT INTO Usuario(nombre, apellido_P, apellido_M, email, password, disciplina_juez, enabled)
-VALUES('German', 'Allende', 'Valderrama', 'german@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', 5, 1);
+INSERT INTO Usuario(nombre, apellido_P, apellido_M, email, password, disciplina_juez,imagen, enabled)
+VALUES('German', 'Allende', 'Valderrama', 'german@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', 5,'carah3.jpeg', 1);
 
-INSERT INTO Usuario(nombre, apellido_P, apellido_M, email, password, fecha_nacimiento, sexo, peso, altura, entrenador_Id, enabled)
-VALUES('Pablo', 'Morales', 'Gallardo', 'pablo@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', '2000-05-17', 'Masculino', 75, 178, 2, 1);
+INSERT INTO Usuario(nombre, apellido_P, apellido_M, email, password, fecha_nacimiento, sexo, peso, altura, entrenador_Id,imagen, enabled)
+VALUES('Pablo', 'Morales', 'Gallardo', 'pablo@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', '2000-05-17', 'Masculino', 75, 178, 2,'carah4.jpeg', 1);
 -- Relacionar usuarios con sus roles
 INSERT INTO Usuarios_Roles(usuario_Id, rol_Id)
 VALUES(1, 1);

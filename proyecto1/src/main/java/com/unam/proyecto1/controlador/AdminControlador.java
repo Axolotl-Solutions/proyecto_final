@@ -12,8 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -72,7 +77,10 @@ public class AdminControlador {
         antiguo.setNombre(competidor.getNombre());
         antiguo.setApellido_P(competidor.getApellido_P());
         antiguo.setApellido_M(competidor.getApellido_M());
+        antiguo.setDisciplinaJuez(disciplinaRepositorio.findByNombre(request.getParameter("nombreDisciplina")));
         usuarioServicio.actualizarUsuario(antiguo);
+        List<Disciplina> disciplinas = disciplinaRepositorio.findAll();
+        model.addAttribute("disciplinas",disciplinas);
         model.addAttribute("exito",true);
         model.addAttribute("competidor",antiguo);
         return "editaJuez";
@@ -82,6 +90,8 @@ public class AdminControlador {
                           Principal principal){
         Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
         Usuario competidor =  usuarioRepositorio.findByEmail(email);
+        List<Disciplina> disciplinas = disciplinaRepositorio.findAll();
+        modelo.addAttribute("disciplinas",disciplinas);
         modelo.addAttribute("usuario", usuario);
         modelo.addAttribute("competidor",competidor);
         return "editaJuez";
@@ -212,7 +222,7 @@ public class AdminControlador {
     }
 
     @PostMapping("/creaJuez")
-    public String creaJuez(HttpServletRequest request, Model model, Principal principal){
+    public String creaJuez(@RequestParam("imagen") MultipartFile imagen, HttpServletRequest request, Model model, Principal principal){
         String emailJuez = request.getParameter("emailJuez");
         String passwordJuez = request.getParameter("passwordJuez");
         String nombreJuez = request.getParameter("nombreJuez");
@@ -224,6 +234,21 @@ public class AdminControlador {
             model.addAttribute("error", true);
         else
             model.addAttribute("exito",true);
+        if (!imagen.isEmpty()){
+            Path directorioImagenes = Paths.get("src//main//resources//static//img");
+            String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+            try {
+                byte[] bytesImg = imagen.getBytes();
+                Path rutaCompleta = Paths.get(rutaAbsoluta+"//"+imagen.getOriginalFilename());
+                Files.write(rutaCompleta,bytesImg);
+                if (nuevoJuez!=null) {
+                    nuevoJuez.setImagen(imagen.getOriginalFilename());
+                    usuarioServicio.actualizarUsuario(nuevoJuez);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         Usuario usuarioActual =  usuarioRepositorio.findByEmail(principal.getName());
         List<Disciplina> disciplinas = disciplinaRepositorio.findAll();
         model.addAttribute("disciplinas",disciplinas);

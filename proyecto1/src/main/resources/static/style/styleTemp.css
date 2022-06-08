@@ -145,6 +145,23 @@ body {
 
 ::-webkit-scrollbar-thumb:hover { background: hsl(0, 0%, 70%); }
 
+
+#subir{
+    border-radius:8px;
+    padding:8px;
+    margin-top:5px;
+    background:hsla(0, 0%, 0%, 0.12);
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    transition: all 0.5s ease;
+    overflow:hidden;
+}
+#subir:hover{
+    color:#fefefc;
+}
+
 /***********************Error**********************************/
 .imagen{
   margin:10px auto;
@@ -501,7 +518,7 @@ select::-ms-expand {
 .select {
    position: relative;
    display: flex;
-   width: 20em;
+   width: 100%;
    height: 3em;
    line-height: 3;
    background: #ff0000;

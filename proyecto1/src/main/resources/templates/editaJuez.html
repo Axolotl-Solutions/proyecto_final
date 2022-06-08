@@ -35,6 +35,14 @@
                                         <span class="details">Correo</span>
                                         <input th:field="*{email}" name="email" type="email" placeholder="Introduce el correo" required>
                                     </div>
+                                    <div class="input-box">
+                                        <span class="details">Disciplina</span>
+                                        <div  class="select" data-aos="fade-right" data-aos-duration="900">
+                                            <select  id="nombreDisciplina" name="nombreDisciplina">
+                                                <option th:each="dis : ${disciplinas}" th:value="${dis.getNombre()}" th:text="${dis.getNombre()}"></option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="button" style="width:100%;">
                                         <input type="submit" value="Editar">
                                     </div>

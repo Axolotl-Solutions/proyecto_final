@@ -30,7 +30,7 @@
             </ul>
             <div class="profile-card-wrapper">
                 <figure class="card-avatar">
-                    <img src="/img/avatar-1.png" alt="" width="48" height="48">
+                    <img th:src="@{${'/img/'+competidor.getImagen()}}" alt="" width="48" height="48">
                 </figure>
                 <div>
                     <p th:text="${competidor.getNombre() +' '+ competidor.getApellido_P()}" class="card-title">Fernando Gerardo Flores García</p>
@@ -100,7 +100,7 @@
                     <div class="juez-titulo">
                         <div>
                             <figure class="card-titulo">
-                                <img src="/img/avatar-1.png" alt="" width="48" height="48">
+                                <img th:src="@{${'/img/'+calificacion.getJuez().getImagen()}}" alt="" width="48" height="48">
                             </figure>
                         </div>
                         <div>
