@@ -68,12 +68,27 @@ public class JuezControlador {
         return "calificacionCompetidorJuez";
     }
 
-    @GetMapping("crearCalificacion/")
-    private String crearCalificacion(Principal principal, Model modelo) {
+    @RequestMapping("crearCalificacion/{idCompetidor}/{idEvento}")
+    private String crearCalificacion(@PathVariable Integer idCompetidor, @PathVariable Integer idEvento, Principal principal, Model modelo) {
         Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
+        Usuario competidor = usuarioRepositorio.getById(idCompetidor);
+        Evento evento = eventoRepositorio.getById(idEvento);
+        modelo.addAttribute("usuario", usuario);
+        modelo.addAttribute("competidor", competidor);
+        modelo.addAttribute("evento", evento);
+        modelo.addAttribute("calificacionesRepositorio", calificacionRepositorio);
+        return "calificacionCompetidorJuez";
+    }
 
+    @PostMapping("creaCalificacion/")
+    private String creaCalificacion(HttpServletRequest request, Usuario competidor, Evento evento, Principal principal, Model modelo) {
+        Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
+        String comentario = request.getParameter("comentario");
+        double puntaje = 9.5;
+        Calificacion nuevaCalificacion = calificacionServicio.creaCalificacion(evento, evento.getDisciplina(), usuario, competidor, puntaje, comentario);
         modelo.addAttribute("usuario", usuario);
         modelo.addAttribute("calificacionesRepositorio", calificacionRepositorio);
+        modelo.addAttribute("exito", true);
         return "calificacionCompetidorJuez";
     }
 
