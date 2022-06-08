@@ -53,10 +53,10 @@ public class JuezControlador {
         modelo.addAttribute("usuario", usuario);
         modelo.addAttribute("calificacion", calificacion);
         modelo.addAttribute("calificacionesRepositorio", calificacionRepositorio);
-        return "calificacionCompetidorJuez";
+        return "editarCalificacionJuez";
     }
 
-    @PostMapping("editaCalificacion/{idCalificacion}")
+    @GetMapping("editaCalificacion/{idCalificacion}")
     private String editaCalificacion(@PathVariable Integer idCalificacion, HttpServletRequest request, Principal principal, Model modelo){
         Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
         modelo.addAttribute("usuario", usuario);
@@ -64,11 +64,10 @@ public class JuezControlador {
         calificacionAntigua.setComentario(request.getParameter("comentario"));
         calificacionServicio.actualizaCalificacion(calificacionAntigua);
         modelo.addAttribute("exito",true);
-        modelo.addAttribute("calificacion", calificacionAntigua);
-        return "calificacionCompetidorJuez";
+        return "editarCalificacionJuez";
     }
 
-    @RequestMapping("crearCalificacion/{idCompetidor}/{idEvento}")
+    @GetMapping("crearCalificacion/{idCompetidor}/{idEvento}")
     private String crearCalificacion(@PathVariable Integer idCompetidor, @PathVariable Integer idEvento, Principal principal, Model modelo) {
         Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
         Usuario competidor = usuarioRepositorio.getById(idCompetidor);
@@ -77,10 +76,10 @@ public class JuezControlador {
         modelo.addAttribute("competidor", competidor);
         modelo.addAttribute("evento", evento);
         modelo.addAttribute("calificacionesRepositorio", calificacionRepositorio);
-        return "calificacionCompetidorJuez";
+        return "crearCalificacionJuez";
     }
 
-    @PostMapping("creaCalificacion/")
+    @GetMapping("creaCalificacion/")
     private String creaCalificacion(HttpServletRequest request, Usuario competidor, Evento evento, Principal principal, Model modelo) {
         Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
         String comentario = request.getParameter("comentario");
@@ -89,7 +88,7 @@ public class JuezControlador {
         modelo.addAttribute("usuario", usuario);
         modelo.addAttribute("calificacionesRepositorio", calificacionRepositorio);
         modelo.addAttribute("exito", true);
-        return "calificacionCompetidorJuez";
+        return "editarCalificacionJuez";
     }
 
     /*

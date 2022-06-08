@@ -25,32 +25,25 @@
                                 </figure>
                             </div>
                             <div>
-                                <p th:if= "${calificacion != null }" th:text="${calificacion.getCompetidor().getNombre() + ' '+ calificacion.getCompetidor().getApellido_P()}">Alan Romero</p>
-                                <p th:if= "${calificacion == null }" th:text="${competidor.getNombre() + ' '+ competidor.getApellido_P()}">Alan Romero</p>
+                                <p th:text="${competidor.getNombre() + ' '+ competidor.getApellido_P()}">Alan Romero</p>
                                 <p class="card-subtitle" >Competidor</p>
                             </div>
                         </div>
                         <div>
-                            <a th:if= "${calificacion != null }" th:href="@{/juez/editaCalificacion/{idCalificacion}(idCalificacion = ${calificacion.getCalificacion_Id()})}" class="guardar-btn" active>
-                                <span  class="material-symbols-rounded  icon" style="color:#fff;">save</span>
-                            </a>
-                            <a th:if= "${calificacion == null }" th:href="@{/juez/creaCalificacion/}" class="guardar-btn" active>
+                            <a th:href="@{/juez/creaCalificacion/}" class="guardar-btn" active>
                                 <span  class="material-symbols-rounded  icon" style="color:#fff;">save</span>
                             </a>
                         </div>
                     </div>
                     <div class="divider card-divider"></div>
                     <div class="juez-calificación">
-                        <p th:if= "${calificacion != null }" th:text="${'Calificación: '+calificacion.getPuntaje()}">Calificación: 5.8</p>
-                        <p th:if= "${calificacion == null }" >Calificación que será guardada (esto será editable despues): 9.5</p>
+                        <p>Calificación que será guardada (esto será editable despues): 9.5</p>
                         <span class="material-symbols-rounded  icon">star</span>
-                        <p th:if= "${calificacion != null }" th:text="${'('+calificacion.getEvento().getNombreEvento()+' - '+calificacion.getEvento().getDisciplina().getNombre()+')'}"></p>
-                        <p th:if= "${calificacion == null }" th:text="${'('+evento.getNombreEvento()+' - '+evento.getDisciplina().getNombre()+')'}"></p>
+                        <p th:text="${'('+evento.getNombreEvento()+' - '+evento.getDisciplina().getNombre()+')'}"></p>
                     </div>
                     <div class="juez-texto-jueces">
                         <label>
-                            <textarea id="comentarioEditar" name="comentarioEditar" class="jueces-textarea" th:if= "${calificacion != null }" th:text="${calificacion.getComentario()}" contentEditable="true" placeholder="Escribe un comentario sobre esta actuación..."></textarea>
-                            <textarea id="comentarioCrear" name="comentarioCrear" class="jueces-textarea" th:if= "${calificacion == null }" contentEditable="true" placeholder="Escribe un comentario sobre esta actuación..."></textarea>
+                            <textarea id="comentario" name="comentario" class="jueces-textarea" contentEditable="true" placeholder="Escribe un comentario sobre esta actuación..."></textarea>
                         </label>
                     </div>
                 </div>
