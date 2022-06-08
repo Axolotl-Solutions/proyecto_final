@@ -40,8 +40,8 @@ public class JuezControlador {
         return "inicioJueces";
     }
 
-    @GetMapping("calificacion/{idCalificacion}")
-    private String calificacion(@PathVariable Integer idCalificacion, Principal principal, Model modelo) {
+    @GetMapping("editarCalificacion/{idCalificacion}")
+    private String editarCalificacion(@PathVariable Integer idCalificacion, Principal principal, Model modelo) {
 
         Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
         Calificacion calificacion = calificacionRepositorio.getById(idCalificacion);
