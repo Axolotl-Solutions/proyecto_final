@@ -25,25 +25,25 @@
                                 </figure>
                             </div>
                             <div>
-                                <p th:text="${calificacion.getCompetidor().getNombre() + ' '+ calificacion.getCompetidor().getApellido_P()}">Alan Romero</p>
+                                <p th:if= "${calificacion != null }" th:text="${calificacion.getCompetidor().getNombre() + ' '+ calificacion.getCompetidor().getApellido_P()}">Alan Romero</p>
                                 <p class="card-subtitle" >Juez</p>
                             </div>
                         </div>
                         <div>
-                            <a class="guardar-btn" active>
-                                <span class="material-symbols-rounded  icon" style="color:#fff;">save</span>
+                            <a th:href="@{/juez/editaCalificacion/{idCalificacion}(idCalificacion = ${calificacion.getCalificacion_Id()})}" class="guardar-btn" active>
+                                <span  class="material-symbols-rounded  icon" style="color:#fff;">save</span>
                             </a>
                         </div>
                     </div>
                     <div class="divider card-divider"></div>
                     <div class="juez-calificación">
-                        <p th:text="${'Calificación: '+calificacion.getPuntaje()}">Calificación: 5.8</p>
+                        <p th:if= "${calificacion != null }" th:text="${'Calificación: '+calificacion.getPuntaje()}">Calificación: 5.8</p>
                         <span class="material-symbols-rounded  icon">star</span>
-                        <p th:text="${'('+calificacion.getEvento().getNombreEvento()+' - '+calificacion.getEvento().getDisciplina().getNombre()+')'}"></p>
+                        <p th:if= "${calificacion != null }" th:text="${'('+calificacion.getEvento().getNombreEvento()+' - '+calificacion.getEvento().getDisciplina().getNombre()+')'}"></p>
                     </div>
                     <div class="juez-texto-jueces">
                         <label>
-                            <textarea class="jueces-textarea" th:text="${calificacion.getComentario()}" contentEditable="true" placeholder="Escribe un comentario sobre esta actuación..."></textarea>
+                            <textarea id="comentario" name="comentario" class="jueces-textarea" th:if= "${calificacion != null }" th:text="${calificacion.getComentario()}" contentEditable="true" placeholder="Escribe un comentario sobre esta actuación..."></textarea>
                         </label>
                     </div>
                 </div>

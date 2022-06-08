@@ -7,11 +7,13 @@ import com.unam.proyecto1.modelo.Usuario;
 import com.unam.proyecto1.repositorio.CalificacionRepositorio;
 import com.unam.proyecto1.repositorio.EventoRepositorio;
 import com.unam.proyecto1.repositorio.UsuarioRepositorio;
+import com.unam.proyecto1.servicio.CalificacionServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.List;
 
@@ -28,6 +30,9 @@ public class JuezControlador {
     @Autowired
     CalificacionRepositorio calificacionRepositorio;
 
+    @Autowired
+    CalificacionServicio calificacionServicio;
+
     @GetMapping("/")
     public String perfil(Model model, Principal principal) {
         Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
@@ -42,12 +47,32 @@ public class JuezControlador {
 
     @GetMapping("editarCalificacion/{idCalificacion}")
     private String editarCalificacion(@PathVariable Integer idCalificacion, Principal principal, Model modelo) {
-
         Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
         Calificacion calificacion = calificacionRepositorio.getById(idCalificacion);
 
         modelo.addAttribute("usuario", usuario);
         modelo.addAttribute("calificacion", calificacion);
+        modelo.addAttribute("calificacionesRepositorio", calificacionRepositorio);
+        return "calificacionCompetidorJuez";
+    }
+
+    @PostMapping("editaCalificacion/{idCalificacion}")
+    private String editaCalificacion(@PathVariable Integer idCalificacion, HttpServletRequest request, Principal principal, Model modelo){
+        Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
+        modelo.addAttribute("usuario", usuario);
+        Calificacion calificacionAntigua = calificacionRepositorio.getById(idCalificacion);
+        calificacionAntigua.setComentario(request.getParameter("comentario"));
+        calificacionServicio.actualizaCalificacion(calificacionAntigua);
+        modelo.addAttribute("exito",true);
+        modelo.addAttribute("calificacion", calificacionAntigua);
+        return "calificacionCompetidorJuez";
+    }
+
+    @GetMapping("crearCalificacion/")
+    private String crearCalificacion(Principal principal, Model modelo) {
+        Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
+
+        modelo.addAttribute("usuario", usuario);
         modelo.addAttribute("calificacionesRepositorio", calificacionRepositorio);
         return "calificacionCompetidorJuez";
     }

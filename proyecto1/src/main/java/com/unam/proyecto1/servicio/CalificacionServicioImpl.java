@@ -45,4 +45,9 @@ public class CalificacionServicioImpl implements CalificacionServicio {
         nuevaCalificacion.setComentario(comentario);
         return calificacionRepositorio.save(nuevaCalificacion);
     }
+
+    @Override
+    public Calificacion actualizaCalificacion(Calificacion calificacion){
+        return calificacionRepositorio.save(calificacion);
+    }
 }
