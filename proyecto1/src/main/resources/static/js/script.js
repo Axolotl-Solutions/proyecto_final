@@ -1,5 +1,23 @@
 'use strict';
 
+function fullImg(){
+    var img = document.getElementById('img-min');
+        var imgContainer = document.getElementById('img-container');
+        var bg = document.getElementById('bg-img');
+        var imgMax = document.getElementById('img-max');
+        img.addEventListener('click', ()=>{
+            imgContainer.classList.add('active');
+            imgMax.classList.add('active');
+            bg.classList.add('active');
+            console.log(imgContainer.classList);
+        });
+        bg.addEventListener('click', ()=>{
+            imgContainer.classList.remove('active');
+            imgMax.classList.remove('active');
+            bg.classList.remove('active');
+        });
+}
+
 function getFile() {
   document.getElementById("upfile").click();
 }
