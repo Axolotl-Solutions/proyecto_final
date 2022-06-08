@@ -9,7 +9,7 @@
 <main>
     <article class="container article">
 
-        <div class="select" data-aos="fade-right" data-aos-duration="900">
+        <div style="width:20em;" class="select" data-aos="fade-right" data-aos-duration="900">
             <select id="sel" name="select">
                 <option value="juez">Juez</option>
                 <option value="evento">Evento</option>
@@ -28,7 +28,7 @@
                     <div class="cont">
                         <div class="title">Registrar Juez</div>
                         <div class="content">
-                            <form method="post" th:action="@{/admins/creaJuez}">
+                            <form method="post" th:action="@{/admins/creaJuez}" enctype="multipart/form-data">
                                 <div class="user-details">
                                     <div class="input-box" >
                                         <span class="details">Nombre</span>
@@ -50,9 +50,9 @@
                                         <span class="details">Contraseña</span>
                                         <input type="password" id="contraseña" name="passwordJuez" placeholder="Introduce la contraseña" required>
                                     </div>
-                                    <div>
+                                    <div class="input-box">
                                         <span class="details">Disciplina</span>
-                                        <div class="select" data-aos="fade-right" data-aos-duration="900">
+                                        <div style="overflow:hidden;" class="select" data-aos="fade-right" data-aos-duration="900">
                                             <select id="nombreDisciplinaJuez" name="nombreDisciplinaJuez">
                                                 <option th:each="dis : ${disciplinas}" th:value="${dis.getNombre()}" th:text="${dis.getNombre()}"></option>
                                             </select>
@@ -61,6 +61,18 @@
                                     <div class="input-box">
                                         <span class="details">Confirma</span>
                                         <input id="confirma-contraseña" type="password" placeholder="Confirma la contraseña" required>
+                                    </div>
+                                    <div class="input-box" style="border:none;">
+                                        <div>
+                                            <span>Subir imagen.</span>
+                                            <a id="subir" onclick="getFile()">
+                                                <data>Selecionar archivo</data>
+                                                <span class="material-symbols-rounded  icon">file_upload</span>
+                                            </a>
+                                        </div>
+                                        <div style='height: 0px;width: 0px; overflow:hidden;'>
+                                            <input id="upfile" type="file" value="upload" onchange="sub(this)" accept="image/png, image/jpeg" name="imagen"/>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="button">
@@ -83,7 +95,7 @@
                                         <span class="details">Categoria</span>
                                         <input type="text" id="categoria" name="categoria" placeholder="Introduce la categoria" required>
                                     </div>
-                                    <div>
+                                    <div class="input-box">
                                         <span class="details">Disciplina</span>
                                         <div class="select" data-aos="fade-right" data-aos-duration="900">
                                             <select id="nombreDisciplina" name="nombreDisciplina">
@@ -133,7 +145,7 @@
                                 <div class="user-details" >
                                     <div class="input-box" style="width:100%;">
                                         <span class="details">Nombre Disciplina</span>
-                                        <input type="text" id="disciplina" name="nombreDisciplina" placeholder="Introduce el nombre del evento" required>
+                                        <input type="text" id="disciplina" name="nombreDisciplina" placeholder="Introduce el nombre" required>
                                     </div>
                                 </div>
                                 <div class="button">

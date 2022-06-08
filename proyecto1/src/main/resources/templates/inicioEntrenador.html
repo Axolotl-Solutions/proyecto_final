@@ -18,7 +18,7 @@
             <div class="card profile-card" data-aos="fade-right" data-aos-duration="700">
                 <div class="profile-card-wrapper">
                     <figure class="card-avatar">
-                        <img src="/img/avatar-1.png" alt="Elizabeth Foster" width="48" height="48">
+                        <img th:src="@{${'/img/'+usuario.getImagen()}}" alt="Elizabeth Foster" width="48" height="48">
                     </figure>
                     <div>
                         <p th:text="${usuario.getNombre()+' '+usuario.getApellido_P() + ' ' + usuario.getApellido_M()}" class="card-title">Fernando Gerardo Flores García</p>

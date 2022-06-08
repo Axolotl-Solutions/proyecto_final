@@ -14,7 +14,8 @@ CREATE TABLE IF NOT EXISTS Usuario (
     altura           INTEGER DEFAULT NULL,
     entrenador_Id	 INTEGER DEFAULT NULL,
     disciplina_Juez  INTEGER DEFAULT NULL,
-    enabled 		 INTEGER DEFAULT NULL
+    enabled 		 INTEGER DEFAULT NULL,
+    imagen           VARCHAR(300) DEFAULT 'user.svg'
 );
 
 -- Tabla de roles

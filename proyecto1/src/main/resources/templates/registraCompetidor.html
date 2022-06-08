@@ -17,7 +17,7 @@
                     <div class="cont">
                         <div class="title">Registrar Competidor</div>
                         <div class="content">
-                            <form method="post" action="/entrenador/registra" onsubmit='return valida(this)'>
+                            <form method="post" enctype="multipart/form-data" action="/entrenador/registra" onsubmit='return valida(this)' name="form">
                                 <div class="user-details">
                                     <div class="input-box" >
                                         <span  class="details">Nombre</span>
@@ -51,14 +51,29 @@
                                         <span class="details">Peso</span>
                                         <input name="altura" type="number" placeholder="Ingresa peso en kg" required>
                                     </div>
-                                    <div class="select">
-                                        <select id="sel" name="eventos">
-                                            <option th:each="evento : ${eventos}" th:value="${evento.getEvento_Id()}" th:text="${evento.getNombreEvento()+' : '+evento.getFecha()+' '+evento.getRama()}"></option>
-                                        </select>
+                                    <div class="input-box">
+                                        <span class="details">Evento</span>
+                                        <div class="select">
+                                            <select id="sel" name="eventos">
+                                                <option th:each="evento : ${eventos}" th:value="${evento.getEvento_Id()}" th:text="${evento.getNombreEvento()+' : '+evento.getFecha()+' '+evento.getRama()}"></option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Fecha de nacimiento</span>
                                         <input name="fecha" type="date" placeholder="Introduce fecha de nacimiento" required>
+                                    </div>
+                                    <div class="input-box" style="border:none;">
+                                        <div>
+                                            <span>Subir imagen.</span>
+                                            <a id="subir" onclick="getFile()">
+                                                <data>Selecionar archivo</data>
+                                                <span class="material-symbols-rounded  icon">file_upload</span>
+                                            </a>
+                                        </div>
+                                        <div style='height: 0px;width: 0px; overflow:hidden;'>
+                                            <input id="upfile" type="file" value="upload" onchange="sub(this)" accept="image/png, image/jpeg" name="imagen"/>
+                                        </div>
                                     </div>
                                 </div>
                                 <div id="tooltip" class="tooltip">
@@ -105,13 +120,15 @@
 </footer>
 <script th:replace="plantillas/plantilla.html :: js">
 </script>
+
 <script>
+
     function valida(f) {
      const tooltip = document.querySelector('#tooltip');
       var ok = true;
       var msg = "Mal perro"
 
-      if(f[10].checked==false && f[11].checked==false){
+      if(f[11].checked==false && f[12].checked==false){
         ok = false;
         console.log("entro aquí");
       }

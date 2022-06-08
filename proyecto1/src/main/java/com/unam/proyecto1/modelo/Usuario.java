@@ -53,6 +53,9 @@ public class Usuario {
     @Column
     private Integer enabled;
 
+    @Column
+    private  String imagen = "user.svg";
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "Usuarios_Roles",
