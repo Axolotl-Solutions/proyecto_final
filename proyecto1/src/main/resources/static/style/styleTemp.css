@@ -145,7 +145,52 @@ body {
 
 ::-webkit-scrollbar-thumb:hover { background: hsl(0, 0%, 70%); }
 
+/*Estilo para click de imagen y hacerla grande*/
 
+.full{
+    transition: all 0.2s linear;
+}
+.full.active{
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    margin-top:  -150px;
+    margin-left: -150px;
+    width: 300px;
+    height: 300px;
+    background:#ccc;
+    z-index:2;
+}
+.full-img-bg.active{
+    content:"";
+    position:fixed;
+    height:100%;
+    width:100%;
+    top:0;
+    left:0;
+    background:rgba(0,0,0,0.5);
+    z-index:1;
+
+}
+.full .img{
+    display:none;
+    transform:translateX(-150);
+    opacity:0;
+    transform:scale(0);
+    transition: all 0.5s linear;
+}
+.full .img.active{
+    display:inline;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index:2;
+    opacity:1;
+        transform:translateX(0);
+        transform:scale(1);
+}
+
+/*Estilo para seleccionar un archivo*/
 #subir{
     border-radius:8px;
     padding:8px;
@@ -1074,6 +1119,7 @@ form input[type="submit"]:active{
 .card-avatar {
   overflow: hidden;
   border-radius: var(--radius-6);
+  cursor:pointer;
 }
 
 .card-title {

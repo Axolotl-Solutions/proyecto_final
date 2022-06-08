@@ -6,7 +6,12 @@
 
 <header th:replace="plantillas/plantilla.html :: header">
 </header>
+<div id="bg-img" class="full-img-bg">
 
+</div>
+<div id="img-container" class="full">
+    <img class="img" id="img-max" th:src="@{${'/img/'+usuario.getImagen()}}" alt="Elizabeth Foster">
+</div>
 <main>
     <article class="container article">
 
@@ -21,7 +26,7 @@
                 <div class="profile-card-wrapper">
 
                     <figure class="card-avatar">
-                        <img th:src="@{${'/img/'+usuario.getImagen()}}" alt="Elizabeth Foster" width="48" height="48">
+                        <img id="img-min" th:src="@{${'/img/'+usuario.getImagen()}}" alt="Elizabeth Foster" width="48" height="48">
                     </figure>
 
                     <div>
@@ -140,6 +145,7 @@
 <script th:replace="plantillas/plantilla.html :: js">
 </script>
 <script>
+    fullImg();
     document.getElementsByClassName("navbar-link")[0].classList.add("active");
 </script>
 </body>
