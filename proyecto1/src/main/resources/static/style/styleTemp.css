@@ -1442,6 +1442,8 @@ form input[type="submit"]:active{
 .calificacionesJuez{
     grid-template-columns: 1fr;
     gap: 25px;
+    max-width: 1150px;
+    margin-inline: auto;
 }
 
 
