@@ -47,7 +47,7 @@
                                         <span class="details">Evento</span>
                                         <div class="select">
                                             <select id="sel" name="eventos">
-                                                <option th:each="evento : ${eventos}" th:value="${evento.getEvento_Id()}" th:text="${evento.getNombreEvento()+' : '+evento.getFecha()+' '+evento.getRama()}"></option>
+                                                <option th:each="evento : ${eventos}" th:value="${evento.getEvento_Id()}" th:text="${evento.getNombreEvento()+' : '+evento.getFecha()+' '+evento.getRama()+' ('+evento.getDisciplina().getNombre()+')'}"></option>
                                             </select>
                                         </div>
                                     </div>
