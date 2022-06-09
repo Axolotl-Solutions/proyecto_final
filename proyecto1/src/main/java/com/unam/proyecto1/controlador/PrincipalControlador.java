@@ -64,6 +64,12 @@ public class PrincipalControlador {
 
         return "index";
     }
+    @RequestMapping("/desarrolladores")
+    public String developers(Model model, String error, Principal principal){
+        Usuario usuarioActual =  usuarioRepositorio.findByEmail(principal.getName());
+        model.addAttribute("usuario", usuarioActual);
+        return "desarrolladores";
+    }
 
     @RequestMapping("/admins")
     public String manejoAdmin(Model model,Principal principal) {

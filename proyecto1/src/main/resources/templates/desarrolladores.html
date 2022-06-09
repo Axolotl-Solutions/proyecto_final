@@ -1,0 +1,62 @@
+<html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla.html :: head">
+</head>
+<body>
+<header th:replace="plantillas/plantilla.html :: header">
+</header>
+<article class="developers">
+  <div class="developers-container">
+    <div class="imagen-axo">
+      <img src="/img/solutions.png" alt="">
+    </div>
+  </div>
+
+  <div class="card-developer-container">
+    <div class="card-developer">
+      <div class="foto">
+        <img src="/img/fer2.png" alt="">
+        <div class="datos">
+          <h2 class="h2">Fernando Gerardo Flores García</h2>
+          <div style="display:grid;gap:5px;">
+            <a href="mailto:fernandondin@ciencias.unam.mx" class="contact-link icon-box">
+              <i class="fa-solid fa-envelope"></i>
+              <p class="text">fernandondin@ciencias.unam.mx</p>
+            </a>
+            <a href="http://github.com/fernandondin" class="contact-link icon-box">
+              <i class="fa-brands fa-github"></i>
+              <p class="text">fernandondin</p>
+            </a>
+            <a href="http://gitlab.com/fernandondin" class="contact-link icon-box">
+              <i class="fa-brands fa-gitlab"></i>
+              <p class="text">fernandondin</p>
+            </a>
+            <a href="tel:5613446352" class="contact-link icon-box">
+              <i class="fa-solid fa-mobile-screen-button"></i>
+              <p class="text">5613446352</p>
+            </a>
+
+          </div>
+
+        </div>
+      </div>
+      <div class="descripcion">
+        <div class="descripcion-texto">
+          <p>Descripcion chevere Descripcion chevereDescripcion chevere
+            Descripcion chevereDescripcion chevereDescripcion chevere</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</article>
+
+<footer th:replace="plantillas/plantilla.html :: footer">
+</footer>
+<script th:replace="plantillas/plantilla.html :: js">
+</script>
+
+<script>
+    document.getElementsByClassName("navbar-link")[0].classList.add("active");
+</script>
+</body></html>

@@ -22,6 +22,8 @@ function getFile() {
   document.getElementById("upfile").click();
 }
 
+
+
 function sub(obj) {
   var archivo = obj.value;
   var nombreArchivo = archivo.split("\\");
