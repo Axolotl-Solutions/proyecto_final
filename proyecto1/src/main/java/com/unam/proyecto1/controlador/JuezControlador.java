@@ -46,7 +46,6 @@ public class JuezControlador {
 
         Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
         Calificacion calificacion = calificacionRepositorio.getById(idCalificacion);
-
         modelo.addAttribute("usuario", usuario);
         modelo.addAttribute("calificacion", calificacion);
         modelo.addAttribute("calificacionesRepositorio", calificacionRepositorio);
