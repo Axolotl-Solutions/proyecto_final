@@ -29,6 +29,12 @@
     </p>
   </div>
   <p><b th:text="${contra}"></b></p>
+  <div>
+    <p>
+      Recuerda que puedes entrar con tu correo:
+    </p>
+    <b th:text="${usuario.getEmail()+' '}"></b>
+  </div>
   <div th:if="${usuario.getRol().equals('COMPETIDOR')}">
     <b>Datos del evento al que has sido inscrito:</b>
     <ul th:each="evento : ${usuario.getEventos()}">

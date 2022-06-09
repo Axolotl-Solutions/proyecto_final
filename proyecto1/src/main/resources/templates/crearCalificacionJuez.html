@@ -21,7 +21,7 @@
                         <div style="display: flex; padding: 15px; align-items: center; gap:5px;">
                             <div>
                                 <figure class="card-titulo">
-                                    <img src="/img/avatar-1.png" alt="" width="48" height="48">
+                                    <img th:src="@{${'/img/'+competidor.getImagen()}}" alt="" width="48" height="48">
                                 </figure>
                             </div>
                             <div>
@@ -38,13 +38,13 @@
                     <div class="divider card-divider"></div>
                     <div class="juez-calificación">
                         <p>Puntaje: </p>
-                        <input name="puntaje" id="puntaje" type="number" min="1" max="10"  placeholder="Ingresa un puntaje del 1-10" step="0.1">
+                        <input name="puntaje" id="puntaje" type="number" min="1" max="10"  placeholder="Ingresa un puntaje del 1-10" step="0.1" required>
                         <span class="material-symbols-rounded  icon">star</span>
                         <p th:text="${'('+evento.getNombreEvento()+' - '+evento.getDisciplina().getNombre()+')'}"></p>
                     </div>
                     <div class="juez-texto-jueces">
                         <label>
-                            <textarea id="comentario" name="comentario" class="jueces-textarea" contentEditable="true" placeholder="Escribe un comentario sobre esta actuación..."></textarea>
+                            <textarea id="comentario" name="comentario" class="jueces-textarea" contentEditable="true" placeholder="Escribe un comentario sobre esta actuación..." required></textarea>
                         </label>
                     </div>
                 </form>
@@ -53,51 +53,22 @@
         </div>
     </div>
 </section>
-
+<div id="exito" th:if="${exito}">
+</div>
 <footer th:replace="plantillas/plantilla.html :: footer">
 </footer>
 <script th:replace="plantillas/plantilla.html :: js">
 </script>
 <script>
-  var eliminar = document.getElementsByName("eliminar-btn");
-  var links = document.getElementsByClassName("a-href");
-  for (let i = 0; i < eliminar.length; i++) {
-   eliminar[i].addEventListener("click", function(){
-
-   Swal.fire({
-     title: '¿Está seguro?',
-     text: "No podrá revertir esta acción.",
-     icon: 'warning',
-     iconColor: 'var(--sw-cancelar)',
-     showCancelButton: true,
-     confirmButtonText: 'Si, eliminar',
-     cancelButtonText: 'No, cancelar',
-     confirmButtonColor:'var(--confirmar-btn)',
-     cancelButtonColor: 'var(--eliminar-btn)',
-     reverseButtons: true
-   }).then((result) => {
-     if (result.isConfirmed) {
-       Swal.fire({
-        title: 'Eliminado',
-        text: "Se elimino correctamente.",
+  var exito = document.getElementById("exito");
+  if(exito!=null){
+    Swal.fire({
+        title: 'Calificación agregada correctamente',
+        text: "calificación y comentario agregados.",
         icon: 'success',
         confirmButtonText: '¡Bien!',
         confirmButtonColor:'var(--confirmar-btn)'
       })
-       window.setTimeout(function(){
-        window.location.href = links[i].href;
-      }, 500);
-     } else if (result.dismiss === Swal.DismissReason.cancel){
-       Swal.fire({
-        title: 'Cancelado',
-        text: "No se elimino el competidor",
-        icon: 'error',
-        confirmButtonText: '¡Bien!',
-        confirmButtonColor:'var(--confirmar-btn)'
-      })
-     }
-   })
-   });
   }
 </script>
 </body>

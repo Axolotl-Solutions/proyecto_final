@@ -21,7 +21,7 @@
                         <div style="display: flex; padding: 15px; align-items: center; gap:5px;">
                             <div>
                                 <figure class="card-titulo">
-                                    <img src="/img/avatar-1.png" alt="" width="48" height="48">
+                                    <img th:src="@{${'/img/'+calificacion.getCompetidor().getImagen()}}" alt="" width="48" height="48">
                                 </figure>
                             </div>
                             <div>
@@ -54,52 +54,23 @@
         </div>
     </div>
 </section>
-
+<div id="exito" th:if="${exito}">
+</div>
 <footer th:replace="plantillas/plantilla.html :: footer">
 </footer>
 <script th:replace="plantillas/plantilla.html :: js">
 </script>
 <script>
-    var eliminar = document.getElementsByName("eliminar-btn");
-    var links = document.getElementsByClassName("a-href");
-    for (let i = 0; i < eliminar.length; i++) {
-        eliminar[i].addEventListener("click", function(){
-
-            Swal.fire({
-                title: '¿Está seguro?',
-                text: "No podrá revertir esta acción.",
-                icon: 'warning',
-                iconColor: 'var(--sw-cancelar)',
-                showCancelButton: true,
-                confirmButtonText: 'Si, eliminar',
-                cancelButtonText: 'No, cancelar',
-                confirmButtonColor:'var(--confirmar-btn)',
-                cancelButtonColor: 'var(--eliminar-btn)',
-                reverseButtons: true
-            }).then((result) => {
-                if (result.isConfirmed) {
-                Swal.fire({
-                    title: 'Eliminado',
-                    text: "Se elimino correctamente.",
-                    icon: 'success',
-                    confirmButtonText: '¡Bien!',
-                    confirmButtonColor:'var(--confirmar-btn)'
-                })
-                window.setTimeout(function(){
-                    window.location.href = links[i].href;
-                }, 500);
-            } else if (result.dismiss === Swal.DismissReason.cancel){
-                Swal.fire({
-                    title: 'Cancelado',
-                    text: "No se elimino el competidor",
-                    icon: 'error',
-                    confirmButtonText: '¡Bien!',
-                    confirmButtonColor:'var(--confirmar-btn)'
-                })
-            }
-        })
-        });
-    }
+    var exito = document.getElementById("exito");
+  if(exito!=null){
+    Swal.fire({
+        title: 'Calificación agregada correctamente',
+        text: "calificación y comentario agregados.",
+        icon: 'success',
+        confirmButtonText: '¡Bien!',
+        confirmButtonColor:'var(--confirmar-btn)'
+      })
+  }
 </script>
 </body>
 </html>
