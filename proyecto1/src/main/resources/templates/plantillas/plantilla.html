@@ -30,7 +30,7 @@
     <div class="container">
       <h1>
         <a id="logo-1" href="#" class="logo">Olimpiadas</a>
-        <a id="logo-2" href="#" class="logo-1">Univeritarias</a>
+        <a id="logo-2" href="#" class="logo-1">Universitarias</a>
       </h1>
 
       <button class="menu-toggle-btn icon-box" data-menu-toggle-btn aria-label="Toggle Menu">
@@ -50,14 +50,14 @@
             </li>
 
             <li>
-              <a th:if="${!usuario.getRol().equals('COMPETIDOR')}" id="agregar-nav" href="#" class="navbar-link icon-box">
+              <a th:if="${!usuario.getRol().equals('COMPETIDOR') && !usuario.getRol().equals('JUEZ')}" id="agregar-nav" href="#" class="navbar-link icon-box">
                 <span class="material-symbols-rounded  icon">add</span>
 
                 <span>Agregar</span>
               </a>
             </li>
 
-            <li th:if="${!usuario.getRol().equals('ADMINISTRADOR')}">
+            <li th:if="${!usuario.getRol().equals('ADMINISTRADOR') && !usuario.getRol().equals('JUEZ')}">
               <a id="calificaciones-nav" href="#" class="navbar-link icon-box">
                 <span class="material-symbols-rounded  icon">military_tech</span>
 
@@ -71,7 +71,7 @@
               </a>
             </li>
 
-            <li th:if="${!usuario.getRol().equals('ADMINISTRADOR')}">
+            <li th:if="${!usuario.getRol().equals('ADMINISTRADOR') && !usuario.getRol().equals('JUEZ')}">
               <a id="tabla-nav" href="#" class="navbar-link icon-box">
                 <span class="material-symbols-rounded  icon">bar_chart</span>
 
