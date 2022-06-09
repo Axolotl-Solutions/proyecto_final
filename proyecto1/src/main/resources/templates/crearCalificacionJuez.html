@@ -37,7 +37,8 @@
                     </div>
                     <div class="divider card-divider"></div>
                     <div class="juez-calificación">
-                        <p>Calificación que será guardada (esto será editable despues): 9.5</p>
+                        <p>Puntaje: </p>
+                        <input name="puntaje" id="puntaje" type="number" min="1" max="10"  placeholder="Ingresa un puntaje del 1-10" step="0.1">
                         <span class="material-symbols-rounded  icon">star</span>
                         <p th:text="${'('+evento.getNombreEvento()+' - '+evento.getDisciplina().getNombre()+')'}"></p>
                     </div>

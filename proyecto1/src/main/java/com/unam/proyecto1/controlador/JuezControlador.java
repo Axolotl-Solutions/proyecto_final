@@ -52,7 +52,6 @@ public class JuezControlador {
         Calificacion calificacion = calificacionRepositorio.getById(idCalificacion);
         modelo.addAttribute("usuario", usuario);
         modelo.addAttribute("calificacion", calificacion);
-        System.out.println(calificacion);
         modelo.addAttribute("calificacionesRepositorio", calificacionRepositorio);
         return "editarCalificacionJuez";
     }
@@ -62,11 +61,8 @@ public class JuezControlador {
         Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
         modelo.addAttribute("usuario", usuario);
         Calificacion calificacionAntigua = calificacionRepositorio.getById(idCalificacion);
-        System.out.println("Este es el id:" + idCalificacion);
-        System.out.println(calificacionAntigua.getComentario() + "Este es el com antiguo");
         calificacionAntigua.setComentario(request.getParameter("comentario"));
-        System.out.println(request.getParameter("comentario")+ "Este es el comentario");
-        System.out.println(calificacionAntigua.getComentario() + " Este es el nuevo");
+        calificacionAntigua.setPuntaje(Double.parseDouble(request.getParameter("puntaje")));
         calificacionServicio.actualizaCalificacion(calificacionAntigua);
         modelo.addAttribute("competidor",calificacionAntigua.getCompetidor());
         modelo.addAttribute("calificacion",calificacionAntigua);
@@ -92,7 +88,7 @@ public class JuezControlador {
         Usuario competidor = usuarioRepositorio.getById(idCompetidor);
         Evento evento = eventoRepositorio.getById(idEvento);
         String comentario = request.getParameter("comentario");
-        double puntaje = 9.5;
+        double puntaje = Double.parseDouble(request.getParameter("puntaje"));
         Calificacion nuevaCalificacion = calificacionServicio.creaCalificacion(evento, evento.getDisciplina(), usuario, competidor, puntaje, comentario);
         modelo.addAttribute("usuario", usuario);
         modelo.addAttribute("calificacionesRepositorio", calificacionRepositorio);
