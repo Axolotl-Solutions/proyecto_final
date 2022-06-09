@@ -113,7 +113,12 @@
                         <td th:text= "${competidor.getNombre()+' '+competidor.getApellido_P() + ' ' + competidor.getApellido_M()}" data-title="Nombre">Fernando Flores</td>
                         <td th:text="${competidor.getEmail()}" data-title="Correo">fernandondin@ciencias.unam.mx</td>
                         <td data-title="Acción" id="td">
-                            <a th:href="@{/juez/calificacion/{idCalificacion}(idCalificacion = ${calificacionRepositorio.findByEventoAndJuezAndCompetidor(evento, usuario, competidor).getCalificacion_Id()})}" class="editar-btn" active>
+
+                            <a th:if= "${calificacionRepositorio.findByEventoAndJuezAndCompetidor(evento, usuario, competidor) != null }" th:href="@{/juez/editarCalificacion/{idCalificacion}(idCalificacion = ${calificacionRepositorio.findByEventoAndJuezAndCompetidor(evento, usuario, competidor).getCalificacion_Id()})}" class="editar-btn" active>
+                                <span class="material-symbols-rounded  icon">edit</span>
+                                <span>Calificación</span>
+                            </a>
+                            <a th:if= "${calificacionRepositorio.findByEventoAndJuezAndCompetidor(evento, usuario, competidor) == null }" th:href="@{/juez/crearCalificacion/{idCompetidor}/{idEvento}(idCompetidor = ${competidor.getUsuario_Id()}, idEvento = ${evento.getEvento_Id()})}" class="editar-btn" active>
                                 <span class="material-symbols-rounded  icon">edit</span>
                                 <span>Calificación</span>
                             </a>

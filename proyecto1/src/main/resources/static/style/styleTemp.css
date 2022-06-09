@@ -522,7 +522,8 @@ body {
     background:transparent;
     font-size: 15px;
     font-family: comfortaa, sans-serif;
-    resize: none;
+    resize: vertical;
+    overflow: auto;
 }
 
 

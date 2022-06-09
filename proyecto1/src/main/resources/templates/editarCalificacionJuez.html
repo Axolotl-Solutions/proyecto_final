@@ -1,0 +1,105 @@
+<html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla.html :: head">
+</head>
+<body>
+<header th:replace="plantillas/plantilla.html :: header">
+</header>
+
+<section>
+    <div class="calificacionesJuez" >
+        <div class="comentarios" data-aos="fade-left" data-aos-duration="700">
+            <div class="titulo-comentarios">
+                <div class="titulo-comentario">
+                    <p class="comentarios-titulo">Calificación</p>
+                    <span class="material-symbols-rounded  icon" aria-hidden="true">chat</span>
+                </div>
+                <div class="divider card-divider"></div>
+
+                <form method="get" class="juez-comentario" th:action="@{/juez/editaCalificacion/{idCalificacion}(idCalificacion = ${calificacion.getCalificacion_Id()})}">
+                    <div class="juez-titulo" style="justify-content: space-between;">
+                        <div style="display: flex; padding: 15px; align-items: center; gap:5px;">
+                            <div>
+                                <figure class="card-titulo">
+                                    <img src="/img/avatar-1.png" alt="" width="48" height="48">
+                                </figure>
+                            </div>
+                            <div>
+                                <p th:text="${calificacion.getCompetidor().getNombre() + ' '+ calificacion.getCompetidor().getApellido_P()}">Alan Romero</p>
+                                <p class="card-subtitle" >Competidor</p>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="submit" class="guardar-btn" active>
+                                <span  class="material-symbols-rounded  icon" style="color:#fff;">save</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="divider card-divider"></div>
+                    <div class="juez-calificación">
+                        <p>Puntaje: </p>
+                        <input th:value="${calificacion.getPuntaje()}" name="puntaje" id="puntaje" type="number" min="1" max="10" placeholder="Ingresa un puntaje del 1-10" step="0.1">
+                        <span class="material-symbols-rounded  icon">star</span>
+                        <p th:text="${'('+calificacion.getEvento().getNombreEvento()+' - '+calificacion.getEvento().getDisciplina().getNombre()+')'}"></p>
+                    </div>
+                    <div class="juez-texto-jueces">
+                        <label>
+                            <textarea id="comentario" name="comentario" class="jueces-textarea"th:text="${calificacion.getComentario()}" contentEditable="true" placeholder="Escribe un comentario sobre esta actuación..."></textarea>
+                        </label>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer th:replace="plantillas/plantilla.html :: footer">
+</footer>
+<script th:replace="plantillas/plantilla.html :: js">
+</script>
+<script>
+    var eliminar = document.getElementsByName("eliminar-btn");
+    var links = document.getElementsByClassName("a-href");
+    for (let i = 0; i < eliminar.length; i++) {
+        eliminar[i].addEventListener("click", function(){
+
+            Swal.fire({
+                title: '¿Está seguro?',
+                text: "No podrá revertir esta acción.",
+                icon: 'warning',
+                iconColor: 'var(--sw-cancelar)',
+                showCancelButton: true,
+                confirmButtonText: 'Si, eliminar',
+                cancelButtonText: 'No, cancelar',
+                confirmButtonColor:'var(--confirmar-btn)',
+                cancelButtonColor: 'var(--eliminar-btn)',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Eliminado',
+                    text: "Se elimino correctamente.",
+                    icon: 'success',
+                    confirmButtonText: '¡Bien!',
+                    confirmButtonColor:'var(--confirmar-btn)'
+                })
+                window.setTimeout(function(){
+                    window.location.href = links[i].href;
+                }, 500);
+            } else if (result.dismiss === Swal.DismissReason.cancel){
+                Swal.fire({
+                    title: 'Cancelado',
+                    text: "No se elimino el competidor",
+                    icon: 'error',
+                    confirmButtonText: '¡Bien!',
+                    confirmButtonColor:'var(--confirmar-btn)'
+                })
+            }
+        })
+        });
+    }
+</script>
+</body>
+</html>
