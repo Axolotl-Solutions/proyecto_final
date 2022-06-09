@@ -44,7 +44,7 @@
                     </div>
                     <div class="juez-texto-jueces">
                         <label>
-                            <textarea id="comentario" name="comentario" class="jueces-textarea"th:text="${calificacion.getComentario()}" contentEditable="true" placeholder="Escribe un comentario sobre esta actuación..."></textarea>
+                            <textarea maxlength="5000" id="comentario" name="comentario" class="jueces-textarea"th:text="${calificacion.getComentario()}" contentEditable="true" placeholder="Escribe un comentario sobre esta actuación..."></textarea>
                         </label>
                     </div>
 

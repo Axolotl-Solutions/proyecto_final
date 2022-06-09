@@ -118,7 +118,7 @@ CREATE TABLE IF NOT EXISTS Calificacion(
     juez_Id				INTEGER NOT NULL,
     competidor_Id		INTEGER NOT NULL,
     puntaje				DOUBLE PRECISION,
-    comentario			VARCHAR(140)
+    comentario			VARCHAR(5000)
 );
 
 ALTER TABLE Calificacion

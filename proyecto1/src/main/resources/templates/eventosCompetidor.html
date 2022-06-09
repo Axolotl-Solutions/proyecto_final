@@ -11,7 +11,7 @@
         <form method="get" style="display:flex;gap:10px;" th:action="@{/entrenador/agregarEvento/{idC}(idC = ${competidor.getUsuario_Id()})}">
             <div data-aos="fade-right" data-aos-duration="1300" class="select">
                 <select id="sel" name="eventos" >
-                    <option th:each="evento : ${eventosAll}" th:value="${evento.getEvento_Id()}" th:text="${evento.getNombreEvento()+' : '+evento.getFecha()+' '+evento.getRama()}"></option>
+                    <option th:each="evento : ${eventosAll}" th:value="${evento.getEvento_Id()}" th:text="${evento.getNombreEvento()+' : '+evento.getFecha()+' '+evento.getRama()+' ('+evento.getDisciplina().getNombre()+')'}"></option>
                 </select>
             </div>
             <button type="submit" data-aos="fade-left" data-aos-duration="1300" class="inscribir">

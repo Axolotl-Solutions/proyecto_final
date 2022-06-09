@@ -12,7 +12,7 @@
         <div data-aos="fade-right" data-aos-duration="1300" class="select" style="width:20em;">
             <select  id="sel" name="eventos" >
                 <option value="">Seleccione un evento</option>
-                <option th:each="evento : ${eventos}" th:value="${evento.getEvento_Id()}" th:text="${evento.getNombreEvento()+' : '+evento.getFecha()+' '+evento.getRama()}"></option>
+                <option th:each="evento : ${eventos}" th:value="${evento.getEvento_Id()}" th:text="${evento.getNombreEvento()+' : '+evento.getFecha()+' '+evento.getRama()+' ('+evento.getDisciplina().getNombre()+')'}"></option>
             </select>
         </div>
 
