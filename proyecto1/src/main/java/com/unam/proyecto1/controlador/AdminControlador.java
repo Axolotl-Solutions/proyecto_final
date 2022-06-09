@@ -237,17 +237,14 @@ public class AdminControlador {
                 apellidoPJuez+" "+
                 apellidoMJuez;
         String asunto = "Axolotl Solutions inc - Sistema de Olimpiadas universitarias [contraseña]";
-        String mensaje= "Hola "+nombre+" Fuiste registrado como JUEZ con éxito en el Sistema de Olimpiadas Universitario para"+
-                "calificar en eventos con disciplina: \n\n"+nombreDisciplinaJuez +"\n\n tu contraseña es:\n\n"+ contra +
-                "\n\n Recuerda que puedes ingresar con tu correo: \n\n"+emailJuez;
         Usuario nuevoJuez = usuarioServicio.creaUsuarioJuez(emailJuez, contra, nombreJuez, apellidoPJuez, apellidoMJuez, nombreDisciplinaJuez);
         if(nuevoJuez==null) {
             model.addAttribute("error", true);
         }else {
             model.addAttribute("exito", true);
             try {
-                emailService.sendSimpleMessage(emailJuez, asunto,
-                        mensaje);
+                emailService.sendCorreoTemplate(emailJuez, asunto,
+                        nuevoJuez,contra);
             }catch (Exception e){
                 model.addAttribute("errorMail",true);
             }
