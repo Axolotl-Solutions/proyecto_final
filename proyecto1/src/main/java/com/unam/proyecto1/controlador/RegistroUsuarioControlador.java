@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -40,15 +41,12 @@ public class RegistroUsuarioControlador {
 
 
     @PostMapping("/crea")
-    public String crea(@RequestParam("imagen") MultipartFile imagen, HttpServletRequest request, Model model) {
+    public String crea(@RequestParam("imagen") MultipartFile imagen, HttpServletRequest request, Model model) throws MessagingException {
         String contra = usuarioServicio.randomString(8);
         String nombre = request.getParameter("nombre")+" "+
                 request.getParameter("apellido_p")+" "+
                 request.getParameter("apellido_m");
         String asunto = "Axolotl Solutions inc - Sistema de Olimpiadas universitarias [contraseña]";
-        String mensaje= "Hola "+nombre+" Fuiste registrado como ENTRENADOR con exito en el Sistema de Olimpiadas Universitario"+
-                " tu contraseña es:\n\n"+ contra +
-                "\n\n Recuerda que puedes ingresar con tu correo: \n\n"+request.getParameter("email");
         Usuario usuario = usuarioServicio.creaUsuarioEntrenador(request.getParameter("email"),
                 contra,
                 request.getParameter("nombre"),
@@ -70,8 +68,8 @@ public class RegistroUsuarioControlador {
             }
         }
         if (usuario!=null) {
-            emailService.sendSimpleMessage(request.getParameter("email"), asunto,
-                    mensaje);
+            emailService.sendCorreoTemplate(request.getParameter("email"), asunto,
+                    usuario,contra);
         }
         model.addAttribute("exito", usuario != null);
         return "registro";

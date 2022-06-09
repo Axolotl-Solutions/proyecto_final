@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -143,7 +144,7 @@ public class EntrenadorControlador {
     }
 
     @PostMapping("/registra")
-    public String registra(@RequestParam("imagen") MultipartFile imagen, HttpServletRequest request, Model model, Principal principal) {
+    public String registra(@RequestParam("imagen") MultipartFile imagen, HttpServletRequest request, Model model, Principal principal) throws MessagingException {
         Usuario usuarioActual =  usuarioRepositorio.findByEmail(principal.getName());
         List<Evento> eventos = eventoRepositorio.findAll();
         model.addAttribute("eventos", eventos);
@@ -162,12 +163,6 @@ public class EntrenadorControlador {
         request.getParameter("apellido_p")+" "+
                 request.getParameter("apellido_m");
         String asunto = "Axolotl Solutions inc - Sistema de Olimpiadas universitarias [contraseña]";
-        String mensaje= "Hola "+nombre+" Fuiste registrado como COMPETIDOR con exito en el Sistema de Olimpiadas Universitario"+
-                "Para el evento:\n\n "+evento +"\n\nCon fecha para el: \n\n"+ fechaEvento+ "\n\nRama: \n\n"+ rama+
-                "\n\nDisciplina:"+
-                "\n\n"+disciplina+
-                "\n\nTu contraseña es:\n\n"+ contra +
-                "\n\n Recuerda que puedes ingresar con tu correo: \n\n"+request.getParameter("email");
         Usuario usuario = null;
         if (sexo.equals(request.getParameter("sexo"))) {
              usuario = usuarioServicio.creaUsuarioCompetidor(request.getParameter("email"),
@@ -203,8 +198,7 @@ public class EntrenadorControlador {
             }
         }
         if (usuario!=null) {
-            emailService.sendSimpleMessage(request.getParameter("email"), asunto,
-                    mensaje);
+            emailService.sendCorreoTemplate(request.getParameter("email"), asunto,usuario,contra);
         }
         model.addAttribute("error", usuario == null);
         model.addAttribute("exito", usuario != null);
