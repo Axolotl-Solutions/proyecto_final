@@ -1,0 +1,74 @@
+Sa<html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla.html :: head">
+</head>
+<body>
+<header th:replace="plantillas/plantilla.html :: header">
+</header>
+
+<main>
+    <article class="container article">
+        <!-- Contenedores form -->
+        <section class="form">
+            <div class="form-container " data-aos="zoom-out" data-aos-duration="900">
+                <div class="form-wrapper">
+
+                    <!-- INICIA FORM  -->
+                    <div class="cont">
+                        <div class="title">Registrar Disciplina</div>
+                        <div class="content">
+                            <form method="post" th:action="@{/admins/actualizaDisciplina/{id}(id=${disciplina.getDisciplina_Id()})}" >
+                                <div class="user-details" >
+                                    <div class="input-box" style="width:100%;">
+                                        <span class="details">Nombre Disciplina</span>
+                                        <input th:value="${disciplina.getNombre()}" type="text" id="disciplina" name="nombreDisciplina" placeholder="Introduce el nombre del evento" required>
+                                    </div>
+                                </div>
+                                <div class="button">
+                                    <input type="submit" value="Registrar">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- TERMINA FORMS  -->
+
+                </div>
+            </div>
+
+        </section>
+
+
+    </article>
+</main>
+<div class="divider card-divider"></div>
+<div id="error" th:if="${error}" class="alerta" style="display:none;" role="alert">
+</div>
+<div id="exito" th:if="${exito}" class="alerta" style="display:none;" role="alert">
+</div>
+<footer th:replace="plantillas/plantilla.html :: footer">
+</footer>
+
+<script th:replace="plantillas/plantilla.html :: js">
+</script>
+<script>
+    document.getElementsByClassName("navbar-link")[2].classList.add("active");
+    var error = document.getElementById('error');
+    var exito = document.getElementById('exito');
+    if(error!=null){
+        Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'La disciplina ya esta registrada',
+              confirmButtonColor: 'var(--confirmar-btn)'
+            })
+    }
+    if(exito!=null){
+        Swal.fire({
+              icon: 'success',
+              title: 'Editado',
+              text: 'Disciplina editada correctamente!',
+              confirmButtonColor: 'var(--confirmar-btn)'
+            })
+    }
+ </script>
+</body></html>

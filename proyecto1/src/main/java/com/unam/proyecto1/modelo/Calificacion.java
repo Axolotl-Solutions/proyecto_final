@@ -11,7 +11,7 @@ public class Calificacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "calificacion_Id")
-    private Integer calificacionId;
+    private Integer calificacion_Id;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "evento_Id")
@@ -31,12 +31,11 @@ public class Calificacion {
     @Column
     private String comentario;
 
-    public Integer getCalificacionId() {
-        return calificacionId;
+    public Integer getCalificacion_Id() {
+        return calificacion_Id;
     }
-
-    public void setCalificacionId(Integer calificacionId) {
-        this.calificacionId = calificacionId;
+    public void setCalificacion_Id(Integer calificacion_Id) {
+        this.calificacion_Id = calificacion_Id;
     }
 
     public Evento getEvento() {

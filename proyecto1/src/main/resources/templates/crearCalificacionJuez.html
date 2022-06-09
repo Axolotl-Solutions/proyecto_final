@@ -7,35 +7,44 @@
 </header>
 
 <section>
-    <div class="calificaciones" >
+    <div class="calificacionesJuez" >
         <div class="comentarios" data-aos="fade-left" data-aos-duration="700">
             <div class="titulo-comentarios">
                 <div class="titulo-comentario">
-                    <p class="comentarios-titulo">Comentarios</p>
+                    <p class="comentarios-titulo">Calificación</p>
                     <span class="material-symbols-rounded  icon" aria-hidden="true">chat</span>
                 </div>
                 <div class="divider card-divider"></div>
 
                 <div class="juez-comentario">
-                    <div class="juez-titulo">
-                        <div>
-                            <figure class="card-titulo">
-                                <img src="/img/avatar-1.png" alt="" width="48" height="48">
-                            </figure>
+                    <div class="juez-titulo" style="justify-content: space-between;">
+                        <div style="display: flex; padding: 15px; align-items: center; gap:5px;">
+                            <div>
+                                <figure class="card-titulo">
+                                    <img src="/img/avatar-1.png" alt="" width="48" height="48">
+                                </figure>
+                            </div>
+                            <div>
+                                <p th:text="${competidor.getNombre() + ' '+ competidor.getApellido_P()}">Alan Romero</p>
+                                <p class="card-subtitle" >Competidor</p>
+                            </div>
                         </div>
                         <div>
-                            <p th:text="${calificacion.getJuez().getNombre() + ' '+ calificacion.getJuez().getApellido_P()}">Alan Romero</p>
-                            <p class="card-subtitle" >Juez</p>
+                            <a th:href="@{/juez/creaCalificacion/}" class="guardar-btn" active>
+                                <span  class="material-symbols-rounded  icon" style="color:#fff;">save</span>
+                            </a>
                         </div>
                     </div>
                     <div class="divider card-divider"></div>
                     <div class="juez-calificación">
-                        <p th:text="${'Calificación: '+calificacion.getPuntaje()}">Calificación: 5.8</p>
+                        <p>Calificación que será guardada (esto será editable despues): 9.5</p>
                         <span class="material-symbols-rounded  icon">star</span>
-                        <p th:text="${'('+calificacion.getEvento().getNombreEvento()+' - '+calificacion.getEvento().getDisciplina().getNombre()+')'}"></p>
+                        <p th:text="${'('+evento.getNombreEvento()+' - '+evento.getDisciplina().getNombre()+')'}"></p>
                     </div>
-                    <div class="juez-texto">
-                        <p th:text="${calificacion.getComentario()}"></p>
+                    <div class="juez-texto-jueces">
+                        <label>
+                            <textarea id="comentario" name="comentario" class="jueces-textarea" contentEditable="true" placeholder="Escribe un comentario sobre esta actuación..."></textarea>
+                        </label>
                     </div>
                 </div>
 

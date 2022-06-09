@@ -49,22 +49,28 @@
             </li>
 
             <li>
-              <a id="agregar-nav" href="#" class="navbar-link icon-box">
+              <a th:if="${!usuario.getRol().equals('COMPETIDOR')}" id="agregar-nav" href="#" class="navbar-link icon-box">
                 <span class="material-symbols-rounded  icon">add</span>
 
                 <span>Agregar</span>
               </a>
             </li>
 
-            <li>
+            <li th:if="${!usuario.getRol().equals('ADMINISTRADOR')}">
               <a id="calificaciones-nav" href="#" class="navbar-link icon-box">
                 <span class="material-symbols-rounded  icon">military_tech</span>
 
                 <span>Calificaciones</span>
               </a>
             </li>
+            <li th:if="${usuario.getRol().equals('ADMINISTRADOR')}">
+              <a id="disciplinas-nav" href="#" class="navbar-link icon-box">
+                <span class="material-symbols-rounded  icon">pool</span>
+                <span>Disciplinas</span>
+              </a>
+            </li>
 
-            <li>
+            <li th:if="${!usuario.getRol().equals('ADMINISTRADOR')}">
               <a id="tabla-nav" href="#" class="navbar-link icon-box">
                 <span class="material-symbols-rounded  icon">bar_chart</span>
 
@@ -72,13 +78,22 @@
               </a>
             </li>
 
+            <li th:if="${usuario.getRol().equals('ADMINISTRADOR')}">
+              <a id="jueces-nav" href="#" class="navbar-link icon-box">
+                <span class="material-symbols-rounded  icon">gavel</span>
+
+                <span>Jueces</span>
+              </a>
+            </li>
+
             <li>
-              <a id="busca-nav" href="#" class="navbar-link icon-box">
+              <a th:if="${!usuario.getRol().equals('COMPETIDOR')}" id="busca-nav" href="#" class="navbar-link icon-box">
                 <span class="material-symbols-rounded  icon">search</span>
 
                 <span>Buscar</span>
               </a>
             </li>
+
 
           </ul>
 
@@ -93,7 +108,8 @@
                   <div>
                     <p id="nombre-nav" th:text="${usuario.getNombre()}" class="profile-title">Fernando F</p>
 
-                    <p id="rol-nav" th:text="${usuario.getRol()}" class="profile-subtitle">Entrenador</p>
+                    <p th:if="${!usuario.getRol().equals('JUEZ')}" id="rol-nav" th:text="${usuario.getRol()}" class="profile-subtitle">Entrenador</p>
+                    <p th:if="${usuario.getRol().equals('JUEZ')}" id="rol-nav" th:text="${usuario.getRol()+' ('+disciplina+')'}" class="profile-subtitle">Entrenador</p>
                   </div>
                  </a>
                   <div class="dd_menu">
@@ -175,6 +191,16 @@
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
        AOS.init({offset: 100});
+
+        if(tipoUsuario.innerHTML === "COMPETIDOR"){
+            document.getElementById("agregar-nav").style.display = 'block';
+    // hide the lorem ipsum text
+            document.getElementById("agregar-nav").style.display = 'none';
+               document.getElementById("busca-nav").style.display = 'block';
+    // hide the lorem ipsum text
+            document.getElementById("busca-nav").style.display = 'none';
+           
+    }
    </script>
 </div>
 

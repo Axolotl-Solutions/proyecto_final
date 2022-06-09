@@ -47,6 +47,15 @@
                                         <span class="details">Fecha de nacimiento</span>
                                         <input th:value="${competidor.getFecha_nacimiento().toString().substring(0,10)}" name="fecha" type="date" placeholder="introduce fecha de nacimiento" required>
                                     </div>
+                                    <div class="input-box">
+                                        <span class="details">
+                                            Editar eventos
+                                        </span>
+                                        <a th:href="@{/entrenador/editarEventos/{email}(email = ${competidor.getEmail()})}" class="editar-btn" active>
+                                            <span>Eventos</span>
+                                            <span class="material-symbols-rounded  icon">edit</span>
+                                        </a>
+                                    </div>
                                 </div>
                                 <div class="gender-details">
                                     <input th:field="*{sexo}" type="radio" name="sexo" value="Masculino" id="dot-1" required/>
@@ -90,6 +99,7 @@
 <script th:replace="plantillas/plantilla.html :: js">
 </script>
 <script>
+    document.getElementsByClassName("navbar-link")[4].classList.add("active");
     var error = document.getElementById('error');
     var exito = document.getElementById('exito');
     if(error!=null){

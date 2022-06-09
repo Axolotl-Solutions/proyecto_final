@@ -8,8 +8,11 @@
 
 var tipoUsuario= document.getElementById("rol-nav");
 if(tipoUsuario.innerHTML === "ADMINISTRADOR"){
+    document.getElementById("jueces-nav").href="/admins/buscaJuez";
+    document.getElementById("busca-nav").href="/admins/busca";
     document.getElementById("agregar-nav").href="/admins";
     document.getElementById("agregar-menu").href="/admins";
+    document.getElementById("disciplinas-nav").href="/admins/buscarDisciplina";
     document.getElementById("inicio-nav").href="/inicioAdmin";
     document.getElementById("logo-1").href="/inicioAdmin";
     document.getElementById("logo-2").href="/inicioAdmin";
@@ -34,16 +37,13 @@ if(tipoUsuario.innerHTML === "COMPETIDOR"){
     document.getElementById("inicio-nav").href="/competidor/";
     document.getElementById("logo-1").href="/competidor/";
     document.getElementById("logo-2").href="/competidor/";
-    if(document.URL.endsWith('/calificaciones')){
-        document.getElementsByClassName("navbar-link")[2].classList.add("active");
-     }
 }
 if(tipoUsuario.innerHTML === "JUEZ"){
-    document.getElementById("agregar-nav").href="/jueces/";
-    document.getElementById("agregar-menu").href="/jueces/";
-    document.getElementById("inicio-nav").href="/jueces/";
-    document.getElementById("logo-1").href="/jueces/";
-    document.getElementById("logo-2").href="/jueces/";
+    document.getElementById("agregar-nav").href="/juez/";
+    document.getElementById("agregar-menu").href="/juez/";
+    document.getElementById("inicio-nav").href="/juez/";
+    document.getElementById("logo-1").href="/juez/";
+    document.getElementById("logo-2").href="/juez/";
 }
 
 /**
@@ -137,18 +137,7 @@ for (let i = 0; i < barra.length; i++) {
   document.getElementsByTagName("head")[0].appendChild(cssA);
   barra[i].style.cssText += 'transition: background 3s; animation-name:slider'+i+';animation-duration: 3.8s;'+'width:'+pro[i].innerHTML*10+'%; background:#'+color+";";
 }
-/*
-Array.prototype.forEach.call(barra, function(e) {
-  var cssA = document.createElement("style");
-  let reglas = document.createTextNode('@-webkit-keyframes slider {'+
-  'from { width:0%; }'+
-  'to { width:100%; }'+
-  '}');
-  cssA.appendChild(reglas);
-  document.getElementsByTagName("head")[0].appendChild(cssA);
-  e.style.cssText += 'animation-name:slider; animation-duration: 1.8s;';
-});
-*/
+
 
 
 

@@ -92,14 +92,14 @@
             </div>
 
         </section>
-
-
     </article>
 </main>
 <div class="divider card-divider"></div>
 <div id="error" th:if="${error}" class="alerta" style="display:none;" role="alert">
 </div>
 <div id="exito" th:if="${exito}" class="alerta" style="display:none;" role="alert">
+</div>
+<div id="errorSexo" th:if="${errorSexo}" class="alerta" style="display:none;" role="alert">
 </div>
 <footer th:replace="plantillas/plantilla.html :: footer">
 </footer>
@@ -128,6 +128,15 @@
     }
 </script>
 <script>
+   var errorSexo=document.getElementById('errorSexo');
+   if(errorSexo!=null){
+    Swal.fire({
+              icon: 'error',
+              title: 'El competidor no puede participar en esta rama',
+              text: 'Verifique el sexo.',
+              confirmButtonColor: 'var(--confirmar-btn)'
+            })
+   }
    document.getElementsByClassName("navbar-link")[1].classList.add("active");
    var error = document.getElementById('error');
    var exito = document.getElementById('exito');

@@ -57,28 +57,6 @@
 
             </div>
 
-            <!--
-            <div class="card-wrapper">
-
-
-                <div class="card task-card" data-aos="fade-left">
-
-                    <div class="card-icon icon-box blue">
-                        <span class="material-symbols-rounded  icon">person</span>
-                    </div>
-
-                    <div>
-                        <data th:text="${eventos.get(0).getNombreEvento()}" class="card-data" value="21">15</data>
-
-                        <p class="card-text">Competidores Registrados</p>
-                    </div>
-
-                </div>
-
-
-
-            </div>
-            -->
         </section>
 
         <!-- Tarjetas de eventos y usuarios -->
@@ -130,7 +108,12 @@
                         <td th:text= "${competidor.getNombre()+' '+competidor.getApellido_P() + ' ' + competidor.getApellido_M()}" data-title="Nombre">Fernando Flores</td>
                         <td th:text="${competidor.getEmail()}" data-title="Correo">fernandondin@ciencias.unam.mx</td>
                         <td data-title="Acción" id="td">
-                            <a th:href="@{/jueces/calificacion/{idCalificacion}(idCalificacion = ${calificacionRepositorio.findByEventoAndJuezAndCompetidor(evento, usuario, competidor).getCalificacionId()})}" class="editar-btn" active>
+
+                            <a th:if= "${calificacionRepositorio.findByEventoAndJuezAndCompetidor(evento, usuario, competidor) != null }" th:href="@{/juez/editarCalificacion/{idCalificacion}(idCalificacion = ${calificacionRepositorio.findByEventoAndJuezAndCompetidor(evento, usuario, competidor).getCalificacion_Id()})}" class="editar-btn" active>
+                                <span class="material-symbols-rounded  icon">edit</span>
+                                <span>Calificación</span>
+                            </a>
+                            <a th:if= "${calificacionRepositorio.findByEventoAndJuezAndCompetidor(evento, usuario, competidor) == null }" th:href="@{/juez/crearCalificacion/{idCompetidor}/{idEvento}(idCompetidor = ${competidor.getUsuario_Id()}, idEvento = ${evento.getEvento_Id()})}" class="editar-btn" active>
                                 <span class="material-symbols-rounded  icon">edit</span>
                                 <span>Calificación</span>
                             </a>
