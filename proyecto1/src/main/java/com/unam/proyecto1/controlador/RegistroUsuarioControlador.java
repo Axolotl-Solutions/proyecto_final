@@ -1,10 +1,12 @@
 package com.unam.proyecto1.controlador;
 
+import com.unam.proyecto1.modelo.Evento;
 import com.unam.proyecto1.modelo.Usuario;
 import com.unam.proyecto1.repositorio.UsuarioRepositorio;
 import com.unam.proyecto1.servicio.EmailService;
 import com.unam.proyecto1.servicio.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +41,27 @@ public class RegistroUsuarioControlador {
         return "registro";
     }
 
+    @GetMapping("/recuperar")
+    public String recuperar(){
+        return "recuperar";
+    }
 
+    @PostMapping("/recupera")
+    public String recupera(HttpServletRequest request, Model model) throws MessagingException {
+        Usuario usuario = usuarioRepositorio.findByEmail(request.getParameter("email"));
+        if(usuario!=null) {
+            String contra = usuarioServicio.randomString(8);
+            String asunto = "[Recuperar contraseña] Axolotl Solutions inc - Sistema de Olimpiadas universitarias";
+            String mensaje = "Tu nueva contraseña es: \n\n"+ contra +"\n\nNo la olvides :)";
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            usuario.setPassword(passwordEncoder.encode(contra));
+            emailService.sendSimpleMessage(usuario.getEmail(), asunto,mensaje);
+            usuarioServicio.actualizarUsuario(usuario);
+        }
+        model.addAttribute("recupera", usuario != null);
+        model.addAttribute("noRecupera",usuario==null);
+        return "index";
+    }
     @PostMapping("/crea")
     public String crea(@RequestParam("imagen") MultipartFile imagen, HttpServletRequest request, Model model) throws MessagingException {
         String contra = usuarioServicio.randomString(8);
