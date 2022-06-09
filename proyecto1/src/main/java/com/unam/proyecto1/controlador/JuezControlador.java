@@ -91,10 +91,11 @@ public class JuezControlador {
         String comentario = request.getParameter("comentario");
         double puntaje = Double.parseDouble(request.getParameter("puntaje"));
         Calificacion nuevaCalificacion = calificacionServicio.creaCalificacion(evento, evento.getDisciplina(), usuario, competidor, puntaje, comentario);
-        modelo.addAttribute("usuario", usuario);
-        modelo.addAttribute("calificacionesRepositorio", calificacionRepositorio);
-        modelo.addAttribute("exito", true);
-        return "redirect:/juez/editarCalificacion/"+nuevaCalificacion.getCalificacion_Id();
+        modelo.addAttribute("competidor",nuevaCalificacion.getCompetidor());
+        modelo.addAttribute("calificacion",nuevaCalificacion);
+        modelo.addAttribute("usuario",usuario);
+        modelo.addAttribute("exito",true);
+        return "editarCalificacionJuez";
     }
 
     @GetMapping("/buscarEventos")
