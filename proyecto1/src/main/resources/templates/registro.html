@@ -233,14 +233,6 @@ form .signup-link a:hover{
                 <input type="email" name="email" required>
                 <label>Correo</label>
             </div>
-            <div class="field" data-aos="fade-left" data-aos-duration="1200">
-                <input id="contraseña" type="password" name="password" required>
-                <label>Contraseña</label>
-            </div>
-            <div class="field" data-aos="fade-left" data-aos-duration="1200">
-                <input id="confirma-contraseña" type="password" required>
-                <label>Confirma contraseña</label>
-            </div>
             <div class="" style="border:none;">
                 <div>
                     <span>Subir imagen.</span>
@@ -294,17 +286,6 @@ form .signup-link a:hover{
             confirmButtonColor: 'hsl(144, 62%, 53%)'
           })
     }
-   var contra = document.getElementById("contraseña");
-   var confirmaContra = document.getElementById("confirma-contraseña");
-    function validaContra(){
-      if(contra.value != confirmaContra.value) {
-        confirmaContra.setCustomValidity("Las contraseñas no coinciden");
-      } else {
-        confirmaContra.setCustomValidity('');
-      }
-    }
-    contra.onchange = validaContra;
-    confirmaContra.onkeyup = validaContra;
 </script>
 </body>
 </html>

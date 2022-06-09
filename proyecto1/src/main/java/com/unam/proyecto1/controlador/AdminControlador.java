@@ -6,6 +6,7 @@ import com.unam.proyecto1.modelo.Usuario;
 import com.unam.proyecto1.repositorio.DisciplinaRepositorio;
 import com.unam.proyecto1.repositorio.UsuarioRepositorio;
 import com.unam.proyecto1.servicio.DisciplinaServicio;
+import com.unam.proyecto1.servicio.EmailService;
 import com.unam.proyecto1.servicio.EventoServicio;
 import com.unam.proyecto1.servicio.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,9 @@ public class AdminControlador {
 
     @Autowired
     private EventoServicio eventoServicio;
+
+    @Autowired
+    private EmailService emailService;
 
     @GetMapping("/")
     public String findUsuarios(Model model) {
@@ -224,16 +228,30 @@ public class AdminControlador {
     @PostMapping("/creaJuez")
     public String creaJuez(@RequestParam("imagen") MultipartFile imagen, HttpServletRequest request, Model model, Principal principal){
         String emailJuez = request.getParameter("emailJuez");
-        String passwordJuez = request.getParameter("passwordJuez");
         String nombreJuez = request.getParameter("nombreJuez");
         String apellidoPJuez = request.getParameter("apellidoPJuez");
         String apellidoMJuez = request.getParameter("apellidoMJuez");
         String nombreDisciplinaJuez = request.getParameter("nombreDisciplinaJuez");
-        Usuario nuevoJuez = usuarioServicio.creaUsuarioJuez(emailJuez, passwordJuez, nombreJuez, apellidoPJuez, apellidoMJuez, nombreDisciplinaJuez);
-        if(nuevoJuez==null)
+        String contra = usuarioServicio.randomString(8);
+        String nombre = nombreJuez+" "+
+                apellidoPJuez+" "+
+                apellidoMJuez;
+        String asunto = "Axolotl Solutions inc - Sistema de Olimpiadas universitarias [contraseña]";
+        String mensaje= "Hola "+nombre+" Fuiste registrado como JUEZ con éxito en el Sistema de Olimpiadas Universitario para"+
+                "calificar en eventos con disciplina: \n\n"+nombreDisciplinaJuez +"\n\n tu contraseña es:\n\n"+ contra +
+                "\n\n Recuerda que puedes ingresar con tu correo: \n\n"+emailJuez;
+        Usuario nuevoJuez = usuarioServicio.creaUsuarioJuez(emailJuez, contra, nombreJuez, apellidoPJuez, apellidoMJuez, nombreDisciplinaJuez);
+        if(nuevoJuez==null) {
             model.addAttribute("error", true);
-        else
-            model.addAttribute("exito",true);
+        }else {
+            model.addAttribute("exito", true);
+            try {
+                emailService.sendSimpleMessage(emailJuez, asunto,
+                        mensaje);
+            }catch (Exception e){
+                model.addAttribute("errorMail",true);
+            }
+        }
         if (!imagen.isEmpty()){
             Path directorioImagenes = Paths.get("src//main//resources//static//img");
             String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();

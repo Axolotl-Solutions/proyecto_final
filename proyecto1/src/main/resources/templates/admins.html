@@ -47,20 +47,12 @@
                                         <input type="text" id="emailJuez" name="emailJuez" placeholder="Introduce el correo electrónico" required>
                                     </div>
                                     <div class="input-box">
-                                        <span class="details">Contraseña</span>
-                                        <input type="password" id="contraseña" name="passwordJuez" placeholder="Introduce la contraseña" required>
-                                    </div>
-                                    <div class="input-box">
                                         <span class="details">Disciplina</span>
                                         <div style="overflow:hidden;" class="select" data-aos="fade-right" data-aos-duration="900">
                                             <select id="nombreDisciplinaJuez" name="nombreDisciplinaJuez">
                                                 <option th:each="dis : ${disciplinas}" th:value="${dis.getNombre()}" th:text="${dis.getNombre()}"></option>
                                             </select>
                                         </div>
-                                    </div>
-                                    <div class="input-box">
-                                        <span class="details">Confirma</span>
-                                        <input id="confirma-contraseña" type="password" placeholder="Confirma la contraseña" required>
                                     </div>
                                     <div class="input-box" style="border:none;">
                                         <div>
@@ -166,6 +158,8 @@
 </main>
 <div id="exito" th:if="${exito}" style="display:none;">
 </div>
+<div id="errorMail" th:if="${errorMail}" style="display:none;">
+</div>
 <div id="error" th:if="${error}" style="display:none;">
 </div>
 <div id="errorDisciplina" th:if="${errorDisciplina}" style="display:none;">
@@ -177,6 +171,15 @@
 <script>
     var exito = document.getElementById('exito');
     var erro = document.getElementById('error');
+    var errorMail = document.getElementById('errorMail');
+    if(errorMail != null){
+        Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Correo no valido',
+              confirmButtonColor: 'var(--confirmar-btn)'
+            })
+    }
     if(exito!=null){
         Swal.fire({
               icon: 'success',
@@ -201,17 +204,6 @@
               confirmButtonColor: 'var(--confirmar-btn)'
             })
     }
-   var contra = document.getElementById("contraseña");
-   var confirmaContra = document.getElementById("confirma-contraseña");
-    function validaContra(){
-      if(contra.value != confirmaContra.value) {
-        confirmaContra.setCustomValidity("Las contraseñas no coinciden");
-      } else {
-        confirmaContra.setCustomValidity('');
-      }
-    }
-    contra.onchange = validaContra;
-    confirmaContra.onkeyup = validaContra;
 </script>
 <script>
     function valida(f) {

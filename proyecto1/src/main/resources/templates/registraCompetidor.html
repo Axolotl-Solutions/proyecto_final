@@ -32,16 +32,8 @@
                                         <input name="apellido_m" type="text" placeholder="Introduce el apellido materno" required>
                                     </div>
                                     <div class="input-box">
-                                        <span class="details">Contraseña</span>
-                                        <input name="password" id="contraseña" type="password" placeholder="Introduce la contraseña" required>
-                                    </div>
-                                    <div class="input-box">
                                         <span class="details">Correo</span>
                                         <input name="email" type="email" placeholder="Introduce el correo" required>
-                                    </div>
-                                    <div class="input-box">
-                                        <span class="details">Confirma</span>
-                                        <input id="confirma-contraseña" type="password" placeholder="Confirma la contraseña" required>
                                     </div>
                                     <div class="input-box">
                                         <span class="details">Altura</span>
@@ -128,7 +120,7 @@
       var ok = true;
       var msg = "Mal perro"
 
-      if(f[11].checked==false && f[12].checked==false){
+      if(f[9].checked==false && f[10].checked==false){
         ok = false;
         console.log("entro aquí");
       }
@@ -172,16 +164,5 @@
               confirmButtonColor: 'var(--confirmar-btn)'
             })
     }
-   var contra = document.getElementById("contraseña");
-   var confirmaContra = document.getElementById("confirma-contraseña");
-    function validaContra(){
-      if(contra.value != confirmaContra.value) {
-        confirmaContra.setCustomValidity("Las contraseñas no coinciden");
-      } else {
-        confirmaContra.setCustomValidity('');
-      }
-    }
-    contra.onchange = validaContra;
-    confirmaContra.onkeyup = validaContra;
  </script>
 </body></html>

@@ -2,6 +2,7 @@ package com.unam.proyecto1.controlador;
 
 import com.unam.proyecto1.modelo.Usuario;
 import com.unam.proyecto1.repositorio.UsuarioRepositorio;
+import com.unam.proyecto1.servicio.EmailService;
 import com.unam.proyecto1.servicio.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,9 @@ public class RegistroUsuarioControlador {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
+    @Autowired
+    private EmailService emailService;
+
     
     @GetMapping("/registro")
     public String registra(){
@@ -37,8 +41,16 @@ public class RegistroUsuarioControlador {
 
     @PostMapping("/crea")
     public String crea(@RequestParam("imagen") MultipartFile imagen, HttpServletRequest request, Model model) {
+        String contra = usuarioServicio.randomString(8);
+        String nombre = request.getParameter("nombre")+" "+
+                request.getParameter("apellido_p")+" "+
+                request.getParameter("apellido_m");
+        String asunto = "Axolotl Solutions inc - Sistema de Olimpiadas universitarias [contraseña]";
+        String mensaje= "Hola "+nombre+" Fuiste registrado como ENTRENADOR con exito en el Sistema de Olimpiadas Universitario"+
+                " tu contraseña es:\n\n"+ contra +
+                "\n\n Recuerda que puedes ingresar con tu correo: \n\n"+request.getParameter("email");
         Usuario usuario = usuarioServicio.creaUsuarioEntrenador(request.getParameter("email"),
-                request.getParameter("password"),
+                contra,
                 request.getParameter("nombre"),
                 request.getParameter("apellido_p"),
                 request.getParameter("apellido_m"));
@@ -56,6 +68,10 @@ public class RegistroUsuarioControlador {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        if (usuario!=null) {
+            emailService.sendSimpleMessage(request.getParameter("email"), asunto,
+                    mensaje);
         }
         model.addAttribute("exito", usuario != null);
         return "registro";
