@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantillas/plantilla.html :: head">
+</head>
+<body>
+
+<header th:replace="plantillas/plantilla.html :: header">
+</header>
+<div id="bg-img" class="full-img-bg">
+
+</div>
+<div id="img-container" class="full">
+    <img class="img" id="img-max" th:src="@{${'/img/'+usuario.getImagen()}}" alt="Elizabeth Foster">
+</div>
+<main>
+    <article class="container article">
+
+            <div data-aos="fade-right" data-aos-duration="1200" class="search_wrap search_wrap_1">
+                <div class="search_box">
+                    <input id="myInput" type="text" class="input" placeholder="Buscar evento..." onkeyup="myFunction()">
+                    <div class="btn btn_common">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+            </div>
+
+        <!-- Tabla de eventos -->
+        <section class="eventos">
+            <div class="card profile-card" data-aos="fade-right" data-aos-duration="700">
+                <div class="profile-card-wrapper">
+                    <div>
+                        <p th:text="${disciplina.getNombre()}" class="card-title" style="font-size: 20px;">Disciplina del juez</p>
+                        <p class="card-subtitle">Disciplina</p>
+                    </div>
+                </div>
+                <div class="divider card-divider"></div>
+                <!-- EMPIEZA TABLA -->
+                <table id="myTable" class="table">
+                    <thead>
+                    <tr class="tabla-t">
+                        <th>Nombre</th>
+                        <th>Rama</th>
+                        <th>Categoria</th>
+                        <th>Fecha</th>
+                        <th>Acción</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr  th:each="evento : ${eventos}">
+                        <td th:text= "${evento.getNombreEvento()}" data-title="Nombre">100 metros planos</td>
+                        <td th:text= "${evento.getRama()}" data-title="Rama">Femenil</td>
+                        <td th:text= "${evento.getCategoria()}" data-title="Categoría">+18 años</td>
+                        <td th:text= "${evento.getFecha()}" data-title="Fecha">2022-02-22</td>
+                        <td data-title="Acción" id="td">
+                            <a th:href="@{/juez/buscaEvento/{idEvento}(idEvento = ${evento.getEvento_Id()})}" class="editar-btn" active>
+                                <span class="material-symbols-rounded  icon">edit</span>
+                                <span>Seleccionar</span>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!--Sí
+            <div class="card" data-aos="zoom-in" data-aos-duration="700" th:each="evento : ${eventos}">
+                <div class="evento_tarjeta" th:text= "${evento.getNombreEvento()}"> Hola </div>
+                <div class="evento_tarjeta" th:text= "${evento.getDisciplina().getNombre()}"> Hola </div>
+                <div class="evento_tarjeta" th:text= "${evento.getRama()}"> Hola </div>
+                <div class="evento_tarjeta" th:text= "${evento.getCategoria()}"> Hola </div>
+            </div>
+            -->
+
+        </section>
+
+
+
+    </article>
+</main>
+
+<footer th:replace="plantillas/plantilla.html :: footer">
+</footer>
+
+<script th:replace="plantillas/plantilla.html :: js">
+</script>
+<script>
+    fullImg();
+    document.getElementsByClassName("navbar-link")[0].classList.add("active");
+</script>
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>

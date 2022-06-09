@@ -97,4 +97,30 @@ public class JuezControlador {
         return "redirect:/juez/editarCalificacion/"+nuevaCalificacion.getCalificacion_Id();
     }
 
+    @GetMapping("/buscarEventos")
+    public String buscarEventos(Model model, Principal principal) {
+        Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
+        model.addAttribute("usuario", usuario);
+        Disciplina disciplinaJuez = usuario.getDisciplinaJuez();
+        List<Evento> eventos = eventoRepositorio.findEventosByDisciplina(disciplinaJuez.getDisciplina_Id());
+        model.addAttribute("eventos", eventos);
+        model.addAttribute("usuarioRepositorio", usuarioRepositorio);
+        model.addAttribute("calificacionRepositorio", calificacionRepositorio);
+        model.addAttribute("disciplina",disciplinaJuez);
+        return "buscarEventosJueces";
+    }
+
+    @GetMapping("/buscaEvento/{idEvento}")
+    public String buscarCompetidores(@PathVariable Integer idEvento, Model model, Principal principal) {
+        Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
+        model.addAttribute("usuario", usuario);
+        Disciplina disciplinaJuez = usuario.getDisciplinaJuez();
+        Evento evento = eventoRepositorio.getById(idEvento);
+        model.addAttribute("evento", evento);
+        model.addAttribute("usuarioRepositorio", usuarioRepositorio);
+        model.addAttribute("calificacionRepositorio", calificacionRepositorio);
+        model.addAttribute("disciplina",disciplinaJuez);
+        return "buscarCompetidoresJueces";
+    }
+
 }
