@@ -95,49 +95,9 @@ public class JuezControlador {
         double puntaje = 9.5;
         Calificacion nuevaCalificacion = calificacionServicio.creaCalificacion(evento, evento.getDisciplina(), usuario, competidor, puntaje, comentario);
         modelo.addAttribute("usuario", usuario);
-        modelo.addAttribute("competidor", competidor);
-        modelo.addAttribute("evento", evento);
         modelo.addAttribute("calificacionesRepositorio", calificacionRepositorio);
         modelo.addAttribute("exito", true);
-        return "crearCalificacionJuez";
+        return "redirect:/juez/editarCalificacion/"+nuevaCalificacion.getCalificacion_Id();
     }
-
-    /*
-    @GetMapping("editar/{email}")
-    private String editar(@PathVariable("email") String email, Model modelo, Principal principal){
-        Usuario usuario =  usuarioRepositorio.findByEmail(principal.getName());
-        Usuario competidor =  usuarioRepositorio.findByEmail(email);
-        modelo.addAttribute("usuario", usuario);
-        modelo.addAttribute("competidor",competidor);
-        modelo.addAttribute("competidor",usuarioRepositorio.findByEmail(email));
-        return "editarCalificacion";
-    }
-
-    @PostMapping("/edita/{id}")
-    public String edita(@PathVariable Integer id, @ModelAttribute Usuario competidor, HttpServletRequest request, Principal principal, Model model){
-        Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
-        model.addAttribute("usuario",usuario);
-        Usuario antiguo = usuarioRepositorio.getById(id);
-        Usuario duplicado = usuarioRepositorio.findByEmail(competidor.getEmail());
-        if(duplicado!= null && !duplicado.getEmail().equals(antiguo.getEmail())){
-            model.addAttribute("error",true);
-            model.addAttribute("competidor",antiguo);
-            return "editarCalificacion";
-        }
-        antiguo.setEmail(competidor.getEmail());
-        antiguo.setPeso(competidor.getPeso());
-        antiguo.setAltura(competidor.getAltura());
-        antiguo.setSexo(competidor.getSexo());
-        Date date = Date.valueOf(request.getParameter("fecha"));
-        antiguo.setFecha_nacimiento(date);
-        antiguo.setNombre(competidor.getNombre());
-        antiguo.setApellido_P(competidor.getApellido_P());
-        antiguo.setApellido_M(competidor.getApellido_M());
-        // usuarioServicio.actualizarUsuario(antiguo);
-        model.addAttribute("exito",true);
-        model.addAttribute("competidor",antiguo);
-        return "editarCalificacion";
-    }
-    */
 
 }
