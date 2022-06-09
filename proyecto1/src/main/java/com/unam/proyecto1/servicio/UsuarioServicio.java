@@ -12,4 +12,6 @@ public interface UsuarioServicio {
     Usuario creaUsuarioJuez(String email, String password, String nombre, String apellido_p, String apellido_m, String nombre_Disciplina_Juez);
     public void eliminarUsuario(Integer id);
     public Usuario actualizarUsuario(Usuario usuario);
+
+    String randomString(int n);
 }

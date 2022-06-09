@@ -13,7 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class UsuarioServicioImpl implements UsuarioServicio {
@@ -99,5 +99,16 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     @Override
     public Usuario actualizarUsuario(Usuario competidor) {
         return usuarioRepositorio.save(competidor);
+    }
+
+    @Override
+    public String randomString(int n){
+        String chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijk"
+                +"lmnopqrstuvwxyz!@#$%&_*-/.,;:?¡!¿#$%()+{}";
+        Random rnd = new Random();
+        StringBuilder sb = new StringBuilder(n);
+        for (int i = 0; i < n; i++)
+            sb.append(chars.charAt(rnd.nextInt(chars.length())));
+        return sb.toString();
     }
 }

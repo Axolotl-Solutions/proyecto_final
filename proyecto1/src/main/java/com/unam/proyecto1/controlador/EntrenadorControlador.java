@@ -7,6 +7,7 @@ import com.unam.proyecto1.repositorio.CalificacionRepositorio;
 import com.unam.proyecto1.repositorio.DisciplinaRepositorio;
 import com.unam.proyecto1.repositorio.EventoRepositorio;
 import com.unam.proyecto1.repositorio.UsuarioRepositorio;
+import com.unam.proyecto1.servicio.EmailService;
 import com.unam.proyecto1.servicio.UsuarioServicio;
 import jdk.jfr.Event;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -24,6 +26,7 @@ import java.security.Principal;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 @Controller
@@ -39,6 +42,8 @@ public class EntrenadorControlador {
     private EventoRepositorio eventoRepositorio;
     @Autowired
     private CalificacionRepositorio calificacionRepositorio;
+    @Autowired
+    EmailService emailService;
 
     @GetMapping("/")
     public String perfil(Model model, Principal principal) {
@@ -141,18 +146,25 @@ public class EntrenadorControlador {
     public String registra(@RequestParam("imagen") MultipartFile imagen, HttpServletRequest request, Model model, Principal principal) {
         Usuario usuarioActual =  usuarioRepositorio.findByEmail(principal.getName());
         List<Evento> eventos = eventoRepositorio.findAll();
+        model.addAttribute("eventos", eventos);
         String entrenador_email = usuarioActual.getEmail();
         model.addAttribute("usuario", usuarioActual);
         Date fecha = Date.valueOf(request.getParameter("fecha"));
-        System.out.println(request.getParameter("eventos")+  "Evento");
         String sexo = eventoRepositorio.getById(Integer.valueOf(request.getParameter("eventos"))).getRama().equals("Femenil")?"Femenino":"Masculino";
         sexo = eventoRepositorio.getById(Integer.valueOf(request.getParameter("eventos"))).getRama().equals("Mixto")?request.getParameter("sexo"):sexo;
-        model.addAttribute("eventos", eventos);
-        System.out.println(request.getParameter("imagen"));
+        String contra = usuarioServicio.randomString(8);
+
+        String nombre = request.getParameter("nombre")+" "+
+        request.getParameter("apellido_p")+" "+
+                request.getParameter("apellido_m");
+        String asunto = "Axolotl Solutions inc - Sistema de Olimpiadas universitarias [contraseña]";
+        String mensaje= "Hola "+nombre+" Fuiste registrado como COMPETIDOR con exito en el Sistema de Olimpiadas Universitario"+
+                " tu contraseña es:\n\n"+ contra +
+                "\n\n Recuerda que puedes ingresar con tu correo: \n\n"+request.getParameter("email");
         Usuario usuario = null;
         if (sexo.equals(request.getParameter("sexo"))) {
              usuario = usuarioServicio.creaUsuarioCompetidor(request.getParameter("email"),
-                    request.getParameter("password"),
+                    contra,
                     request.getParameter("nombre"),
                     request.getParameter("apellido_p"),
                     request.getParameter("apellido_m"),
@@ -167,8 +179,7 @@ public class EntrenadorControlador {
             model.addAttribute("errorSexo",true);
             return "registraCompetidor";
         }
-        System.out.println(imagen+" IMAGENNENENENEN");
-        System.out.println(imagen.isEmpty());
+
         if (!imagen.isEmpty()){
             Path directorioImagenes = Paths.get("src//main//resources//static//img");
             String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
@@ -183,6 +194,10 @@ public class EntrenadorControlador {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        if (usuario!=null) {
+            emailService.sendSimpleMessage(request.getParameter("email"), asunto,
+                    mensaje);
         }
         model.addAttribute("error", usuario == null);
         model.addAttribute("exito", usuario != null);
