@@ -118,8 +118,6 @@
     function valida(f) {
      const tooltip = document.querySelector('#tooltip');
       var ok = true;
-      var msg = "Mal perro"
-
       if(f[9].checked==false && f[10].checked==false){
         ok = false;
         console.log("entro aquí");
@@ -161,6 +159,7 @@
         Swal.fire({
               icon: 'success',
               title: 'Agregado correctamente',
+              text: 'Registrado correctamente, Se ha enviado la contraseña al correo del competidor',
               confirmButtonColor: 'var(--confirmar-btn)'
             })
     }

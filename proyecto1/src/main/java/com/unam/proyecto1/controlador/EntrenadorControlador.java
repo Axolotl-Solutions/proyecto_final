@@ -153,13 +153,20 @@ public class EntrenadorControlador {
         String sexo = eventoRepositorio.getById(Integer.valueOf(request.getParameter("eventos"))).getRama().equals("Femenil")?"Femenino":"Masculino";
         sexo = eventoRepositorio.getById(Integer.valueOf(request.getParameter("eventos"))).getRama().equals("Mixto")?request.getParameter("sexo"):sexo;
         String contra = usuarioServicio.randomString(8);
-
+        Evento e = eventoRepositorio.getById(Integer.parseInt(request.getParameter("eventos")));
+        String evento = e.getNombreEvento();
+        String fechaEvento = String.valueOf(e.getFecha());
+        String rama = e.getRama();
+        String disciplina = e.getDisciplina().getNombre();
         String nombre = request.getParameter("nombre")+" "+
         request.getParameter("apellido_p")+" "+
                 request.getParameter("apellido_m");
         String asunto = "Axolotl Solutions inc - Sistema de Olimpiadas universitarias [contraseña]";
         String mensaje= "Hola "+nombre+" Fuiste registrado como COMPETIDOR con exito en el Sistema de Olimpiadas Universitario"+
-                " tu contraseña es:\n\n"+ contra +
+                "Para el evento:\n\n "+evento +"\n\nCon fecha para el: \n\n"+ fechaEvento+ "\n\nRama: \n\n"+ rama+
+                "\n\nDisciplina:"+
+                "\n\n"+disciplina+
+                "\n\nTu contraseña es:\n\n"+ contra +
                 "\n\n Recuerda que puedes ingresar con tu correo: \n\n"+request.getParameter("email");
         Usuario usuario = null;
         if (sexo.equals(request.getParameter("sexo"))) {
@@ -191,8 +198,8 @@ public class EntrenadorControlador {
                     usuario.setImagen(imagen.getOriginalFilename());
                     usuarioServicio.actualizarUsuario(usuario);
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
         }
         if (usuario!=null) {
