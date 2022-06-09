@@ -66,13 +66,8 @@
 
         <!-- Tarjetas de eventos y usuarios -->
         <section class="eventos">
-            <div class="card profile-card" data-aos="fade-right" data-aos-duration="700" th:each="evento : ${eventos}">
+            <div  class="card profile-card" data-aos="fade-right" data-aos-duration="700" th:each="evento : ${eventos}">
                 <div class="profile-card-wrapper">
-                    <!--
-                    <figure class="card-avatar">
-                        <img src="/img/avatar-1.png" alt="" width="48" height="48">
-                    </figure>
-                    -->
                     <div>
                         <p th:text="${evento.getNombreEvento()}" class="card-title">Nombre del evento</p>
                         <p th:text="${evento.getDisciplina().getNombre()}" class="card-subtitle">Disciplina del evento</p>
@@ -100,7 +95,10 @@
                 </ul>
                 <div class="divider card-divider"></div>
                 <!-- EMPIEZA TABLA -->
-                <table id="myTable" class="table">
+                <div th:if="${usuarioRepositorio.findCompetidoresByEvento(evento.getEvento_Id()).size()==0}">
+                    Aún no hay competidores registrados para calificar.
+                </div>
+                <table id="myTable" class="table" th:if="${usuarioRepositorio.findCompetidoresByEvento(evento.getEvento_Id()).size()>0}">
                     <thead>
                     <tr class="tabla-t">
                         <th>Nombre</th>
