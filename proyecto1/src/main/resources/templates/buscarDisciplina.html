@@ -56,6 +56,7 @@
 </main>
 
 <div id="exito" th:if="${exito}"></div>
+<div id="error" th:if="${error}"></div>
 <footer th:replace="plantillas/plantilla.html :: footer">
 </footer>
 <script th:replace="plantillas/plantilla.html :: js">
@@ -85,7 +86,17 @@
 </script>
 <script>
   var eliminar = document.getElementsByClassName("eliminar-btn");
+  var err = document.getElementById("error");
   var exito = document.getElementById("exito");
+  if(err != null){
+    Swal.fire({
+        title: 'No se puede borrar la disciplina',
+        text: "Hay eventos asociados a las disciplinas",
+        icon: 'error',
+        confirmButtonText: '¡Bien!',
+        confirmButtonColor:'var(--confirmar-btn)'
+      })
+  }
   if(exito!=null){
     Swal.fire({
         title: 'Eliminado',
