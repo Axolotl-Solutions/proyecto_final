@@ -10,7 +10,7 @@
 
 </div>
 <div id="img-container" class="full">
-    <img class="img" id="img-max" th:src="@{${'/img/'+usuario.getImagen()}}" alt="Elizabeth Foster">
+    <img class="img" id="img-max" th:src="@{${'/img/'+usuario.getImagen()}}" alt="">
 </div>
 <main>
     <article class="container article">
@@ -23,7 +23,7 @@
             <div class="card profile-card" data-aos="fade-right" data-aos-duration="700">
                 <div class="profile-card-wrapper">
                     <figure class="card-avatar">
-                        <img id="img-min" th:src="@{${'/img/'+usuario.getImagen()}}" alt="Elizabeth Foster" width="48" height="48">
+                        <img id="img-min" th:src="@{${'/img/'+usuario.getImagen()}}" alt="" width="48" height="48">
                     </figure>
                     <div>
                         <p th:text="${usuario.getNombre()+' '+usuario.getApellido_P() + ' ' + usuario.getApellido_M()}" class="card-title">Fernando Gerardo Flores García</p>

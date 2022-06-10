@@ -42,6 +42,11 @@ VALUES('German', 'Allende', 'Valderrama', 'german@ciencias.unam.mx', '$2a$10$vMZ
 
 INSERT INTO Usuario(nombre, apellido_P, apellido_M, email, password, fecha_nacimiento, sexo, peso, altura, entrenador_Id,imagen, enabled)
 VALUES('Pablo', 'Morales', 'Gallardo', 'pablo@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', '2000-05-17', 'Masculino', 75, 178, 2,'carah4.jpeg', 1);
+
+INSERT INTO Usuario(nombre, apellido_P, apellido_M, email, password, fecha_nacimiento, sexo, peso, altura, entrenador_Id,imagen, enabled)
+VALUES('Ana', 'Mora', 'Vera', 'ana@ciencias.unam.mx', '$2a$10$vMZ76pgLOM4mnsK4OtzO6O.hNfEZU4xDhx.nqTuRyzC6NBItwGFe.', '2000-05-17', 'Femenino', 85, 180, 2, 'caram6.jpeg',  1);
+
+
 -- Relacionar usuarios con sus roles
 INSERT INTO Usuarios_Roles(usuario_Id, rol_Id)
 VALUES(1, 1);
@@ -61,6 +66,9 @@ VALUES(5, 4);
 INSERT INTO Usuarios_Roles(usuario_Id, rol_Id)
 VALUES(6, 3);
 
+INSERT INTO Usuarios_Roles(usuario_Id, rol_Id)
+VALUES(7, 3);
+
 -- Insertar eventos, cada uno relacionado con su disciplina
 INSERT INTO Evento(nombre, disciplina_Id, rama, categoria, fecha)
 VALUES('100 metros planos', 7, 'Varonil', '18+ años', '2022-06-15'),
@@ -79,7 +87,8 @@ VALUES(3, 1),
       (3, 5),
       (6, 7),
       (6, 1),
-      (6, 3);
+      (6, 3),
+      (7, 2);
 
 -- Crear calificaciones, relacionando jueces con eventos con competidores
 INSERT INTO Calificacion(evento_Id, juez_Id, competidor_Id, puntaje, comentario)
