@@ -5,6 +5,7 @@ import com.unam.proyecto1.modelo.Evento;
 import com.unam.proyecto1.modelo.Usuario;
 import com.unam.proyecto1.repositorio.DisciplinaRepositorio;
 import com.unam.proyecto1.repositorio.UsuarioRepositorio;
+import com.unam.proyecto1.repositorio.EventoRepositorio;
 import com.unam.proyecto1.servicio.DisciplinaServicio;
 import com.unam.proyecto1.servicio.EmailService;
 import com.unam.proyecto1.servicio.EventoServicio;
@@ -47,6 +48,9 @@ public class AdminControlador {
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private EventoRepositorio eventoRepositorio;
 
     @GetMapping("/")
     public String findUsuarios(Model model) {
@@ -176,11 +180,20 @@ public class AdminControlador {
     @GetMapping("/eliminarDisciplina/{id}")
     public String editaEvento(@PathVariable Integer id, Principal principal, Model model){
         Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
-        disciplinaServicio.eliminaDisciplina(id);
-        List<Disciplina> disciplinas = disciplinaRepositorio.findAll();
-        model.addAttribute("disciplinas",disciplinas);
-        model.addAttribute("usuario",usuario);
-        model.addAttribute("exito",true);
+        List<Evento> evento= eventoRepositorio.findEventosByDisciplina(id);
+        if(evento.size()>0){
+              List<Disciplina> disciplinas = disciplinaRepositorio.findAll();
+              model.addAttribute("disciplinas",disciplinas);
+              model.addAttribute("usuario",usuario);
+              model.addAttribute("error",true);     
+        }else{
+            disciplinaServicio.eliminaDisciplina(id);
+            List<Disciplina> disciplinas = disciplinaRepositorio.findAll();
+            model.addAttribute("disciplinas",disciplinas);
+            model.addAttribute("usuario",usuario);
+            model.addAttribute("exito",true);            
+        }
+
         return "buscarDisciplina";
     }
     @GetMapping("/buscarDisciplina")
