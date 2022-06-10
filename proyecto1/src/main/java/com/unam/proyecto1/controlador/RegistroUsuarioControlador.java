@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.MessagingException;
@@ -46,25 +43,50 @@ public class RegistroUsuarioControlador {
         return "recuperar";
     }
 
-    @PostMapping("/recupera")
-    public String recupera(HttpServletRequest request, Model model) throws MessagingException {
-        Usuario usuario = usuarioRepositorio.findByEmail(request.getParameter("email"));
-        if(usuario!=null) {
+    @PostMapping("/confirmaRecupera")
+    public String confirmaRecupera(Model model,HttpServletRequest request){
+        String codigoIntroducido = request.getParameter("confirma");
+        String correo = request.getParameter("correo");
+        Usuario usuario = usuarioRepositorio.findByEmail(correo);
+        String codigo = usuario.getCodigo();
+        if(!codigoIntroducido.equals(codigo)){
+            model.addAttribute("correo",correo);
+            model.addAttribute("error");
+            return "confirma";
+        }else if(usuario!=null) {
             String contra = usuarioServicio.randomString(8);
-            String asunto = "[Recuperar contraseña] Axolotl Solutions inc - Sistema de Olimpiadas universitarias";
+            String asunto = "Axolotl Solutions inc - Sistema de Olimpiadas universitarias [Nueva contraseña] ";
             String mensaje = "Tu nueva contraseña es: \n\n"+ contra +"\n\nNo la olvides :)";
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             usuario.setPassword(passwordEncoder.encode(contra));
             emailService.sendSimpleMessage(usuario.getEmail(), asunto,mensaje);
             usuarioServicio.actualizarUsuario(usuario);
         }
-        model.addAttribute("recupera", usuario != null);
-        model.addAttribute("noRecupera",usuario==null);
+        model.addAttribute("recupera",true);
         return "index";
+    }
+
+    @PostMapping("/recupera")
+    public String recupera(HttpServletRequest request, Model model) throws MessagingException {
+        Usuario usuario = usuarioRepositorio.findByEmail(request.getParameter("email"));
+        String codigo = usuarioServicio.randomString(10);
+        if(usuario!=null) {
+            String asunto = "[Código de confirmación] Axolotl Solutions inc - Sistema de Olimpiadas universitarias";
+            String mensaje = "El código de confirmación es: \n\n"+ codigo;
+            usuario.setCodigo(codigo);
+            usuarioRepositorio.save(usuario);
+            emailService.sendSimpleMessage(usuario.getEmail(), asunto,mensaje);
+        }else{
+            model.addAttribute("error",true);
+            return "recuperar";
+        }
+        model.addAttribute("correo",usuario.getEmail());
+        model.addAttribute("exito",true);
+        return "confirma";
     }
     @PostMapping("/crea")
     public String crea(@RequestParam("imagen") MultipartFile imagen, HttpServletRequest request, Model model) throws MessagingException {
-        String contra = usuarioServicio.randomString(8);
+        String contra = usuarioServicio.randomString(10);
         String nombre = request.getParameter("nombre")+" "+
                 request.getParameter("apellido_p")+" "+
                 request.getParameter("apellido_m");

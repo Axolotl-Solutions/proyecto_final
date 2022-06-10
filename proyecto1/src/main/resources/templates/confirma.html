@@ -182,15 +182,17 @@ form .signup-link a:hover{
 </head>
 <body>
 <div class="contenedor" data-aos="zoom-out" data-aos-duration="1200">
+
     <div class="titulo">
-        Recuperar Contraseña
+        Confirma el código
     </div>
     <div id="error" th:if="${error}" class="alerta" style="display:none;" role="alert">
     </div>
-    <form method="post" th:action="@{/registro/recupera}" >
+    <form method="post" th:action="@{/registro/confirmaRecupera}" >
+        <div style="display:none;"><input name="correo" th:value="${correo}" type="text"></div>
         <div class="field" data-aos="fade-left" data-aos-duration="1200">
-            <input type="text" name="email" required>
-            <label>Correo</label>
+            <input type="text" name="confirma" required>
+            <label>Confirma el código que llego a tu correo</label>
         </div>
         <div class="field" data-aos="zoom-in" data-aos-duration="2000">
             <input class="btn" type="submit" value="Recuperar">
@@ -203,16 +205,27 @@ form .signup-link a:hover{
         </div>
     </form>
 </div>
+<div id="exito" th:if="${exito}"></div>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     AOS.init({offset: 100});
+    var exito = document.getElementById('exito');
     var error = document.getElementById('error');
+    if(exito!=null){
+        Swal.fire({
+        title: 'Se ha enviado un correo a su cuenta',
+        text: "En el correo el código de confirmación",
+        icon: 'success',
+        confirmButtonText: '¡Bien!',
+        confirmButtonColor: 'hsl(144, 62%, 53%)'
+      })
+    }
     if(error!=null){
         Swal.fire({
               icon: 'error',
               title: 'Error',
-              text: 'El correo no esta registrado en el sistema',
+              text: 'Código incorrecto',
               confirmButtonColor: 'hsl(144, 62%, 53%)'
             })
     }

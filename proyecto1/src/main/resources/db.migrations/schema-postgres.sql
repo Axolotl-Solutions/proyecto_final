@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS Usuario (
     entrenador_Id	 INTEGER DEFAULT NULL,
     disciplina_Juez  INTEGER DEFAULT NULL,
     enabled 		 INTEGER DEFAULT NULL,
+    codigo           VARCHAR(10) DEFAULT NULL,
     imagen           VARCHAR(300) DEFAULT 'user.svg'
 );
 
