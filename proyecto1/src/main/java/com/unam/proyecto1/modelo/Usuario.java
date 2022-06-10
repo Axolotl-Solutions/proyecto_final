@@ -19,6 +19,9 @@ public class Usuario {
     private String nombre;
 
     @Column
+    private String codigo;
+
+    @Column
     private String apellido_P;
 
     @Column
@@ -237,4 +240,5 @@ public class Usuario {
     public void setEntrenador(Usuario entrenador) {
         this.entrenador = entrenador;
     }
+
 }
