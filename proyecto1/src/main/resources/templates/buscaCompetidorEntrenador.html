@@ -25,7 +25,7 @@
         <table id="myTable" class="table">
           <thead>
           <tr class="tabla-t">
-            <th>#Competidor</th>
+            <th>#Id</th>
             <th>Nombre</th>
             <th>Correo</th>
             <th>Rol</th>
@@ -33,7 +33,7 @@
           </thead>
           <tbody>
           <tr th:each="usr : ${usuarios}">
-            <td data-aos="zoom-in-right" data-aos-duration="4000" th:text="${usr.getUsuario_Id()}" data-title="#Competidor" >01</td>
+            <td data-aos="zoom-in-right" data-aos-duration="4000" th:text="${usr.getUsuario_Id()}" data-title="#Id" >01</td>
             <td data-aos="zoom-in-left" data-aos-duration="4000" th:text= "${usr.getNombre()+' '+usr.getApellido_P() + ' ' + usr.getApellido_M()}" data-title="Nombre">Fernando Flores</td>
             <td data-aos="zoom-in-right" data-aos-duration="4000"th:text="${usr.getEmail()}" data-title="Correo">fernandondin@ciencias.unam.mx</td>
             <td data-aos="zoom-in-left" data-aos-duration="4000" data-title="Rol">

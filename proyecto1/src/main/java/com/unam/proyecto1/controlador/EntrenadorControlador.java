@@ -90,11 +90,7 @@ public class EntrenadorControlador {
     private String eliminarEvento (@PathVariable("idC") Integer idC, @PathVariable("idE") Integer idE){
         Usuario competidor = usuarioRepositorio.getById(idC);
         Evento evento = eventoRepositorio.getById(idE);
-        System.out.println(evento+ " A eliminar");
-        System.out.println(competidor.getNombre()+" NOMBRE");
-        System.out.println(competidor.getEventos());
         competidor.getEventos().remove(eventoRepositorio.getById(idE));
-        System.out.println(competidor.getEventos());
         usuarioServicio.actualizarUsuario(competidor);
         return "redirect:/entrenador/editarEventos/"+competidor.getEmail();
     }
@@ -106,13 +102,11 @@ public class EntrenadorControlador {
         Usuario usuario = usuarioRepositorio.findByEmail(principal.getName());
         Usuario comp = usuarioRepositorio.findByEmail(email);
         Set<Evento> eventos = competidor.getEventos();
-        System.out.println(request.getParameter("email"));
         model.addAttribute("usuario",usuario);
         model.addAttribute("competidor",comp);
         model.addAttribute("eventos",eventos);
         model.addAttribute("eventosAll",eventosAll);
         model.addAttribute("calificacionRepositorio",calificacionRepositorio);
-        System.out.println("Entre aquí");
         return "eventosCompetidor";
     }
     @PostMapping("/edita/{id}")

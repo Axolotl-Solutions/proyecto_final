@@ -76,13 +76,11 @@
                 <ul class="contact-list">
                     <li>
                         <a class="contact-link icon-box">
-                            <!-- <span class="material-symbols-rounded  icon">monitor_weight</span> -->
                             <p th:text="${evento.getRama()}" class="text">Rama</p>
                         </a>
                     </li>
                     <li>
                         <a class="contact-link icon-box">
-                            <!-- <span class="material-symbols-rounded  icon">height</span> -->
                             <p th:text="${evento.getCategoria()}" class="text">Categoría</p>
                         </a>
                     </li>
@@ -125,16 +123,6 @@
                     </tbody>
                 </table>
             </div>
-
-            <!--Sí
-            <div class="card" data-aos="zoom-in" data-aos-duration="700" th:each="evento : ${eventos}">
-                <div class="evento_tarjeta" th:text= "${evento.getNombreEvento()}"> Hola </div>
-                <div class="evento_tarjeta" th:text= "${evento.getDisciplina().getNombre()}"> Hola </div>
-                <div class="evento_tarjeta" th:text= "${evento.getRama()}"> Hola </div>
-                <div class="evento_tarjeta" th:text= "${evento.getCategoria()}"> Hola </div>
-            </div>
-            -->
-
         </section>
 
 

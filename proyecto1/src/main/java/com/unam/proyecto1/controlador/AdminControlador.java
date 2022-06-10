@@ -171,8 +171,6 @@ public class AdminControlador {
 
         modelo.addAttribute("usuario", usuario);
         modelo.addAttribute("disciplina",disciplina);
-        System.out.println("LOL XD");
-        System.out.println(disciplina.getNombre());
         return "editarDisciplina";
     }
     @GetMapping("/eliminarDisciplina/{id}")
@@ -183,7 +181,6 @@ public class AdminControlador {
         model.addAttribute("disciplinas",disciplinas);
         model.addAttribute("usuario",usuario);
         model.addAttribute("exito",true);
-        System.out.println("IDDisciplina: "+id);
         return "buscarDisciplina";
     }
     @GetMapping("/buscarDisciplina")

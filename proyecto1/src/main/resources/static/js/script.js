@@ -9,7 +9,6 @@ function fullImg(){
             imgContainer.classList.add('active');
             imgMax.classList.add('active');
             bg.classList.add('active');
-            console.log(imgContainer.classList);
         });
         bg.addEventListener('click', ()=>{
             imgContainer.classList.remove('active');
@@ -38,10 +37,13 @@ function sub(obj) {
 var tipoUsuario= document.getElementById("rol-nav");
 if(tipoUsuario.innerHTML === "ADMINISTRADOR"){
     document.getElementById("jueces-nav").href="/admins/buscaJuez";
+    document.getElementById("buscar-menu").href="/admins/busca"
+    document.getElementById("juez-menu").href="/admins/buscaJuez";
     document.getElementById("busca-nav").href="/admins/busca";
     document.getElementById("agregar-nav").href="/admins";
     document.getElementById("agregar-menu").href="/admins";
     document.getElementById("disciplinas-nav").href="/admins/buscarDisciplina";
+    document.getElementById("disciplinas-menu").href="/admins/buscarDisciplina";
     document.getElementById("inicio-nav").href="/inicioAdmin";
     document.getElementById("logo-1").href="/inicioAdmin";
     document.getElementById("logo-2").href="/inicioAdmin";
@@ -49,6 +51,7 @@ if(tipoUsuario.innerHTML === "ADMINISTRADOR"){
 if(tipoUsuario.innerHTML === "ENTRENADOR"){
     document.getElementById("tabla-nav").href="/entrenador/tabla";
     document.getElementById("tabla-menu").href="/entrenador/tabla";
+    document.getElementById("buscar-menu").href="/entrenador/buscar";
     document.getElementById("calificaciones-nav").href="/entrenador/calificaciones";
     document.getElementById("calificaciones-menu").href="/entrenador/calificaciones";
     document.getElementById("busca-nav").href="/entrenador/buscar";
@@ -60,6 +63,7 @@ if(tipoUsuario.innerHTML === "ENTRENADOR"){
 }
 if(tipoUsuario.innerHTML === "COMPETIDOR"){
     document.getElementById("tabla-nav").href="/competidor/tabla";
+    document.getElementById("inicio-menu").href="/competidor/";
     document.getElementById("tabla-menu").href="/competidor/tabla";
     document.getElementById("calificaciones-nav").href="/competidor/calificaciones";
     document.getElementById("calificaciones-menu").href="/competidor/calificaciones";
@@ -68,8 +72,8 @@ if(tipoUsuario.innerHTML === "COMPETIDOR"){
     document.getElementById("logo-2").href="/competidor/";
 }
 if(tipoUsuario.innerHTML.includes("JUEZ")){
-    //document.getElementById("agregar-nav").href="/juez/";
-    //document.getElementById("agregar-menu").href="/juez/";
+    document.getElementById("inicio-menu").href="/juez/";
+    document.getElementById("buscar-menu").href="/juez/buscarEventos";
     document.getElementById("inicio-nav").href="/juez/";
     document.getElementById("busca-nav").href="/juez/buscarEventos";
     document.getElementById("logo-1").href="/juez/";
@@ -116,7 +120,6 @@ for (let i = 0; i < menuBtn.length; i++) {
 */
 let p = document.getElementsByClassName("rol-usuario");
 Array.prototype.forEach.call(p, function(e) {
-  console.log(e.innerHTML);
   if (e.innerHTML === "administrador") {
      e.classList.add("rol");
      e.classList.add("rol-admin");
@@ -158,7 +161,6 @@ for (let i = 0; i < barra.length; i++) {
   }else {
     color="2fff00";
   }
-  console.log(color);
   let reglas = document.createTextNode('@-webkit-keyframes slider'+i+'{'+
   'from { width:0%;}'+
   'to { width:'+pro[i].innerHTML*10+'%; }'+

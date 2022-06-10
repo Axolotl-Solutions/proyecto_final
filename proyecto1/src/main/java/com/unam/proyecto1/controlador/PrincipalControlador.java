@@ -54,7 +54,6 @@ public class PrincipalControlador {
     @RequestMapping("/")
     public String index(Model model, String error, Principal principal){
         if (error != null) {
-            System.out.println("Hola error");
             model.addAttribute("error", true);
         }
 
@@ -92,11 +91,6 @@ public class PrincipalControlador {
         return "inicioAdmin";
     }
 
-    /*@RequestMapping("/manejoAdmin")
-    public String manejoAdmin() { 
-        return "manejoAdmin"; 
-    }*/
-
     @RequestMapping("/buscarComp")
     public  String buscarComp(){
         return "redirect:/registrarCompetidor/buscar/";
@@ -104,8 +98,6 @@ public class PrincipalControlador {
 
     @RequestMapping("/inicioCompetidor")
     public String competidor() {
-        System.out.println("competidor");
-
         return "inicioCompetidor/";
     }
     @RequestMapping("/registro")

@@ -61,16 +61,6 @@
                     </tbody>
                 </table>
             </div>
-
-            <!--Sí
-            <div class="card" data-aos="zoom-in" data-aos-duration="700" th:each="evento : ${eventos}">
-                <div class="evento_tarjeta" th:text= "${evento.getNombreEvento()}"> Hola </div>
-                <div class="evento_tarjeta" th:text= "${evento.getDisciplina().getNombre()}"> Hola </div>
-                <div class="evento_tarjeta" th:text= "${evento.getRama()}"> Hola </div>
-                <div class="evento_tarjeta" th:text= "${evento.getCategoria()}"> Hola </div>
-            </div>
-            -->
-
         </section>
 
 
@@ -84,8 +74,7 @@
 <script th:replace="plantillas/plantilla.html :: js">
 </script>
 <script>
-    fullImg();
-    document.getElementsByClassName("navbar-link")[0].classList.add("active");
+    document.getElementsByClassName("navbar-link")[1].classList.add("active");
 </script>
 <script>
     function myFunction() {
